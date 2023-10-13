@@ -10,15 +10,50 @@ using Repository.Database;
 
 namespace Repository.Migrations
 {
-    [DbContext(typeof(MaterialDBContext))]
-    [Migration("20231005093937_1")]
-    partial class _1
+    [DbContext(typeof(DatabaseContext))]
+    [Migration("20231013164345_2")]
+    partial class _2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
+
+            modelBuilder.Entity("Models.Storage.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUsers");
+                });
 
             modelBuilder.Entity("Models.Storage.Material", b =>
                 {
@@ -79,7 +114,7 @@ namespace Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Material");
+                    b.ToTable("Materials");
                 });
 
             modelBuilder.Entity("Models.Storage.StorageItem", b =>
@@ -112,7 +147,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("MaterialId");
 
-                    b.ToTable("StorageItem");
+                    b.ToTable("Storage");
                 });
 
             modelBuilder.Entity("Models.Storage.StorageItem", b =>

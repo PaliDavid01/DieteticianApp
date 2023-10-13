@@ -22,17 +22,17 @@ namespace Logic.Logic
             _repository.Create(material);
         }
 
-        public void DeleteMaterial(string materialId)
+        public void Delete(string materialId)
         {
             _repository.Delete(materialId);
         }
 
-        public IQueryable<Material> GetAllMaterials()
+        public IQueryable<Material> GetAll()
         {
             return _repository.ReadAll();
         }
 
-        public Material GetMaterial(string materialId)
+        public Material Get(string materialId)
         {
             return _repository.Read(materialId);
         }

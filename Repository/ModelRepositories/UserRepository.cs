@@ -1,29 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Models.Storage;
+﻿using Models.Storage;
 using Repository.Database;
 using Repository.GenericRepository;
 using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository.ModelRepositories
 {
-    public class MaterialRepository : GenericRepository<Material>, IRepository<Material>
+    public class UserRepository : GenericRepository<AppUser>, IRepository<AppUser>
     {
-        public MaterialRepository(DatabaseContext dbContext) : base(dbContext)
+        public UserRepository(DatabaseContext dbctx):base(dbctx)
         {
+                
         }
 
-        public override Material Read(string id)
+        public override AppUser Read(string id)
         {
-            return (base.dbContext as DatabaseContext).Materials.FirstOrDefault(t => t.Id == id);
+            return (base.dbContext as DatabaseContext).AppUsers.FirstOrDefault(t => t.Email == id);
         }
 
-        public override void Update(Material item)
+        public override void Update(AppUser item)
         {
             var oldInDatabase = Read(item.Id);
             foreach (var prop in oldInDatabase.GetType().GetProperties())

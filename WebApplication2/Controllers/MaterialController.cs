@@ -21,7 +21,7 @@ namespace API.Controllers
         [HttpGet("GetAll")]
         public IEnumerable<Material> GetAll()
         {
-            return this._logic.GetAllMaterials();
+            return this._logic.GetAll();
         }
 
         [HttpPost]

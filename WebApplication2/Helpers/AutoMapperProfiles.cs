@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Models.DTOs;
+using Models.DTOs.UserDTOs;
 using Models.Storage;
 
 namespace API.Helpers
@@ -9,6 +10,7 @@ namespace API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<MaterialDTO, Material>();
+            CreateMap<RegisterDTO, AppUser>();
         }
     }
 }

@@ -13,9 +13,11 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddTransient<MaterialDBContext>();
+builder.Services.AddTransient<DatabaseContext>();
 builder.Services.AddTransient<IRepository<Material>, MaterialRepository>();
+builder.Services.AddTransient<IRepository<AppUser>, UserRepository>();
 builder.Services.AddTransient<IMaterialLogic, MaterialLogic>();
+builder.Services.AddTransient<ILogic<AppUser>, UserLogic>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace Repository.Database
 {
-    public class MaterialDBContext : DbContext
+    public class DatabaseContext : DbContext
     {
-        public DbSet<Material> Materials;
-        public DbSet<StorageItem> Storage;
+        public DbSet<Material> Materials { get; set; }
+        public DbSet<StorageItem> Storage { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlite("Filename=Storage.db");
+            builder.UseSqlite("Filename=Database.db");
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
