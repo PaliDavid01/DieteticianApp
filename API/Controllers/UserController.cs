@@ -23,7 +23,7 @@ namespace API.Controllers
             this._tokenService = tokenService;
         }
         [HttpPost]
-        public ActionResult Login(LoginDTO loginUser) 
+        public ActionResult<string> Login(LoginDTO loginUser) 
         {
             var user = _userLogic.Get(loginUser.Email);
             
@@ -40,7 +40,7 @@ namespace API.Controllers
                 }
             }
             var token = _tokenService.CreateToken(user);
-            return Ok(token);
+            return token;
             //tokenservice here
 
 

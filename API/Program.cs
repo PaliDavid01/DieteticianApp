@@ -25,6 +25,10 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
+app.UseCors( corsBuilder => 
+    corsBuilder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200")
+);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
