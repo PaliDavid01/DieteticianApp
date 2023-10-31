@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using API.Interfaces;
+using AutoMapper;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTOs.UserDTOs;
@@ -14,13 +15,15 @@ namespace API.Controllers
     {
         private readonly ILogic<AppUser> _userLogic;
         private readonly IMapper _mapper;
-        public UserController(ILogic<AppUser> userLogic, IMapper mapper)
+        private readonly ITokenService _tokenService;
+        public UserController(ILogic<AppUser> userLogic, IMapper mapper, ITokenService tokenService)
         {
             this._mapper = mapper;
             this._userLogic = userLogic;
+            this._tokenService = tokenService;
         }
         [HttpPost]
-        public IActionResult Login(LoginDTO loginUser) 
+        public ActionResult Login(LoginDTO loginUser) 
         {
             var user = _userLogic.Get(loginUser.Email);
             
@@ -36,7 +39,8 @@ namespace API.Controllers
                     return Unauthorized("Wrong email or password!");
                 }
             }
-            return Ok();
+            var token = _tokenService.CreateToken(user);
+            return Ok(token);
             //tokenservice here
 
 

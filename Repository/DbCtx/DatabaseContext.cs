@@ -14,11 +14,7 @@ namespace Repository.Database
         public DbSet<StorageItem> Storage { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder builder)
-        {
-            builder.UseSqlite("Filename=Database.db");
-
-        }
+        public DatabaseContext(DbContextOptions opt):base(opt){}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StorageItem>().HasOne(t => t.Type)
