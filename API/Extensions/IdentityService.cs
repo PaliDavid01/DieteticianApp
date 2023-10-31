@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Diagnostics;
 using System.Text;
 
 namespace API.Extensions;
