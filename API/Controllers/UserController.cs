@@ -9,6 +9,9 @@ using System.Text;
 
 namespace API.Controllers
 {
+    public static class Roles{
+        public static List<string> roles = new List<string>(){"Dietetian", "Chef", "Kitchen-staff", "Storage-staff", "Supervisor", "IT"};
+    }
     [ApiController]
     [Route("[controller]")]
     public class UserController: ControllerBase
@@ -23,7 +26,7 @@ namespace API.Controllers
             this._tokenService = tokenService;
         }
         [HttpPost]
-        public ActionResult<string> Login(LoginDTO loginUser) 
+        public ActionResult<LoginResponseDTO> Login(LoginDTO loginUser) 
         {
             var user = _userLogic.Get(loginUser.Email);
             
@@ -39,8 +42,9 @@ namespace API.Controllers
                     return Unauthorized("Wrong email or password!");
                 }
             }
-            var token = _tokenService.CreateToken(user);
-            return token;
+            var response = _mapper.Map<LoginResponseDTO>(user);
+            response.token = this._tokenService.CreateToken(user);
+            return response;
             //tokenservice here
 
 
@@ -63,7 +67,10 @@ namespace API.Controllers
             // tokenservice here
             return Ok();
         }
-
+        [HttpGet("Roles")]
+        public ActionResult<ICollection<string>> GetRoles(){
+            return Roles.roles;
+        }
         private bool UserExists(string email)
         {
             return _userLogic.Get(email) == null;

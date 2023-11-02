@@ -11,6 +11,7 @@ namespace API.Helpers
         {
             CreateMap<MaterialDTO, Material>();
             CreateMap<RegisterDTO, AppUser>();
+            CreateMap<AppUser, LoginResponseDTO>();
         }
     }
 }
