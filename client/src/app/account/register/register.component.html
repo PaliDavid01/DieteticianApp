@@ -5,10 +5,10 @@
           <div class="card shadow-2-strong" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
   
-              <h3 class="mb-5">Register</h3>
+              <h3 class="mb-5">{{'register' | translate}}</h3>
               <form #loginForm="ngForm" (ngSubmit)="register()" autocomplete="off" >
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="typeEmailX-2">Firstname</label>
+                    <label class="form-label" for="typeEmailX-2">{{'firstName' | translate}}</label>
                     <input 
                         name="firstName"
                         [(ngModel)]="model.firstName" 
@@ -18,7 +18,7 @@
                         placeholder="Pali"/>
                 </div>
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="typeEmailX-2">Lastname</label>
+                    <label class="form-label" for="typeEmailX-2">{{'lastName' | translate}}</label>
                     <input 
                         name="lastName"
                         [(ngModel)]="model.lastName" 
@@ -28,7 +28,7 @@
                         placeholder="David" />
                 </div>
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="typeEmailX-2">Email</label>
+                    <label class="form-label" for="typeEmailX-2">{{'email' | translate}}</label>
                     <input 
                         name="email"
                         [(ngModel)]="model.email" 
@@ -38,7 +38,7 @@
                         placeholder="pali.david@xyz.com"/>
                 </div>
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="typePasswordX-2">Password</label>
+                    <label class="form-label" for="typePasswordX-2">{{'password' | translate}}</label>
                     <input
                         name="password" 
                         [(ngModel)]="model.password" 
@@ -57,11 +57,11 @@
                         class="form-control form-control-lg" />
                 </div> -->
                 <div class="form-outline">
-                <label class="form-label" for="typeEmailX-2">Role</label>
+                <label class="form-label" for="typeEmailX-2">{{'role' | translate}}</label>
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Options<i class="bi bi-arrow-down"></i></label>
+                    <label class="input-group-text" for="inputGroupSelect01">{{'options' | translate}}<i class="bi bi-arrow-down"></i></label>
                   </div>
                   <select name="role" [(ngModel)]="model.role" class="form-control">
                     <option *ngFor="let item of roles">{{item}}</option>
@@ -73,7 +73,7 @@
                 <label class="form-check-label" for="form1Example3"> Remember password </label>
               </div> -->
   
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit">{{'register' | translate}}</button>
           </form>
             </div>
           </div>

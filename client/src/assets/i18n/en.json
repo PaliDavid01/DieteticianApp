@@ -1,0 +1,14 @@
+{
+    "english":"English",
+    "Hungarian":"Hungarian",
+    "signIn": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "register": "Register",
+    "selectLang":"Selact language",
+    "firstName":"Firstname",
+    "lastName":"Lastname",
+    "role":"Role",
+    "options":"Options"
+}

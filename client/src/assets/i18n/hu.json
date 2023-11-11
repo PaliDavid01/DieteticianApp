@@ -1,0 +1,14 @@
+{
+    "english":"Angol",
+    "Hungarian":"Magyar",
+    "signIn": "Bejelentkezés",
+    "email": "Email",
+    "password": "Jelszó",
+    "login": "Belélpés",
+    "register": "Regisztráció",
+    "selectLang":"Válasszon nyelvet",
+    "firstName":"Vezetéknév",
+    "lastName":"Keresztnév",
+    "role":"Pozíció",
+    "options":"Opciók"
+}
