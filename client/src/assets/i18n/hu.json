@@ -10,5 +10,9 @@
     "firstName":"Vezetéknév",
     "lastName":"Keresztnév",
     "role":"Pozíció",
-    "options":"Opciók"
-}
+    "settings":"Beállítások",
+    "home":"Kezdőlap",
+    "baseMaterial":"Alapanyagok",
+    "receipts":"Receptek",
+    "logOut":"Kilépés"
+}   

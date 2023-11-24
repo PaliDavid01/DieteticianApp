@@ -10,5 +10,10 @@
     "firstName":"Firstname",
     "lastName":"Lastname",
     "role":"Role",
-    "options":"Options"
+    "settings":"Settings",
+    "home":"Home",
+    "baseMaterial":"BaseMaterial",
+    "receipts":"Receipts",
+    "logOut":"logOut"
+
 }
