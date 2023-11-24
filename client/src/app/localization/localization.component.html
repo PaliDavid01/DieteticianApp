@@ -9,17 +9,17 @@
 <div class="d-flex justify-content-end">
     <div class="py-3 px-3">
     <div class="flex justify-content-center" style="background:transparent;">
-        <p-dropdown [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" [showClear]="true" placeholder="" (onChange)="setLang()">
+        <p-dropdown [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" [showClear]="false" placeholder="" (onChange)="setLang()">
             <ng-template pTemplate="selectedItem">
                 <div class="flex align-items-center" *ngIf="selectedLanguage">
     
-                    <img src="{{selectedLanguage.svg}}"/>
+                    <img src="{{selectedLanguage.svg}}" style="width: 25px;"/>
                     <!-- <div>{{ selectedlang }}</div> -->
                 </div>
             </ng-template>
             <ng-template let-language pTemplate="item">
                 <div class="flex align-items-center">
-                    <img src="{{language.svg}}">
+                    <img src="{{language.svg}}" style="width: 25px;">
                     <!-- <div>{{ language.name }}</div> -->
                 </div>
             </ng-template>

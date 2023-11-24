@@ -1,7 +1,16 @@
 <div style="background-color: #508bfc; ">
-
-
-<app-localization></app-localization>
-<app-nav *ngIf="(accountService.currentUser$ | async)"></app-nav>
-<router-outlet></router-outlet>
+<div class="d-flex">
+    <div class="col-10">
+        <div class="row-1" style="height: 50%;">
+            
+        </div>
+        <div class="row-1">
+            <app-nav *ngIf="(accountService.currentUser$ | async)"></app-nav>
+        </div>
+    </div>
+    <div class="col-2">
+        <app-localization></app-localization>
+    </div>    
 </div>
+</div>
+<router-outlet></router-outlet>
