@@ -14,6 +14,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DropdownModule } from 'primeng/dropdown';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { config } from 'rxjs';
+import { RecieptContainerComponent } from './receipt/reciept-container/reciept-container.component';
+import { RecieptCreateComponent } from './receipt/reciept-create/reciept-create.component';
+import { RecieptUpdateComponent } from './receipt/reciept-update/reciept-update.component';
+import { RecieptDisplayComponent } from './receipt/reciept-display/reciept-display.component';
+import { MaterialContainerComponent } from './material/material-container/material-container.component';
+import { MaterialCreateComponent } from './material/material-create/material-create.component';
+import { MaterialUpdateComponent } from './material/material-update/material-update.component';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -26,7 +33,14 @@ export function HttpLoaderFactory(http: HttpClient){
     RegisterComponent,
     HomeComponent,
     NavComponent,
-    LocalizationComponent
+    LocalizationComponent,
+    RecieptContainerComponent,
+    RecieptCreateComponent,
+    RecieptUpdateComponent,
+    RecieptDisplayComponent,
+    MaterialContainerComponent,
+    MaterialCreateComponent,
+    MaterialUpdateComponent
   ],
   imports: [
     BrowserModule,
