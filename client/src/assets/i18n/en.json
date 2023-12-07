@@ -32,7 +32,9 @@
     "updated": "Updated",
     "updatedBy":"UpdatedBy",
     "options":"Options",
-    "update":"Update",
+    "update":"Modify",
     "delete":"Delete",
-    "modify":"Modify"
+    "modify":"Modify",
+    "allergen": "Allergen",
+    "scaleType": "Scale Tyle"
 }

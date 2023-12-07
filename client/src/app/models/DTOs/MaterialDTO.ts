@@ -14,6 +14,8 @@ export interface MaterialGetDTO{
     salt: number;
     sugar: number;
     scale: number;
+    scaleType:string;
     updated: Date;
     updatedBy:string;
+    allergen:boolean;
 }

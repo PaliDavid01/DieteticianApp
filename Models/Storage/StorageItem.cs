@@ -22,5 +22,7 @@ namespace Models.Storage
         public string StoredBy { get; set; }
         public Material Type { get; set; }
         
+        public bool IsOpened {get; set;}
+        
     }
 }

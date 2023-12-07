@@ -29,8 +29,9 @@ namespace Models.Storage
         public float Salt { get; set; }
         public float Sugar { get; set; }
         public int Scale { get; set; }
+        public int ScaleType { get; set; }
         public DateTime Updated {  get; set; }
         public string UpdatedBy { get; set; }
-
+        public bool allergen{get; set;}
     }
 }

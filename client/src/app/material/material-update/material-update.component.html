@@ -108,9 +108,21 @@
                         class="form-control form-control-lg" />
                 </div>
             </div>
-            <div class="col ">
-                <button class="btn btn-success btn-lg btn-block " type="submit">{{'modify' | translate}}</button>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'scaleType' | translate}}</label>
+                    <input name="scale" [(ngModel)]="sMaterial.scaleType" type="number" id="typeScaleX-2"
+                        class="form-control form-control-lg" />
+                </div>
             </div>
+            <div class="col ">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'allergen' | translate}}</label>
+                    <input name="allergen" [(ngModel)]="sMaterial.allergen" type="checkbox" id="typeAllergenX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+            <button class="btn btn-success btn-lg btn-block " type="submit">{{'modify' | translate}}</button>
         </div>
     </div>
 </form>
