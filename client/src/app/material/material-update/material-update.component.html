@@ -1,1 +1,116 @@
-<p>material-update works!</p>
+<form #loginForm="ngForm" (ngSubmit)="update()" autocomplete="off">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'name' | translate}}</label>
+                    <input name="name" [(ngModel)]="sMaterial.name" type="text" id="typeName1X-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'fat' | translate}}</label>
+                    <input name="fat" [(ngModel)]="sMaterial.fat" type="number" id="typeFatX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'protein' | translate}}</label>
+                    <input name="protein" [(ngModel)]="sMaterial.protein" type="number" id="typeEmailX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'kilocalorie' | translate}}</label>
+                    <input name="kilocalorie" [(ngModel)]="sMaterial.kilocalorie" type="number" id="typeKilocalorieX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'kilojoule' | translate}}</label>
+                    <input name="kilojoule" [(ngModel)]="sMaterial.kilojoule" type="number" id="typeKilojouleX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'carbohydrate' | translate}}</label>
+                    <input name="carbohydrate" [(ngModel)]="sMaterial.carbohydrate" type="number"
+                        id="typeCarbohydrateX-2" class="form-control form-control-lg" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'cholesterol' | translate}}</label>
+                    <input name="cholesterol" [(ngModel)]="sMaterial.cholesterol" type="number" id="typeCholesterolX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'saturatedfat' | translate}}</label>
+                    <input name="saturatedfat" [(ngModel)]="sMaterial.saturatedfat" type="number"
+                        id="typeSaturatedfatX-2" class="form-control form-control-lg" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'transfat' | translate}}</label>
+                    <input name="transfat" [(ngModel)]="sMaterial.transfat" type="number" id="typeTransfatX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'natrium_mg' | translate}}</label>
+                    <input name="natrium_mg" [(ngModel)]="sMaterial.natrium_mg" type="number" id="typeNatrium_mgX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'fluorite_mg' | translate}}</label>
+                    <input name="natrium_mg" [(ngModel)]="sMaterial.fluorite_mg" type="number" id="typeFluorite_mgX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'salt' | translate}}</label>
+                    <input name="salt" [(ngModel)]="sMaterial.salt" type="number" id="typeSaltX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'sugar' | translate}}</label>
+                    <input name="sugar" [(ngModel)]="sMaterial.sugar" type="number" id="typeSugarX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label">{{'scale' | translate}}</label>
+                    <input name="scale" [(ngModel)]="sMaterial.scale" type="number" id="typeScaleX-2"
+                        class="form-control form-control-lg" />
+                </div>
+            </div>
+            <div class="col ">
+                <button class="btn btn-success btn-lg btn-block " type="submit">{{'modify' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</form>

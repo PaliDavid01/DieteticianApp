@@ -25,10 +25,21 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public void Create([FromBody] MaterialDTO material) 
+        public void Create([FromBody] MaterialPostDTO material) 
         {
             var item = _mapper.Map<Material>(material);
             _logic.Create(item);
+        }
+
+        [HttpPut]
+        public void Update([FromBody] Material material) 
+        {
+            _logic.Update(material);
+        }
+        [HttpDelete]
+        public void Delete(string id) 
+        {
+            _logic.Delete(id);
         }
     }
 }

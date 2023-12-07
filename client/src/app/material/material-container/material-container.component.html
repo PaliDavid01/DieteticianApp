@@ -1,1 +1,58 @@
-<p>material-container works!</p>
+<app-material-update *ngIf="selectedMaterial" [sMaterial]="selectedMaterial"></app-material-update>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>{{'name'|translate}}</th>
+      <th>{{'fat'|translate}}</th>
+      <th>{{'protein'|translate}}</th>
+      <th>{{'kilocalorie'|translate}}</th>
+      <th>{{'kilojoule'|translate}}</th>
+      <th>{{'carbohydrate'|translate}}</th>
+      <th>{{'cholesterol'|translate}}</th>
+      <th>{{'saturatedfat'|translate}}</th>
+      <th>{{'transfat'|translate}}</th>
+      <th>{{'natrium_mg'|translate}}</th>
+      <th>{{'fluorite_mg'|translate}}</th>
+      <th>{{'salt'|translate}}</th>
+      <th>{{'sugar'|translate}}</th>
+      <th>{{'scale'|translate}}</th>
+      <th>{{'updated'|translate}}</th>
+      <th>{{'updatedBy'|translate}}</th>
+      <th>{{'options'|translate}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of materials$|async">
+      <td>{{item.name}}</td>
+      <td>{{item.fat}}</td>
+      <td>{{item.protein}}</td>
+      <td>{{item.kilocalorie}}</td>
+      <td>{{item.kilojoule}}</td>
+      <td>{{item.carbohydrate}}</td>
+      <td>{{item.cholesterol}}</td>
+      <td>{{item.saturatedfat}}</td>
+      <td>{{item.transfat}}</td>
+      <td>{{item.natrium_mg}}</td>
+      <td>{{item.fluorite_mg}}</td>
+      <td>{{item.salt}}</td>
+      <td>{{item.sugar}}</td>
+      <td>{{item.scale}}</td>
+      <td>{{item.updated}}</td>
+      <td>{{item.updatedBy}}</td>
+      <td>
+        <div class="dropdown" ngbDropdown>
+          <a class="btn btn-primary" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false" ngbDropdownToggle>
+            {{'options' | translate}}
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
+            <li ngbDropdownItem><a class="dropdown-item text-secondary" (click)="update(item)">
+              {{'update' | translate}}</a></li>
+            <li ngbDropdownItem><a class="dropdown-item text-danger" (click)="delete(item.id)">
+              {{'delete' | translate}}</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

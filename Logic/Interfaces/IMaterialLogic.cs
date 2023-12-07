@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace Logic.Interfaces
 {
-    public interface IMaterialLogic: ILogic<Material>
+    public interface IMaterialLogic 
     {
-              
+        void Create(Material item);
+        void Update(Material item);
+
+        void Delete(string Id);
+        Material Get(string Id);
+
+        IQueryable<Material> GetAll();       
     }
 }

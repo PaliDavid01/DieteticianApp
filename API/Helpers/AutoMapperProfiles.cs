@@ -9,7 +9,7 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<MaterialDTO, Material>();
+            CreateMap<MaterialPostDTO, Material>();
             CreateMap<RegisterDTO, AppUser>();
             CreateMap<AppUser, LoginResponseDTO>();
         }
