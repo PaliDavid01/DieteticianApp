@@ -12,8 +12,8 @@ namespace Logic.Interfaces
         void Create(T item);
         void Update(T item);
 
-        void Delete(string Id);
-        T Get(string Id);
+        void Delete(int Id);
+        T Get(int Id);
 
         IQueryable<T> GetAll();
     }

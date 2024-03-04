@@ -10,36 +10,36 @@ using System.Threading.Tasks;
 
 namespace Logic.Logic
 {
-    public class MaterialLogic : IMaterialLogic
-    {
-        private IRepository<Material> _repository;
-        public MaterialLogic(IRepository<Material> repository)
-        {
-            this._repository = repository;
-        }
-        public void Create(Material material)
-        {
-            _repository.Create(material);
-        }
+    //public class MaterialLogic : IMaterialLogic
+    //{
+    //    private IRepository<Material> _repository;
+    //    public MaterialLogic(IRepository<Material> repository)
+    //    {
+    //        this._repository = repository;
+    //    }
+    //    public void Create(Material material)
+    //    {
+    //        _repository.Create(material);
+    //    }
 
-        public void Delete(string materialId)
-        {
-            _repository.Delete(materialId);
-        }
+    //    public void Delete(string materialId)
+    //    {
+    //        _repository.Delete(materialId);
+    //    }
 
-        public IQueryable<Material> GetAll()
-        {
-            return _repository.ReadAll();
-        }
+    //    public IQueryable<Material> GetAll()
+    //    {
+    //        return _repository.ReadAll();
+    //    }
 
-        public Material Get(string materialId)
-        {
-            return _repository.Read(materialId);
-        }
+    //    public Material Get(string materialId)
+    //    {
+    //        return _repository.Read(materialId);
+    //    }
 
-        public void Update(Material dealership)
-        {
-            _repository.Update(dealership);
-        }
-    }
+    //    public void Update(Material dealership)
+    //    {
+    //        _repository.Update(dealership);
+    //    }
+    //}
 }

@@ -1,7 +1,8 @@
-﻿using Castle.Core.Internal;
-using Castle.DynamicProxy.Generators;
+﻿//using Castle.Core.Internal;
+//using Castle.DynamicProxy.Generators;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Models.Models;
 using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,13 +26,13 @@ namespace Repository.GenericRepository
                 dbContext.SaveChanges();
         }
 
-        public void Delete(string id)
+        public void Delete(int id)
         {
             dbContext.Set<T>().Remove(Read(id));
             dbContext.SaveChanges();
         }
 
-        public abstract T Read(string id);
+        public abstract T Read(int id);
 
         public IQueryable<T> ReadAll()
         {

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using API.Interfaces;
 using Microsoft.IdentityModel.Tokens;
+using Models.Models;
 using Models.Storage;
 
 namespace API.Services;
@@ -14,7 +15,7 @@ public class TokenService : ITokenService
     {
         _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
     }
-    public string CreateToken(AppUser user)
+    public string CreateToken(User user)
     {
         var claims = new List<Claim>(){
             new Claim(JwtRegisteredClaimNames.NameId, user.Email),

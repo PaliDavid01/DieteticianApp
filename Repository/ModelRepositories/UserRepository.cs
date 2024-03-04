@@ -1,4 +1,6 @@
-﻿using Models.Storage;
+﻿using Microsoft.EntityFrameworkCore;
+using Models.Models;
+using Models.Storage;
 using Repository.Database;
 using Repository.GenericRepository;
 using Repository.Interfaces;
@@ -10,21 +12,21 @@ using System.Threading.Tasks;
 
 namespace Repository.ModelRepositories
 {
-    public class UserRepository : GenericRepository<AppUser>, IRepository<AppUser>
+    public class UserRepository : GenericRepository<User>, IRepository<User>
     {
-        public UserRepository(DatabaseContext dbctx):base(dbctx)
+        public UserRepository(DataBaseContext dbctx):base(dbctx)
         {
                 
         }
 
-        public override AppUser Read(string id)
+        public override User Read(int id)
         {
-            return (base.dbContext as DatabaseContext).AppUsers.FirstOrDefault(t => t.Email == id);
+            return (base.dbContext as DataBaseContext).Users.FirstOrDefault(t => t.UserId == id);
         }
 
-        public override void Update(AppUser item)
+        public override void Update(User item)
         {
-            var oldInDatabase = Read(item.Id);
+            var oldInDatabase = Read(item.UserId);
             foreach (var prop in oldInDatabase.GetType().GetProperties())
             {
                 if (prop.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)

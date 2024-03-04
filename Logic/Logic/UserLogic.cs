@@ -1,4 +1,5 @@
 ﻿using Logic.Interfaces;
+using Models.Models;
 using Models.Storage;
 using Repository.Interfaces;
 using Repository.ModelRepositories;
@@ -10,36 +11,41 @@ using System.Threading.Tasks;
 
 namespace Logic.Logic
 {
-    public class UserLogic : ILogic<AppUser>
+    public class UserLogic : IUserLogic
     {
-        private readonly IRepository<AppUser> _repository;
-        public UserLogic(IRepository<AppUser> repository)
+        private readonly IRepository<User> _repository;
+        public UserLogic(IRepository<User> repository)
         {
             this._repository = repository;
         }
-        public void Create(AppUser item)
+        public void Create(User item)
         {
             this._repository.Create(item);
         }
 
-        public void Delete(string Id)
+        public void Delete(int Id)
         {
             this._repository.Delete(Id);
         }
 
-        public IQueryable<AppUser> GetAll()
+        public IQueryable<User> GetAll()
         {
             return this._repository.ReadAll();
         }
 
-        public AppUser Get(string Id)
+        public User Get(int Id)
         {
             return this._repository.Read(Id);
         }
 
-        public void Update(AppUser item)
+        public void Update(User item)
         {
             this._repository.Update(item);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return this._repository.ReadAll().Where(x => x.Email == email).FirstOrDefault();
         }
     }
 }
