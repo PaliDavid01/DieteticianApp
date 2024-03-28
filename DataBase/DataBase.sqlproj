@@ -71,6 +71,16 @@
     <Build Include="Schemas\dbo\Tables\Role.sql" />
     <Build Include="Schemas\dbo\Tables\UserRole.sql" />
     <None Include="Data\Test\User.sql" />
+    <Build Include="Schemas\dbo\Views\UserRoleView.sql" />
+    <Build Include="Schemas\dbo\Tables\Ecodes.sql" />
+    <Build Include="Schemas\dbo\Tables\Vitamins.sql" />
+    <Build Include="Schemas\dbo\Tables\AllergenMaterial.sql" />
+    <Build Include="Schemas\dbo\Tables\Stock.sql" />
+    <Build Include="Schemas\dbo\Tables\BaseMaterial.sql" />
+    <Build Include="Schemas\dbo\Tables\Allergen.sql" />
+    <None Include="Data\Test\Allergen.sql" />
+    <Build Include="Schemas\dbo\Tables\MaterialGroup.sql" />
+    <None Include="Data\Test\MaterialGroup.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DataBase.refactorlog" />
@@ -78,6 +88,8 @@
   <ItemGroup>
     <None Include="PublishingProfiles\DataBaseTestPublishRecreate.publish.xml" />
     <None Include="Scripts_Post-Deployment\GeneratedPostDeployment.sql" />
+    <None Include="Data\Test\Role.sql" />
+    <None Include="Data\Test\UserRole.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts_Post-Deployment\Script.PostDeployment.sql" />

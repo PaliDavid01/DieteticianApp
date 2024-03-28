@@ -8,7 +8,7 @@
               <h3 class="mb-5">{{'register' | translate}}</h3>
               <form #loginForm="ngForm" (ngSubmit)="register()" autocomplete="off" >
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="typeEmailX-2">{{'firstName' | translate}}</label>
+                    <label class="form-label" for="name">{{'firstName' | translate}}</label>
                     <input 
                         name="firstName"
                         [(ngModel)]="model.firstName" 
@@ -63,8 +63,8 @@
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">{{'options' | translate}}<i class="bi bi-arrow-down"></i></label>
                   </div>
-                  <select name="role" [(ngModel)]="model.role" class="form-control">
-                    <option *ngFor="let item of roles">{{item}}</option>
+                  <select name="role" [(ngModel)]="selectedRole.roleName" [required]="true" class="form-control">
+                    <option *ngFor="let item of roles">{{item.roleName}}</option>
                   </select>
                 </div>
               <!-- Checkbox -->

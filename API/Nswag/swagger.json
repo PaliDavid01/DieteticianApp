@@ -1,0 +1,731 @@
+{
+  "x-generator": "NSwag v14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "My Title",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/Material/GetAllFasz": {
+      "get": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_GetAllFasz",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Material"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Material": {
+      "post": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_Create",
+        "requestBody": {
+          "x-name": "material",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialPostDTO"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_Update",
+        "requestBody": {
+          "x-name": "material",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Material"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Role": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "Role_CreateRole",
+        "requestBody": {
+          "x-name": "role",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Role"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "Role_GetRoles",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Role"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Role/CreateUserRole": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "Role_CreateUserRole",
+        "requestBody": {
+          "x-name": "userRole",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRole"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserRole"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Role/GetRolesByUserId": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "Role_GetRolesByUserId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserRole"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Role/GetRoleViews": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "Role_GetRoleViews",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserRoleView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Role/GetUserRoleViewsByUserId": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "Role_GetUserRoleViewsByUserId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserRoleView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Role/GetUserRoles": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "Role_GetUserRoles",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Role"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/User": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_Login",
+        "requestBody": {
+          "x-name": "loginUser",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDTO"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/User/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_Register",
+        "requestBody": {
+          "x-name": "userDTO",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDTO"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/User/Roles": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_GetRoles",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Material": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 0
+          },
+          "fat": {
+            "type": "number",
+            "format": "float"
+          },
+          "protein": {
+            "type": "number",
+            "format": "float"
+          },
+          "kilocalorie": {
+            "type": "number",
+            "format": "float"
+          },
+          "kilojoule": {
+            "type": "number",
+            "format": "float"
+          },
+          "carbohydrate": {
+            "type": "number",
+            "format": "float"
+          },
+          "cholesterol": {
+            "type": "number",
+            "format": "float"
+          },
+          "saturatedfat": {
+            "type": "number",
+            "format": "float"
+          },
+          "transfat": {
+            "type": "number",
+            "format": "float"
+          },
+          "natrium_mg": {
+            "type": "number",
+            "format": "float"
+          },
+          "fluorite_mg": {
+            "type": "number",
+            "format": "float"
+          },
+          "salt": {
+            "type": "number",
+            "format": "float"
+          },
+          "sugar": {
+            "type": "number",
+            "format": "float"
+          },
+          "scale": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scaleType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "allergen": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MaterialPostDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "fat": {
+            "type": "number",
+            "format": "float"
+          },
+          "protein": {
+            "type": "number",
+            "format": "float"
+          },
+          "kilocalorie": {
+            "type": "number",
+            "format": "float"
+          },
+          "kilojoule": {
+            "type": "number",
+            "format": "float"
+          },
+          "carbohydrate": {
+            "type": "number",
+            "format": "float"
+          },
+          "cholesterol": {
+            "type": "number",
+            "format": "float"
+          },
+          "saturatedfat": {
+            "type": "number",
+            "format": "float"
+          },
+          "transfat": {
+            "type": "number",
+            "format": "float"
+          },
+          "natrium_mg": {
+            "type": "number",
+            "format": "float"
+          },
+          "fluorite_mg": {
+            "type": "number",
+            "format": "float"
+          },
+          "salt": {
+            "type": "number",
+            "format": "float"
+          },
+          "sugar": {
+            "type": "number",
+            "format": "float"
+          },
+          "scale": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedBy": {
+            "type": "string"
+          }
+        }
+      },
+      "Role": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "userRoles": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            }
+          }
+        }
+      },
+      "UserRole": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userRoleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dateAssigned": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateRevoked": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "role": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Role"
+              }
+            ]
+          },
+          "user": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ]
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "passwordHash": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "passwordSalt": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "userRoles": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            }
+          }
+        }
+      },
+      "UserRoleView": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userRoleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "LoginResponseDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  }
+}

@@ -3,89 +3,222 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Models.Models
+namespace Models.Models;
+
+public partial class DataBaseContext : DbContext
 {
-    public partial class DataBaseContext : DbContext
+    public DataBaseContext(DbContextOptions<DataBaseContext> options)
+        : base(options)
     {
-        public DataBaseContext()
-        {
-        }
-
-        public DataBaseContext(DbContextOptions<DataBaseContext> options)
-            : base(options)
-        {
-        }
-
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.HasAnnotation("Scaffolding:ConnectionString", "Data Source=(local);Initial Catalog=DataBase;Integrated Security=true");
-
-            modelBuilder.Entity<Role>(entity =>
-            {
-                entity.ToTable("Role");
-
-                entity.Property(e => e.RoleDescription)
-                    .IsRequired()
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.RoleName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.ToTable("User");
-
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.PasswordHash)
-                    .IsRequired()
-                    .HasColumnType("image");
-
-                entity.Property(e => e.PasswordSalt)
-                    .IsRequired()
-                    .HasColumnType("image");
-            });
-
-            modelBuilder.Entity<UserRole>(entity =>
-            {
-                entity.ToTable("UserRole");
-
-                entity.Property(e => e.DateAssigned).HasColumnType("datetime");
-
-                entity.Property(e => e.DateRevoked).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.UserRoles)
-                    .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserRoles)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-            });
-
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
+
+    public virtual DbSet<Allergen> Allergens { get; set; }
+
+    public virtual DbSet<AllergenMaterial> AllergenMaterials { get; set; }
+
+    public virtual DbSet<BaseMaterial> BaseMaterials { get; set; }
+
+    public virtual DbSet<Ecode> Ecodes { get; set; }
+
+    public virtual DbSet<MaterialGroup> MaterialGroups { get; set; }
+
+    public virtual DbSet<Role> Roles { get; set; }
+
+    public virtual DbSet<Stock> Stocks { get; set; }
+
+    public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserRole> UserRoles { get; set; }
+
+    public virtual DbSet<UserRoleView> UserRoleViews { get; set; }
+
+    public virtual DbSet<Vitamin> Vitamins { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Allergen>(entity =>
+        {
+            entity.ToTable("Allergen");
+
+            entity.Property(e => e.AllergenCode)
+                .IsRequired()
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.AllergenDescription)
+                .IsRequired()
+                .HasMaxLength(250);
+            entity.Property(e => e.AllergenName)
+                .IsRequired()
+                .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<AllergenMaterial>(entity =>
+        {
+            entity.ToTable("AllergenMaterial");
+
+            entity.Property(e => e.AllergenMaterialId).HasColumnName("AllergenMaterialID");
+            entity.Property(e => e.AllergenId).HasColumnName("AllergenID");
+            entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
+
+            entity.HasOne(d => d.Allergen).WithMany(p => p.AllergenMaterials)
+                .HasForeignKey(d => d.AllergenId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            entity.HasOne(d => d.Material).WithMany(p => p.AllergenMaterials)
+                .HasForeignKey(d => d.MaterialId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
+        modelBuilder.Entity<BaseMaterial>(entity =>
+        {
+            entity.HasKey(e => e.MaterialId);
+
+            entity.ToTable("BaseMaterial");
+
+            entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
+            entity.Property(e => e.ActivityDescription)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.CostPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.ItjSztj)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("ITJ_SZTJ");
+            entity.Property(e => e.MaterialCode)
+                .IsRequired()
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.MaterialGroupName)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Note).HasColumnType("text");
+            entity.Property(e => e.Quantity).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.RetailPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.SupplierCode)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Vatrate).HasColumnName("VATRate");
+        });
+
+        modelBuilder.Entity<Ecode>(entity =>
+        {
+            entity.Property(e => e.EcodeId).HasColumnName("EcodeID");
+            entity.Property(e => e.Description).HasColumnType("text");
+            entity.Property(e => e.Ecode1)
+                .IsRequired()
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("Ecode");
+            entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
+
+            entity.HasOne(d => d.Material).WithMany(p => p.Ecodes)
+                .HasForeignKey(d => d.MaterialId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
+        modelBuilder.Entity<MaterialGroup>(entity =>
+        {
+            entity.HasKey(e => e.GroupCode);
+
+            entity.ToTable("MaterialGroup");
+
+            entity.Property(e => e.GroupName)
+                .IsRequired()
+                .HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.ToTable("Role");
+
+            entity.Property(e => e.RoleDescription)
+                .IsRequired()
+                .HasMaxLength(250);
+            entity.Property(e => e.RoleName)
+                .IsRequired()
+                .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<Stock>(entity =>
+        {
+            entity.ToTable("Stock");
+
+            entity.Property(e => e.StockId).HasColumnName("StockID");
+            entity.Property(e => e.CountingUnitPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.CurrentStock).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
+            entity.Property(e => e.MaximumOrderPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.OrderUnitPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.PreCalculationPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.SalePrice).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Material).WithMany(p => p.Stocks)
+                .HasForeignKey(d => d.MaterialId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.ToTable("User");
+
+            entity.Property(e => e.Email)
+                .IsRequired()
+                .HasMaxLength(250);
+            entity.Property(e => e.FirstName)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.LastName)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.PasswordHash)
+                .IsRequired()
+                .HasColumnType("image");
+            entity.Property(e => e.PasswordSalt)
+                .IsRequired()
+                .HasColumnType("image");
+        });
+
+        modelBuilder.Entity<UserRole>(entity =>
+        {
+            entity.ToTable("UserRole");
+
+            entity.Property(e => e.DateAssigned).HasColumnType("datetime");
+            entity.Property(e => e.DateRevoked).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            entity.HasOne(d => d.User).WithMany(p => p.UserRoles)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
+        modelBuilder.Entity<UserRoleView>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("UserRoleView");
+
+            entity.Property(e => e.RoleName)
+                .IsRequired()
+                .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<Vitamin>(entity =>
+        {
+            entity.Property(e => e.VitaminId).HasColumnName("VitaminID");
+            entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
+            entity.Property(e => e.Pha).HasColumnName("PHA");
+
+            entity.HasOne(d => d.Material).WithMany(p => p.Vitamins)
+                .HasForeignKey(d => d.MaterialId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
+        OnModelCreatingPartial(modelBuilder);
+    }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

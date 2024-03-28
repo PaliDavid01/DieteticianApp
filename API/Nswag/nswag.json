@@ -1,5 +1,5 @@
 {
-  "runtime": "WinX64",
+  "runtime": "Net80",
   "defaultVariables": null,
   "documentGenerator": {
     "aspNetCoreToOpenApi": {
@@ -76,7 +76,7 @@
       "templateDirectory": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "../../client/src/app/services/generated-client.ts",
+      "output": "../client/src/app/services/generated-client.ts",
       "newLineBehavior": "Auto"
     }
   }

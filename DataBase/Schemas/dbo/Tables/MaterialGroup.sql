@@ -1,0 +1,5 @@
+
+CREATE TABLE MaterialGroup (
+    GroupCode INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    GroupName NVARCHAR(255) NOT NULL
+);

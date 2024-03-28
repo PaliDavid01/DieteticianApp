@@ -8,11 +8,8 @@ using Models.Storage;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace API.Controllers
-{
-    public static class Roles{
-        public static List<string> roles = new List<string>(){"Dietetian", "Chef", "Kitchen-staff", "Storage-staff", "Supervisor", "IT"};
-    }
+namespace API.Controllers 
+{ 
     [ApiController]
     [Route("[controller]")]
     public class UserController: ControllerBase
@@ -27,11 +24,11 @@ namespace API.Controllers
             this._tokenService = tokenService;
         }
         [HttpPost]
-        public ActionResult<LoginResponseDTO> Login(LoginDTO loginUser)
+        public async Task<LoginResponseDTO> Login(LoginDTO loginUser)
         {
-            var user = _userLogic.GetUserByEmail(loginUser.Email);
+            var user = (await _userLogic.GetUserByEmail(loginUser.Email)).FirstOrDefault();
 
-            if (user == null) return Unauthorized("Wrong email or password!");
+            if (user == null) throw new ArgumentNullException();
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
 
@@ -40,7 +37,7 @@ namespace API.Controllers
             {
                 if (computedHash[i] != user.PasswordHash[i])
                 {
-                    return Unauthorized("Wrong email or password!");
+                    throw new Exception("Wrong email or password");
                 }
             }
             var response = _mapper.Map<LoginResponseDTO>(user);
@@ -52,10 +49,8 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(RegisterDTO userDTO)
+        public async Task<int> Register(RegisterDTO userDTO)
         {
-            //if(!UserExists(userDTO.Email)) return BadRequest();
-
             var user = new User()
             {
                 FirstName = userDTO.FirstName,
@@ -70,15 +65,7 @@ namespace API.Controllers
             _userLogic.Create(user);
 
             // tokenservice here
-            return Ok();
+            return (await _userLogic.FindAsync(t => t.Email == userDTO.Email)).FirstOrDefault().UserId;
         }
-        [HttpGet("Roles")]
-        public ActionResult<ICollection<string>> GetRoles(){
-            return Roles.roles;
-        }
-        //private bool UserExists(string email)
-        //{
-        //    return _userLogic.Get(email) == null;
-        //}
     }
 }

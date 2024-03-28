@@ -1,4 +1,5 @@
-﻿using Models.Models;
+﻿using Logic.Interfaces.GenericInterfaces;
+using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Logic.Interfaces
 {
-    public interface IUserLogic: ILogic<User>
+    public interface IUserLogic: ICRUDLogic<User>
     {
-        User GetUserByEmail(string email);
+        Task<IEnumerable<User>> GetUserByEmail(string email);
     }
 }

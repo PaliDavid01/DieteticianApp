@@ -19,31 +19,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Add services to the container.
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddDataInjectionServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerDocument();
 builder.Services.AddSwaggerGen(c =>
 {
     c.CustomOperationIds(d => d.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
        ? controllerActionDescriptor.MethodInfo.Name
        : d.ActionDescriptor.AttributeRouteInfo?.Name);
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "Willu Backend API",
-        Version = "v1",
-        Description = "API for Willu application"
-    });
+    //c.SwaggerDoc("v1", new OpenApiInfo
+    //{
+    //    Title = "Willu Backend API",
+    //    Version = "v1",
+    //    Description = "API for Willu application"
+    //});
 });
 
-//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-//builder.Services.AddOpenApiDocument(options =>
-//{
-//    options.Title = "DietApp";
-//});
+builder.Services.AddOpenApiDocument();
 
 var app = builder.Build();
 
@@ -55,7 +52,7 @@ app.UseCors(corsBuilder =>
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUi();
+    app.UseSwaggerUI();
 }
 
 //app.UseSwaggerUi(options =>

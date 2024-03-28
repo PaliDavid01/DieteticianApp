@@ -1,5 +1,5 @@
 ﻿{
-   "CodeGenerationMode": 2,
+   "CodeGenerationMode": 4,
    "ContextClassName": "DataBaseContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
@@ -16,7 +16,31 @@
    "T4TemplatePath": null,
    "Tables": [
       {
+         "Name": "[dbo].[Allergen]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AllergenMaterial]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BaseMaterial]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Ecodes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MaterialGroup]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Role]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Stock]",
          "ObjectType": 0
       },
       {
@@ -26,6 +50,14 @@
       {
          "Name": "[dbo].[UserRole]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Vitamins]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserRoleView]",
+         "ObjectType": 3
       }
    ],
    "UiHint": "..\\DataBase\\DataBase.sqlproj",

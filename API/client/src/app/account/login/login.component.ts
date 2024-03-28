@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
+import { UserService } from 'src/app/services/generated-client';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +11,13 @@ import { AccountService } from 'src/app/services/account.service';
 export class LoginComponent {
   model:any = {};
   
-  constructor(public accountService: AccountService, private router: Router){}
+  constructor(public accountService: AccountService,private userService: UserService, private router: Router){}
 
   login(){
-    this.accountService.login(this.model).subscribe({
+    this.userService.getRoles().subscribe(
+      response => console.log(response)
+      );
+    this.userService.login(this.model).subscribe({
       next: () => this.router.navigateByUrl('/home')
     });
   }

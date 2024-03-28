@@ -21,6 +21,7 @@ import { RecieptDisplayComponent } from './receipt/reciept-display/reciept-displ
 import { MaterialContainerComponent } from './material/material-container/material-container.component';
 import { MaterialCreateComponent } from './material/material-create/material-create.component';
 import { MaterialUpdateComponent } from './material/material-update/material-update.component';
+import { API_BASE_URL, RoleService, UserService } from './services/generated-client';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -58,7 +59,11 @@ export function HttpLoaderFactory(http: HttpClient){
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    UserService,
+    RoleService,
+    { provide: API_BASE_URL, useValue: 'http://localhost:7247' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
