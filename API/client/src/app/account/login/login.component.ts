@@ -1,27 +1,29 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
-import { UserService } from 'src/app/services/generated-client';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { AuthService } from 'src/app/services/generated-client';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  model:any = {};
-  
-  constructor(public accountService: AccountService,private userService: UserService, private router: Router){}
+  model: any = {};
 
-  login(){
-    this.userService.getRoles().subscribe(
-      response => console.log(response)
-      );
-    this.userService.login(this.model).subscribe({
-      next: () => this.router.navigateByUrl('/home')
+  constructor(
+    public accountService: AccountService,
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
+
+  login() {
+    this.authService.authenticate(this.model).subscribe({
+      next: () => this.router.navigateByUrl('/home'),
     });
   }
-  register(){
+  register() {
     this.router.navigateByUrl('/register');
   }
 }

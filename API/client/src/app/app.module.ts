@@ -9,10 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
 import { LocalizationComponent } from './localization/localization.component';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DropdownModule } from 'primeng/dropdown';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { config } from 'rxjs';
 import { RecieptContainerComponent } from './receipt/reciept-container/reciept-container.component';
 import { RecieptCreateComponent } from './receipt/reciept-create/reciept-create.component';
@@ -21,9 +21,13 @@ import { RecieptDisplayComponent } from './receipt/reciept-display/reciept-displ
 import { MaterialContainerComponent } from './material/material-container/material-container.component';
 import { MaterialCreateComponent } from './material/material-create/material-create.component';
 import { MaterialUpdateComponent } from './material/material-update/material-update.component';
-import { API_BASE_URL, RoleService, UserService } from './services/generated-client';
+import {
+  API_BASE_URL,
+  AuthService,
+  RoleService,
+} from './services/generated-client';
 
-export function HttpLoaderFactory(http: HttpClient){
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
@@ -41,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient){
     RecieptDisplayComponent,
     MaterialContainerComponent,
     MaterialCreateComponent,
-    MaterialUpdateComponent
+    MaterialUpdateComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,20 +54,20 @@ export function HttpLoaderFactory(http: HttpClient){
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     BrowserAnimationsModule,
     DropdownModule,
     FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
-    UserService,
+    AuthService,
     RoleService,
     { provide: API_BASE_URL, useValue: 'http://localhost:7247' },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

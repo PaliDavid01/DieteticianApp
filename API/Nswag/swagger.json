@@ -6,12 +6,136 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/Material/GetAllFasz": {
+    "/Allergen/Create": {
+      "post": {
+        "tags": [
+          "Allergen"
+        ],
+        "operationId": "Allergen_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Allergen"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Allergen/CreateAsync": {
+      "post": {
+        "tags": [
+          "Allergen"
+        ],
+        "operationId": "Allergen_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Allergen"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Allergen/Delete": {
+      "delete": {
+        "tags": [
+          "Allergen"
+        ],
+        "operationId": "Allergen_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Allergen/DeleteAsync": {
+      "delete": {
+        "tags": [
+          "Allergen"
+        ],
+        "operationId": "Allergen_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Allergen"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Allergen/DeleteByIdAsync/{id}": {
+      "delete": {
+        "tags": [
+          "Allergen"
+        ],
+        "operationId": "Allergen_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Allergen/ReadAllAsync": {
       "get": {
         "tags": [
-          "Material"
+          "Allergen"
         ],
-        "operationId": "Material_GetAllFasz",
+        "operationId": "Allergen_ReadAll",
         "responses": {
           "200": {
             "description": "",
@@ -20,7 +144,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Material"
+                    "$ref": "#/components/schemas/Allergen"
                   }
                 }
               }
@@ -29,18 +153,692 @@
         }
       }
     },
-    "/Material": {
+    "/Allergen/ReadAll": {
+      "get": {
+        "tags": [
+          "Allergen"
+        ],
+        "operationId": "Allergen_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Allergen"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Allergen/ReadByIdAsync/{id}": {
+      "get": {
+        "tags": [
+          "Allergen"
+        ],
+        "operationId": "Allergen_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Allergen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Allergen/Update": {
+      "put": {
+        "tags": [
+          "Allergen"
+        ],
+        "operationId": "Allergen_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Allergen"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Allergen/UpdateAsync": {
+      "put": {
+        "tags": [
+          "Allergen"
+        ],
+        "operationId": "Allergen_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Allergen"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/Create": {
+      "post": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllergenMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/CreateAsync": {
+      "post": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllergenMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/Delete": {
+      "delete": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/DeleteAsync": {
+      "delete": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllergenMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/DeleteByIdAsync/{id}": {
+      "delete": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/ReadAllAsync": {
+      "get": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AllergenMaterial"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/ReadAll": {
+      "get": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AllergenMaterial"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/ReadByIdAsync/{id}": {
+      "get": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllergenMaterial"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/Update": {
+      "put": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllergenMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/UpdateAsync": {
+      "put": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllergenMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "Auth_Login",
+        "requestBody": {
+          "x-name": "loginUser",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDTO"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "Auth_Register",
+        "requestBody": {
+          "x-name": "userDTO",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDTO"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Ecode/Create": {
+      "post": {
+        "tags": [
+          "Ecode"
+        ],
+        "operationId": "Ecode_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ecode"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Ecode/CreateAsync": {
+      "post": {
+        "tags": [
+          "Ecode"
+        ],
+        "operationId": "Ecode_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ecode"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Ecode/Delete": {
+      "delete": {
+        "tags": [
+          "Ecode"
+        ],
+        "operationId": "Ecode_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Ecode/DeleteAsync": {
+      "delete": {
+        "tags": [
+          "Ecode"
+        ],
+        "operationId": "Ecode_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ecode"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Ecode/DeleteByIdAsync/{id}": {
+      "delete": {
+        "tags": [
+          "Ecode"
+        ],
+        "operationId": "Ecode_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Ecode/ReadAllAsync": {
+      "get": {
+        "tags": [
+          "Ecode"
+        ],
+        "operationId": "Ecode_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ecode"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Ecode/ReadAll": {
+      "get": {
+        "tags": [
+          "Ecode"
+        ],
+        "operationId": "Ecode_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ecode"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Ecode/ReadByIdAsync/{id}": {
+      "get": {
+        "tags": [
+          "Ecode"
+        ],
+        "operationId": "Ecode_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ecode"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Ecode/Update": {
+      "put": {
+        "tags": [
+          "Ecode"
+        ],
+        "operationId": "Ecode_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ecode"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Ecode/UpdateAsync": {
+      "put": {
+        "tags": [
+          "Ecode"
+        ],
+        "operationId": "Ecode_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ecode"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Material/Create": {
       "post": {
         "tags": [
           "Material"
         ],
         "operationId": "Material_Create",
         "requestBody": {
-          "x-name": "material",
+          "x-name": "entity",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MaterialPostDTO"
+                "$ref": "#/components/schemas/BaseMaterial"
               }
             }
           },
@@ -52,18 +850,20 @@
             "description": ""
           }
         }
-      },
-      "put": {
+      }
+    },
+    "/Material/CreateAsync": {
+      "post": {
         "tags": [
           "Material"
         ],
-        "operationId": "Material_Update",
+        "operationId": "Material_Create2",
         "requestBody": {
-          "x-name": "material",
+          "x-name": "entity",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Material"
+                "$ref": "#/components/schemas/BaseMaterial"
               }
             }
           },
@@ -75,7 +875,9 @@
             "description": ""
           }
         }
-      },
+      }
+    },
+    "/Material/Delete": {
       "delete": {
         "tags": [
           "Material"
@@ -86,11 +888,442 @@
             "name": "id",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             },
             "x-position": 1
           }
         ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Material/DeleteAsync": {
+      "delete": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Material/DeleteByIdAsync/{id}": {
+      "delete": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Material/ReadAllAsync": {
+      "get": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BaseMaterial"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Material/ReadAll": {
+      "get": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BaseMaterial"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Material/ReadByIdAsync/{id}": {
+      "get": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseMaterial"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Material/Update": {
+      "put": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Material/UpdateAsync": {
+      "put": {
+        "tags": [
+          "Material"
+        ],
+        "operationId": "Material_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/MaterialGroup/Create": {
+      "post": {
+        "tags": [
+          "MaterialGroup"
+        ],
+        "operationId": "MaterialGroup_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialGroup"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/MaterialGroup/CreateAsync": {
+      "post": {
+        "tags": [
+          "MaterialGroup"
+        ],
+        "operationId": "MaterialGroup_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialGroup"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/MaterialGroup/Delete": {
+      "delete": {
+        "tags": [
+          "MaterialGroup"
+        ],
+        "operationId": "MaterialGroup_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/MaterialGroup/DeleteAsync": {
+      "delete": {
+        "tags": [
+          "MaterialGroup"
+        ],
+        "operationId": "MaterialGroup_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialGroup"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/MaterialGroup/DeleteByIdAsync/{id}": {
+      "delete": {
+        "tags": [
+          "MaterialGroup"
+        ],
+        "operationId": "MaterialGroup_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/MaterialGroup/ReadAllAsync": {
+      "get": {
+        "tags": [
+          "MaterialGroup"
+        ],
+        "operationId": "MaterialGroup_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MaterialGroup"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/MaterialGroup/ReadAll": {
+      "get": {
+        "tags": [
+          "MaterialGroup"
+        ],
+        "operationId": "MaterialGroup_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MaterialGroup"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/MaterialGroup/ReadByIdAsync/{id}": {
+      "get": {
+        "tags": [
+          "MaterialGroup"
+        ],
+        "operationId": "MaterialGroup_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialGroup"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/MaterialGroup/Update": {
+      "put": {
+        "tags": [
+          "MaterialGroup"
+        ],
+        "operationId": "MaterialGroup_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialGroup"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/MaterialGroup/UpdateAsync": {
+      "put": {
+        "tags": [
+          "MaterialGroup"
+        ],
+        "operationId": "MaterialGroup_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialGroup"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
         "responses": {
           "200": {
             "description": ""
@@ -297,18 +1530,18 @@
         }
       }
     },
-    "/User": {
+    "/api/Stock/Create": {
       "post": {
         "tags": [
-          "User"
+          "Stock"
         ],
-        "operationId": "User_Login",
+        "operationId": "Stock_Create",
         "requestBody": {
-          "x-name": "loginUser",
+          "x-name": "entity",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginDTO"
+                "$ref": "#/components/schemas/Stock"
               }
             }
           },
@@ -317,30 +1550,23 @@
         },
         "responses": {
           "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LoginResponseDTO"
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
     },
-    "/User/register": {
+    "/api/Stock/CreateAsync": {
       "post": {
         "tags": [
-          "User"
+          "Stock"
         ],
-        "operationId": "User_Register",
+        "operationId": "Stock_Create2",
         "requestBody": {
-          "x-name": "userDTO",
+          "x-name": "entity",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterDTO"
+                "$ref": "#/components/schemas/Stock"
               }
             }
           },
@@ -349,25 +1575,91 @@
         },
         "responses": {
           "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
     },
-    "/User/Roles": {
+    "/api/Stock/Delete": {
+      "delete": {
+        "tags": [
+          "Stock"
+        ],
+        "operationId": "Stock_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Stock/DeleteAsync": {
+      "delete": {
+        "tags": [
+          "Stock"
+        ],
+        "operationId": "Stock_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Stock"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Stock/DeleteByIdAsync/{id}": {
+      "delete": {
+        "tags": [
+          "Stock"
+        ],
+        "operationId": "Stock_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Stock/ReadAllAsync": {
       "get": {
         "tags": [
-          "User"
+          "Stock"
         ],
-        "operationId": "User_GetRoles",
+        "operationId": "Stock_ReadAll",
         "responses": {
           "200": {
             "description": "",
@@ -376,7 +1668,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/Stock"
                   }
                 }
               }
@@ -384,158 +1676,742 @@
           }
         }
       }
+    },
+    "/api/Stock/ReadAll": {
+      "get": {
+        "tags": [
+          "Stock"
+        ],
+        "operationId": "Stock_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Stock"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Stock/ReadByIdAsync/{id}": {
+      "get": {
+        "tags": [
+          "Stock"
+        ],
+        "operationId": "Stock_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stock"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Stock/Update": {
+      "put": {
+        "tags": [
+          "Stock"
+        ],
+        "operationId": "Stock_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Stock"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Stock/UpdateAsync": {
+      "put": {
+        "tags": [
+          "Stock"
+        ],
+        "operationId": "Stock_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Stock"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Vitamin/Create": {
+      "post": {
+        "tags": [
+          "Vitamin"
+        ],
+        "operationId": "Vitamin_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vitamin"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Vitamin/CreateAsync": {
+      "post": {
+        "tags": [
+          "Vitamin"
+        ],
+        "operationId": "Vitamin_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vitamin"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Vitamin/Delete": {
+      "delete": {
+        "tags": [
+          "Vitamin"
+        ],
+        "operationId": "Vitamin_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Vitamin/DeleteAsync": {
+      "delete": {
+        "tags": [
+          "Vitamin"
+        ],
+        "operationId": "Vitamin_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vitamin"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Vitamin/DeleteByIdAsync/{id}": {
+      "delete": {
+        "tags": [
+          "Vitamin"
+        ],
+        "operationId": "Vitamin_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Vitamin/ReadAllAsync": {
+      "get": {
+        "tags": [
+          "Vitamin"
+        ],
+        "operationId": "Vitamin_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vitamin"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Vitamin/ReadAll": {
+      "get": {
+        "tags": [
+          "Vitamin"
+        ],
+        "operationId": "Vitamin_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vitamin"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Vitamin/ReadByIdAsync/{id}": {
+      "get": {
+        "tags": [
+          "Vitamin"
+        ],
+        "operationId": "Vitamin_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vitamin"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Vitamin/Update": {
+      "put": {
+        "tags": [
+          "Vitamin"
+        ],
+        "operationId": "Vitamin_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vitamin"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Vitamin/UpdateAsync": {
+      "put": {
+        "tags": [
+          "Vitamin"
+        ],
+        "operationId": "Vitamin_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vitamin"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "Material": {
+      "Allergen": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "name"
-        ],
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 0
-          },
-          "fat": {
-            "type": "number",
-            "format": "float"
-          },
-          "protein": {
-            "type": "number",
-            "format": "float"
-          },
-          "kilocalorie": {
-            "type": "number",
-            "format": "float"
-          },
-          "kilojoule": {
-            "type": "number",
-            "format": "float"
-          },
-          "carbohydrate": {
-            "type": "number",
-            "format": "float"
-          },
-          "cholesterol": {
-            "type": "number",
-            "format": "float"
-          },
-          "saturatedfat": {
-            "type": "number",
-            "format": "float"
-          },
-          "transfat": {
-            "type": "number",
-            "format": "float"
-          },
-          "natrium_mg": {
-            "type": "number",
-            "format": "float"
-          },
-          "fluorite_mg": {
-            "type": "number",
-            "format": "float"
-          },
-          "salt": {
-            "type": "number",
-            "format": "float"
-          },
-          "sugar": {
-            "type": "number",
-            "format": "float"
-          },
-          "scale": {
+          "allergenId": {
             "type": "integer",
             "format": "int32"
           },
-          "scaleType": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "updated": {
+          "allergenName": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
-          "updatedBy": {
-            "type": "string"
+          "allergenDescription": {
+            "type": "string",
+            "nullable": true
           },
-          "allergen": {
-            "type": "boolean"
+          "allergenCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "allergenMaterials": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AllergenMaterial"
+            }
           }
         }
       },
-      "MaterialPostDTO": {
+      "AllergenMaterial": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "name": {
-            "type": "string"
-          },
-          "fat": {
-            "type": "number",
-            "format": "float"
-          },
-          "protein": {
-            "type": "number",
-            "format": "float"
-          },
-          "kilocalorie": {
-            "type": "number",
-            "format": "float"
-          },
-          "kilojoule": {
-            "type": "number",
-            "format": "float"
-          },
-          "carbohydrate": {
-            "type": "number",
-            "format": "float"
-          },
-          "cholesterol": {
-            "type": "number",
-            "format": "float"
-          },
-          "saturatedfat": {
-            "type": "number",
-            "format": "float"
-          },
-          "transfat": {
-            "type": "number",
-            "format": "float"
-          },
-          "natrium_mg": {
-            "type": "number",
-            "format": "float"
-          },
-          "fluorite_mg": {
-            "type": "number",
-            "format": "float"
-          },
-          "salt": {
-            "type": "number",
-            "format": "float"
-          },
-          "sugar": {
-            "type": "number",
-            "format": "float"
-          },
-          "scale": {
+          "allergenMaterialId": {
             "type": "integer",
             "format": "int32"
           },
-          "updated": {
-            "type": "string",
-            "format": "date-time"
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
           },
-          "updatedBy": {
+          "allergenId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allergen": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Allergen"
+              }
+            ]
+          },
+          "material": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            ]
+          }
+        }
+      },
+      "BaseMaterial": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "activityDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "vatrate": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "ledgerAccountNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rounding": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itjSztj": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialGroupName": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialGroupId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "costPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "retailPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "supplierCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "allergenMaterials": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AllergenMaterial"
+            }
+          },
+          "ecodes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Ecode"
+            }
+          },
+          "stocks": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Stock"
+            }
+          },
+          "vitamins": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Vitamin"
+            }
+          }
+        }
+      },
+      "Ecode": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ecodeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ecode1": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "material": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            ]
+          }
+        }
+      },
+      "Stock": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "stockId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minimumStock": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "maximumStock": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "preCalculationPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "currentStock": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "orderUnitPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "maximumOrderPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "countingUnitPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "salePrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "material": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            ]
+          }
+        }
+      },
+      "Vitamin": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "vitaminId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vitaminA": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "vitaminC": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "vitaminD": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "vitaminE": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "vitaminK": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pha": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fiber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "material": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            ]
+          }
+        }
+      },
+      "LoginResponseDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "firstName": {
             "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "MaterialGroup": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "groupCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupName": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -668,61 +2544,6 @@
           "roleName": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "LoginResponseDTO": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "role": {
-            "type": "string"
-          },
-          "token": {
-            "type": "string"
-          }
-        }
-      },
-      "LoginDTO": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        }
-      },
-      "RegisterDTO": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "roleId": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       }

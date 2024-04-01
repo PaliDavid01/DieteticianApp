@@ -12,12 +12,12 @@ namespace API.Controllers
 { 
     [ApiController]
     [Route("[controller]")]
-    public class UserController: ControllerBase
+    public class AuthController: ControllerBase
     {
         private readonly IUserLogic _userLogic;
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
-        public UserController(IUserLogic userLogic, IMapper mapper, ITokenService tokenService)
+        public AuthController(IUserLogic userLogic, IMapper mapper, ITokenService tokenService)
         {
             this._mapper = mapper;
             this._userLogic = userLogic;

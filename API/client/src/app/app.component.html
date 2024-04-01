@@ -1,17 +1,15 @@
-<div style="background-color: #508bfc; height: 5em;">
-    <div class="d-flex align-items-center">
+<div style="background-color: #508bfc; height: 5em">
+  <div class="d-flex align-items-center">
     <div class="col-8">
-        <div class="row-1" style="height: 33%;">
-        </div>
-        <div class="row-1 card ms-2" style=" width: fit-content;">
-            <app-nav *ngIf="(accountService.currentUser$ | async)"></app-nav>
-        </div>
-        <div class="row-1" style="height: 33%;">
-        </div>
+      <div class="row-1" style="height: 33%"></div>
+      <div class="row-1 card ms-2" style="width: fit-content">
+        <app-nav *ngIf="authenticationService.getIsAuthenticated()"></app-nav>
+      </div>
+      <div class="row-1" style="height: 33%"></div>
     </div>
     <div class="col-4">
-        <app-localization></app-localization>
-    </div>    
-</div>
+      <app-localization></app-localization>
+    </div>
+  </div>
 </div>
 <router-outlet></router-outlet>
