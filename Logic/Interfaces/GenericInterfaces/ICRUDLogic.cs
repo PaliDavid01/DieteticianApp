@@ -1,16 +1,10 @@
-﻿using Models.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace Logic.Interfaces.GenericInterfaces
 {
     public interface ICRUDLogic<T> where T : class
     {
-        void Create(T entity);
+        T Create(T entity);
         void Delete(int Id);
         T Read(int Id);
         IEnumerable<T> ReadAll();
@@ -25,4 +19,3 @@ namespace Logic.Interfaces.GenericInterfaces
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
     }
 }
- 

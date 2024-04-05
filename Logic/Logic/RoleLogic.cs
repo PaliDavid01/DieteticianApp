@@ -8,7 +8,7 @@ namespace Logic.Logic
     public class RoleLogic : CRUDLogic<Role>, IRoleLogic
     {
         private readonly IRoleRepository _repository;
-        public RoleLogic(IRoleRepository repository): base(repository)
+        public RoleLogic(IRoleRepository repository) : base(repository)
         {
             _repository = repository;
         }
@@ -26,6 +26,11 @@ namespace Logic.Logic
         public async Task<IEnumerable<UserRoleView>> GetUserRoleViewsByUserId(int userId)
         {
             return await _repository.GetUserRoleViewsByUserId(userId);
+        }
+
+        public async Task AddRolesToUser(int userId, IEnumerable<int> roles)
+        {
+            await _repository.AddRolesToUser(userId, roles);
         }
     }
 }

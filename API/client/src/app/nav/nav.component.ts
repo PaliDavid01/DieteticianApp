@@ -3,6 +3,9 @@ import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/auth/authentication.service';
+import { MenuItem } from 'primeng/api';
+import { PrimeIcons } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nav',
@@ -11,13 +14,128 @@ import { AuthenticationService } from '../services/auth/authentication.service';
 })
 export class NavComponent implements OnInit {
   curentUser$: Observable<User | null> = of(null);
+  items: MenuItem[];
   constructor(
     public authenticationService: AuthenticationService,
+    private translateService: TranslateService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
-
+  ngOnInit() {
+    this.items = [
+      {
+        label: 'Base data',
+        icon: PrimeIcons.FILE,
+        items: [
+          {
+            label: 'Allergen',
+            icon: PrimeIcons.CIRCLE_FILL,
+            url: '/allergen',
+          },
+          {
+            label: this.translateService.instant('baseMaterial'),
+            icon: PrimeIcons.BOX,
+            url: '/material',
+          },
+          {
+            label: 'Diet groups',
+            icon: PrimeIcons.USERS,
+          },
+        ],
+      },
+      {
+        label: 'Edit',
+        icon: 'pi pi-fw pi-pencil',
+        items: [
+          {
+            label: 'Left',
+            icon: 'pi pi-fw pi-align-left',
+          },
+          {
+            label: 'Right',
+            icon: 'pi pi-fw pi-align-right',
+          },
+          {
+            label: 'Center',
+            icon: 'pi pi-fw pi-align-center',
+          },
+          {
+            label: 'Justify',
+            icon: 'pi pi-fw pi-align-justify',
+          },
+        ],
+      },
+      {
+        label: 'Users',
+        icon: 'pi pi-fw pi-user',
+        items: [
+          {
+            label: 'New',
+            icon: 'pi pi-fw pi-user-plus',
+          },
+          {
+            label: 'Delete',
+            icon: 'pi pi-fw pi-user-minus',
+          },
+          {
+            label: 'Search',
+            icon: 'pi pi-fw pi-users',
+            items: [
+              {
+                label: 'Filter',
+                icon: 'pi pi-fw pi-filter',
+                items: [
+                  {
+                    label: 'Print',
+                    icon: 'pi pi-fw pi-print',
+                  },
+                ],
+              },
+              {
+                icon: 'pi pi-fw pi-bars',
+                label: 'List',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        label: 'Events',
+        icon: 'pi pi-fw pi-calendar',
+        items: [
+          {
+            label: 'Edit',
+            icon: 'pi pi-fw pi-pencil',
+            items: [
+              {
+                label: 'Save',
+                icon: 'pi pi-fw pi-calendar-plus',
+              },
+              {
+                label: 'Delete',
+                icon: 'pi pi-fw pi-calendar-minus',
+              },
+            ],
+          },
+          {
+            label: 'Archieve',
+            icon: 'pi pi-fw pi-calendar-times',
+            items: [
+              {
+                label: 'Remove',
+                icon: 'pi pi-fw pi-calendar-minus',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        label: this.translateService.instant('logOut'),
+        icon: 'pi pi-fw pi-power-off',
+        command: () => this.logout(),
+      },
+    ];
+  }
   logout() {
     this.authenticationService.clearSession();
     this.router.navigateByUrl('/');

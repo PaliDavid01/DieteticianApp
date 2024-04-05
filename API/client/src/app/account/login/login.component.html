@@ -1,60 +1,68 @@
-<section class="vh-100" style="background-color: #508bfc">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card shadow-2-strong" style="border-radius: 1rem">
-          <div class="card-body p-5 text-center">
-            <h3 class="mb-5">{{ "signIn" | translate }}</h3>
-            <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
-              <div class="form-outline mb-4">
-                <label class="form-label" for="typeEmailX-2">{{
-                  "email" | translate
-                }}</label>
-                <input
-                  name="email"
-                  [(ngModel)]="model.email"
-                  type="text"
-                  id="typeEmailX-2"
-                  class="form-control form-control-lg"
-                />
-              </div>
+<div class="flex align-items-center justify-content-center">
+  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-3">
+    <div class="text-center mb-5">
+      <img
+        src="https://cdn-icons-png.freepik.com/512/7414/7414124.png"
+        alt="Image"
+        height="100"
+        class="mb-3"
+      />
+      <div class="text-900 text-5xl font-medium mb-3">Diet Z'App</div>
+      <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
 
-              <div class="form-outline mb-4">
-                <label class="form-label" for="typePasswordX-2">{{
-                  "password" | translate
-                }}</label>
-                <input
-                  name="password"
-                  [(ngModel)]="model.password"
-                  type="password"
-                  id="typePasswordX-2"
-                  class="form-control form-control-lg"
-                />
-              </div>
+      <span class="text-600 font-medium line-height-3"
+        >Don't have an account?</span
+      >
+      <a
+        class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+        href="/register"
+        >Create today!</a
+      >
+    </div>
+    <div>
+      <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="on">
+        <label for="email1" class="block text-900 font-medium mb-2">{{
+          "email" | translate
+        }}</label>
+        <input
+          id="email1"
+          name="email"
+          type="email"
+          placeholder="yxz@sth.com"
+          pInputText
+          class="w-full mb-3"
+          [(ngModel)]="model.email"
+        />
 
-              <!-- Checkbox -->
-              <!--<div class="form-check d-flex justify-content-start mb-4">
-              <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-              <label class="form-check-label" for="form1Example3"> Remember password </label>
-            </div> -->
+        <label for="password1" class="block text-900 font-medium mb-2">
+          {{ "password" | translate }}
+        </label>
+        <input
+          id="password1"
+          name="password"
+          type="password"
+          placeholder="Password"
+          pInputText
+          class="w-full mb-3"
+          [(ngModel)]="model.password"
+        />
 
-              <button class="btn btn-primary btn-lg btn-block" type="submit">
-                {{ "login" | translate }} <i class="bi bi-arrow-right"></i>
-              </button>
-            </form>
-            <hr class="my-4" />
-
-            <li
-              class="btn btn-lg btn-block btn-primary mb-2"
-              style="background-color: #3b5998"
-              type="submit"
-              routerLink="/register"
-            >
-              {{ "register" | translate }}
-            </li>
-          </div>
+        <div class="flex align-items-center justify-content-between mb-6">
+          <a
+            class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
+            >Forgot password?</a
+          >
         </div>
-      </div>
+
+        <button
+          pButton
+          pRipple
+          label="{{ 'login' | translate }}"
+          icon="pi pi-user"
+          class="w-full"
+          type="submit"
+        ></button>
+      </form>
     </div>
   </div>
-</section>
+</div>

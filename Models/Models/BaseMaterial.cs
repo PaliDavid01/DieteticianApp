@@ -9,13 +9,17 @@ public partial class BaseMaterial
 {
     public int MaterialId { get; set; }
 
+    public string MaterialName { get; set; }
+
     public string MaterialCode { get; set; }
 
     public string ActivityDescription { get; set; }
 
     public int? Vatrate { get; set; }
 
-    public decimal? Quantity { get; set; }
+    public int? Quantity { get; set; }
+
+    public string Measure { get; set; }
 
     public int? LedgerAccountNumber { get; set; }
 
@@ -23,11 +27,33 @@ public partial class BaseMaterial
 
     public string ItjSztj { get; set; }
 
-    public string MaterialGroupName { get; set; }
-
     public int? MaterialGroupId { get; set; }
 
     public string Note { get; set; }
+
+    public decimal? Kilojule { get; set; }
+
+    public decimal? Protein { get; set; }
+
+    public decimal? Fat { get; set; }
+
+    public decimal? Carbohydrate { get; set; }
+
+    public decimal? Cholesterol { get; set; }
+
+    public decimal? Sugar { get; set; }
+
+    public decimal? Salt { get; set; }
+
+    public decimal? SaturatedFat { get; set; }
+
+    public decimal? TransFat { get; set; }
+
+    public decimal? Fiber { get; set; }
+
+    public decimal? Kalcium { get; set; }
+
+    public decimal? Kalium { get; set; }
 
     public decimal? CostPrice { get; set; }
 
@@ -38,6 +64,8 @@ public partial class BaseMaterial
     public virtual ICollection<AllergenMaterial> AllergenMaterials { get; set; } = new List<AllergenMaterial>();
 
     public virtual ICollection<Ecode> Ecodes { get; set; } = new List<Ecode>();
+
+    public virtual MaterialGroup MaterialGroup { get; set; }
 
     public virtual ICollection<Stock> Stocks { get; set; } = new List<Stock>();
 

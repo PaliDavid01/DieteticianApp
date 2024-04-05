@@ -31,7 +31,7 @@
         }
       }
     },
-    "/Allergen/CreateAsync": {
+    "/Allergen/CreateAsyn": {
       "post": {
         "tags": [
           "Allergen"
@@ -80,7 +80,7 @@
         }
       }
     },
-    "/Allergen/DeleteAsync": {
+    "/Allergen/DeleteAsyn": {
       "delete": {
         "tags": [
           "Allergen"
@@ -105,7 +105,7 @@
         }
       }
     },
-    "/Allergen/DeleteByIdAsync/{id}": {
+    "/Allergen/DeleteByIdAsyn/{id}": {
       "delete": {
         "tags": [
           "Allergen"
@@ -130,7 +130,7 @@
         }
       }
     },
-    "/Allergen/ReadAllAsync": {
+    "/Allergen/ReadAllAsyn": {
       "get": {
         "tags": [
           "Allergen"
@@ -176,7 +176,7 @@
         }
       }
     },
-    "/Allergen/ReadByIdAsync/{id}": {
+    "/Allergen/ReadByIdAsyn/{id}": {
       "get": {
         "tags": [
           "Allergen"
@@ -233,7 +233,7 @@
         }
       }
     },
-    "/Allergen/UpdateAsync": {
+    "/Allergen/UpdateAsyn": {
       "put": {
         "tags": [
           "Allergen"
@@ -283,7 +283,7 @@
         }
       }
     },
-    "/api/AllergenMaterial/CreateAsync": {
+    "/api/AllergenMaterial/CreateAsyn": {
       "post": {
         "tags": [
           "AllergenMaterial"
@@ -332,7 +332,7 @@
         }
       }
     },
-    "/api/AllergenMaterial/DeleteAsync": {
+    "/api/AllergenMaterial/DeleteAsyn": {
       "delete": {
         "tags": [
           "AllergenMaterial"
@@ -357,7 +357,7 @@
         }
       }
     },
-    "/api/AllergenMaterial/DeleteByIdAsync/{id}": {
+    "/api/AllergenMaterial/DeleteByIdAsyn/{id}": {
       "delete": {
         "tags": [
           "AllergenMaterial"
@@ -382,7 +382,7 @@
         }
       }
     },
-    "/api/AllergenMaterial/ReadAllAsync": {
+    "/api/AllergenMaterial/ReadAllAsyn": {
       "get": {
         "tags": [
           "AllergenMaterial"
@@ -428,7 +428,7 @@
         }
       }
     },
-    "/api/AllergenMaterial/ReadByIdAsync/{id}": {
+    "/api/AllergenMaterial/ReadByIdAsyn/{id}": {
       "get": {
         "tags": [
           "AllergenMaterial"
@@ -485,7 +485,7 @@
         }
       }
     },
-    "/api/AllergenMaterial/UpdateAsync": {
+    "/api/AllergenMaterial/UpdateAsyn": {
       "put": {
         "tags": [
           "AllergenMaterial"
@@ -566,11 +566,283 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int32"
+                  "$ref": "#/components/schemas/LoginResponseDTO"
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/BaseMaterial/LoadFromExcel": {
+      "get": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_LoadFromExcel",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/BaseMaterial/Create": {
+      "post": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/BaseMaterial/CreateAsyn": {
+      "post": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/BaseMaterial/Delete": {
+      "delete": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/BaseMaterial/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/BaseMaterial/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/BaseMaterial/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BaseMaterial"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/BaseMaterial/ReadAll": {
+      "get": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BaseMaterial"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/BaseMaterial/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseMaterial"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/BaseMaterial/Update": {
+      "put": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/BaseMaterial/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
           }
         }
       }
@@ -600,7 +872,7 @@
         }
       }
     },
-    "/api/Ecode/CreateAsync": {
+    "/api/Ecode/CreateAsyn": {
       "post": {
         "tags": [
           "Ecode"
@@ -649,7 +921,7 @@
         }
       }
     },
-    "/api/Ecode/DeleteAsync": {
+    "/api/Ecode/DeleteAsyn": {
       "delete": {
         "tags": [
           "Ecode"
@@ -674,7 +946,7 @@
         }
       }
     },
-    "/api/Ecode/DeleteByIdAsync/{id}": {
+    "/api/Ecode/DeleteByIdAsyn/{id}": {
       "delete": {
         "tags": [
           "Ecode"
@@ -699,7 +971,7 @@
         }
       }
     },
-    "/api/Ecode/ReadAllAsync": {
+    "/api/Ecode/ReadAllAsyn": {
       "get": {
         "tags": [
           "Ecode"
@@ -745,7 +1017,7 @@
         }
       }
     },
-    "/api/Ecode/ReadByIdAsync/{id}": {
+    "/api/Ecode/ReadByIdAsyn/{id}": {
       "get": {
         "tags": [
           "Ecode"
@@ -802,7 +1074,7 @@
         }
       }
     },
-    "/api/Ecode/UpdateAsync": {
+    "/api/Ecode/UpdateAsyn": {
       "put": {
         "tags": [
           "Ecode"
@@ -814,258 +1086,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Ecode"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/Material/Create": {
-      "post": {
-        "tags": [
-          "Material"
-        ],
-        "operationId": "Material_Create",
-        "requestBody": {
-          "x-name": "entity",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BaseMaterial"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/Material/CreateAsync": {
-      "post": {
-        "tags": [
-          "Material"
-        ],
-        "operationId": "Material_Create2",
-        "requestBody": {
-          "x-name": "entity",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BaseMaterial"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/Material/Delete": {
-      "delete": {
-        "tags": [
-          "Material"
-        ],
-        "operationId": "Material_Delete",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/Material/DeleteAsync": {
-      "delete": {
-        "tags": [
-          "Material"
-        ],
-        "operationId": "Material_Delete2",
-        "requestBody": {
-          "x-name": "entity",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BaseMaterial"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/Material/DeleteByIdAsync/{id}": {
-      "delete": {
-        "tags": [
-          "Material"
-        ],
-        "operationId": "Material_DeleteById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/Material/ReadAllAsync": {
-      "get": {
-        "tags": [
-          "Material"
-        ],
-        "operationId": "Material_ReadAll",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BaseMaterial"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/Material/ReadAll": {
-      "get": {
-        "tags": [
-          "Material"
-        ],
-        "operationId": "Material_ReadAll2",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BaseMaterial"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/Material/ReadByIdAsync/{id}": {
-      "get": {
-        "tags": [
-          "Material"
-        ],
-        "operationId": "Material_GetById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseMaterial"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/Material/Update": {
-      "put": {
-        "tags": [
-          "Material"
-        ],
-        "operationId": "Material_Update",
-        "requestBody": {
-          "x-name": "entity",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BaseMaterial"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/Material/UpdateAsync": {
-      "put": {
-        "tags": [
-          "Material"
-        ],
-        "operationId": "Material_Update2",
-        "requestBody": {
-          "x-name": "entity",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BaseMaterial"
               }
             }
           },
@@ -1104,7 +1124,7 @@
         }
       }
     },
-    "/api/MaterialGroup/CreateAsync": {
+    "/api/MaterialGroup/CreateAsyn": {
       "post": {
         "tags": [
           "MaterialGroup"
@@ -1153,7 +1173,7 @@
         }
       }
     },
-    "/api/MaterialGroup/DeleteAsync": {
+    "/api/MaterialGroup/DeleteAsyn": {
       "delete": {
         "tags": [
           "MaterialGroup"
@@ -1178,7 +1198,7 @@
         }
       }
     },
-    "/api/MaterialGroup/DeleteByIdAsync/{id}": {
+    "/api/MaterialGroup/DeleteByIdAsyn/{id}": {
       "delete": {
         "tags": [
           "MaterialGroup"
@@ -1203,7 +1223,7 @@
         }
       }
     },
-    "/api/MaterialGroup/ReadAllAsync": {
+    "/api/MaterialGroup/ReadAllAsyn": {
       "get": {
         "tags": [
           "MaterialGroup"
@@ -1249,7 +1269,7 @@
         }
       }
     },
-    "/api/MaterialGroup/ReadByIdAsync/{id}": {
+    "/api/MaterialGroup/ReadByIdAsyn/{id}": {
       "get": {
         "tags": [
           "MaterialGroup"
@@ -1306,7 +1326,7 @@
         }
       }
     },
-    "/api/MaterialGroup/UpdateAsync": {
+    "/api/MaterialGroup/UpdateAsyn": {
       "put": {
         "tags": [
           "MaterialGroup"
@@ -1555,7 +1575,7 @@
         }
       }
     },
-    "/api/Stock/CreateAsync": {
+    "/api/Stock/CreateAsyn": {
       "post": {
         "tags": [
           "Stock"
@@ -1604,7 +1624,7 @@
         }
       }
     },
-    "/api/Stock/DeleteAsync": {
+    "/api/Stock/DeleteAsyn": {
       "delete": {
         "tags": [
           "Stock"
@@ -1629,7 +1649,7 @@
         }
       }
     },
-    "/api/Stock/DeleteByIdAsync/{id}": {
+    "/api/Stock/DeleteByIdAsyn/{id}": {
       "delete": {
         "tags": [
           "Stock"
@@ -1654,7 +1674,7 @@
         }
       }
     },
-    "/api/Stock/ReadAllAsync": {
+    "/api/Stock/ReadAllAsyn": {
       "get": {
         "tags": [
           "Stock"
@@ -1700,7 +1720,7 @@
         }
       }
     },
-    "/api/Stock/ReadByIdAsync/{id}": {
+    "/api/Stock/ReadByIdAsyn/{id}": {
       "get": {
         "tags": [
           "Stock"
@@ -1757,7 +1777,7 @@
         }
       }
     },
-    "/api/Stock/UpdateAsync": {
+    "/api/Stock/UpdateAsyn": {
       "put": {
         "tags": [
           "Stock"
@@ -1807,7 +1827,7 @@
         }
       }
     },
-    "/api/Vitamin/CreateAsync": {
+    "/api/Vitamin/CreateAsyn": {
       "post": {
         "tags": [
           "Vitamin"
@@ -1856,7 +1876,7 @@
         }
       }
     },
-    "/api/Vitamin/DeleteAsync": {
+    "/api/Vitamin/DeleteAsyn": {
       "delete": {
         "tags": [
           "Vitamin"
@@ -1881,7 +1901,7 @@
         }
       }
     },
-    "/api/Vitamin/DeleteByIdAsync/{id}": {
+    "/api/Vitamin/DeleteByIdAsyn/{id}": {
       "delete": {
         "tags": [
           "Vitamin"
@@ -1906,7 +1926,7 @@
         }
       }
     },
-    "/api/Vitamin/ReadAllAsync": {
+    "/api/Vitamin/ReadAllAsyn": {
       "get": {
         "tags": [
           "Vitamin"
@@ -1952,7 +1972,7 @@
         }
       }
     },
-    "/api/Vitamin/ReadByIdAsync/{id}": {
+    "/api/Vitamin/ReadByIdAsyn/{id}": {
       "get": {
         "tags": [
           "Vitamin"
@@ -2009,7 +2029,7 @@
         }
       }
     },
-    "/api/Vitamin/UpdateAsync": {
+    "/api/Vitamin/UpdateAsyn": {
       "put": {
         "tags": [
           "Vitamin"
@@ -2108,6 +2128,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "materialName": {
+            "type": "string",
+            "nullable": true
+          },
           "materialCode": {
             "type": "string",
             "nullable": true
@@ -2122,8 +2146,12 @@
             "nullable": true
           },
           "quantity": {
-            "type": "number",
-            "format": "decimal",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "measure": {
+            "type": "string",
             "nullable": true
           },
           "ledgerAccountNumber": {
@@ -2140,10 +2168,6 @@
             "type": "string",
             "nullable": true
           },
-          "materialGroupName": {
-            "type": "string",
-            "nullable": true
-          },
           "materialGroupId": {
             "type": "integer",
             "format": "int32",
@@ -2151,6 +2175,66 @@
           },
           "note": {
             "type": "string",
+            "nullable": true
+          },
+          "kilojule": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "protein": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "fat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "carbohydrate": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "cholesterol": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "sugar": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "salt": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "saturatedFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "transFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "fiber": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "kalcium": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "kalium": {
+            "type": "number",
+            "format": "decimal",
             "nullable": true
           },
           "costPrice": {
@@ -2180,6 +2264,14 @@
             "items": {
               "$ref": "#/components/schemas/Ecode"
             }
+          },
+          "materialGroup": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MaterialGroup"
+              }
+            ]
           },
           "stocks": {
             "type": "array",
@@ -2224,6 +2316,27 @@
                 "$ref": "#/components/schemas/BaseMaterial"
               }
             ]
+          }
+        }
+      },
+      "MaterialGroup": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "groupCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupName": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseMaterials": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/BaseMaterial"
+            }
           }
         }
       },
@@ -2395,23 +2508,11 @@
           "password": {
             "type": "string"
           },
-          "roleId": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "MaterialGroup": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "groupCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "groupName": {
-            "type": "string",
-            "nullable": true
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
           }
         }
       },

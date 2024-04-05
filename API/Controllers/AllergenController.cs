@@ -8,7 +8,7 @@ namespace API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize(Roles = "IT,Supervisor")]
+    [Authorize(Roles = "IT,Supervisor,Dietitian")]
     public class AllergenController : CRUDController<Allergen>
     {
         public AllergenController(IAllergenLogic logic) : base(logic)

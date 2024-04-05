@@ -1,30 +1,25 @@
 ﻿//using Castle.Core.Internal;
 //using Castle.DynamicProxy.Generators;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Models.Models;
 using Repository.Interfaces.GenericInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.GenericRepository
 {
-    public abstract class CRUDRepository<T>  : ICRUDRepository<T> where T : class
+    public abstract class CRUDRepository<T> : ICRUDRepository<T> where T : class
     {
         protected readonly DataBaseContext _dbContext;
         public CRUDRepository(DataBaseContext dbContext)
         {
-                this._dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
-        public void Create(T item)
+        public T Create(T item)
         {
-                _dbContext.Set<T>().Add(item);
-                _dbContext.SaveChanges();
+            _dbContext.Set<T>().Add(item);
+            _dbContext.SaveChanges();
+            return item;
         }
 
         public void Delete(int id)

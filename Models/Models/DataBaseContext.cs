@@ -76,29 +76,45 @@ public partial class DataBaseContext : DbContext
 
             entity.ToTable("BaseMaterial");
 
-            entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
             entity.Property(e => e.ActivityDescription)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            entity.Property(e => e.Carbohydrate).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Cholesterol).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.CostPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Fat).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Fiber).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.ItjSztj)
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("ITJ_SZTJ");
+            entity.Property(e => e.Kalcium).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Kalium).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Kilojule).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.MaterialCode)
                 .IsRequired()
                 .HasMaxLength(255)
                 .IsUnicode(false);
-            entity.Property(e => e.MaterialGroupName)
+            entity.Property(e => e.MaterialName)
+                .IsRequired()
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Measure)
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.Note).HasColumnType("text");
-            entity.Property(e => e.Quantity).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Protein).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.RetailPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Salt).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.SaturatedFat).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Sugar).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.SupplierCode)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            entity.Property(e => e.TransFat).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.Vatrate).HasColumnName("VATRate");
+
+            entity.HasOne(d => d.MaterialGroup).WithMany(p => p.BaseMaterials).HasForeignKey(d => d.MaterialGroupId);
         });
 
         modelBuilder.Entity<Ecode>(entity =>
@@ -182,9 +198,6 @@ public partial class DataBaseContext : DbContext
         modelBuilder.Entity<UserRole>(entity =>
         {
             entity.ToTable("UserRole");
-
-            entity.Property(e => e.DateAssigned).HasColumnType("datetime");
-            entity.Property(e => e.DateRevoked).HasColumnType("datetime");
 
             entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
                 .HasForeignKey(d => d.RoleId)

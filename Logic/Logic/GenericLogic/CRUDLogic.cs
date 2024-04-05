@@ -7,13 +7,13 @@ namespace Logic.Logic.GenericLogic
     public class CRUDLogic<T> : ICRUDLogic<T> where T : class
     {
         ICRUDRepository<T> _repository;
-        public CRUDLogic(ICRUDRepository<T> repository) 
+        public CRUDLogic(ICRUDRepository<T> repository)
         {
             _repository = repository;
         }
-        public void Create(T entity)
+        public T Create(T entity)
         {
-            _repository.Create(entity);
+            return _repository.Create(entity);
         }
 
         public Task<T> CreateAsync(T entity)

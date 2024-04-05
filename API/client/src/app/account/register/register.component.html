@@ -1,83 +1,132 @@
-<section class="vh-100" style="background-color: #508bfc; ">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card shadow-2-strong" style="border-radius: 1rem;">
-            <div class="card-body p-5 text-center">
-  
-              <h3 class="mb-5">{{'register' | translate}}</h3>
-              <form #loginForm="ngForm" (ngSubmit)="register()" autocomplete="off" >
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="name">{{'firstName' | translate}}</label>
-                    <input 
-                        name="firstName"
-                        [(ngModel)]="model.firstName" 
-                        type="text" 
-                        id="typeName1X-2" 
-                        class="form-control form-control-lg" 
-                        placeholder="Pali"/>
-                </div>
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="typeEmailX-2">{{'lastName' | translate}}</label>
-                    <input 
-                        name="lastName"
-                        [(ngModel)]="model.lastName" 
-                        type="text" 
-                        id="typeName2X-2" 
-                        class="form-control form-control-lg"
-                        placeholder="David" />
-                </div>
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="typeEmailX-2">{{'email' | translate}}</label>
-                    <input 
-                        name="email"
-                        [(ngModel)]="model.email" 
-                        type="text" 
-                        id="typeEmailX-2" 
-                        class="form-control form-control-lg"
-                        placeholder="pali.david@xyz.com"/>
-                </div>
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="typePasswordX-2">{{'password' | translate}}</label>
-                    <input
-                        name="password" 
-                        [(ngModel)]="model.password" 
-                        type="password" 
-                        id="typePasswordX-2" 
-                        class="form-control form-control-lg" />
-                </div>
-                
-                <!-- <div class="form-outline mb-4">
-                    <label class="form-label" for="typeEmailX-2">Role</label>
-                    <input 
-                        name="role"
-                        [(ngModel)]="model.role" 
-                        type="text" 
-                        id="typeNameX-2" 
-                        class="form-control form-control-lg" />
-                </div> -->
-                <div class="form-outline">
-                <label class="form-label" for="typeEmailX-2">{{'role' | translate}}</label>
-                </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">{{'options' | translate}}<i class="bi bi-arrow-down"></i></label>
-                  </div>
-                  <select name="role" [(ngModel)]="selectedRole.roleName" [required]="true" class="form-control">
-                    <option *ngFor="let item of roles">{{item.roleName}}</option>
-                  </select>
-                </div>
-              <!-- Checkbox -->
-              <!--<div class="form-check d-flex justify-content-start mb-4">
-                <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-                <label class="form-check-label" for="form1Example3"> Remember password </label>
-              </div> -->
-  
-              <button class="btn btn-primary btn-lg btn-block" type="submit">{{'register' | translate}}</button>
-          </form>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="flex align-items-center justify-content-center">
+  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-3">
+    <div class="text-center mb-5">
+      <div class="text-900 text-3xl font-medium mb-3">Register</div>
     </div>
-  </section>
+
+    <div>
+      <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="on">
+        <label for="firstName1" class="block text-900 font-medium mb-2"
+          >Firstname</label
+        >
+        <input
+          id="firstName1"
+          name="firstName"
+          type="text"
+          placeholder="John"
+          pInputText
+          class="w-full mb-3"
+          [(ngModel)]="model.firstName"
+          [required]="true"
+        />
+        <p-message
+          *ngIf="registerForm.form.hasError('required', 'firstName')"
+          severity="error"
+          text="Firstname is required"
+        ></p-message>
+
+        <label for="lastName1" class="block text-900 font-medium mb-2"
+          >lastname</label
+        >
+        <input
+          id="lastName1"
+          name="lastName"
+          type="text"
+          placeholder="Wick"
+          pInputText
+          class="w-full mb-3"
+          [(ngModel)]="model.lastName"
+          [required]="true"
+        />
+        <p-message
+          *ngIf="registerForm.form.hasError('required', 'lastName')"
+          severity="error"
+          text="Lastname is required"
+        ></p-message>
+
+        <label for="email1" class="block text-900 font-medium mb-2"
+          >Email</label
+        >
+        <input
+          id="email1"
+          name="email"
+          type="email"
+          placeholder="yxz@sth.com"
+          pInputText
+          class="w-full mb-3"
+          [(ngModel)]="model.email"
+          [required]="true"
+        />
+        <p-message
+          *ngIf="registerForm.form.hasError('required', 'email')"
+          severity="error"
+          text="Email is required"
+        ></p-message>
+
+        <label for="password1" class="block text-900 font-medium mb-2"
+          >Password</label
+        >
+        <input
+          id="password1"
+          name="password"
+          type="password"
+          placeholder="Password"
+          pInputText
+          class="w-full mb-3"
+          [(ngModel)]="model.password"
+          [required]="true"
+          [minlength]="10"
+        />
+        <p-message
+          *ngIf="registerForm.form.hasError('required', 'password')"
+          severity="error"
+          text="Password is required"
+        ></p-message>
+        <p-message
+          *ngIf="registerForm.form.hasError('minlength', 'password')"
+          severity="error"
+          text="Password must be at least 10 characters"
+        ></p-message>
+
+        <label for="roles1" class="block text-900 font-medium mb-2">Role</label>
+        <p-multiSelect
+          id="roles1"
+          name="roles"
+          [options]="roles"
+          [(ngModel)]="model.roles"
+          optionLabel="roleName"
+          defaultLabel="Select a Role"
+          [showClear]="true"
+          styleClass="w-full mb-3"
+          display="chip"
+          [required]="true"
+        ></p-multiSelect>
+        <p-message
+          *ngIf="registerForm.form.hasError('required', 'roles')"
+          severity="error"
+          text="At least one role is required"
+        ></p-message>
+        <div class="flex align-items-center justify-content-between mb-6">
+          <a
+            class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
+            >Forgot password?</a
+          >
+          <a
+            href="/"
+            class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
+            >Already have an account?</a
+          >
+        </div>
+
+        <button
+          pButton
+          pRipple
+          label="Register"
+          icon="pi pi-user"
+          class="w-full"
+          type="submit"
+        ></button>
+      </form>
+    </div>
+  </div>
+</div>

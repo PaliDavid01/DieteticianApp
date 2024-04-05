@@ -90,6 +90,7 @@
     <None Include="Scripts_Post-Deployment\GeneratedPostDeployment.sql" />
     <None Include="Data\Test\Role.sql" />
     <None Include="Data\Test\UserRole.sql" />
+    <None Include="Data\Test\BaseMaterial.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts_Post-Deployment\Script.PostDeployment.sql" />

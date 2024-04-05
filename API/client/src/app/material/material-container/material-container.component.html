@@ -1,62 +1,429 @@
-<app-material-update *ngIf="selectedMaterial" [sMaterial]="selectedMaterial"></app-material-update>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>{{'name'|translate}}</th>
-      <th>{{'fat'|translate}}</th>
-      <th>{{'protein'|translate}}</th>
-      <th>{{'kilocalorie'|translate}}</th>
-      <th>{{'kilojoule'|translate}}</th>
-      <th>{{'carbohydrate'|translate}}</th>
-      <th>{{'cholesterol'|translate}}</th>
-      <th>{{'saturatedfat'|translate}}</th>
-      <th>{{'transfat'|translate}}</th>
-      <th>{{'natrium_mg'|translate}}</th>
-      <th>{{'fluorite_mg'|translate}}</th>
-      <th>{{'salt'|translate}}</th>
-      <th>{{'sugar'|translate}}</th>
-      <th>{{'scale'|translate}}</th>
-      <th>{{'scaleType'|translate}}</th>
-      <th>{{'updated'|translate}}</th>
-      <th>{{'updatedBy'|translate}}</th>
-      <th>{{'options'|translate}}</th>
-      <th>{{'allergen'|translate}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of materials$|async">
-      <td>{{item.name}}</td>
-      <td>{{item.fat}}</td>
-      <td>{{item.protein}}</td>
-      <td>{{item.kilocalorie}}</td>
-      <td>{{item.kilojoule}}</td>
-      <td>{{item.carbohydrate}}</td>
-      <td>{{item.cholesterol}}</td>
-      <td>{{item.saturatedfat}}</td>
-      <td>{{item.transfat}}</td>
-      <td>{{item.natrium_mg}}</td>
-      <td>{{item.fluorite_mg}}</td>
-      <td>{{item.salt}}</td>
-      <td>{{item.sugar}}</td>
-      <td>{{item.scale}}</td>
-      <td>{{item.scaleType}}</td>
-      <td>{{item.updated}}</td>
-      <td>{{item.updatedBy}}</td>
-      <td>{{item.allergen}}</td>
-      <td>
-        <div class="dropdown" ngbDropdown>
-          <a class="btn btn-primary" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false" ngbDropdownToggle>
-            {{'options' | translate}}
-          </a>
-          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
-            <li ngbDropdownItem><a class="dropdown-item text-secondary" (click)="update(item)">
-              {{'update' | translate}}</a></li>
-            <li ngbDropdownItem><a class="dropdown-item text-danger" (click)="delete(item.id)">
-              {{'delete' | translate}}</a></li>
-          </ul>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="card">
+  <p-toast></p-toast>
+  <p-toolbar styleClass="mb-2 gap-2">
+    <ng-template pTemplate="left">
+      <button
+        pButton
+        pRipple
+        label="New"
+        icon="pi pi-plus"
+        class="p-button-success mr-2 p-button-sm"
+        (click)="openNew()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        [label]="Delete"
+        icon="pi pi-trash"
+        class="p-button-danger p-button-sm"
+        (click)="deleteSelectedMaterial()"
+        [disabled]="!selectedMaterials || !selectedMaterials.length"
+      ></button>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+      <p-fileUpload
+        mode="basic"
+        accept="image/*"
+        [maxFileSize]="1000000"
+        label="Import"
+        chooseLabel="Import"
+        class="mr-2 inline-block"
+        styleClass="p-button-sm"
+      ></p-fileUpload>
+      <button
+        pButton
+        pRipple
+        label="Export"
+        icon="pi pi-upload"
+        class="p-button-help p-button-sm"
+        (click)="exportExcel()"
+      ></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="materials"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="[
+      'materialName',
+      'materialCode',
+      'costPrice',
+      'kilojule'
+    ]"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedMaterials"
+    [rowHover]="true"
+    dataKey="materialId"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Manage Base-materials</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            #textInput
+            (input)="dt.filterGlobal(textInput.value, 'contains')"
+            placeholder="Search..."
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="materialName">
+          BaseMaterialName <p-sortIcon field="code"></p-sortIcon>
+        </th>
+        <th pSortableColumn="materialCode" style="min-width: 15rem">
+          Code <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="costPrice" style="min-width: 10rem">
+          CostPrice <p-sortIcon field="description"></p-sortIcon>
+        </th>
+        <th pSortableColumn="kilojule" style="min-width: 10rem">
+          Kilojoule<p-sortIcon field="description"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="item"></p-tableCheckbox>
+        </td>
+        <td>{{ item.materialName }}</td>
+        <td>{{ item.materialCode }}</td>
+        <td>{{ item.costPrice }}</td>
+        <td>{{ item.kilojule }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+            (click)="editMaterial(item)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            (click)="deleteMaterial(item)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        In total there are {{ materials ? materials.length : 0 }} allergens.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+<p-dialog
+  [(visible)]="materialDialog"
+  [style]="{ width: '450px' }"
+  header="Product Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <!-- MaterialName input -->
+    <div class="field">
+      <label for="materialName">Material Name</label>
+      <input
+        type="text"
+        pInputText
+        id="materialName"
+        [(ngModel)]="material.materialName"
+        required
+      />
+      <small class="p-error" *ngIf="submitted && !material.materialName"
+        >Material Name is required.</small
+      >
+    </div>
+
+    <!-- MaterialCode input -->
+    <div class="field">
+      <label for="materialCode">Material Code</label>
+      <input
+        type="text"
+        pInputText
+        id="materialCode"
+        [(ngModel)]="material.materialCode"
+        required
+      />
+      <small class="p-error" *ngIf="submitted && !material.materialCode"
+        >Material Code is required.</small
+      >
+    </div>
+
+    <!-- ActivityDescriptor input -->
+    <div class="field">
+      <label for="activityDescription">Activity Descriptor</label>
+      <input
+        type="text"
+        pInputText
+        id="activityDescriptor"
+        [(ngModel)]="material.activityDescription"
+      />
+    </div>
+
+    <!-- Quantity input -->
+    <div class="field">
+      <label for="quantity">Quantity</label>
+      <input
+        type="number"
+        pInputText
+        id="quantity"
+        [(ngModel)]="material.quantity"
+        required
+      />
+      <small class="p-error" *ngIf="submitted && !material.quantity"
+        >Quantity is required.</small
+      >
+    </div>
+
+    <!-- Measure input -->
+    <div class="field">
+      <label for="measure">Measure</label>
+      <input
+        type="text"
+        pInputText
+        id="measure"
+        [(ngModel)]="material.measure"
+      />
+    </div>
+
+    <!-- LedgerAccountNumber input -->
+    <div class="field">
+      <label for="ledgerAccountNumber">Ledger Account Number</label>
+      <input
+        type="text"
+        pInputText
+        id="ledgerAccountNumber"
+        [(ngModel)]="material.ledgerAccountNumber"
+      />
+    </div>
+
+    <!-- Rounding input -->
+    <div class="field">
+      <label for="rounding">Rounding</label>
+      <input
+        type="number"
+        pInputText
+        id="rounding"
+        [(ngModel)]="material.rounding"
+      />
+    </div>
+
+    <!-- The rest of the fields would follow the same pattern, adjusting the type attribute as needed (e.g., text, number, etc.) and whether they are required or not based on your application's logic. -->
+
+    <!-- Note input -->
+    <div class="field">
+      <label for="note">Note</label>
+      <textarea
+        pInputTextarea
+        id="note"
+        [(ngModel)]="material.note"
+        rows="5"
+      ></textarea>
+    </div>
+
+    <!-- Kilojoule input -->
+    <div class="field">
+      <label for="kilojoule">Kilojoule</label>
+      <input
+        type="number"
+        pInputText
+        id="kilojoule"
+        [(ngModel)]="material.kilojule"
+        step="0.01"
+      />
+    </div>
+
+    <!-- Protein input -->
+    <div class="field">
+      <label for="protein">Protein</label>
+      <input
+        type="number"
+        pInputText
+        id="protein"
+        [(ngModel)]="material.protein"
+        step="0.01"
+      />
+    </div>
+
+    <!-- Carbohydrate input -->
+    <div class="field">
+      <label for="carbohydrate">Carbohydrate</label>
+      <input
+        type="number"
+        pInputText
+        id="carbohydrate"
+        [(ngModel)]="material.carbohydrate"
+        step="0.01"
+      />
+    </div>
+
+    <!-- Fat input -->
+    <div class="field">
+      <label for="fat">Fat</label>
+      <input
+        type="number"
+        pInputText
+        id="fat"
+        [(ngModel)]="material.fat"
+        step="0.01"
+      />
+    </div>
+
+    <!-- Cholesterol input -->
+    <div class="field">
+      <label for="cholesterol">Cholesterol</label>
+      <input
+        type="number"
+        pInputText
+        id="cholesterol"
+        [(ngModel)]="material.cholesterol"
+        step="0.01"
+      />
+    </div>
+
+    <!-- Sugar input -->
+    <div class="field">
+      <label for="sugar">Sugar</label>
+      <input
+        type="number"
+        pInputText
+        id="sugar"
+        [(ngModel)]="material.sugar"
+        step="0.01"
+      />
+    </div>
+
+    <!-- Salt input -->
+    <div class="field">
+      <label for="salt">Salt</label>
+      <input
+        type="number"
+        pInputText
+        id="salt"
+        [(ngModel)]="material.salt"
+        step="0.01"
+      />
+    </div>
+
+    <!-- SaturatedFat input -->
+    <div class="field">
+      <label for="saturatedFat">Saturated Fat</label>
+      <input
+        type="number"
+        pInputText
+        id="saturatedFat"
+        [(ngModel)]="material.saturatedFat"
+        step="0.01"
+      />
+    </div>
+
+    <!-- TransFat input -->
+    <div class="field">
+      <label for="transFat">Trans Fat</label>
+      <input
+        type="number"
+        pInputText
+        id="transFat"
+        [(ngModel)]="material.transFat"
+        step="0.01"
+      />
+    </div>
+
+    <!-- Fiber input -->
+    <div class="field">
+      <label for="fiber">Fiber</label>
+      <input
+        type="number"
+        pInputText
+        id="fiber"
+        [(ngModel)]="material.fiber"
+        step="0.01"
+      />
+    </div>
+
+    <!-- Calcium input -->
+    <div class="field">
+      <label for="calcium">Calcium</label>
+      <input
+        type="number"
+        pInputText
+        id="calcium"
+        [(ngModel)]="material.kalcium"
+        step="0.01"
+      />
+    </div>
+
+    <!-- CostPrice input -->
+    <div class="field">
+      <label for="costPrice">Cost Price</label>
+      <input
+        type="number"
+        pInputText
+        id="costPrice"
+        [(ngModel)]="material.costPrice"
+        step="0.01"
+      />
+    </div>
+
+    <!-- RetailPrice input -->
+    <div class="field">
+      <label for="retailPrice">Retail Price</label>
+      <input
+        type="number"
+        pInputText
+        id="retailPrice"
+        [(ngModel)]="material.retailPrice"
+        step="0.01"
+      />
+    </div>
+
+    <!-- SupplierCode input -->
+    <div class="field">
+      <label for="supplierCode">Supplier Code</label>
+      <input
+        type="text"
+        pInputText
+        id="supplierCode"
+        [(ngModel)]="material.supplierCode"
+      />
+    </div>
+
+    <!-- Note that for IT3_SIZE and MaterialGroupId, I have assumed they are text fields. If these should be numeric or selections from a dropdown, you will need to adjust the type or use a different input mechanism like a <select>. -->
+
+    <!-- MaterialGroupId input (assuming it's a foreign key that might be selected from a dropdown) -->
+    <div class="field">
+      <label for="materialGroupId">Material Group ID</label>
+      <select
+        pInputText
+        id="materialGroupId"
+        [(ngModel)]="material.materialGroupId"
+        required
+      >
+        <!-- Option elements would be dynamically generated from your list of material groups -->
+      </select>
+      <small class="p-error" *ngIf="submitted && !material.materialGroupId"
+        >Material Group ID is required.</small
+      >
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

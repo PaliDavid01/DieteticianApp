@@ -1,5 +1,4 @@
 ﻿using Logic.Interfaces.GenericInterfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.GenericController
@@ -17,7 +16,7 @@ namespace API.Controllers.GenericController
         {
             _logic.Create(entity);
         }
-        [HttpPost("CreateAsync")]
+        [HttpPost("CreateAsyn")]
         public Task CreateAsync(T entity)
         {
             return _logic.CreateAsync(entity);
@@ -27,17 +26,17 @@ namespace API.Controllers.GenericController
         {
             _logic.Delete(id);
         }
-        [HttpDelete("DeleteAsync")]
+        [HttpDelete("DeleteAsyn")]
         public Task DeleteAsync(T entity)
         {
             return _logic.DeleteAsync(entity);
         }
-        [HttpDelete("DeleteByIdAsync/{id}")]
+        [HttpDelete("DeleteByIdAsyn/{id}")]
         public Task DeleteByIdAsync(int id)
         {
             return _logic.DeleteByIdAsync(id);
         }
-        [HttpGet("ReadAllAsync")]
+        [HttpGet("ReadAllAsyn")]
         public Task<IEnumerable<T>> ReadAllAsync()
         {
             return _logic.ReadAllAsync();
@@ -47,7 +46,7 @@ namespace API.Controllers.GenericController
         {
             return _logic.ReadAll();
         }
-        [HttpGet("ReadByIdAsync/{id}")]
+        [HttpGet("ReadByIdAsyn/{id}")]
         public Task<T> GetByIdAsync(int id)
         {
             return _logic.ReadByIdAsync(id);
@@ -57,7 +56,7 @@ namespace API.Controllers.GenericController
         {
             _logic.Update(entity);
         }
-        [HttpPut("UpdateAsync")]
+        [HttpPut("UpdateAsyn")]
         public Task UpdateAsync(T entity)
         {
             return _logic.UpdateAsync(entity);

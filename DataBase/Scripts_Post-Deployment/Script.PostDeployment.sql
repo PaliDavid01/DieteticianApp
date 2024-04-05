@@ -13,3 +13,5 @@ Post-Deployment Script Template
 :r .\..\Data\Test\Role.sql
 :r .\..\Data\Test\UserRole.sql
 :r .\..\Data\Test\Allergen.sql
+:r .\..\Data\Test\MaterialGroup.sql
+:r .\..\Data\Test\BaseMaterial.sql

@@ -1,18 +1,5 @@
-using Logic.Interfaces;
-using Logic.Logic;
-using Models.Storage;
-using Repository.Database;
-using Repository.Interfaces;
-using Repository.ModelRepositories;
-using Microsoft.EntityFrameworkCore.Design;
-using API.Helpers;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using API.Extensions;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,12 +17,6 @@ builder.Services.AddSwaggerGen(c =>
     c.CustomOperationIds(d => d.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
        ? controllerActionDescriptor.MethodInfo.Name
        : d.ActionDescriptor.AttributeRouteInfo?.Name);
-    //c.SwaggerDoc("v1", new OpenApiInfo
-    //{
-    //    Title = "Willu Backend API",
-    //    Version = "v1",
-    //    Description = "API for Willu application"
-    //});
 });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -54,11 +35,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-//app.UseSwaggerUi(options =>
-//{
-//    options.DocumentTitle = "Title";
-//});
 
 app.UseHttpsRedirection();
 

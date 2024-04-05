@@ -4,24 +4,25 @@ using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTOs.UserDTOs;
 using Models.Models;
-using Models.Storage;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace API.Controllers 
-{ 
+namespace API.Controllers
+{
     [ApiController]
     [Route("[controller]")]
-    public class AuthController: ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly IUserLogic _userLogic;
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
-        public AuthController(IUserLogic userLogic, IMapper mapper, ITokenService tokenService)
+        private readonly IRoleLogic _roleLogic;
+        public AuthController(IUserLogic userLogic, IMapper mapper, ITokenService tokenService, IRoleLogic roleLogic)
         {
             this._mapper = mapper;
             this._userLogic = userLogic;
             this._tokenService = tokenService;
+            _roleLogic = roleLogic;
         }
         [HttpPost]
         public async Task<LoginResponseDTO> Login(LoginDTO loginUser)
@@ -43,13 +44,11 @@ namespace API.Controllers
             var response = _mapper.Map<LoginResponseDTO>(user);
             response.token = this._tokenService.CreateToken(user);
             return response;
-            //tokenservice here
-
 
         }
 
         [HttpPost("register")]
-        public async Task<int> Register(RegisterDTO userDTO)
+        public async Task<LoginResponseDTO> Register(RegisterDTO userDTO)
         {
             var user = new User()
             {
@@ -58,14 +57,17 @@ namespace API.Controllers
                 Email = userDTO.Email,
             };
             using var hmac = new HMACSHA512();
-            
+
             user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password));
             user.PasswordSalt = hmac.Key;
 
-            _userLogic.Create(user);
+            var createdUSer = await _userLogic.CreateAsync(user);
 
-            // tokenservice here
-            return (await _userLogic.FindAsync(t => t.Email == userDTO.Email)).FirstOrDefault().UserId;
+            await _roleLogic.AddRolesToUser(createdUSer.UserId, userDTO.Roles.Select(t => t.RoleId));
+
+            var response = _mapper.Map<LoginResponseDTO>(user);
+            response.token = this._tokenService.CreateToken(user);
+            return response;
         }
     }
 }

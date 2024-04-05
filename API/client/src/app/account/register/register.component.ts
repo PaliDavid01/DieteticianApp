@@ -2,10 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  ListboxChangeEvent,
+  ListboxSelectAllChangeEvent,
+} from 'primeng/listbox';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import {
   RegisterDTO,
   Role,
   RoleService,
-  AuthService,
 } from 'src/app/services/generated-client';
 
 @Component({
@@ -14,36 +18,35 @@ import {
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  onChange($event: ListboxChangeEvent) {
+    throw new Error('Method not implemented.');
+  }
+  onSelectAllChange($event: ListboxSelectAllChangeEvent) {
+    throw new Error('Method not implemented.');
+  }
   model: RegisterDTO = new RegisterDTO();
-  selectedRole: Role = new Role();
-  roles: Array<Role> = [];
+  roles!: Role[];
+  selectAll: boolean = false;
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthenticationService,
     private roleService: RoleService,
-    private router: Router,
-    private http: HttpClient
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.roleService.getRoles().subscribe({
       next: (response) => {
         this.roles = response;
-        console.log(this.roles);
       },
     });
   }
 
   register() {
-    console.log(this.selectedRole);
-    let roleid: number = this.roles.find(
-      (x) => x.roleName == this.selectedRole.roleName
-    ).roleId;
-    console.log(roleid);
-    this.model.roleId = roleid;
+    console.log(this.model.roles);
     this.authService.register(this.model).subscribe({
       next: () => {
         console.log('User registered');
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/');
       },
     });
   }

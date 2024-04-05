@@ -4,9 +4,10 @@ import {
   AuthService,
   LoginDTO,
   LoginResponseDTO,
+  RegisterDTO,
 } from '../generated-client';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +40,22 @@ export class AuthenticationService extends AuthService {
   }
   authenticate(loginDTO: LoginDTO) {
     return super.login(loginDTO).pipe(
+      map((response: LoginResponseDTO) => {
+        if (response) {
+          sessionStorage.setItem(
+            AuthenticationService.USER_STORAGE_KEY,
+            JSON.stringify(response)
+          );
+          console.log(loginDTO, response);
+        } else {
+          this.clearSession();
+        }
+        return response;
+      })
+    );
+  }
+  override register(userDTO: RegisterDTO): Observable<LoginResponseDTO> {
+    return super.register(userDTO).pipe(
       map((response: LoginResponseDTO) => {
         if (response) {
           sessionStorage.setItem(

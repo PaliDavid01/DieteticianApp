@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AccountService } from 'src/app/services/account.service';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
-import { AuthService } from 'src/app/services/generated-client';
+import { AuthService, LoginDTO } from 'src/app/services/generated-client';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,12 @@ import { AuthService } from 'src/app/services/generated-client';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  model: any = {};
-
+  model: LoginDTO = new LoginDTO();
   constructor(
     public accountService: AccountService,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private translator: TranslateService
   ) {}
 
   login() {

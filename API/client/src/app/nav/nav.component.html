@@ -1,28 +1,63 @@
-<ul class="nav ">
+<!-- <ul class="nav">
   <li class="nav-item card">
-    <a class="nav-link text-secondary" aria-current="page" href="/home">{{ 'home' | translate}}</a>
+    <a class="nav-link text-secondary" aria-current="page" href="/home">{{
+      "home" | translate
+    }}</a>
   </li>
   <li class="nav-item dropdown" ngbDropdown>
-    <a class="nav-link text-secondary dropdown-toggle" id="navbarScrollingDropdown" role="button"
-      data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
-      {{'settings' | translate}}
+    <a
+      class="nav-link text-secondary dropdown-toggle"
+      id="navbarScrollingDropdown"
+      role="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      ngbDropdownToggle
+    >
+      {{ "settings" | translate }}
     </a>
-    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
-      <li ngbDropdownItem><a class="dropdown-item text-secondary" href="#">Action</a></li>
-      <li ngbDropdownItem><a class="dropdown-item text-secondary" href="#">Another action</a></li>
+    <ul
+      class="dropdown-menu"
+      ngbDropdownMenu
+      aria-labelledby="navbarScrollingDropdown"
+    >
       <li ngbDropdownItem>
-        <hr class="dropdown-divider text-secondary">
+        <a class="dropdown-item text-secondary" href="/allergen">Allergen</a>
       </li>
-      <li ngbDropdownItem><a class="dropdown-item text-secondary" href="#">Something else here</a></li>
+      <li ngbDropdownItem>
+        <a class="dropdown-item text-secondary" href="#">Another action</a>
+      </li>
+      <li ngbDropdownItem>
+        <hr class="dropdown-divider text-secondary" />
+      </li>
+      <li ngbDropdownItem>
+        <a class="dropdown-item text-secondary" href="#">Something else here</a>
+      </li>
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link text-secondary" href="/material">{{'baseMaterial' | translate}}</a>
+    <a class="nav-link text-secondary" href="/material">{{
+      "baseMaterial" | translate
+    }}</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link text-secondary" href="/reciept" tabindex="-1" aria-disabled="true">{{'receipts' | translate}}</a>
+    <a
+      class="nav-link text-secondary"
+      href="/reciept"
+      tabindex="-1"
+      aria-disabled="true"
+      >{{ "receipts" | translate }}</a
+    >
   </li>
   <li class="nav-item">
-    <a class="nav-link text-danger" href="#" tabindex="-1" (click)="logout()">{{'logOut'|translate}}</a>
+    <a class="nav-link text-danger" href="#" tabindex="-1" (click)="logout()">{{
+      "logOut" | translate
+    }}</a>
   </li>
-</ul>
+</ul> -->
+<div class="card">
+  <p-menubar [model]="items" styleClass="flex">
+    <ng-template pTemplate="end">
+      <app-localization></app-localization>
+    </ng-template>
+  </p-menubar>
+</div>

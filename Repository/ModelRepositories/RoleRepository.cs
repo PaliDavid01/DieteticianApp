@@ -2,11 +2,6 @@
 using Models.Models;
 using Repository.GenericRepository;
 using Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.ModelRepositories
 {
@@ -17,6 +12,13 @@ namespace Repository.ModelRepositories
         {
             _dbContext = dbContext;
         }
+
+        public async Task AddRolesToUser(int userId, IEnumerable<int> roles)
+        {
+            await _dbContext.UserRoles.AddRangeAsync(roles.Select(r => new UserRole { UserId = userId, RoleId = r }));
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<UserRoleView>> GetRoleViews()
         {
             return await _dbContext.UserRoleViews.ToListAsync();
