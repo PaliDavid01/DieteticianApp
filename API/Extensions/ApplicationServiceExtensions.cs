@@ -1,14 +1,5 @@
 ﻿using API.Interfaces;
 using API.Services;
-using Logic.Interfaces;
-using Logic.Logic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Models.Models;
-using Models.Storage;
-using Repository.Database;
-using Repository.Interfaces;
-using Repository.ModelRepositories;
 
 namespace API.Extensions;
 

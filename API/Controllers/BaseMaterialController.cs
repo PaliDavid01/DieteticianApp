@@ -20,6 +20,10 @@ namespace API.Controllers
             _logic.LoadFromExcel();
             return Ok();
         }
-
+        [HttpGet("GetBaseMaterialsExtended")]
+        public Task<IEnumerable<BaseMaterial>> GetBaseMaterialsExtended()
+        {
+            return _logic.GetBaseMaterialsExtended();
+        }
     }
 }

@@ -51,7 +51,8 @@
       'materialName',
       'materialCode',
       'costPrice',
-      'kilojule'
+      'kilojule',
+      'isAllergen'
     ]"
     [tableStyle]="{ 'min-width': '75rem' }"
     [(selection)]="selectedMaterials"
@@ -92,6 +93,10 @@
         <th pSortableColumn="kilojule" style="min-width: 10rem">
           Kilojoule<p-sortIcon field="description"></p-sortIcon>
         </th>
+        <th pSortableColumn="isAllergen" style="min-width: 10rem">
+          Allergen<p-sortIcon field="description"></p-sortIcon>
+        </th>
+
         <th></th>
       </tr>
     </ng-template>
@@ -104,6 +109,13 @@
         <td>{{ item.materialCode }}</td>
         <td>{{ item.costPrice }}</td>
         <td>{{ item.kilojule }}</td>
+        <td>
+          <i
+            *ngIf="item.isAllergen"
+            class="pi pi-exclamation-triangle"
+            style="color: #cc8925; font-size: 1.5rem; margin-left: 1.5rem"
+          ></i>
+        </td>
         <td>
           <button
             pButton

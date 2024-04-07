@@ -33,7 +33,7 @@ namespace Repository.GenericRepository
             return _dbContext.Set<T>().Find(id);
         }
 
-        public IEnumerable<T> ReadAll()
+        public virtual IEnumerable<T> ReadAll()
         {
             return _dbContext.Set<T>().ToList();
         }

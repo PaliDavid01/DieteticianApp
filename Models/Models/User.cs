@@ -18,6 +18,4 @@ public partial class User
     public byte[] PasswordHash { get; set; }
 
     public byte[] PasswordSalt { get; set; }
-
-    public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 }

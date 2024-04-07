@@ -5,5 +5,6 @@ namespace Logic.Interfaces
 {
     public interface IAllergenMaterialLogic : ICRUDLogic<AllergenMaterial>
     {
+        Task<IEnumerable<AllergenMaterialView>> GetAllergensByMaterialId(int Id);
     }
 }

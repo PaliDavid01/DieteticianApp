@@ -26,6 +26,4 @@ public partial class Stock
     public decimal? CountingUnitPrice { get; set; }
 
     public decimal? SalePrice { get; set; }
-
-    public virtual BaseMaterial Material { get; set; }
 }

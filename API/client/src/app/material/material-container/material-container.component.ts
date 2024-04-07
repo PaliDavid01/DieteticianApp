@@ -35,7 +35,7 @@ export class MaterialContainerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.materialService.readAll().subscribe((data) => {
+    this.materialService.getBaseMaterialsExtended().subscribe((data) => {
       this.materials = data;
     });
   }
@@ -47,7 +47,7 @@ export class MaterialContainerComponent implements OnInit {
         bookType: 'xlsx',
         type: 'array',
       });
-      this.saveAsExcelFile(excelBuffer, 'products');
+      this.saveAsExcelFile(excelBuffer, 'materials');
     });
   }
 

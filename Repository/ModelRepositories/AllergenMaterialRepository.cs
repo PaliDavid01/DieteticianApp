@@ -10,5 +10,10 @@ namespace Repository.ModelRepositories
         public AllergenMaterialRepository(DataBaseContext dbContext) : base(dbContext)
         {
         }
+
+        public async Task<IEnumerable<AllergenMaterialView>> GetAllergensByMaterialId(int Id)
+        {
+            return await _dbContext.AllergenMaterialViews.Where(t => t.MaterialId == Id).ToListAsync();
+        }
     }
 }

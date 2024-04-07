@@ -5,11 +5,15 @@ using System.Collections.Generic;
 
 namespace Models.Models;
 
-public partial class AllergenMaterial
+public partial class AllergenMaterialView
 {
     public int AllergenMaterialId { get; set; }
 
     public int MaterialId { get; set; }
 
-    public int AllergenId { get; set; }
+    public string AllergenCode { get; set; }
+
+    public string AllergenName { get; set; }
+
+    public string AllergenDescription { get; set; }
 }

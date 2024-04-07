@@ -14,6 +14,4 @@ public partial class Ecode
     public string Ecode1 { get; set; }
 
     public string Description { get; set; }
-
-    public virtual BaseMaterial Material { get; set; }
 }

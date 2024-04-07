@@ -56,6 +56,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[AllergenMaterialView]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[UserRoleView]",
          "ObjectType": 3
       }
@@ -74,7 +78,7 @@
    "UseLegacyPluralizer": false,
    "UseManyToManyEntity": false,
    "UseNoDefaultConstructor": false,
-   "UseNoNavigations": false,
+   "UseNoNavigations": true,
    "UseNoObjectFilter": false,
    "UseNodaTime": false,
    "UseNullableReferences": false,

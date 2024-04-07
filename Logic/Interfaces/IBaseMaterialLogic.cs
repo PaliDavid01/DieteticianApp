@@ -6,5 +6,6 @@ namespace Logic.Interfaces
     public interface IBaseMaterialLogic : ICRUDLogic<BaseMaterial>
     {
         void LoadFromExcel();
+        Task<IEnumerable<BaseMaterial>> GetBaseMaterialsExtended();
     }
 }

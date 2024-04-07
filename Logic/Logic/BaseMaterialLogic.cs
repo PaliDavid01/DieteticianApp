@@ -1,5 +1,6 @@
 ﻿using Logic.Interfaces;
 using Logic.Logic.GenericLogic;
+using Models.DTOs;
 using Models.Models;
 using Repository.Interfaces;
 
@@ -8,9 +9,26 @@ namespace Logic.Logic
     public class BaseMaterialLogic : CRUDLogic<BaseMaterial>, IBaseMaterialLogic
     {
         IBaseMaterialRepository _repository;
-        public BaseMaterialLogic(IBaseMaterialRepository repository) : base(repository)
+        IAllergenMaterialLogic _allergenMaterialLogic;
+
+
+        public BaseMaterialLogic(IBaseMaterialRepository repository, IAllergenMaterialLogic allergenMaterialLogic, IMaterialGroupRepository materialGroupRepository) : base(repository)
         {
             _repository = repository;
+            _allergenMaterialLogic = allergenMaterialLogic;
+        }
+
+        public async Task<IEnumerable<BaseMaterial>> GetBaseMaterialsExtended()
+        {
+            var baseMaterials = await _repository.ReadAllAsync();
+            var dtos = new List<BaseMaterialDTO>();
+            foreach (var baseMaterial in baseMaterials)
+            {
+                var allergens = await _allergenMaterialLogic.GetAllergensByMaterialId(baseMaterial.MaterialId);
+                baseMaterial.IsAllergen = allergens.Count() > 0;
+            }
+            return baseMaterials;
+
         }
 
         public void LoadFromExcel()

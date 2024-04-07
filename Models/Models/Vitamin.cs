@@ -24,6 +24,4 @@ public partial class Vitamin
     public int? Pha { get; set; }
 
     public int? Fiber { get; set; }
-
-    public virtual BaseMaterial Material { get; set; }
 }

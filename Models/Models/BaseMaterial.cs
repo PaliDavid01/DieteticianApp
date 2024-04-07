@@ -61,13 +61,5 @@ public partial class BaseMaterial
 
     public string SupplierCode { get; set; }
 
-    public virtual ICollection<AllergenMaterial> AllergenMaterials { get; set; } = new List<AllergenMaterial>();
-
-    public virtual ICollection<Ecode> Ecodes { get; set; } = new List<Ecode>();
-
-    public virtual MaterialGroup MaterialGroup { get; set; }
-
-    public virtual ICollection<Stock> Stocks { get; set; } = new List<Stock>();
-
-    public virtual ICollection<Vitamin> Vitamins { get; set; } = new List<Vitamin>();
+    public bool? IsAllergen { get; set; }
 }

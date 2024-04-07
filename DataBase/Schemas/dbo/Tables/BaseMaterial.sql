@@ -26,6 +26,7 @@ CREATE TABLE [dbo].[BaseMaterial] (
     [Kalium] DECIMAL(10,2),
     [CostPrice] DECIMAL(10,2),
     [RetailPrice] DECIMAL(10,2),
-    [SupplierCode] VARCHAR(255)
+    [SupplierCode] VARCHAR(255),
+    [IsAllergen] BIT,
     FOREIGN KEY ([MaterialGroupId]) REFERENCES [dbo].[MaterialGroup]([GroupCode])
 );

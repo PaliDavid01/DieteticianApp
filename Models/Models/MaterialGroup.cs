@@ -10,6 +10,4 @@ public partial class MaterialGroup
     public int GroupCode { get; set; }
 
     public string GroupName { get; set; }
-
-    public virtual ICollection<BaseMaterial> BaseMaterials { get; set; } = new List<BaseMaterial>();
 }

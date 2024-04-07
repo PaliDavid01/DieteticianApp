@@ -1,7 +1,7 @@
 SET IDENTITY_INSERT [dbo].[MaterialGroup] ON
 INSERT INTO [dbo].[MaterialGroup] ([GroupCode], [GroupName]) VALUES (1, N'hús (baromfi, sertés, marha)');
 INSERT INTO [dbo].[MaterialGroup] ([GroupCode], [GroupName]) VALUES (2, N'húskészítmény, húskonzerv');
-INSERT INTO [dbo].[MaterialGroup] ([GroupCode], [GroupName]) VALUES (3, N'belőség, belőség készítmények');
+INSERT INTO [dbo].[MaterialGroup] ([GroupCode], [GroupName]) VALUES (3, N'belsőség, belsőség készítmények');
 INSERT INTO [dbo].[MaterialGroup] ([GroupCode], [GroupName]) VALUES (4, N'hal, halkonzerv');
 INSERT INTO [dbo].[MaterialGroup] ([GroupCode], [GroupName]) VALUES (5, N'tej, savanyított tejtermékek(kefír,joghurt');
 INSERT INTO [dbo].[MaterialGroup] ([GroupCode], [GroupName]) VALUES (6, N'tejtermékek(sajt, túró)');

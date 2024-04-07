@@ -537,6 +537,65 @@ export class AllergenMaterialService {
         this.baseUrl = baseUrl ?? "";
     }
 
+    getAllergensByMaterialId(id: number): Observable<AllergenMaterialView[]> {
+        let url_ = this.baseUrl + "/api/AllergenMaterial/GetAllergensByMaterialId/{Id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{Id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllergensByMaterialId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllergensByMaterialId(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AllergenMaterialView[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AllergenMaterialView[]>;
+        }));
+    }
+
+    protected processGetAllergensByMaterialId(response: HttpResponseBase): Observable<AllergenMaterialView[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(AllergenMaterialView.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
     create(entity: AllergenMaterial): Observable<void> {
         let url_ = this.baseUrl + "/api/AllergenMaterial/Create";
         url_ = url_.replace(/[?&]$/, "");
@@ -1210,6 +1269,62 @@ export class BaseMaterialService {
                 fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
             }
             return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getBaseMaterialsExtended(): Observable<BaseMaterial[]> {
+        let url_ = this.baseUrl + "/BaseMaterial/GetBaseMaterialsExtended";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetBaseMaterialsExtended(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetBaseMaterialsExtended(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<BaseMaterial[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<BaseMaterial[]>;
+        }));
+    }
+
+    protected processGetBaseMaterialsExtended(response: HttpResponseBase): Observable<BaseMaterial[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(BaseMaterial.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -4173,20 +4288,12 @@ export class Allergen implements IAllergen {
     allergenName?: string | null;
     allergenDescription?: string | null;
     allergenCode?: string | null;
-    allergenMaterials?: AllergenMaterial[] | null;
 
     constructor(data?: IAllergen) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
-            }
-            if (data.allergenMaterials) {
-                this.allergenMaterials = [];
-                for (let i = 0; i < data.allergenMaterials.length; i++) {
-                    let item = data.allergenMaterials[i];
-                    this.allergenMaterials[i] = item && !(<any>item).toJSON ? new AllergenMaterial(item) : <AllergenMaterial>item;
-                }
             }
         }
     }
@@ -4197,14 +4304,6 @@ export class Allergen implements IAllergen {
             this.allergenName = _data["allergenName"] !== undefined ? _data["allergenName"] : <any>null;
             this.allergenDescription = _data["allergenDescription"] !== undefined ? _data["allergenDescription"] : <any>null;
             this.allergenCode = _data["allergenCode"] !== undefined ? _data["allergenCode"] : <any>null;
-            if (Array.isArray(_data["allergenMaterials"])) {
-                this.allergenMaterials = [] as any;
-                for (let item of _data["allergenMaterials"])
-                    this.allergenMaterials!.push(AllergenMaterial.fromJS(item, _mappings));
-            }
-            else {
-                this.allergenMaterials = <any>null;
-            }
         }
     }
 
@@ -4219,11 +4318,6 @@ export class Allergen implements IAllergen {
         data["allergenName"] = this.allergenName !== undefined ? this.allergenName : <any>null;
         data["allergenDescription"] = this.allergenDescription !== undefined ? this.allergenDescription : <any>null;
         data["allergenCode"] = this.allergenCode !== undefined ? this.allergenCode : <any>null;
-        if (Array.isArray(this.allergenMaterials)) {
-            data["allergenMaterials"] = [];
-            for (let item of this.allergenMaterials)
-                data["allergenMaterials"].push(item.toJSON());
-        }
         return data;
     }
 }
@@ -4233,15 +4327,62 @@ export interface IAllergen {
     allergenName?: string | null;
     allergenDescription?: string | null;
     allergenCode?: string | null;
-    allergenMaterials?: IAllergenMaterial[] | null;
+}
+
+export class AllergenMaterialView implements IAllergenMaterialView {
+    allergenMaterialId?: number;
+    materialId?: number;
+    allergenCode?: string | null;
+    allergenName?: string | null;
+    allergenDescription?: string | null;
+
+    constructor(data?: IAllergenMaterialView) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.allergenMaterialId = _data["allergenMaterialId"] !== undefined ? _data["allergenMaterialId"] : <any>null;
+            this.materialId = _data["materialId"] !== undefined ? _data["materialId"] : <any>null;
+            this.allergenCode = _data["allergenCode"] !== undefined ? _data["allergenCode"] : <any>null;
+            this.allergenName = _data["allergenName"] !== undefined ? _data["allergenName"] : <any>null;
+            this.allergenDescription = _data["allergenDescription"] !== undefined ? _data["allergenDescription"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): AllergenMaterialView | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<AllergenMaterialView>(data, _mappings, AllergenMaterialView);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["allergenMaterialId"] = this.allergenMaterialId !== undefined ? this.allergenMaterialId : <any>null;
+        data["materialId"] = this.materialId !== undefined ? this.materialId : <any>null;
+        data["allergenCode"] = this.allergenCode !== undefined ? this.allergenCode : <any>null;
+        data["allergenName"] = this.allergenName !== undefined ? this.allergenName : <any>null;
+        data["allergenDescription"] = this.allergenDescription !== undefined ? this.allergenDescription : <any>null;
+        return data;
+    }
+}
+
+export interface IAllergenMaterialView {
+    allergenMaterialId?: number;
+    materialId?: number;
+    allergenCode?: string | null;
+    allergenName?: string | null;
+    allergenDescription?: string | null;
 }
 
 export class AllergenMaterial implements IAllergenMaterial {
     allergenMaterialId?: number;
     materialId?: number;
     allergenId?: number;
-    allergen?: Allergen | null;
-    material?: BaseMaterial | null;
 
     constructor(data?: IAllergenMaterial) {
         if (data) {
@@ -4249,8 +4390,6 @@ export class AllergenMaterial implements IAllergenMaterial {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
-            this.allergen = data.allergen && !(<any>data.allergen).toJSON ? new Allergen(data.allergen) : <Allergen>this.allergen;
-            this.material = data.material && !(<any>data.material).toJSON ? new BaseMaterial(data.material) : <BaseMaterial>this.material;
         }
     }
 
@@ -4259,8 +4398,6 @@ export class AllergenMaterial implements IAllergenMaterial {
             this.allergenMaterialId = _data["allergenMaterialId"] !== undefined ? _data["allergenMaterialId"] : <any>null;
             this.materialId = _data["materialId"] !== undefined ? _data["materialId"] : <any>null;
             this.allergenId = _data["allergenId"] !== undefined ? _data["allergenId"] : <any>null;
-            this.allergen = _data["allergen"] ? Allergen.fromJS(_data["allergen"], _mappings) : <any>null;
-            this.material = _data["material"] ? BaseMaterial.fromJS(_data["material"], _mappings) : <any>null;
         }
     }
 
@@ -4274,8 +4411,6 @@ export class AllergenMaterial implements IAllergenMaterial {
         data["allergenMaterialId"] = this.allergenMaterialId !== undefined ? this.allergenMaterialId : <any>null;
         data["materialId"] = this.materialId !== undefined ? this.materialId : <any>null;
         data["allergenId"] = this.allergenId !== undefined ? this.allergenId : <any>null;
-        data["allergen"] = this.allergen ? this.allergen.toJSON() : <any>null;
-        data["material"] = this.material ? this.material.toJSON() : <any>null;
         return data;
     }
 }
@@ -4284,496 +4419,6 @@ export interface IAllergenMaterial {
     allergenMaterialId?: number;
     materialId?: number;
     allergenId?: number;
-    allergen?: IAllergen | null;
-    material?: IBaseMaterial | null;
-}
-
-export class BaseMaterial implements IBaseMaterial {
-    materialId?: number;
-    materialName?: string | null;
-    materialCode?: string | null;
-    activityDescription?: string | null;
-    vatrate?: number | null;
-    quantity?: number | null;
-    measure?: string | null;
-    ledgerAccountNumber?: number | null;
-    rounding?: number | null;
-    itjSztj?: string | null;
-    materialGroupId?: number | null;
-    note?: string | null;
-    kilojule?: number | null;
-    protein?: number | null;
-    fat?: number | null;
-    carbohydrate?: number | null;
-    cholesterol?: number | null;
-    sugar?: number | null;
-    salt?: number | null;
-    saturatedFat?: number | null;
-    transFat?: number | null;
-    fiber?: number | null;
-    kalcium?: number | null;
-    kalium?: number | null;
-    costPrice?: number | null;
-    retailPrice?: number | null;
-    supplierCode?: string | null;
-    allergenMaterials?: AllergenMaterial[] | null;
-    ecodes?: Ecode[] | null;
-    materialGroup?: MaterialGroup | null;
-    stocks?: Stock[] | null;
-    vitamins?: Vitamin[] | null;
-
-    constructor(data?: IBaseMaterial) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-            if (data.allergenMaterials) {
-                this.allergenMaterials = [];
-                for (let i = 0; i < data.allergenMaterials.length; i++) {
-                    let item = data.allergenMaterials[i];
-                    this.allergenMaterials[i] = item && !(<any>item).toJSON ? new AllergenMaterial(item) : <AllergenMaterial>item;
-                }
-            }
-            if (data.ecodes) {
-                this.ecodes = [];
-                for (let i = 0; i < data.ecodes.length; i++) {
-                    let item = data.ecodes[i];
-                    this.ecodes[i] = item && !(<any>item).toJSON ? new Ecode(item) : <Ecode>item;
-                }
-            }
-            this.materialGroup = data.materialGroup && !(<any>data.materialGroup).toJSON ? new MaterialGroup(data.materialGroup) : <MaterialGroup>this.materialGroup;
-            if (data.stocks) {
-                this.stocks = [];
-                for (let i = 0; i < data.stocks.length; i++) {
-                    let item = data.stocks[i];
-                    this.stocks[i] = item && !(<any>item).toJSON ? new Stock(item) : <Stock>item;
-                }
-            }
-            if (data.vitamins) {
-                this.vitamins = [];
-                for (let i = 0; i < data.vitamins.length; i++) {
-                    let item = data.vitamins[i];
-                    this.vitamins[i] = item && !(<any>item).toJSON ? new Vitamin(item) : <Vitamin>item;
-                }
-            }
-        }
-    }
-
-    init(_data?: any, _mappings?: any) {
-        if (_data) {
-            this.materialId = _data["materialId"] !== undefined ? _data["materialId"] : <any>null;
-            this.materialName = _data["materialName"] !== undefined ? _data["materialName"] : <any>null;
-            this.materialCode = _data["materialCode"] !== undefined ? _data["materialCode"] : <any>null;
-            this.activityDescription = _data["activityDescription"] !== undefined ? _data["activityDescription"] : <any>null;
-            this.vatrate = _data["vatrate"] !== undefined ? _data["vatrate"] : <any>null;
-            this.quantity = _data["quantity"] !== undefined ? _data["quantity"] : <any>null;
-            this.measure = _data["measure"] !== undefined ? _data["measure"] : <any>null;
-            this.ledgerAccountNumber = _data["ledgerAccountNumber"] !== undefined ? _data["ledgerAccountNumber"] : <any>null;
-            this.rounding = _data["rounding"] !== undefined ? _data["rounding"] : <any>null;
-            this.itjSztj = _data["itjSztj"] !== undefined ? _data["itjSztj"] : <any>null;
-            this.materialGroupId = _data["materialGroupId"] !== undefined ? _data["materialGroupId"] : <any>null;
-            this.note = _data["note"] !== undefined ? _data["note"] : <any>null;
-            this.kilojule = _data["kilojule"] !== undefined ? _data["kilojule"] : <any>null;
-            this.protein = _data["protein"] !== undefined ? _data["protein"] : <any>null;
-            this.fat = _data["fat"] !== undefined ? _data["fat"] : <any>null;
-            this.carbohydrate = _data["carbohydrate"] !== undefined ? _data["carbohydrate"] : <any>null;
-            this.cholesterol = _data["cholesterol"] !== undefined ? _data["cholesterol"] : <any>null;
-            this.sugar = _data["sugar"] !== undefined ? _data["sugar"] : <any>null;
-            this.salt = _data["salt"] !== undefined ? _data["salt"] : <any>null;
-            this.saturatedFat = _data["saturatedFat"] !== undefined ? _data["saturatedFat"] : <any>null;
-            this.transFat = _data["transFat"] !== undefined ? _data["transFat"] : <any>null;
-            this.fiber = _data["fiber"] !== undefined ? _data["fiber"] : <any>null;
-            this.kalcium = _data["kalcium"] !== undefined ? _data["kalcium"] : <any>null;
-            this.kalium = _data["kalium"] !== undefined ? _data["kalium"] : <any>null;
-            this.costPrice = _data["costPrice"] !== undefined ? _data["costPrice"] : <any>null;
-            this.retailPrice = _data["retailPrice"] !== undefined ? _data["retailPrice"] : <any>null;
-            this.supplierCode = _data["supplierCode"] !== undefined ? _data["supplierCode"] : <any>null;
-            if (Array.isArray(_data["allergenMaterials"])) {
-                this.allergenMaterials = [] as any;
-                for (let item of _data["allergenMaterials"])
-                    this.allergenMaterials!.push(AllergenMaterial.fromJS(item, _mappings));
-            }
-            else {
-                this.allergenMaterials = <any>null;
-            }
-            if (Array.isArray(_data["ecodes"])) {
-                this.ecodes = [] as any;
-                for (let item of _data["ecodes"])
-                    this.ecodes!.push(Ecode.fromJS(item, _mappings));
-            }
-            else {
-                this.ecodes = <any>null;
-            }
-            this.materialGroup = _data["materialGroup"] ? MaterialGroup.fromJS(_data["materialGroup"], _mappings) : <any>null;
-            if (Array.isArray(_data["stocks"])) {
-                this.stocks = [] as any;
-                for (let item of _data["stocks"])
-                    this.stocks!.push(Stock.fromJS(item, _mappings));
-            }
-            else {
-                this.stocks = <any>null;
-            }
-            if (Array.isArray(_data["vitamins"])) {
-                this.vitamins = [] as any;
-                for (let item of _data["vitamins"])
-                    this.vitamins!.push(Vitamin.fromJS(item, _mappings));
-            }
-            else {
-                this.vitamins = <any>null;
-            }
-        }
-    }
-
-    static fromJS(data: any, _mappings?: any): BaseMaterial | null {
-        data = typeof data === 'object' ? data : {};
-        return createInstance<BaseMaterial>(data, _mappings, BaseMaterial);
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["materialId"] = this.materialId !== undefined ? this.materialId : <any>null;
-        data["materialName"] = this.materialName !== undefined ? this.materialName : <any>null;
-        data["materialCode"] = this.materialCode !== undefined ? this.materialCode : <any>null;
-        data["activityDescription"] = this.activityDescription !== undefined ? this.activityDescription : <any>null;
-        data["vatrate"] = this.vatrate !== undefined ? this.vatrate : <any>null;
-        data["quantity"] = this.quantity !== undefined ? this.quantity : <any>null;
-        data["measure"] = this.measure !== undefined ? this.measure : <any>null;
-        data["ledgerAccountNumber"] = this.ledgerAccountNumber !== undefined ? this.ledgerAccountNumber : <any>null;
-        data["rounding"] = this.rounding !== undefined ? this.rounding : <any>null;
-        data["itjSztj"] = this.itjSztj !== undefined ? this.itjSztj : <any>null;
-        data["materialGroupId"] = this.materialGroupId !== undefined ? this.materialGroupId : <any>null;
-        data["note"] = this.note !== undefined ? this.note : <any>null;
-        data["kilojule"] = this.kilojule !== undefined ? this.kilojule : <any>null;
-        data["protein"] = this.protein !== undefined ? this.protein : <any>null;
-        data["fat"] = this.fat !== undefined ? this.fat : <any>null;
-        data["carbohydrate"] = this.carbohydrate !== undefined ? this.carbohydrate : <any>null;
-        data["cholesterol"] = this.cholesterol !== undefined ? this.cholesterol : <any>null;
-        data["sugar"] = this.sugar !== undefined ? this.sugar : <any>null;
-        data["salt"] = this.salt !== undefined ? this.salt : <any>null;
-        data["saturatedFat"] = this.saturatedFat !== undefined ? this.saturatedFat : <any>null;
-        data["transFat"] = this.transFat !== undefined ? this.transFat : <any>null;
-        data["fiber"] = this.fiber !== undefined ? this.fiber : <any>null;
-        data["kalcium"] = this.kalcium !== undefined ? this.kalcium : <any>null;
-        data["kalium"] = this.kalium !== undefined ? this.kalium : <any>null;
-        data["costPrice"] = this.costPrice !== undefined ? this.costPrice : <any>null;
-        data["retailPrice"] = this.retailPrice !== undefined ? this.retailPrice : <any>null;
-        data["supplierCode"] = this.supplierCode !== undefined ? this.supplierCode : <any>null;
-        if (Array.isArray(this.allergenMaterials)) {
-            data["allergenMaterials"] = [];
-            for (let item of this.allergenMaterials)
-                data["allergenMaterials"].push(item.toJSON());
-        }
-        if (Array.isArray(this.ecodes)) {
-            data["ecodes"] = [];
-            for (let item of this.ecodes)
-                data["ecodes"].push(item.toJSON());
-        }
-        data["materialGroup"] = this.materialGroup ? this.materialGroup.toJSON() : <any>null;
-        if (Array.isArray(this.stocks)) {
-            data["stocks"] = [];
-            for (let item of this.stocks)
-                data["stocks"].push(item.toJSON());
-        }
-        if (Array.isArray(this.vitamins)) {
-            data["vitamins"] = [];
-            for (let item of this.vitamins)
-                data["vitamins"].push(item.toJSON());
-        }
-        return data;
-    }
-}
-
-export interface IBaseMaterial {
-    materialId?: number;
-    materialName?: string | null;
-    materialCode?: string | null;
-    activityDescription?: string | null;
-    vatrate?: number | null;
-    quantity?: number | null;
-    measure?: string | null;
-    ledgerAccountNumber?: number | null;
-    rounding?: number | null;
-    itjSztj?: string | null;
-    materialGroupId?: number | null;
-    note?: string | null;
-    kilojule?: number | null;
-    protein?: number | null;
-    fat?: number | null;
-    carbohydrate?: number | null;
-    cholesterol?: number | null;
-    sugar?: number | null;
-    salt?: number | null;
-    saturatedFat?: number | null;
-    transFat?: number | null;
-    fiber?: number | null;
-    kalcium?: number | null;
-    kalium?: number | null;
-    costPrice?: number | null;
-    retailPrice?: number | null;
-    supplierCode?: string | null;
-    allergenMaterials?: IAllergenMaterial[] | null;
-    ecodes?: IEcode[] | null;
-    materialGroup?: IMaterialGroup | null;
-    stocks?: IStock[] | null;
-    vitamins?: IVitamin[] | null;
-}
-
-export class Ecode implements IEcode {
-    ecodeId?: number;
-    materialId?: number;
-    ecode1?: string | null;
-    description?: string | null;
-    material?: BaseMaterial | null;
-
-    constructor(data?: IEcode) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-            this.material = data.material && !(<any>data.material).toJSON ? new BaseMaterial(data.material) : <BaseMaterial>this.material;
-        }
-    }
-
-    init(_data?: any, _mappings?: any) {
-        if (_data) {
-            this.ecodeId = _data["ecodeId"] !== undefined ? _data["ecodeId"] : <any>null;
-            this.materialId = _data["materialId"] !== undefined ? _data["materialId"] : <any>null;
-            this.ecode1 = _data["ecode1"] !== undefined ? _data["ecode1"] : <any>null;
-            this.description = _data["description"] !== undefined ? _data["description"] : <any>null;
-            this.material = _data["material"] ? BaseMaterial.fromJS(_data["material"], _mappings) : <any>null;
-        }
-    }
-
-    static fromJS(data: any, _mappings?: any): Ecode | null {
-        data = typeof data === 'object' ? data : {};
-        return createInstance<Ecode>(data, _mappings, Ecode);
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["ecodeId"] = this.ecodeId !== undefined ? this.ecodeId : <any>null;
-        data["materialId"] = this.materialId !== undefined ? this.materialId : <any>null;
-        data["ecode1"] = this.ecode1 !== undefined ? this.ecode1 : <any>null;
-        data["description"] = this.description !== undefined ? this.description : <any>null;
-        data["material"] = this.material ? this.material.toJSON() : <any>null;
-        return data;
-    }
-}
-
-export interface IEcode {
-    ecodeId?: number;
-    materialId?: number;
-    ecode1?: string | null;
-    description?: string | null;
-    material?: IBaseMaterial | null;
-}
-
-export class MaterialGroup implements IMaterialGroup {
-    groupCode?: number;
-    groupName?: string | null;
-    baseMaterials?: BaseMaterial[] | null;
-
-    constructor(data?: IMaterialGroup) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-            if (data.baseMaterials) {
-                this.baseMaterials = [];
-                for (let i = 0; i < data.baseMaterials.length; i++) {
-                    let item = data.baseMaterials[i];
-                    this.baseMaterials[i] = item && !(<any>item).toJSON ? new BaseMaterial(item) : <BaseMaterial>item;
-                }
-            }
-        }
-    }
-
-    init(_data?: any, _mappings?: any) {
-        if (_data) {
-            this.groupCode = _data["groupCode"] !== undefined ? _data["groupCode"] : <any>null;
-            this.groupName = _data["groupName"] !== undefined ? _data["groupName"] : <any>null;
-            if (Array.isArray(_data["baseMaterials"])) {
-                this.baseMaterials = [] as any;
-                for (let item of _data["baseMaterials"])
-                    this.baseMaterials!.push(BaseMaterial.fromJS(item, _mappings));
-            }
-            else {
-                this.baseMaterials = <any>null;
-            }
-        }
-    }
-
-    static fromJS(data: any, _mappings?: any): MaterialGroup | null {
-        data = typeof data === 'object' ? data : {};
-        return createInstance<MaterialGroup>(data, _mappings, MaterialGroup);
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["groupCode"] = this.groupCode !== undefined ? this.groupCode : <any>null;
-        data["groupName"] = this.groupName !== undefined ? this.groupName : <any>null;
-        if (Array.isArray(this.baseMaterials)) {
-            data["baseMaterials"] = [];
-            for (let item of this.baseMaterials)
-                data["baseMaterials"].push(item.toJSON());
-        }
-        return data;
-    }
-}
-
-export interface IMaterialGroup {
-    groupCode?: number;
-    groupName?: string | null;
-    baseMaterials?: IBaseMaterial[] | null;
-}
-
-export class Stock implements IStock {
-    stockId?: number;
-    materialId?: number;
-    minimumStock?: number | null;
-    maximumStock?: number | null;
-    preCalculationPrice?: number | null;
-    currentStock?: number | null;
-    orderUnitPrice?: number | null;
-    maximumOrderPrice?: number | null;
-    countingUnitPrice?: number | null;
-    salePrice?: number | null;
-    material?: BaseMaterial | null;
-
-    constructor(data?: IStock) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-            this.material = data.material && !(<any>data.material).toJSON ? new BaseMaterial(data.material) : <BaseMaterial>this.material;
-        }
-    }
-
-    init(_data?: any, _mappings?: any) {
-        if (_data) {
-            this.stockId = _data["stockId"] !== undefined ? _data["stockId"] : <any>null;
-            this.materialId = _data["materialId"] !== undefined ? _data["materialId"] : <any>null;
-            this.minimumStock = _data["minimumStock"] !== undefined ? _data["minimumStock"] : <any>null;
-            this.maximumStock = _data["maximumStock"] !== undefined ? _data["maximumStock"] : <any>null;
-            this.preCalculationPrice = _data["preCalculationPrice"] !== undefined ? _data["preCalculationPrice"] : <any>null;
-            this.currentStock = _data["currentStock"] !== undefined ? _data["currentStock"] : <any>null;
-            this.orderUnitPrice = _data["orderUnitPrice"] !== undefined ? _data["orderUnitPrice"] : <any>null;
-            this.maximumOrderPrice = _data["maximumOrderPrice"] !== undefined ? _data["maximumOrderPrice"] : <any>null;
-            this.countingUnitPrice = _data["countingUnitPrice"] !== undefined ? _data["countingUnitPrice"] : <any>null;
-            this.salePrice = _data["salePrice"] !== undefined ? _data["salePrice"] : <any>null;
-            this.material = _data["material"] ? BaseMaterial.fromJS(_data["material"], _mappings) : <any>null;
-        }
-    }
-
-    static fromJS(data: any, _mappings?: any): Stock | null {
-        data = typeof data === 'object' ? data : {};
-        return createInstance<Stock>(data, _mappings, Stock);
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["stockId"] = this.stockId !== undefined ? this.stockId : <any>null;
-        data["materialId"] = this.materialId !== undefined ? this.materialId : <any>null;
-        data["minimumStock"] = this.minimumStock !== undefined ? this.minimumStock : <any>null;
-        data["maximumStock"] = this.maximumStock !== undefined ? this.maximumStock : <any>null;
-        data["preCalculationPrice"] = this.preCalculationPrice !== undefined ? this.preCalculationPrice : <any>null;
-        data["currentStock"] = this.currentStock !== undefined ? this.currentStock : <any>null;
-        data["orderUnitPrice"] = this.orderUnitPrice !== undefined ? this.orderUnitPrice : <any>null;
-        data["maximumOrderPrice"] = this.maximumOrderPrice !== undefined ? this.maximumOrderPrice : <any>null;
-        data["countingUnitPrice"] = this.countingUnitPrice !== undefined ? this.countingUnitPrice : <any>null;
-        data["salePrice"] = this.salePrice !== undefined ? this.salePrice : <any>null;
-        data["material"] = this.material ? this.material.toJSON() : <any>null;
-        return data;
-    }
-}
-
-export interface IStock {
-    stockId?: number;
-    materialId?: number;
-    minimumStock?: number | null;
-    maximumStock?: number | null;
-    preCalculationPrice?: number | null;
-    currentStock?: number | null;
-    orderUnitPrice?: number | null;
-    maximumOrderPrice?: number | null;
-    countingUnitPrice?: number | null;
-    salePrice?: number | null;
-    material?: IBaseMaterial | null;
-}
-
-export class Vitamin implements IVitamin {
-    vitaminId?: number;
-    materialId?: number;
-    vitaminA?: number | null;
-    vitaminC?: number | null;
-    vitaminD?: number | null;
-    vitaminE?: number | null;
-    vitaminK?: number | null;
-    pha?: number | null;
-    fiber?: number | null;
-    material?: BaseMaterial | null;
-
-    constructor(data?: IVitamin) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-            this.material = data.material && !(<any>data.material).toJSON ? new BaseMaterial(data.material) : <BaseMaterial>this.material;
-        }
-    }
-
-    init(_data?: any, _mappings?: any) {
-        if (_data) {
-            this.vitaminId = _data["vitaminId"] !== undefined ? _data["vitaminId"] : <any>null;
-            this.materialId = _data["materialId"] !== undefined ? _data["materialId"] : <any>null;
-            this.vitaminA = _data["vitaminA"] !== undefined ? _data["vitaminA"] : <any>null;
-            this.vitaminC = _data["vitaminC"] !== undefined ? _data["vitaminC"] : <any>null;
-            this.vitaminD = _data["vitaminD"] !== undefined ? _data["vitaminD"] : <any>null;
-            this.vitaminE = _data["vitaminE"] !== undefined ? _data["vitaminE"] : <any>null;
-            this.vitaminK = _data["vitaminK"] !== undefined ? _data["vitaminK"] : <any>null;
-            this.pha = _data["pha"] !== undefined ? _data["pha"] : <any>null;
-            this.fiber = _data["fiber"] !== undefined ? _data["fiber"] : <any>null;
-            this.material = _data["material"] ? BaseMaterial.fromJS(_data["material"], _mappings) : <any>null;
-        }
-    }
-
-    static fromJS(data: any, _mappings?: any): Vitamin | null {
-        data = typeof data === 'object' ? data : {};
-        return createInstance<Vitamin>(data, _mappings, Vitamin);
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["vitaminId"] = this.vitaminId !== undefined ? this.vitaminId : <any>null;
-        data["materialId"] = this.materialId !== undefined ? this.materialId : <any>null;
-        data["vitaminA"] = this.vitaminA !== undefined ? this.vitaminA : <any>null;
-        data["vitaminC"] = this.vitaminC !== undefined ? this.vitaminC : <any>null;
-        data["vitaminD"] = this.vitaminD !== undefined ? this.vitaminD : <any>null;
-        data["vitaminE"] = this.vitaminE !== undefined ? this.vitaminE : <any>null;
-        data["vitaminK"] = this.vitaminK !== undefined ? this.vitaminK : <any>null;
-        data["pha"] = this.pha !== undefined ? this.pha : <any>null;
-        data["fiber"] = this.fiber !== undefined ? this.fiber : <any>null;
-        data["material"] = this.material ? this.material.toJSON() : <any>null;
-        return data;
-    }
-}
-
-export interface IVitamin {
-    vitaminId?: number;
-    materialId?: number;
-    vitaminA?: number | null;
-    vitaminC?: number | null;
-    vitaminD?: number | null;
-    vitaminE?: number | null;
-    vitaminK?: number | null;
-    pha?: number | null;
-    fiber?: number | null;
-    material?: IBaseMaterial | null;
 }
 
 export class LoginResponseDTO implements ILoginResponseDTO {
@@ -4936,20 +4581,12 @@ export class Role implements IRole {
     roleId?: number;
     roleName?: string | null;
     roleDescription?: string | null;
-    userRoles?: UserRole[] | null;
 
     constructor(data?: IRole) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
-            }
-            if (data.userRoles) {
-                this.userRoles = [];
-                for (let i = 0; i < data.userRoles.length; i++) {
-                    let item = data.userRoles[i];
-                    this.userRoles[i] = item && !(<any>item).toJSON ? new UserRole(item) : <UserRole>item;
-                }
             }
         }
     }
@@ -4959,14 +4596,6 @@ export class Role implements IRole {
             this.roleId = _data["roleId"] !== undefined ? _data["roleId"] : <any>null;
             this.roleName = _data["roleName"] !== undefined ? _data["roleName"] : <any>null;
             this.roleDescription = _data["roleDescription"] !== undefined ? _data["roleDescription"] : <any>null;
-            if (Array.isArray(_data["userRoles"])) {
-                this.userRoles = [] as any;
-                for (let item of _data["userRoles"])
-                    this.userRoles!.push(UserRole.fromJS(item, _mappings));
-            }
-            else {
-                this.userRoles = <any>null;
-            }
         }
     }
 
@@ -4980,11 +4609,6 @@ export class Role implements IRole {
         data["roleId"] = this.roleId !== undefined ? this.roleId : <any>null;
         data["roleName"] = this.roleName !== undefined ? this.roleName : <any>null;
         data["roleDescription"] = this.roleDescription !== undefined ? this.roleDescription : <any>null;
-        if (Array.isArray(this.userRoles)) {
-            data["userRoles"] = [];
-            for (let item of this.userRoles)
-                data["userRoles"].push(item.toJSON());
-        }
         return data;
     }
 }
@@ -4993,18 +4617,238 @@ export interface IRole {
     roleId?: number;
     roleName?: string | null;
     roleDescription?: string | null;
-    userRoles?: IUserRole[] | null;
+}
+
+export class BaseMaterial implements IBaseMaterial {
+    materialId?: number;
+    materialName?: string | null;
+    materialCode?: string | null;
+    activityDescription?: string | null;
+    vatrate?: number | null;
+    quantity?: number | null;
+    measure?: string | null;
+    ledgerAccountNumber?: number | null;
+    rounding?: number | null;
+    itjSztj?: string | null;
+    materialGroupId?: number | null;
+    note?: string | null;
+    kilojule?: number | null;
+    protein?: number | null;
+    fat?: number | null;
+    carbohydrate?: number | null;
+    cholesterol?: number | null;
+    sugar?: number | null;
+    salt?: number | null;
+    saturatedFat?: number | null;
+    transFat?: number | null;
+    fiber?: number | null;
+    kalcium?: number | null;
+    kalium?: number | null;
+    costPrice?: number | null;
+    retailPrice?: number | null;
+    supplierCode?: string | null;
+    isAllergen?: boolean | null;
+
+    constructor(data?: IBaseMaterial) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.materialId = _data["materialId"] !== undefined ? _data["materialId"] : <any>null;
+            this.materialName = _data["materialName"] !== undefined ? _data["materialName"] : <any>null;
+            this.materialCode = _data["materialCode"] !== undefined ? _data["materialCode"] : <any>null;
+            this.activityDescription = _data["activityDescription"] !== undefined ? _data["activityDescription"] : <any>null;
+            this.vatrate = _data["vatrate"] !== undefined ? _data["vatrate"] : <any>null;
+            this.quantity = _data["quantity"] !== undefined ? _data["quantity"] : <any>null;
+            this.measure = _data["measure"] !== undefined ? _data["measure"] : <any>null;
+            this.ledgerAccountNumber = _data["ledgerAccountNumber"] !== undefined ? _data["ledgerAccountNumber"] : <any>null;
+            this.rounding = _data["rounding"] !== undefined ? _data["rounding"] : <any>null;
+            this.itjSztj = _data["itjSztj"] !== undefined ? _data["itjSztj"] : <any>null;
+            this.materialGroupId = _data["materialGroupId"] !== undefined ? _data["materialGroupId"] : <any>null;
+            this.note = _data["note"] !== undefined ? _data["note"] : <any>null;
+            this.kilojule = _data["kilojule"] !== undefined ? _data["kilojule"] : <any>null;
+            this.protein = _data["protein"] !== undefined ? _data["protein"] : <any>null;
+            this.fat = _data["fat"] !== undefined ? _data["fat"] : <any>null;
+            this.carbohydrate = _data["carbohydrate"] !== undefined ? _data["carbohydrate"] : <any>null;
+            this.cholesterol = _data["cholesterol"] !== undefined ? _data["cholesterol"] : <any>null;
+            this.sugar = _data["sugar"] !== undefined ? _data["sugar"] : <any>null;
+            this.salt = _data["salt"] !== undefined ? _data["salt"] : <any>null;
+            this.saturatedFat = _data["saturatedFat"] !== undefined ? _data["saturatedFat"] : <any>null;
+            this.transFat = _data["transFat"] !== undefined ? _data["transFat"] : <any>null;
+            this.fiber = _data["fiber"] !== undefined ? _data["fiber"] : <any>null;
+            this.kalcium = _data["kalcium"] !== undefined ? _data["kalcium"] : <any>null;
+            this.kalium = _data["kalium"] !== undefined ? _data["kalium"] : <any>null;
+            this.costPrice = _data["costPrice"] !== undefined ? _data["costPrice"] : <any>null;
+            this.retailPrice = _data["retailPrice"] !== undefined ? _data["retailPrice"] : <any>null;
+            this.supplierCode = _data["supplierCode"] !== undefined ? _data["supplierCode"] : <any>null;
+            this.isAllergen = _data["isAllergen"] !== undefined ? _data["isAllergen"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): BaseMaterial | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<BaseMaterial>(data, _mappings, BaseMaterial);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["materialId"] = this.materialId !== undefined ? this.materialId : <any>null;
+        data["materialName"] = this.materialName !== undefined ? this.materialName : <any>null;
+        data["materialCode"] = this.materialCode !== undefined ? this.materialCode : <any>null;
+        data["activityDescription"] = this.activityDescription !== undefined ? this.activityDescription : <any>null;
+        data["vatrate"] = this.vatrate !== undefined ? this.vatrate : <any>null;
+        data["quantity"] = this.quantity !== undefined ? this.quantity : <any>null;
+        data["measure"] = this.measure !== undefined ? this.measure : <any>null;
+        data["ledgerAccountNumber"] = this.ledgerAccountNumber !== undefined ? this.ledgerAccountNumber : <any>null;
+        data["rounding"] = this.rounding !== undefined ? this.rounding : <any>null;
+        data["itjSztj"] = this.itjSztj !== undefined ? this.itjSztj : <any>null;
+        data["materialGroupId"] = this.materialGroupId !== undefined ? this.materialGroupId : <any>null;
+        data["note"] = this.note !== undefined ? this.note : <any>null;
+        data["kilojule"] = this.kilojule !== undefined ? this.kilojule : <any>null;
+        data["protein"] = this.protein !== undefined ? this.protein : <any>null;
+        data["fat"] = this.fat !== undefined ? this.fat : <any>null;
+        data["carbohydrate"] = this.carbohydrate !== undefined ? this.carbohydrate : <any>null;
+        data["cholesterol"] = this.cholesterol !== undefined ? this.cholesterol : <any>null;
+        data["sugar"] = this.sugar !== undefined ? this.sugar : <any>null;
+        data["salt"] = this.salt !== undefined ? this.salt : <any>null;
+        data["saturatedFat"] = this.saturatedFat !== undefined ? this.saturatedFat : <any>null;
+        data["transFat"] = this.transFat !== undefined ? this.transFat : <any>null;
+        data["fiber"] = this.fiber !== undefined ? this.fiber : <any>null;
+        data["kalcium"] = this.kalcium !== undefined ? this.kalcium : <any>null;
+        data["kalium"] = this.kalium !== undefined ? this.kalium : <any>null;
+        data["costPrice"] = this.costPrice !== undefined ? this.costPrice : <any>null;
+        data["retailPrice"] = this.retailPrice !== undefined ? this.retailPrice : <any>null;
+        data["supplierCode"] = this.supplierCode !== undefined ? this.supplierCode : <any>null;
+        data["isAllergen"] = this.isAllergen !== undefined ? this.isAllergen : <any>null;
+        return data;
+    }
+}
+
+export interface IBaseMaterial {
+    materialId?: number;
+    materialName?: string | null;
+    materialCode?: string | null;
+    activityDescription?: string | null;
+    vatrate?: number | null;
+    quantity?: number | null;
+    measure?: string | null;
+    ledgerAccountNumber?: number | null;
+    rounding?: number | null;
+    itjSztj?: string | null;
+    materialGroupId?: number | null;
+    note?: string | null;
+    kilojule?: number | null;
+    protein?: number | null;
+    fat?: number | null;
+    carbohydrate?: number | null;
+    cholesterol?: number | null;
+    sugar?: number | null;
+    salt?: number | null;
+    saturatedFat?: number | null;
+    transFat?: number | null;
+    fiber?: number | null;
+    kalcium?: number | null;
+    kalium?: number | null;
+    costPrice?: number | null;
+    retailPrice?: number | null;
+    supplierCode?: string | null;
+    isAllergen?: boolean | null;
+}
+
+export class Ecode implements IEcode {
+    ecodeId?: number;
+    materialId?: number;
+    ecode1?: string | null;
+    description?: string | null;
+
+    constructor(data?: IEcode) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.ecodeId = _data["ecodeId"] !== undefined ? _data["ecodeId"] : <any>null;
+            this.materialId = _data["materialId"] !== undefined ? _data["materialId"] : <any>null;
+            this.ecode1 = _data["ecode1"] !== undefined ? _data["ecode1"] : <any>null;
+            this.description = _data["description"] !== undefined ? _data["description"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): Ecode | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<Ecode>(data, _mappings, Ecode);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ecodeId"] = this.ecodeId !== undefined ? this.ecodeId : <any>null;
+        data["materialId"] = this.materialId !== undefined ? this.materialId : <any>null;
+        data["ecode1"] = this.ecode1 !== undefined ? this.ecode1 : <any>null;
+        data["description"] = this.description !== undefined ? this.description : <any>null;
+        return data;
+    }
+}
+
+export interface IEcode {
+    ecodeId?: number;
+    materialId?: number;
+    ecode1?: string | null;
+    description?: string | null;
+}
+
+export class MaterialGroup implements IMaterialGroup {
+    groupCode?: number;
+    groupName?: string | null;
+
+    constructor(data?: IMaterialGroup) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.groupCode = _data["groupCode"] !== undefined ? _data["groupCode"] : <any>null;
+            this.groupName = _data["groupName"] !== undefined ? _data["groupName"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): MaterialGroup | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<MaterialGroup>(data, _mappings, MaterialGroup);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["groupCode"] = this.groupCode !== undefined ? this.groupCode : <any>null;
+        data["groupName"] = this.groupName !== undefined ? this.groupName : <any>null;
+        return data;
+    }
+}
+
+export interface IMaterialGroup {
+    groupCode?: number;
+    groupName?: string | null;
 }
 
 export class UserRole implements IUserRole {
     userRoleId?: number;
     userId?: number;
     roleId?: number;
-    dateAssigned?: Date;
-    dateRevoked?: Date | null;
-    isActive?: boolean;
-    role?: Role | null;
-    user?: User | null;
 
     constructor(data?: IUserRole) {
         if (data) {
@@ -5012,8 +4856,6 @@ export class UserRole implements IUserRole {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
-            this.role = data.role && !(<any>data.role).toJSON ? new Role(data.role) : <Role>this.role;
-            this.user = data.user && !(<any>data.user).toJSON ? new User(data.user) : <User>this.user;
         }
     }
 
@@ -5022,11 +4864,6 @@ export class UserRole implements IUserRole {
             this.userRoleId = _data["userRoleId"] !== undefined ? _data["userRoleId"] : <any>null;
             this.userId = _data["userId"] !== undefined ? _data["userId"] : <any>null;
             this.roleId = _data["roleId"] !== undefined ? _data["roleId"] : <any>null;
-            this.dateAssigned = _data["dateAssigned"] ? new Date(_data["dateAssigned"].toString()) : <any>null;
-            this.dateRevoked = _data["dateRevoked"] ? new Date(_data["dateRevoked"].toString()) : <any>null;
-            this.isActive = _data["isActive"] !== undefined ? _data["isActive"] : <any>null;
-            this.role = _data["role"] ? Role.fromJS(_data["role"], _mappings) : <any>null;
-            this.user = _data["user"] ? User.fromJS(_data["user"], _mappings) : <any>null;
         }
     }
 
@@ -5040,11 +4877,6 @@ export class UserRole implements IUserRole {
         data["userRoleId"] = this.userRoleId !== undefined ? this.userRoleId : <any>null;
         data["userId"] = this.userId !== undefined ? this.userId : <any>null;
         data["roleId"] = this.roleId !== undefined ? this.roleId : <any>null;
-        data["dateAssigned"] = this.dateAssigned ? this.dateAssigned.toISOString() : <any>null;
-        data["dateRevoked"] = this.dateRevoked ? this.dateRevoked.toISOString() : <any>null;
-        data["isActive"] = this.isActive !== undefined ? this.isActive : <any>null;
-        data["role"] = this.role ? this.role.toJSON() : <any>null;
-        data["user"] = this.user ? this.user.toJSON() : <any>null;
         return data;
     }
 }
@@ -5053,87 +4885,6 @@ export interface IUserRole {
     userRoleId?: number;
     userId?: number;
     roleId?: number;
-    dateAssigned?: Date;
-    dateRevoked?: Date | null;
-    isActive?: boolean;
-    role?: IRole | null;
-    user?: IUser | null;
-}
-
-export class User implements IUser {
-    userId?: number;
-    firstName?: string | null;
-    lastName?: string | null;
-    email?: string | null;
-    passwordHash?: string | null;
-    passwordSalt?: string | null;
-    userRoles?: UserRole[] | null;
-
-    constructor(data?: IUser) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-            if (data.userRoles) {
-                this.userRoles = [];
-                for (let i = 0; i < data.userRoles.length; i++) {
-                    let item = data.userRoles[i];
-                    this.userRoles[i] = item && !(<any>item).toJSON ? new UserRole(item) : <UserRole>item;
-                }
-            }
-        }
-    }
-
-    init(_data?: any, _mappings?: any) {
-        if (_data) {
-            this.userId = _data["userId"] !== undefined ? _data["userId"] : <any>null;
-            this.firstName = _data["firstName"] !== undefined ? _data["firstName"] : <any>null;
-            this.lastName = _data["lastName"] !== undefined ? _data["lastName"] : <any>null;
-            this.email = _data["email"] !== undefined ? _data["email"] : <any>null;
-            this.passwordHash = _data["passwordHash"] !== undefined ? _data["passwordHash"] : <any>null;
-            this.passwordSalt = _data["passwordSalt"] !== undefined ? _data["passwordSalt"] : <any>null;
-            if (Array.isArray(_data["userRoles"])) {
-                this.userRoles = [] as any;
-                for (let item of _data["userRoles"])
-                    this.userRoles!.push(UserRole.fromJS(item, _mappings));
-            }
-            else {
-                this.userRoles = <any>null;
-            }
-        }
-    }
-
-    static fromJS(data: any, _mappings?: any): User | null {
-        data = typeof data === 'object' ? data : {};
-        return createInstance<User>(data, _mappings, User);
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["userId"] = this.userId !== undefined ? this.userId : <any>null;
-        data["firstName"] = this.firstName !== undefined ? this.firstName : <any>null;
-        data["lastName"] = this.lastName !== undefined ? this.lastName : <any>null;
-        data["email"] = this.email !== undefined ? this.email : <any>null;
-        data["passwordHash"] = this.passwordHash !== undefined ? this.passwordHash : <any>null;
-        data["passwordSalt"] = this.passwordSalt !== undefined ? this.passwordSalt : <any>null;
-        if (Array.isArray(this.userRoles)) {
-            data["userRoles"] = [];
-            for (let item of this.userRoles)
-                data["userRoles"].push(item.toJSON());
-        }
-        return data;
-    }
-}
-
-export interface IUser {
-    userId?: number;
-    firstName?: string | null;
-    lastName?: string | null;
-    email?: string | null;
-    passwordHash?: string | null;
-    passwordSalt?: string | null;
-    userRoles?: IUserRole[] | null;
 }
 
 export class UserRoleView implements IUserRoleView {
@@ -5180,6 +4931,142 @@ export interface IUserRoleView {
     userId?: number;
     roleId?: number;
     roleName?: string | null;
+}
+
+export class Stock implements IStock {
+    stockId?: number;
+    materialId?: number;
+    minimumStock?: number | null;
+    maximumStock?: number | null;
+    preCalculationPrice?: number | null;
+    currentStock?: number | null;
+    orderUnitPrice?: number | null;
+    maximumOrderPrice?: number | null;
+    countingUnitPrice?: number | null;
+    salePrice?: number | null;
+
+    constructor(data?: IStock) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.stockId = _data["stockId"] !== undefined ? _data["stockId"] : <any>null;
+            this.materialId = _data["materialId"] !== undefined ? _data["materialId"] : <any>null;
+            this.minimumStock = _data["minimumStock"] !== undefined ? _data["minimumStock"] : <any>null;
+            this.maximumStock = _data["maximumStock"] !== undefined ? _data["maximumStock"] : <any>null;
+            this.preCalculationPrice = _data["preCalculationPrice"] !== undefined ? _data["preCalculationPrice"] : <any>null;
+            this.currentStock = _data["currentStock"] !== undefined ? _data["currentStock"] : <any>null;
+            this.orderUnitPrice = _data["orderUnitPrice"] !== undefined ? _data["orderUnitPrice"] : <any>null;
+            this.maximumOrderPrice = _data["maximumOrderPrice"] !== undefined ? _data["maximumOrderPrice"] : <any>null;
+            this.countingUnitPrice = _data["countingUnitPrice"] !== undefined ? _data["countingUnitPrice"] : <any>null;
+            this.salePrice = _data["salePrice"] !== undefined ? _data["salePrice"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): Stock | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<Stock>(data, _mappings, Stock);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["stockId"] = this.stockId !== undefined ? this.stockId : <any>null;
+        data["materialId"] = this.materialId !== undefined ? this.materialId : <any>null;
+        data["minimumStock"] = this.minimumStock !== undefined ? this.minimumStock : <any>null;
+        data["maximumStock"] = this.maximumStock !== undefined ? this.maximumStock : <any>null;
+        data["preCalculationPrice"] = this.preCalculationPrice !== undefined ? this.preCalculationPrice : <any>null;
+        data["currentStock"] = this.currentStock !== undefined ? this.currentStock : <any>null;
+        data["orderUnitPrice"] = this.orderUnitPrice !== undefined ? this.orderUnitPrice : <any>null;
+        data["maximumOrderPrice"] = this.maximumOrderPrice !== undefined ? this.maximumOrderPrice : <any>null;
+        data["countingUnitPrice"] = this.countingUnitPrice !== undefined ? this.countingUnitPrice : <any>null;
+        data["salePrice"] = this.salePrice !== undefined ? this.salePrice : <any>null;
+        return data;
+    }
+}
+
+export interface IStock {
+    stockId?: number;
+    materialId?: number;
+    minimumStock?: number | null;
+    maximumStock?: number | null;
+    preCalculationPrice?: number | null;
+    currentStock?: number | null;
+    orderUnitPrice?: number | null;
+    maximumOrderPrice?: number | null;
+    countingUnitPrice?: number | null;
+    salePrice?: number | null;
+}
+
+export class Vitamin implements IVitamin {
+    vitaminId?: number;
+    materialId?: number;
+    vitaminA?: number | null;
+    vitaminC?: number | null;
+    vitaminD?: number | null;
+    vitaminE?: number | null;
+    vitaminK?: number | null;
+    pha?: number | null;
+    fiber?: number | null;
+
+    constructor(data?: IVitamin) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.vitaminId = _data["vitaminId"] !== undefined ? _data["vitaminId"] : <any>null;
+            this.materialId = _data["materialId"] !== undefined ? _data["materialId"] : <any>null;
+            this.vitaminA = _data["vitaminA"] !== undefined ? _data["vitaminA"] : <any>null;
+            this.vitaminC = _data["vitaminC"] !== undefined ? _data["vitaminC"] : <any>null;
+            this.vitaminD = _data["vitaminD"] !== undefined ? _data["vitaminD"] : <any>null;
+            this.vitaminE = _data["vitaminE"] !== undefined ? _data["vitaminE"] : <any>null;
+            this.vitaminK = _data["vitaminK"] !== undefined ? _data["vitaminK"] : <any>null;
+            this.pha = _data["pha"] !== undefined ? _data["pha"] : <any>null;
+            this.fiber = _data["fiber"] !== undefined ? _data["fiber"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): Vitamin | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<Vitamin>(data, _mappings, Vitamin);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["vitaminId"] = this.vitaminId !== undefined ? this.vitaminId : <any>null;
+        data["materialId"] = this.materialId !== undefined ? this.materialId : <any>null;
+        data["vitaminA"] = this.vitaminA !== undefined ? this.vitaminA : <any>null;
+        data["vitaminC"] = this.vitaminC !== undefined ? this.vitaminC : <any>null;
+        data["vitaminD"] = this.vitaminD !== undefined ? this.vitaminD : <any>null;
+        data["vitaminE"] = this.vitaminE !== undefined ? this.vitaminE : <any>null;
+        data["vitaminK"] = this.vitaminK !== undefined ? this.vitaminK : <any>null;
+        data["pha"] = this.pha !== undefined ? this.pha : <any>null;
+        data["fiber"] = this.fiber !== undefined ? this.fiber : <any>null;
+        return data;
+    }
+}
+
+export interface IVitamin {
+    vitaminId?: number;
+    materialId?: number;
+    vitaminA?: number | null;
+    vitaminC?: number | null;
+    vitaminD?: number | null;
+    vitaminE?: number | null;
+    vitaminK?: number | null;
+    pha?: number | null;
+    fiber?: number | null;
 }
 
 function jsonParse(json: any, reviver?: any) {

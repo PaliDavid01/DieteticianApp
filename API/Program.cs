@@ -12,6 +12,7 @@ builder.Services.AddIdentityServices(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.CustomOperationIds(d => d.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
@@ -22,7 +23,6 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddOpenApiDocument();
-
 var app = builder.Build();
 
 app.UseCors(corsBuilder =>

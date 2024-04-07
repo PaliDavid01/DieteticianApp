@@ -14,6 +14,4 @@ public partial class Allergen
     public string AllergenDescription { get; set; }
 
     public string AllergenCode { get; set; }
-
-    public virtual ICollection<AllergenMaterial> AllergenMaterials { get; set; } = new List<AllergenMaterial>();
 }

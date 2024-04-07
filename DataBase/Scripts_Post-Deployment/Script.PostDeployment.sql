@@ -15,3 +15,4 @@ Post-Deployment Script Template
 :r .\..\Data\Test\Allergen.sql
 :r .\..\Data\Test\MaterialGroup.sql
 :r .\..\Data\Test\BaseMaterial.sql
+:r .\..\Data\Test\AllergenMaterial.sql

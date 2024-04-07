@@ -17,6 +17,8 @@ public partial class DataBaseContext : DbContext
 
     public virtual DbSet<AllergenMaterial> AllergenMaterials { get; set; }
 
+    public virtual DbSet<AllergenMaterialView> AllergenMaterialViews { get; set; }
+
     public virtual DbSet<BaseMaterial> BaseMaterials { get; set; }
 
     public virtual DbSet<Ecode> Ecodes { get; set; }
@@ -60,14 +62,26 @@ public partial class DataBaseContext : DbContext
             entity.Property(e => e.AllergenMaterialId).HasColumnName("AllergenMaterialID");
             entity.Property(e => e.AllergenId).HasColumnName("AllergenID");
             entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
+        });
 
-            entity.HasOne(d => d.Allergen).WithMany(p => p.AllergenMaterials)
-                .HasForeignKey(d => d.AllergenId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+        modelBuilder.Entity<AllergenMaterialView>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("AllergenMaterialView");
 
-            entity.HasOne(d => d.Material).WithMany(p => p.AllergenMaterials)
-                .HasForeignKey(d => d.MaterialId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+            entity.Property(e => e.AllergenCode)
+                .IsRequired()
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.AllergenDescription)
+                .IsRequired()
+                .HasMaxLength(250);
+            entity.Property(e => e.AllergenMaterialId).HasColumnName("AllergenMaterialID");
+            entity.Property(e => e.AllergenName)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
         });
 
         modelBuilder.Entity<BaseMaterial>(entity =>
@@ -113,8 +127,6 @@ public partial class DataBaseContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.TransFat).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.Vatrate).HasColumnName("VATRate");
-
-            entity.HasOne(d => d.MaterialGroup).WithMany(p => p.BaseMaterials).HasForeignKey(d => d.MaterialGroupId);
         });
 
         modelBuilder.Entity<Ecode>(entity =>
@@ -127,10 +139,6 @@ public partial class DataBaseContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("Ecode");
             entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
-
-            entity.HasOne(d => d.Material).WithMany(p => p.Ecodes)
-                .HasForeignKey(d => d.MaterialId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<MaterialGroup>(entity =>
@@ -168,10 +176,6 @@ public partial class DataBaseContext : DbContext
             entity.Property(e => e.OrderUnitPrice).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.PreCalculationPrice).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.SalePrice).HasColumnType("decimal(10, 2)");
-
-            entity.HasOne(d => d.Material).WithMany(p => p.Stocks)
-                .HasForeignKey(d => d.MaterialId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -198,14 +202,6 @@ public partial class DataBaseContext : DbContext
         modelBuilder.Entity<UserRole>(entity =>
         {
             entity.ToTable("UserRole");
-
-            entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
-                .HasForeignKey(d => d.RoleId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            entity.HasOne(d => d.User).WithMany(p => p.UserRoles)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<UserRoleView>(entity =>
@@ -224,10 +220,6 @@ public partial class DataBaseContext : DbContext
             entity.Property(e => e.VitaminId).HasColumnName("VitaminID");
             entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
             entity.Property(e => e.Pha).HasColumnName("PHA");
-
-            entity.HasOne(d => d.Material).WithMany(p => p.Vitamins)
-                .HasForeignKey(d => d.MaterialId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         OnModelCreatingPartial(modelBuilder);

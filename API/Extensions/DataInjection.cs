@@ -14,6 +14,7 @@ namespace API.Extensions
             services.AddDbContext<DataBaseContext>(opt =>
             {
                 opt.UseSqlServer("Data Source=localhost\\MSSQLSERVER01;Initial Catalog=DataBase;Integrated Security=True;Connect Timeout=60;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+
             });
             //services.AddTransient<IRepository<Material>, MaterialRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -26,7 +27,7 @@ namespace API.Extensions
             services.AddScoped<IMaterialGroupRepository, MaterialGroupRepository>();
             services.AddScoped<IStockRepository, StockRepository>();
             services.AddScoped<IVitaminRepository, VitaminRepository>();
-            
+
             //services.AddTransient<IMaterialLogic, MaterialLogic>();
             services.AddScoped<IUserLogic, UserLogic>();
             services.AddScoped<IRoleLogic, RoleLogic>();

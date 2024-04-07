@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Database\" />
+    <Folder Include="DbCtx\" />
   </ItemGroup>
 
   <ItemGroup>

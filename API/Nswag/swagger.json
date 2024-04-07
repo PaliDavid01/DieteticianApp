@@ -258,6 +258,41 @@
         }
       }
     },
+    "/api/AllergenMaterial/GetAllergensByMaterialId/{Id}": {
+      "get": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_GetAllergensByMaterialId",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AllergenMaterialView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/AllergenMaterial/Create": {
       "post": {
         "tags": [
@@ -588,6 +623,29 @@
                 "schema": {
                   "type": "string",
                   "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/BaseMaterial/GetBaseMaterialsExtended": {
+      "get": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_GetBaseMaterialsExtended",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BaseMaterial"
+                  }
                 }
               }
             }
@@ -2076,13 +2134,32 @@
           "allergenCode": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "AllergenMaterialView": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "allergenMaterialId": {
+            "type": "integer",
+            "format": "int32"
           },
-          "allergenMaterials": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/AllergenMaterial"
-            }
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allergenCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "allergenName": {
+            "type": "string",
+            "nullable": true
+          },
+          "allergenDescription": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -2101,22 +2178,81 @@
           "allergenId": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "LoginResponseDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "firstName": {
+            "type": "string"
           },
-          "allergen": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Allergen"
-              }
-            ]
+          "lastName": {
+            "type": "string"
           },
-          "material": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/BaseMaterial"
-              }
-            ]
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        }
+      },
+      "Role": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleDescription": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -2251,41 +2387,9 @@
             "type": "string",
             "nullable": true
           },
-          "allergenMaterials": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/AllergenMaterial"
-            }
-          },
-          "ecodes": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Ecode"
-            }
-          },
-          "materialGroup": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/MaterialGroup"
-              }
-            ]
-          },
-          "stocks": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Stock"
-            }
-          },
-          "vitamins": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Vitamin"
-            }
+          "isAllergen": {
+            "type": "boolean",
+            "nullable": true
           }
         }
       },
@@ -2308,14 +2412,6 @@
           "description": {
             "type": "string",
             "nullable": true
-          },
-          "material": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/BaseMaterial"
-              }
-            ]
           }
         }
       },
@@ -2330,13 +2426,46 @@
           "groupName": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "UserRole": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userRoleId": {
+            "type": "integer",
+            "format": "int32"
           },
-          "baseMaterials": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/BaseMaterial"
-            }
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UserRoleView": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userRoleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -2391,14 +2520,6 @@
             "type": "number",
             "format": "decimal",
             "nullable": true
-          },
-          "material": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/BaseMaterial"
-              }
-            ]
           }
         }
       },
@@ -2447,203 +2568,6 @@
           "fiber": {
             "type": "integer",
             "format": "int32",
-            "nullable": true
-          },
-          "material": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/BaseMaterial"
-              }
-            ]
-          }
-        }
-      },
-      "LoginResponseDTO": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "role": {
-            "type": "string"
-          },
-          "token": {
-            "type": "string"
-          }
-        }
-      },
-      "LoginDTO": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        }
-      },
-      "RegisterDTO": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "roles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Role"
-            }
-          }
-        }
-      },
-      "Role": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "roleId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "roleName": {
-            "type": "string",
-            "nullable": true
-          },
-          "roleDescription": {
-            "type": "string",
-            "nullable": true
-          },
-          "userRoles": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/UserRole"
-            }
-          }
-        }
-      },
-      "UserRole": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "userRoleId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "roleId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "dateAssigned": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "dateRevoked": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "role": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Role"
-              }
-            ]
-          },
-          "user": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/User"
-              }
-            ]
-          }
-        }
-      },
-      "User": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "firstName": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastName": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "passwordHash": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "passwordSalt": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "userRoles": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/UserRole"
-            }
-          }
-        }
-      },
-      "UserRoleView": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "userRoleId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "roleId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "roleName": {
-            "type": "string",
             "nullable": true
           }
         }
