@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -15,8 +16,6 @@ import {
 export class MaterialContainerComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
 
-  materialDialog: boolean = false;
-
   materials!: BaseMaterial[];
 
   material!: BaseMaterial;
@@ -27,11 +26,13 @@ export class MaterialContainerComponent implements OnInit {
 
   statuses!: any[];
   Delete: string = 'Delete';
+  displayDialog: boolean = false;
 
   constructor(
     private materialService: BaseMaterialService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -64,10 +65,9 @@ export class MaterialContainerComponent implements OnInit {
     );
   }
 
-  openNew() {
-    this.material = new BaseMaterial();
-    this.submitted = false;
-    this.materialDialog = true;
+  showInfo(material: BaseMaterial) {
+    this.material = material;
+    this.displayDialog = true;
   }
 
   deleteSelectedMaterial() {
@@ -91,8 +91,11 @@ export class MaterialContainerComponent implements OnInit {
   }
 
   editMaterial(allergen: BaseMaterial) {
-    this.material = allergen;
-    this.materialDialog = true;
+    this.router.navigate(['/material-edit', allergen.materialId]);
+  }
+
+  createMaterial() {
+    this.router.navigate(['/material-edit', 0]);
   }
 
   deleteMaterial(material: BaseMaterial) {
@@ -116,41 +119,11 @@ export class MaterialContainerComponent implements OnInit {
   }
 
   hideDialog() {
-    this.materialDialog = false;
+    this.displayDialog = false;
     this.submitted = false;
   }
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-  }
-
-  saveMaterial() {
-    this.submitted = true;
-
-    if (this.material.materialName?.trim()) {
-      if (this.material.materialId) {
-        this.materials[this.findIndexById(this.material.materialId)] =
-          this.material;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Allergen Updated',
-          life: 3000,
-        });
-      } else {
-        this.material.materialId = 11;
-        this.materials.push(this.material);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Allergen Created',
-          life: 3000,
-        });
-      }
-
-      this.materials = [...this.materials];
-      this.materialDialog = false;
-      this.material = new BaseMaterial();
-    }
   }
 
   findIndexById(materialId: number): number {

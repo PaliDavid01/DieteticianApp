@@ -137,6 +137,7 @@ import { SharedModule } from 'primeng/api';
 
 // Import AllergenComponent
 import { AllergenComponent } from './material/allergen/allergen.component';
+import { MaterialCreateResolverService } from './material/material-create/material-create-resolver.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -289,6 +290,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TableService,
     BaseMaterialService,
     ConfirmationService,
+    MaterialCreateResolverService,
     { provide: API_BASE_URL, useValue: 'http://localhost:7247' },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

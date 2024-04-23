@@ -1,1 +1,404 @@
-<p>material-create works!</p>
+<div class="surface-card p-4 shadow-2 border-round w-full">
+  <form>
+    <div class="grid grid-cols-4 gap-4 m-2">
+      <div class="field">
+        <label for="materialName" class="block text-900 font-medium mb-2"
+          >Material Name</label
+        >
+        <input
+          type="text"
+          pInputText
+          id="materialName"
+          name="materialName"
+          [(ngModel)]="material.materialName"
+          required
+          class="w-full mb-3"
+        />
+        <small class="p-error" *ngIf="submitted && !material.materialName"
+          >Material Name is required.</small
+        >
+      </div>
+      <!-- MaterialCode input -->
+      <div class="field">
+        <label for="materialCode" class="block text-900 font-medium mb-2"
+          >Material Code</label
+        >
+        <input
+          type="text"
+          pInputText
+          id="materialCode"
+          name="materialCode"
+          [(ngModel)]="material.materialCode"
+          required
+          class="w-full mb-3"
+        />
+        <small class="p-error" *ngIf="submitted && !material.materialCode"
+          >Material Code is required.</small
+        >
+      </div>
+
+      <!-- ActivityDescriptor input -->
+      <div class="field">
+        <label for="activityDescriptor" class="block text-900 font-medium mb-2"
+          >Activity Descriptor</label
+        >
+        <input
+          type="text"
+          pInputText
+          id="activityDescriptor"
+          name="activityDescriptor"
+          [(ngModel)]="material.activityDescription"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- Quantity input -->
+      <div class="field">
+        <label for="quantity" class="block text-900 font-medium mb-2"
+          >Quantity</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="quantity"
+          name="quantity"
+          [(ngModel)]="material.quantity"
+          required
+          class="w-full mb-3"
+        />
+        <small class="p-error" *ngIf="submitted && !material.quantity"
+          >Quantity is required.</small
+        >
+      </div>
+
+      <!-- Measure input -->
+      <div class="field">
+        <label for="measure" class="block text-900 font-medium mb-2"
+          >Measure</label
+        >
+        <input
+          type="text"
+          pInputText
+          id="measure"
+          name="measure"
+          [(ngModel)]="material.measure"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- LedgerAccountNumber input -->
+      <div class="field">
+        <label for="ledgerAccountNumber" class="block text-900 font-medium mb-2"
+          >Ledger Account Number</label
+        >
+        <input
+          type="text"
+          pInputText
+          id="ledgerAccountNumber"
+          name="ledgerAccountNumber"
+          class="w-full mb-3"
+          [(ngModel)]="material.ledgerAccountNumber"
+        />
+      </div>
+
+      <!-- Rounding input -->
+      <div class="field">
+        <label for="rounding" class="block text-900 font-medium mb-2"
+          >Rounding</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="rounding"
+          name="rounding"
+          class="w-full mb-3"
+          [(ngModel)]="material.rounding"
+        />
+      </div>
+
+      <!-- The rest of the fields would follow the same pattern, adjusting the type attribute as needed (e.g., text, number, etc.) and whether they are required or not based on your application's logic. -->
+
+      <!-- Kilojoule input -->
+      <div class="field">
+        <label for="kilojoule" class="block text-900 font-medium mb-2"
+          >Kilojoule</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="kilojoule"
+          name="kilojoule"
+          [(ngModel)]="material.kilojule"
+          class="w-full mb-3"
+          step="0.01"
+        />
+      </div>
+
+      <!-- Protein input -->
+      <div class="field">
+        <label for="protein" class="block text-900 font-medium mb-2"
+          >Protein</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="protein"
+          name="protein"
+          [(ngModel)]="material.protein"
+          class="w-full mb-3"
+          step="0.01"
+        />
+      </div>
+
+      <!-- Carbohydrate input -->
+      <div class="field">
+        <label for="carbohydrate" class="block text-900 font-medium mb-2"
+          >Carbohydrate</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="carbohydrate"
+          name="carbohydrate"
+          [(ngModel)]="material.carbohydrate"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- Fat input -->
+      <div class="field">
+        <label for="fat" class="block text-900 font-medium mb-2">Fat</label>
+        <input
+          type="number"
+          pInputText
+          id="fat"
+          name="fat"
+          [(ngModel)]="material.fat"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- Cholesterol input -->
+      <div class="field">
+        <label for="cholesterol" class="block text-900 font-medium mb-2"
+          >Cholesterol</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="cholesterol"
+          name="cholesterol"
+          [(ngModel)]="material.cholesterol"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- Sugar input -->
+      <div class="field">
+        <label for="sugar" class="block text-900 font-medium mb-2">Sugar</label>
+        <input
+          type="number"
+          pInputText
+          id="sugar"
+          name="sugar"
+          [(ngModel)]="material.sugar"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- Salt input -->
+      <div class="field">
+        <label for="salt" class="block text-900 font-medium mb-2">Salt</label>
+        <input
+          type="number"
+          pInputText
+          id="salt"
+          name="salt"
+          [(ngModel)]="material.salt"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- SaturatedFat input -->
+      <div class="field">
+        <label for="saturatedFat" class="block text-900 font-medium mb-2"
+          >Saturated Fat</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="saturatedFat"
+          name="saturatedFat"
+          [(ngModel)]="material.saturatedFat"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+      <!-- TransFat input -->
+      <div class="field">
+        <label for="transFat" class="block text-900 font-medium mb-2"
+          >Trans Fat</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="transFat"
+          name="transFat"
+          [(ngModel)]="material.transFat"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- Fiber input -->
+      <div class="field">
+        <label for="fiber" class="block text-900 font-medium mb-2">Fiber</label>
+        <input
+          type="number"
+          pInputText
+          id="fiber"
+          name="fiber"
+          [(ngModel)]="material.fiber"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- Calcium input -->
+      <div class="field">
+        <label for="calcium" class="block text-900 font-medium mb-2"
+          >Calcium</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="calcium"
+          name="calcium"
+          [(ngModel)]="material.kalcium"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- Potassium input -->
+      <!-- <div class="field">
+      <label for="potassium">Potassium</label>
+      <input
+        type="number"
+        pInputText
+        id="potassium"
+        [(ngModel)]="material."
+        step="0.01"
+      />
+    </div> -->
+
+      <!-- CostPrice input -->
+      <div class="field">
+        <label for="costPrice" class="block text-900 font-medium mb-2"
+          >Cost Price</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="costPrice"
+          name="costPrice"
+          [(ngModel)]="material.costPrice"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- RetailPrice input -->
+      <div class="field">
+        <label for="retailPrice" class="block text-900 font-medium mb-2"
+          >Retail Price</label
+        >
+        <input
+          type="number"
+          pInputText
+          id="retailPrice"
+          name="retailPrice"
+          [(ngModel)]="material.retailPrice"
+          step="0.01"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- SupplierCode input -->
+      <div class="field">
+        <label for="supplierCode" class="block text-900 font-medium mb-2"
+          >Supplier Code</label
+        >
+        <input
+          type="text"
+          pInputText
+          id="supplierCode"
+          name="supplierCode"
+          [(ngModel)]="material.supplierCode"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- IT3_SIZE input -->
+      <div class="field">
+        <label for="it3Size" class="block text-900 font-medium mb-2"
+          >IT3 Size</label
+        >
+        <input
+          type="text"
+          pInputText
+          id="it3Size"
+          name="itjSztj"
+          [(ngModel)]="material.itjSztj"
+          class="w-full mb-3"
+        />
+      </div>
+
+      <!-- Note that for IT3_SIZE and MaterialGroupId, I have assumed they are text fields. If these should be numeric or selections from a dropdown, you will need to adjust the type or use a different input mechanism like a <select>. -->
+
+      <!-- MaterialGroupId input (assuming it's a foreign key that might be selected from a dropdown) -->
+      <div class="field">
+        <label for="materialGroupId" class="block text-900 font-medium mb-2"
+          >Material Group ID</label
+        >
+        <select
+          pInputText
+          id="materialGroupId"
+          name="materialGroupId"
+          [(ngModel)]="material.materialGroupId"
+          required
+          class="w-full mb-3"
+        >
+          <!-- Option elements would be dynamically generated from your list of material groups -->
+        </select>
+        <small class="p-error" *ngIf="submitted && !material.materialGroupId"
+          >Material Group ID is required.</small
+        >
+      </div>
+      <!-- Note input -->
+      <div class="field">
+        <label for="note" class="block text-900 font-medium mb-2">Note</label>
+        <textarea
+          pInputTextarea
+          id="note"
+          name="note"
+          [(ngModel)]="material.note"
+          rows="5"
+        ></textarea>
+      </div>
+    </div>
+  </form>
+  <div class="flex justify-end mt-4">
+    <p-button
+      pRipple
+      label="Save"
+      severity="success"
+      (onClick)="saveMaterial()"
+    ></p-button>
+  </div>
+</div>

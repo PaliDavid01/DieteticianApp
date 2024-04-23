@@ -8,7 +8,7 @@
         label="New"
         icon="pi pi-plus"
         class="p-button-success mr-2 p-button-sm"
-        (click)="openNew()"
+        (click)="createMaterial()"
       ></button>
       <button
         pButton
@@ -120,6 +120,13 @@
           <button
             pButton
             pRipple
+            icon="pi pi-info"
+            class="p-button-rounded p-button-help mr-2"
+            (click)="showInfo(item)"
+          ></button>
+          <button
+            pButton
+            pRipple
             icon="pi pi-pencil"
             class="p-button-rounded p-button-success mr-2"
             (click)="editMaterial(item)"
@@ -141,15 +148,17 @@
     </ng-template>
   </p-table>
 </div>
+
+<!-- show info -->
+
 <p-dialog
-  [(visible)]="materialDialog"
+  [(visible)]="displayDialog"
   [style]="{ width: '450px' }"
   header="Product Details"
   [modal]="true"
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-    <!-- MaterialName input -->
     <div class="field">
       <label for="materialName">Material Name</label>
       <input
@@ -157,11 +166,8 @@
         pInputText
         id="materialName"
         [(ngModel)]="material.materialName"
-        required
+        disabled
       />
-      <small class="p-error" *ngIf="submitted && !material.materialName"
-        >Material Name is required.</small
-      >
     </div>
 
     <!-- MaterialCode input -->
@@ -172,21 +178,19 @@
         pInputText
         id="materialCode"
         [(ngModel)]="material.materialCode"
-        required
+        disabled
       />
-      <small class="p-error" *ngIf="submitted && !material.materialCode"
-        >Material Code is required.</small
-      >
     </div>
 
     <!-- ActivityDescriptor input -->
     <div class="field">
-      <label for="activityDescription">Activity Descriptor</label>
+      <label for="activityDescriptor">Activity Descriptor</label>
       <input
         type="text"
         pInputText
         id="activityDescriptor"
         [(ngModel)]="material.activityDescription"
+        disabled
       />
     </div>
 
@@ -198,11 +202,8 @@
         pInputText
         id="quantity"
         [(ngModel)]="material.quantity"
-        required
+        disabled
       />
-      <small class="p-error" *ngIf="submitted && !material.quantity"
-        >Quantity is required.</small
-      >
     </div>
 
     <!-- Measure input -->
@@ -213,6 +214,7 @@
         pInputText
         id="measure"
         [(ngModel)]="material.measure"
+        disabled
       />
     </div>
 
@@ -224,6 +226,7 @@
         pInputText
         id="ledgerAccountNumber"
         [(ngModel)]="material.ledgerAccountNumber"
+        disabled
       />
     </div>
 
@@ -235,6 +238,7 @@
         pInputText
         id="rounding"
         [(ngModel)]="material.rounding"
+        disabled
       />
     </div>
 
@@ -248,6 +252,7 @@
         id="note"
         [(ngModel)]="material.note"
         rows="5"
+        disabled
       ></textarea>
     </div>
 
@@ -260,6 +265,7 @@
         id="kilojoule"
         [(ngModel)]="material.kilojule"
         step="0.01"
+        disabled
       />
     </div>
 
@@ -272,6 +278,7 @@
         id="protein"
         [(ngModel)]="material.protein"
         step="0.01"
+        disabled
       />
     </div>
 
@@ -284,6 +291,7 @@
         id="carbohydrate"
         [(ngModel)]="material.carbohydrate"
         step="0.01"
+        disabled
       />
     </div>
 
@@ -296,6 +304,7 @@
         id="fat"
         [(ngModel)]="material.fat"
         step="0.01"
+        disabled
       />
     </div>
 
@@ -307,6 +316,7 @@
         pInputText
         id="cholesterol"
         [(ngModel)]="material.cholesterol"
+        disabled
         step="0.01"
       />
     </div>
@@ -319,6 +329,7 @@
         pInputText
         id="sugar"
         [(ngModel)]="material.sugar"
+        disabled
         step="0.01"
       />
     </div>
@@ -331,6 +342,7 @@
         pInputText
         id="salt"
         [(ngModel)]="material.salt"
+        disabled
         step="0.01"
       />
     </div>
@@ -343,10 +355,10 @@
         pInputText
         id="saturatedFat"
         [(ngModel)]="material.saturatedFat"
+        disabled
         step="0.01"
       />
     </div>
-
     <!-- TransFat input -->
     <div class="field">
       <label for="transFat">Trans Fat</label>
@@ -355,6 +367,7 @@
         pInputText
         id="transFat"
         [(ngModel)]="material.transFat"
+        disabled
         step="0.01"
       />
     </div>
@@ -367,6 +380,7 @@
         pInputText
         id="fiber"
         [(ngModel)]="material.fiber"
+        disabled
         step="0.01"
       />
     </div>
@@ -379,9 +393,22 @@
         pInputText
         id="calcium"
         [(ngModel)]="material.kalcium"
+        disabled
         step="0.01"
       />
     </div>
+
+    <!-- Potassium input -->
+    <!-- <div class="field">
+      <label for="potassium">Potassium</label>
+      <input
+        type="number"
+        pInputText
+        id="potassium"
+        [(ngModel)]="material."
+        step="0.01"
+      />
+    </div> -->
 
     <!-- CostPrice input -->
     <div class="field">
@@ -391,6 +418,7 @@
         pInputText
         id="costPrice"
         [(ngModel)]="material.costPrice"
+        disabled
         step="0.01"
       />
     </div>
@@ -403,6 +431,7 @@
         pInputText
         id="retailPrice"
         [(ngModel)]="material.retailPrice"
+        disabled
         step="0.01"
       />
     </div>
@@ -414,28 +443,32 @@
         type="text"
         pInputText
         id="supplierCode"
+        disabled
         [(ngModel)]="material.supplierCode"
       />
     </div>
 
-    <!-- Note that for IT3_SIZE and MaterialGroupId, I have assumed they are text fields. If these should be numeric or selections from a dropdown, you will need to adjust the type or use a different input mechanism like a <select>. -->
-
-    <!-- MaterialGroupId input (assuming it's a foreign key that might be selected from a dropdown) -->
+    <!-- IT3_SIZE input -->
     <div class="field">
-      <label for="materialGroupId">Material Group ID</label>
-      <select
+      <label for="it3Size">IT3 Size</label>
+      <input
+        type="text"
         pInputText
-        id="materialGroupId"
-        [(ngModel)]="material.materialGroupId"
-        required
-      >
-        <!-- Option elements would be dynamically generated from your list of material groups -->
-      </select>
-      <small class="p-error" *ngIf="submitted && !material.materialGroupId"
-        >Material Group ID is required.</small
-      >
+        id="it3Size"
+        disabled
+        [(ngModel)]="material.itjSztj"
+      />
     </div>
   </ng-template>
-</p-dialog>
 
-<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Back"
+      icon="pi pi-arrow-left"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+  </ng-template>
+</p-dialog>
