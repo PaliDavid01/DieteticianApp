@@ -374,11 +374,26 @@
           required
           class="w-full mb-3"
         >
-          <!-- Option elements would be dynamically generated from your list of material groups -->
+          <option *ngFor="let item of materialGroups" [value]="item.groupCode">
+            {{ item.groupName }}
+          </option>
         </select>
         <small class="p-error" *ngIf="submitted && !material.materialGroupId"
           >Material Group ID is required.</small
         >
+      </div>
+
+      <div class="field">
+        <label for="allergens" class="block text-900 font-medium mb-2"
+          >Allergens</label
+        >
+        <p-multiSelect
+          [options]="allergens"
+          name="allergens"
+          [(ngModel)]="selectedAllergens"
+          optionLabel="allergenName"
+          placeholder="Allergens"
+        ></p-multiSelect>
       </div>
       <!-- Note input -->
       <div class="field">
