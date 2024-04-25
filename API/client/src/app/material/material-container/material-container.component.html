@@ -143,7 +143,7 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="flex align-items-center justify-content-between">
-        In total there are {{ materials ? materials.length : 0 }} allergens.
+        In total there are {{ materials ? materials.length : 0 }} basematerials.
       </div>
     </ng-template>
   </p-table>
@@ -154,7 +154,7 @@
 <p-dialog
   [(visible)]="displayDialog"
   [style]="{ width: '450px' }"
-  header="Product Details"
+  header="Basematerial Details"
   [modal]="true"
   styleClass="p-fluid"
 >
@@ -472,3 +472,4 @@
     ></button>
   </ng-template>
 </p-dialog>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

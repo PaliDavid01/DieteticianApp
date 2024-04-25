@@ -293,6 +293,59 @@
         }
       }
     },
+    "/api/AllergenMaterial/CreateAllergenMaterials": {
+      "post": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_CreateAllergenMaterials",
+        "requestBody": {
+          "x-name": "allergenMaterials",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AllergenMaterial"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/AllergenMaterial/UpdateAllergenMaterials": {
+      "put": {
+        "tags": [
+          "AllergenMaterial"
+        ],
+        "operationId": "AllergenMaterial_UpdateAllergenMaterials",
+        "requestBody": {
+          "x-name": "updateAllergenMaterialsDTO",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAllergenMaterialsDTO"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/AllergenMaterial/Create": {
       "post": {
         "tags": [
@@ -649,6 +702,31 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/BaseMaterial/DeleteWithAlllergenMaterials": {
+      "delete": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_DeleteWithAlllergenMaterials",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseMaterial"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
           }
         }
       }
@@ -1157,6 +1235,258 @@
         }
       }
     },
+    "/Ingredient/Create": {
+      "post": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ingredient"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Ingredient/CreateAsyn": {
+      "post": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ingredient"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Ingredient/Delete": {
+      "delete": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Ingredient/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ingredient"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Ingredient/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Ingredient/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ingredient"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Ingredient/ReadAll": {
+      "get": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ingredient"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Ingredient/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ingredient"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Ingredient/Update": {
+      "put": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ingredient"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Ingredient/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ingredient"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/MaterialGroup/Create": {
       "post": {
         "tags": [
@@ -1396,6 +1726,510 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/MaterialGroup"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/RecipeCategory/Create": {
+      "post": {
+        "tags": [
+          "RecipeCategory"
+        ],
+        "operationId": "RecipeCategory_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecipeCategory"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/RecipeCategory/CreateAsyn": {
+      "post": {
+        "tags": [
+          "RecipeCategory"
+        ],
+        "operationId": "RecipeCategory_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecipeCategory"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/RecipeCategory/Delete": {
+      "delete": {
+        "tags": [
+          "RecipeCategory"
+        ],
+        "operationId": "RecipeCategory_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/RecipeCategory/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "RecipeCategory"
+        ],
+        "operationId": "RecipeCategory_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecipeCategory"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/RecipeCategory/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "RecipeCategory"
+        ],
+        "operationId": "RecipeCategory_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/RecipeCategory/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "RecipeCategory"
+        ],
+        "operationId": "RecipeCategory_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RecipeCategory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/RecipeCategory/ReadAll": {
+      "get": {
+        "tags": [
+          "RecipeCategory"
+        ],
+        "operationId": "RecipeCategory_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RecipeCategory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/RecipeCategory/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "RecipeCategory"
+        ],
+        "operationId": "RecipeCategory_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeCategory"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/RecipeCategory/Update": {
+      "put": {
+        "tags": [
+          "RecipeCategory"
+        ],
+        "operationId": "RecipeCategory_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecipeCategory"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/RecipeCategory/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "RecipeCategory"
+        ],
+        "operationId": "RecipeCategory_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecipeCategory"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Recipe/Create": {
+      "post": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Recipe"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Recipe/CreateAsyn": {
+      "post": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Recipe"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Recipe/Delete": {
+      "delete": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Recipe/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Recipe"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Recipe/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Recipe/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Recipe"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Recipe/ReadAll": {
+      "get": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Recipe"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Recipe/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Recipe"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Recipe/Update": {
+      "put": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Recipe"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Recipe/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Recipe"
               }
             }
           },
@@ -2181,6 +3015,22 @@
           }
         }
       },
+      "UpdateAllergenMaterialsDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allergenMaterials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AllergenMaterial"
+            }
+          }
+        }
+      },
       "LoginResponseDTO": {
         "type": "object",
         "additionalProperties": false,
@@ -2415,6 +3265,28 @@
           }
         }
       },
+      "Ingredient": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ingredientId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "recipeId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "MaterialGroup": {
         "type": "object",
         "additionalProperties": false,
@@ -2426,6 +3298,58 @@
           "groupName": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "RecipeCategory": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "recipeCategoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Recipe": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "recipeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

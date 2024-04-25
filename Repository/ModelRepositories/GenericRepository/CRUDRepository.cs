@@ -5,14 +5,14 @@ using Models.Models;
 using Repository.Interfaces.GenericInterfaces;
 using System.Linq.Expressions;
 
-namespace Repository.GenericRepository
+namespace Repository.ModelRepositories.GenericRepository
 {
-    public abstract class CRUDRepository<T> : ICRUDRepository<T> where T : class
+    public abstract class CRUDRepository<T> : IRecipeRepository<T> where T : class
     {
         protected readonly DataBaseContext _dbContext;
         public CRUDRepository(DataBaseContext dbContext)
         {
-            this._dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public T Create(T item)

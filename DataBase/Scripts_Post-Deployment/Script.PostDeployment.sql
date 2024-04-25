@@ -16,3 +16,7 @@ Post-Deployment Script Template
 :r .\..\Data\Test\MaterialGroup.sql
 :r .\..\Data\Test\BaseMaterial.sql
 :r .\..\Data\Test\AllergenMaterial.sql
+:r .\..\Data\Test\RecipeCategory.sql
+:r .\..\Data\Test\Recipe.sql
+:r .\..\Data\Test\Ingredient.sql
+

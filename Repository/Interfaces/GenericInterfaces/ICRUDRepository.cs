@@ -2,7 +2,7 @@
 
 namespace Repository.Interfaces.GenericInterfaces
 {
-    public interface ICRUDRepository<T> where T : class
+    public interface IRecipeRepository<T> where T : class
     {
         T Create(T entity);
         void Delete(int Id);

@@ -1,0 +1,184 @@
+<div class="card">
+  <p-toast></p-toast>
+  <p-toolbar styleClass="mb-3 gap-2">
+    <ng-template pTemplate="left">
+      <button
+        pButton
+        pRipple
+        label="New"
+        icon="pi pi-plus"
+        class="p-button-success mr-2 p-button-sm"
+        (click)="openNew()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        [label]="Delete"
+        icon="pi pi-trash"
+        class="p-button-danger p-button-sm"
+        (click)="deleteSelectedRecipeCategory()"
+        [disabled]="
+          !selectedrecipeCategories || !selectedrecipeCategories.length
+        "
+      ></button>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+      <p-fileUpload
+        mode="basic"
+        accept="image/*"
+        [maxFileSize]="1000000"
+        label="Import"
+        chooseLabel="Import"
+        class="mr-2 inline-block"
+        styleClass="p-button-sm"
+      ></p-fileUpload>
+      <button
+        pButton
+        pRipple
+        label="Export"
+        icon="pi pi-upload"
+        class="p-button-help p-button-sm"
+        (click)="exportExcel()"
+      ></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="recipeCategories"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['recipeCategoryId', 'categoryName', 'description']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedrecipeCategories"
+    [rowHover]="true"
+    dataKey="recipeCategoryId"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Manage recipe categories</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            #textInput
+            (input)="dt.filterGlobal(textInput.value, 'contains')"
+            placeholder="Search..."
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="recipeCategoryName">
+          Id <p-sortIcon field="recipeCategoryId"></p-sortIcon>
+        </th>
+        <th pSortableColumn="categoryName" style="min-width: 15rem">
+          Name <p-sortIcon field="categoryName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="description" style="min-width: 10rem">
+          Description <p-sortIcon field="description"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="item"></p-tableCheckbox>
+        </td>
+        <td>{{ item.recipeCategoryId }}</td>
+        <td>{{ item.categoryName }}</td>
+        <td>{{ item.description }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+            (click)="editRecipeCategory(item)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            (click)="deleteRecipeCategory(item)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        In total there are
+        {{ recipeCategories ? recipeCategories.length : 0 }} categories.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+<p-dialog
+  [(visible)]="recipeCategoryDialog"
+  [style]="{ width: '450px' }"
+  header="Recipe Category Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        pInputText
+        id="name"
+        [(ngModel)]="recipeCategory.categoryName"
+        required
+        autofocus
+      />
+      <small class="p-error" *ngIf="submitted && !recipeCategory.categoryName"
+        >Name is required.</small
+      >
+    </div>
+    <div class="field">
+      <label for="code">Description</label>
+      <input
+        type="text"
+        pInputText
+        id="code"
+        [(ngModel)]="recipeCategory.description"
+        required
+        autofocus
+      />
+      <small class="p-error" *ngIf="submitted && !recipeCategory.description"
+        >Allergen code is required.</small
+      >
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveRecipeCategoryn()"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

@@ -32,7 +32,19 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Ingredient]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[MaterialGroup]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Recipe]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RecipeCategory]",
          "ObjectType": 0
       },
       {

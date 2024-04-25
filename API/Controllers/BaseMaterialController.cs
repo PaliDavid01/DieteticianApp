@@ -25,5 +25,10 @@ namespace API.Controllers
         {
             return _logic.GetBaseMaterialsExtended();
         }
+        [HttpDelete("DeleteWithAlllergenMaterials")]
+        public async Task DeleteWithAlllergenMaterials(BaseMaterial entity)
+        {
+            await _logic.DeleteWithAlllergenMaterials(entity);
+        }
     }
 }

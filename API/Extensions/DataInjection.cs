@@ -27,6 +27,9 @@ namespace API.Extensions
             services.AddScoped<IMaterialGroupRepository, MaterialGroupRepository>();
             services.AddScoped<IStockRepository, StockRepository>();
             services.AddScoped<IVitaminRepository, VitaminRepository>();
+            services.AddScoped<IRecipeCategoryRepository, RecipeCategoryRepository>();
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IIngredientRepository, IngredientRepository>();
 
             //services.AddTransient<IMaterialLogic, MaterialLogic>();
             services.AddScoped<IUserLogic, UserLogic>();
@@ -39,6 +42,9 @@ namespace API.Extensions
             services.AddScoped<IMaterialGroupLogic, MaterialGroupLogic>();
             services.AddScoped<IStockLogic, StockLogic>();
             services.AddScoped<IVitaminLogic, VitaminLogic>();
+            services.AddScoped<IRecipeCategoryLogic, RecipeCategoryLogic>();
+            services.AddScoped<IRecipeLogic, RecipeLogic>();
+            services.AddScoped<IIngredientLogic, IngredientLogic>();
 
             return services;
         }

@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[Recipe]
+(
+	[RecipeId] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[RecipeName] NVARCHAR(50) NOT NULL,
+	[RecipeDescription] TEXT,
+	[RecipeCategoryId] INT NOT NULL,
+	[RecipeCostPrice] DECIMAL(18, 2),
+	[RecipeRetailPrice] DECIMAL(18, 2),
+	[RecipeKilojule] DECIMAL(18, 2),
+	[RecipeCalories] DECIMAL(18, 2),
+	[RecipeProtein] DECIMAL(18, 2),
+	[RecipeFat] DECIMAL(18, 2),
+	[RecipeCarbohydrate] DECIMAL(18, 2),
+	[RecipeCholesterol] DECIMAL(18, 2),
+	[RecipeSugar] DECIMAL(18, 2),
+	[RecipeSalt] DECIMAL(18, 2),
+	[RecipeSaturatedFat] DECIMAL(18, 2),
+	[RecipeTransFat] DECIMAL(18, 2),
+	[RecipeFiber] DECIMAL(18, 2),
+	[RecipeKalcium] DECIMAL(18, 2),
+	[RecipeKalium] DECIMAL(18, 2),
+	[RecipeQuantity] DECIMAL(18, 2),
+	[RecipeMeasure] NVARCHAR(50),
+	FOREIGN KEY ([RecipeCategoryId]) REFERENCES [dbo].[RecipeCategory] ([RecipeCategoryId])
+)

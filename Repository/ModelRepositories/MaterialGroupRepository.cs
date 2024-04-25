@@ -1,8 +1,8 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using Models.Models;
-using Repository.GenericRepository;
 using Repository.Interfaces;
+using Repository.ModelRepositories.GenericRepository;
 
 namespace Repository.ModelRepositories
 {

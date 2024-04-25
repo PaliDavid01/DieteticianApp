@@ -23,7 +23,13 @@ public partial class DataBaseContext : DbContext
 
     public virtual DbSet<Ecode> Ecodes { get; set; }
 
+    public virtual DbSet<Ingredient> Ingredients { get; set; }
+
     public virtual DbSet<MaterialGroup> MaterialGroups { get; set; }
+
+    public virtual DbSet<Recipe> Recipes { get; set; }
+
+    public virtual DbSet<RecipeCategory> RecipeCategories { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
@@ -141,6 +147,14 @@ public partial class DataBaseContext : DbContext
             entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
         });
 
+        modelBuilder.Entity<Ingredient>(entity =>
+        {
+            entity.ToTable("Ingredient");
+
+            entity.Property(e => e.IngredientId).ValueGeneratedNever();
+            entity.Property(e => e.Quantity).HasColumnType("decimal(18, 2)");
+        });
+
         modelBuilder.Entity<MaterialGroup>(entity =>
         {
             entity.HasKey(e => e.GroupCode);
@@ -150,6 +164,36 @@ public partial class DataBaseContext : DbContext
             entity.Property(e => e.GroupName)
                 .IsRequired()
                 .HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<Recipe>(entity =>
+        {
+            entity.ToTable("Recipe");
+
+            entity.Property(e => e.RecipeId).ValueGeneratedNever();
+            entity.Property(e => e.CreatedBy)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.Description)
+                .IsRequired()
+                .HasColumnType("text");
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<RecipeCategory>(entity =>
+        {
+            entity.ToTable("RecipeCategory");
+
+            entity.Property(e => e.RecipeCategoryId).ValueGeneratedNever();
+            entity.Property(e => e.CategoryName)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.Description)
+                .IsRequired()
+                .HasMaxLength(1000);
         });
 
         modelBuilder.Entity<Role>(entity =>

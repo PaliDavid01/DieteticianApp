@@ -44,12 +44,13 @@ export class NavComponent implements OnInit {
         ],
       },
       {
-        label: 'Edit',
+        label: 'Recipes',
         icon: 'pi pi-fw pi-pencil',
         items: [
           {
-            label: 'Left',
-            icon: 'pi pi-fw pi-align-left',
+            label: 'Recipe categories',
+            icon: 'pi pi-fw pi-bars',
+            url: '/recipe-category',
           },
           {
             label: 'Right',

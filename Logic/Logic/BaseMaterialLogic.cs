@@ -30,6 +30,15 @@ namespace Logic.Logic
             return baseMaterials;
 
         }
+        public async Task DeleteWithAlllergenMaterials(BaseMaterial baseMaterial)
+        {
+            var allergenMaterials = await _allergenMaterialLogic.FindAsync(t => t.MaterialId == baseMaterial.MaterialId);
+            foreach (var allergenMaterial in allergenMaterials)
+            {
+                await _allergenMaterialLogic.DeleteAsync(allergenMaterial);
+            }
+            await _repository.DeleteAsync(baseMaterial);
+        }
 
         public void LoadFromExcel()
         {
@@ -54,7 +63,7 @@ namespace Logic.Logic
                     });
                 }
             }
-            ;
+
         }
     }
 }

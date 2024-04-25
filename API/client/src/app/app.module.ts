@@ -17,20 +17,20 @@ import { LocalizationComponent } from './localization/localization.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { config } from 'rxjs';
-import { RecieptContainerComponent } from './receipt/reciept-container/reciept-container.component';
-import { RecieptCreateComponent } from './receipt/reciept-create/reciept-create.component';
-import { RecieptUpdateComponent } from './receipt/reciept-update/reciept-update.component';
-import { RecieptDisplayComponent } from './receipt/reciept-display/reciept-display.component';
 import { MaterialContainerComponent } from './material/material-container/material-container.component';
 import { MaterialCreateComponent } from './material/material-create/material-create.component';
-import { MaterialUpdateComponent } from './material/material-update/material-update.component';
 import {
   API_BASE_URL,
   AllergenService,
   AuthService,
   BaseMaterial,
   BaseMaterialService,
+  Ingredient,
+  IngredientService,
+  Recipe,
+  RecipeCategory,
+  RecipeCategoryService,
+  RecipeService,
   RoleService,
 } from './services/generated-client';
 import { AuthInterceptor } from './services/auth/auth.interceptor';
@@ -138,6 +138,8 @@ import { SharedModule } from 'primeng/api';
 // Import AllergenComponent
 import { AllergenComponent } from './material/allergen/allergen.component';
 import { MaterialCreateResolverService } from './material/material-create/material-create-resolver.service';
+import { RecipeComponent } from './recipe-ingredient/recipe/recipe.component';
+import { RecipeCategoryComponent } from './recipe-ingredient/recipe-category/recipe-category.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -151,14 +153,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     NavComponent,
     LocalizationComponent,
-    RecieptContainerComponent,
-    RecieptCreateComponent,
-    RecieptUpdateComponent,
-    RecieptDisplayComponent,
     MaterialContainerComponent,
     MaterialCreateComponent,
-    MaterialUpdateComponent,
     AllergenComponent,
+    RecipeCategoryComponent,
+    RecipeComponent,
   ],
   imports: [
     CommonModule,
@@ -291,6 +290,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     BaseMaterialService,
     ConfirmationService,
     MaterialCreateResolverService,
+    ConfirmationService,
+    RecipeCategoryService,
+    RecipeService,
+    IngredientService,
     { provide: API_BASE_URL, useValue: 'http://localhost:7247' },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

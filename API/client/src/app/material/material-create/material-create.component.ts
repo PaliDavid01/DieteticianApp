@@ -10,6 +10,7 @@ import {
   BaseMaterialService,
   MaterialGroup,
   MaterialGroupService,
+  UpdateAllergenMaterialsDTO,
 } from 'src/app/services/generated-client';
 
 @Component({
@@ -66,9 +67,25 @@ export class MaterialCreateComponent implements OnInit {
   }
 
   saveMaterial() {
+    let updateAllergenMaterialsDTO: UpdateAllergenMaterialsDTO;
+    let allergens: AllergenMaterial[] = [];
     if (this.material.materialId) {
+      allergens = this.selectedAllergens.map((allergen) => {
+        return new AllergenMaterial({
+          allergenMaterialId: 0,
+          allergenId: allergen.allergenId,
+          materialId: this.material.materialId,
+        });
+      });
+      updateAllergenMaterialsDTO = new UpdateAllergenMaterialsDTO({
+        materialId: this.material.materialId,
+        allergenMaterials: allergens,
+      });
       this.baseMaterialService.update(this.material).subscribe(
         (data) => {
+          this.allergenMaterialService
+            .updateAllergenMaterials(updateAllergenMaterialsDTO)
+            .subscribe();
           this.router.navigate(['/material']);
         },
         (error) => {
@@ -81,8 +98,11 @@ export class MaterialCreateComponent implements OnInit {
         }
       );
     } else {
+      this.material.materialId = 0;
       this.baseMaterialService.create(this.material).subscribe(
         (data) => {
+          if (allergens.length > 0) {
+          }
           this.router.navigate(['/material']);
         },
         (error) => {

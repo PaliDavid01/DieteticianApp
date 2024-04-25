@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -10,19 +10,19 @@ import {
 
 @Component({
   selector: 'app-material-container',
+  standalone: false,
   templateUrl: './material-container.component.html',
   styleUrls: ['./material-container.component.css'],
+  providers: [MessageService, ConfirmationService],
 })
-export class MaterialContainerComponent implements OnInit {
-  @ViewChild('dt') dt: Table | undefined;
+export class MaterialContainerComponent {
+  @ViewChild('dt') dt: Table;
 
   materials!: BaseMaterial[];
 
   material!: BaseMaterial;
 
   selectedMaterials!: BaseMaterial[] | null;
-
-  submitted: boolean = false;
 
   statuses!: any[];
   Delete: string = 'Delete';
@@ -31,8 +31,9 @@ export class MaterialContainerComponent implements OnInit {
   constructor(
     private materialService: BaseMaterialService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService,
-    private router: Router
+
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit() {
@@ -72,21 +73,10 @@ export class MaterialContainerComponent implements OnInit {
 
   deleteSelectedMaterial() {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected products?',
+      message: 'Are you sure you want to delete the selected materials?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.materials = this.materials.filter(
-          (val) => !this.selectedMaterials?.includes(val)
-        );
-        this.selectedMaterials = null;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Products Deleted',
-          life: 3000,
-        });
-      },
+      accept: () => {},
     });
   }
 
@@ -99,52 +89,41 @@ export class MaterialContainerComponent implements OnInit {
   }
 
   deleteMaterial(material: BaseMaterial) {
+    console.log(material);
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + material.materialName + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.materials = this.materials.filter(
-          (val) => val.materialId !== material.materialId
+        this.materialService.deleteWithAlllergenMaterials(material).subscribe(
+          (data) => {
+            this.materials = this.materials.filter(
+              (val) => val.materialId !== material.materialId
+            );
+            this.material = new BaseMaterial();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Product Deleted',
+              life: 3000,
+            });
+          },
+          (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Error deleting product',
+            });
+          }
         );
-        this.material = new BaseMaterial();
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Deleted',
-          life: 3000,
-        });
       },
     });
   }
 
   hideDialog() {
     this.displayDialog = false;
-    this.submitted = false;
   }
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-  }
-
-  findIndexById(materialId: number): number {
-    let index = -1;
-    for (let i = 0; i < this.materials.length; i++) {
-      if (this.materials[i].materialId === materialId) {
-        index = i;
-        break;
-      }
-    }
-
-    return index;
-  }
-
-  createId(): string {
-    let id = '';
-    var chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < 5; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
   }
 }

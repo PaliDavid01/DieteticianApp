@@ -2,7 +2,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "~primeng/resources/primeng.min.css";
-@import "~primeng/resources/themes/md-light-indigo/theme.css";
-@import "~primeicons/primeicons.css";

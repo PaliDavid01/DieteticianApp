@@ -9,7 +9,7 @@ import * as FileSaver from 'file-saver';
   standalone: false,
   templateUrl: './allergen.component.html',
   styleUrl: './allergen.component.css',
-  providers: [MessageService, ConfirmationService],
+  providers: [MessageService],
 })
 export class AllergenComponent {
   @ViewChild('dt') dt: Table;
