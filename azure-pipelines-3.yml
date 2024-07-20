@@ -1,0 +1,58 @@
+trigger:
+- master
+
+pool: 
+  name: MyPool
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g @angular/cli@17.3.2
+    npm install
+    ng build --configuration production
+  displayName: 'npm install and build'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '**/dist/**'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+  displayName: 'Copy files to artifact staging directory'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: drop
+    publishLocation: 'Container'
+  displayName: 'Publish build artifacts'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    azureSubscription: 'YOUR_AZURE_SUBSCRIPTION_SERVICE_CONNECTION'
+    appType: 'webApp'
+    WebAppName: 'YOUR_WEB_APP_NAME'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+  displayName: 'Deploy to Azure Web App'
+
+- task: SonarQubePrepare@4
+  inputs:
+    SonarQube: 'SonarQubeServer'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'your-project-key'
+    cliProjectName: 'your-project-name'
+    cliSources: '.'
+  displayName: 'Prepare analysis on SonarQube'
+
+- script: |
+    npm install -g sonarqube-scanner
+    sonar-scanner
+  displayName: 'Run SonarQube analysis'
+
+- task: SonarQubePublish@4
+  inputs:
+    pollingTimeoutSec: '300'
+  displayName: 'Publish Quality Gate Result'
