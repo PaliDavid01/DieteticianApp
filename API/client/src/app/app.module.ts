@@ -127,7 +127,7 @@ import { TreeModule } from 'primeng/tree';
 import { TreeSelectModule } from 'primeng/treeselect';
 import { TreeTableModule } from 'primeng/treetable';
 import { AnimateModule } from 'primeng/animate';
-import { CardModule } from 'primeng/card';
+import { Card, CardModule } from 'primeng/card';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RippleModule } from 'primeng/ripple';
@@ -140,6 +140,7 @@ import { AllergenComponent } from './material/allergen/allergen.component';
 import { MaterialCreateResolverService } from './material/material-create/material-create-resolver.service';
 import { RecipeComponent } from './recipe-ingredient/recipe/recipe.component';
 import { RecipeCategoryComponent } from './recipe-ingredient/recipe-category/recipe-category.component';
+import { RecipeCreateEditComponent } from './recipe-ingredient/recipe/recipe-create-edit/recipe-create-edit.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -158,6 +159,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AllergenComponent,
     RecipeCategoryComponent,
     RecipeComponent,
+    RecipeCreateEditComponent,
   ],
   imports: [
     CommonModule,
@@ -178,6 +180,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BlockUIModule,
     ButtonModule,
     CalendarModule,
+    CardModule,
     CarouselModule,
     CascadeSelectModule,
     ChartModule,
@@ -261,7 +264,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TreeSelectModule,
     TreeTableModule,
     AnimateModule,
-    CardModule,
     RippleModule,
     StyleClassModule,
     SharedModule,

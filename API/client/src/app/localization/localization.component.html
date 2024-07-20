@@ -1,4 +1,4 @@
-<div class="py-3 px-3">
+<!-- <div class="py-3 px-3">
   <div class="flex justify-content-center" style="background: transparent">
     <p-dropdown
       [options]="languages"
@@ -20,4 +20,9 @@
       </ng-template>
     </p-dropdown>
   </div>
-</div>
+</div> -->
+<p-inputSwitch
+  [(ngModel)]="isDarkMode"
+  (onChange)="toggleDarkMode()"
+  styleClass="p-mr-2"
+></p-inputSwitch>

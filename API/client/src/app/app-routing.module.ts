@@ -8,6 +8,9 @@ import { AllergenComponent } from './material/allergen/allergen.component';
 import { MaterialCreateComponent } from './material/material-create/material-create.component';
 import { MaterialCreateResolverService } from './material/material-create/material-create-resolver.service';
 import { RecipeCategoryComponent } from './recipe-ingredient/recipe-category/recipe-category.component';
+import { RecipeComponent } from './recipe-ingredient/recipe/recipe.component';
+import { RecipeCreateEditComponent } from './recipe-ingredient/recipe/recipe-create-edit/recipe-create-edit.component';
+import { RecipeCreateEditResolverService } from './recipe-ingredient/recipe/recipe-create-edit-resolver.service';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,6 +23,12 @@ const routes: Routes = [
     resolve: { material: MaterialCreateResolverService },
   },
   { path: 'allergen', component: AllergenComponent },
+  { path: 'recipe', component: RecipeComponent },
+  {
+    path: 'recipe-edit/:id',
+    component: RecipeCreateEditComponent,
+    resolve: { recipe: RecipeCreateEditResolverService },
+  },
   { path: 'recipe-category', component: RecipeCategoryComponent },
 ];
 

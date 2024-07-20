@@ -9,15 +9,43 @@ public partial class Recipe
 {
     public int RecipeId { get; set; }
 
-    public string Name { get; set; }
+    public string RecipeName { get; set; }
 
-    public string Description { get; set; }
+    public string RecipeDescription { get; set; }
 
-    public DateTime CreatedDate { get; set; }
+    public int RecipeCategoryId { get; set; }
 
-    public string CreatedBy { get; set; }
+    public decimal? RecipeCostPrice { get; set; }
 
-    public int UserId { get; set; }
+    public decimal? RecipeRetailPrice { get; set; }
 
-    public int CategoryId { get; set; }
+    public decimal? RecipeKilojule { get; set; }
+
+    public decimal? RecipeCalories { get; set; }
+
+    public decimal? RecipeProtein { get; set; }
+
+    public decimal? RecipeFat { get; set; }
+
+    public decimal? RecipeCarbohydrate { get; set; }
+
+    public decimal? RecipeCholesterol { get; set; }
+
+    public decimal? RecipeSugar { get; set; }
+
+    public decimal? RecipeSalt { get; set; }
+
+    public decimal? RecipeSaturatedFat { get; set; }
+
+    public decimal? RecipeTransFat { get; set; }
+
+    public decimal? RecipeFiber { get; set; }
+
+    public decimal? RecipeKalcium { get; set; }
+
+    public decimal? RecipeKalium { get; set; }
+
+    public decimal? RecipeQuantity { get; set; }
+
+    public string RecipeMeasure { get; set; }
 }

@@ -12,9 +12,9 @@ namespace API.Controllers.GenericController
             _logic = logic;
         }
         [HttpPost("Create")]
-        public void Create(T entity)
+        public T Create(T entity)
         {
-            _logic.Create(entity);
+            return _logic.Create(entity);
         }
         [HttpPost("CreateAsyn")]
         public Task CreateAsync(T entity)

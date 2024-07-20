@@ -1,27 +1,29 @@
-<div class="flex align-items-center justify-content-center">
-  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-3">
-    <div class="text-center mb-5">
-      <img
-        src="https://cdn-icons-png.freepik.com/512/7414/7414124.png"
-        alt="Image"
-        height="100"
-        class="mb-3"
-      />
-      <div class="text-900 text-5xl font-medium mb-3">Diet Z'App</div>
-      <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+<div class="n flex n justify-center">
+  <p-card class="n block n p-6 n rounded-lg">
+    <div class="n text-center n mb-5">
+      <div class="n flex n justify-center">
+        <img
+          src="https://cdn-icons-png.freepik.com/512/7414/7414124.png"
+          alt="Image"
+          class="n mb-3 n w-40"
+        />
+      </div>
 
-      <span class="text-600 font-medium line-height-3"
+      <div class="n text-900 n text-5xl n font-medium n mb-3">Diet Z'App</div>
+      <div class="n text-900 n text-3xl n font-medium n mb-3">Welcome Back</div>
+
+      <span class="n text-600 n font-medium n line-height-3"
         >Don't have an account?</span
       >
       <a
-        class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+        class="n font-medium n no-underline n ml-2 n text-blue-500 n cursor-pointer"
         href="/register"
         >Create today!</a
       >
     </div>
     <div>
       <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="on">
-        <label for="email1" class="block text-900 font-medium mb-2">{{
+        <label for="email1" class="n block n text-900 n font-medium n mb-2">{{
           "email" | translate
         }}</label>
         <input
@@ -30,11 +32,11 @@
           type="email"
           placeholder="yxz@sth.com"
           pInputText
-          class="w-full mb-3"
+          class="n w-full n mb-3"
           [(ngModel)]="model.email"
         />
 
-        <label for="password1" class="block text-900 font-medium mb-2">
+        <label for="password1" class="n block n text-900 n font-medium n mb-2">
           {{ "password" | translate }}
         </label>
         <input
@@ -43,13 +45,13 @@
           type="password"
           placeholder="Password"
           pInputText
-          class="w-full mb-3"
+          class="n w-full n mb-3"
           [(ngModel)]="model.password"
         />
 
-        <div class="flex align-items-center justify-content-between mb-6">
+        <div class="n flex align-items-center n justify-content-between n mb-6">
           <a
-            class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
+            class="n font-medium n no-underline n ml-2 n text-blue-500 n text-right n cursor-pointer"
             >Forgot password?</a
           >
         </div>
@@ -59,10 +61,10 @@
           pRipple
           label="{{ 'login' | translate }}"
           icon="pi pi-user"
-          class="w-full"
+          class="n w-full"
           type="submit"
         ></button>
       </form>
     </div>
-  </div>
+  </p-card>
 </div>

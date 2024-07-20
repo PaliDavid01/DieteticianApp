@@ -53,8 +53,9 @@ export class NavComponent implements OnInit {
             url: '/recipe-category',
           },
           {
-            label: 'Right',
-            icon: 'pi pi-fw pi-align-right',
+            label: 'Recipes',
+            icon: 'pi pi-fw pi-file-edit',
+            url: '/recipe',
           },
           {
             label: 'Center',

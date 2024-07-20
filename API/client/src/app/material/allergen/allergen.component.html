@@ -48,8 +48,8 @@
     [rows]="10"
     [paginator]="true"
     [globalFilterFields]="[
-      'allergenName',
       'AllergenCode',
+      'AllergeneName',
       'allergenDescription'
     ]"
     [tableStyle]="{ 'min-width': '75rem' }"
@@ -60,7 +60,7 @@
     [showCurrentPageReport]="true"
   >
     <ng-template pTemplate="caption">
-      <div class="flex align-items-center justify-content-between">
+      <div class="tw-flex tw-align-items-center justify-content-between">
         <h5 class="m-0">Manage Allergens</h5>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
@@ -88,7 +88,7 @@
         <th pSortableColumn="allergenDescription" style="min-width: 10rem">
           Description <p-sortIcon field="description"></p-sortIcon>
         </th>
-        <th></th>
+        <th>Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item>
@@ -97,7 +97,7 @@
           <p-tableCheckbox [value]="item"></p-tableCheckbox>
         </td>
         <td>{{ item.allergenCode }}</td>
-        <td>{{ item.allergenCode }}</td>
+        <td>{{ item.allergenName }}</td>
         <td>{{ item.allergenDescription }}</td>
         <td>
           <button
@@ -142,7 +142,7 @@
         required
         autofocus
       />
-      <small class="p-error" *ngIf="submitted && !allergen.allergenName"
+      <small class="p-error" *ngIf="!allergen.allergenName"
         >Name is required.</small
       >
     </div>
@@ -156,7 +156,7 @@
         required
         autofocus
       />
-      <small class="p-error" *ngIf="submitted && !allergen.allergenName"
+      <small class="p-error" *ngIf="!allergen.allergenCode"
         >Allergen code is required.</small
       >
     </div>
@@ -170,6 +170,9 @@
         rows="3"
         cols="20"
       ></textarea>
+      <small class="p-error" *ngIf="!allergen.allergenDescription"
+        >Description is required.</small
+      >
     </div>
   </ng-template>
 

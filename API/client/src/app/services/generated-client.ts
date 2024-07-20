@@ -26,7 +26,7 @@ export class AllergenService {
         this.baseUrl = baseUrl ?? "";
     }
 
-    create(entity: Allergen): Observable<void> {
+    create(entity: Allergen): Observable<Allergen> {
         let url_ = this.baseUrl + "/Allergen/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -38,6 +38,7 @@ export class AllergenService {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -48,23 +49,27 @@ export class AllergenService {
                 try {
                     return this.processCreate(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<Allergen>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<Allergen>;
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<Allergen> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = Allergen.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -692,7 +697,7 @@ export class AllergenMaterialService {
         return _observableOf(null as any);
     }
 
-    create(entity: AllergenMaterial): Observable<void> {
+    create(entity: AllergenMaterial): Observable<AllergenMaterial> {
         let url_ = this.baseUrl + "/api/AllergenMaterial/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -704,6 +709,7 @@ export class AllergenMaterialService {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -714,23 +720,27 @@ export class AllergenMaterialService {
                 try {
                     return this.processCreate(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<AllergenMaterial>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<AllergenMaterial>;
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<AllergenMaterial> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = AllergenMaterial.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -1477,7 +1487,7 @@ export class BaseMaterialService {
         return _observableOf(null as any);
     }
 
-    create(entity: BaseMaterial): Observable<void> {
+    create(entity: BaseMaterial): Observable<BaseMaterial> {
         let url_ = this.baseUrl + "/BaseMaterial/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1489,6 +1499,7 @@ export class BaseMaterialService {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -1499,23 +1510,27 @@ export class BaseMaterialService {
                 try {
                     return this.processCreate(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<BaseMaterial>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<BaseMaterial>;
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<BaseMaterial> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = BaseMaterial.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -1988,7 +2003,7 @@ export class EcodeService {
         this.baseUrl = baseUrl ?? "";
     }
 
-    create(entity: Ecode): Observable<void> {
+    create(entity: Ecode): Observable<Ecode> {
         let url_ = this.baseUrl + "/api/Ecode/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2000,6 +2015,7 @@ export class EcodeService {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -2010,23 +2026,27 @@ export class EcodeService {
                 try {
                     return this.processCreate(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<Ecode>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<Ecode>;
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<Ecode> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = Ecode.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -2499,7 +2519,66 @@ export class IngredientService {
         this.baseUrl = baseUrl ?? "";
     }
 
-    create(entity: Ingredient): Observable<void> {
+    getAllByRecipeId(recipeId: number): Observable<IngredientDataView[]> {
+        let url_ = this.baseUrl + "/Ingredient/GetAllByRecipeId/{recipeId}";
+        if (recipeId === undefined || recipeId === null)
+            throw new Error("The parameter 'recipeId' must be defined.");
+        url_ = url_.replace("{recipeId}", encodeURIComponent("" + recipeId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllByRecipeId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllByRecipeId(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<IngredientDataView[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<IngredientDataView[]>;
+        }));
+    }
+
+    protected processGetAllByRecipeId(response: HttpResponseBase): Observable<IngredientDataView[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(IngredientDataView.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    create(entity: Ingredient): Observable<Ingredient> {
         let url_ = this.baseUrl + "/Ingredient/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2511,6 +2590,7 @@ export class IngredientService {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -2521,23 +2601,27 @@ export class IngredientService {
                 try {
                     return this.processCreate(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<Ingredient>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<Ingredient>;
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<Ingredient> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = Ingredient.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -3010,7 +3094,7 @@ export class MaterialGroupService {
         this.baseUrl = baseUrl ?? "";
     }
 
-    create(entity: MaterialGroup): Observable<void> {
+    create(entity: MaterialGroup): Observable<MaterialGroup> {
         let url_ = this.baseUrl + "/api/MaterialGroup/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3022,6 +3106,7 @@ export class MaterialGroupService {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -3032,23 +3117,27 @@ export class MaterialGroupService {
                 try {
                     return this.processCreate(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<MaterialGroup>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<MaterialGroup>;
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<MaterialGroup> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = MaterialGroup.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -3521,7 +3610,7 @@ export class RecipeCategoryService {
         this.baseUrl = baseUrl ?? "";
     }
 
-    create(entity: RecipeCategory): Observable<void> {
+    create(entity: RecipeCategory): Observable<RecipeCategory> {
         let url_ = this.baseUrl + "/RecipeCategory/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3533,6 +3622,7 @@ export class RecipeCategoryService {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -3543,23 +3633,27 @@ export class RecipeCategoryService {
                 try {
                     return this.processCreate(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<RecipeCategory>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<RecipeCategory>;
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<RecipeCategory> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = RecipeCategory.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -4032,7 +4126,54 @@ export class RecipeService {
         this.baseUrl = baseUrl ?? "";
     }
 
-    create(entity: Recipe): Observable<void> {
+    recalculateMacros(recipeId: number): Observable<void> {
+        let url_ = this.baseUrl + "/Recipe/RecalculateMacros/{recipeId}";
+        if (recipeId === undefined || recipeId === null)
+            throw new Error("The parameter 'recipeId' must be defined.");
+        url_ = url_.replace("{recipeId}", encodeURIComponent("" + recipeId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processRecalculateMacros(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processRecalculateMacros(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processRecalculateMacros(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    create(entity: Recipe): Observable<Recipe> {
         let url_ = this.baseUrl + "/Recipe/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4044,6 +4185,7 @@ export class RecipeService {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -4054,23 +4196,27 @@ export class RecipeService {
                 try {
                     return this.processCreate(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<Recipe>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<Recipe>;
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<Recipe> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = Recipe.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -4949,7 +5095,7 @@ export class StockService {
         this.baseUrl = baseUrl ?? "";
     }
 
-    create(entity: Stock): Observable<void> {
+    create(entity: Stock): Observable<Stock> {
         let url_ = this.baseUrl + "/api/Stock/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4961,6 +5107,7 @@ export class StockService {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -4971,23 +5118,27 @@ export class StockService {
                 try {
                     return this.processCreate(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<Stock>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<Stock>;
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<Stock> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = Stock.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -5460,7 +5611,7 @@ export class VitaminService {
         this.baseUrl = baseUrl ?? "";
     }
 
-    create(entity: Vitamin): Observable<void> {
+    create(entity: Vitamin): Observable<Vitamin> {
         let url_ = this.baseUrl + "/api/Vitamin/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5472,6 +5623,7 @@ export class VitaminService {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -5482,23 +5634,27 @@ export class VitaminService {
                 try {
                     return this.processCreate(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<Vitamin>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<Vitamin>;
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<Vitamin> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = Vitamin.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -6540,6 +6696,76 @@ export interface IEcode {
     description?: string | null;
 }
 
+export class IngredientDataView implements IIngredientDataView {
+    ingredientId?: number;
+    recipeId?: number;
+    baseMaterialId?: number;
+    quantity?: number;
+    materialCode?: string | null;
+    materialName?: string | null;
+    note?: string | null;
+    materialGroupId?: number | null;
+    groupCode?: number;
+    groupName?: string | null;
+
+    constructor(data?: IIngredientDataView) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.ingredientId = _data["ingredientId"] !== undefined ? _data["ingredientId"] : <any>null;
+            this.recipeId = _data["recipeId"] !== undefined ? _data["recipeId"] : <any>null;
+            this.baseMaterialId = _data["baseMaterialId"] !== undefined ? _data["baseMaterialId"] : <any>null;
+            this.quantity = _data["quantity"] !== undefined ? _data["quantity"] : <any>null;
+            this.materialCode = _data["materialCode"] !== undefined ? _data["materialCode"] : <any>null;
+            this.materialName = _data["materialName"] !== undefined ? _data["materialName"] : <any>null;
+            this.note = _data["note"] !== undefined ? _data["note"] : <any>null;
+            this.materialGroupId = _data["materialGroupId"] !== undefined ? _data["materialGroupId"] : <any>null;
+            this.groupCode = _data["groupCode"] !== undefined ? _data["groupCode"] : <any>null;
+            this.groupName = _data["groupName"] !== undefined ? _data["groupName"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): IngredientDataView | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<IngredientDataView>(data, _mappings, IngredientDataView);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ingredientId"] = this.ingredientId !== undefined ? this.ingredientId : <any>null;
+        data["recipeId"] = this.recipeId !== undefined ? this.recipeId : <any>null;
+        data["baseMaterialId"] = this.baseMaterialId !== undefined ? this.baseMaterialId : <any>null;
+        data["quantity"] = this.quantity !== undefined ? this.quantity : <any>null;
+        data["materialCode"] = this.materialCode !== undefined ? this.materialCode : <any>null;
+        data["materialName"] = this.materialName !== undefined ? this.materialName : <any>null;
+        data["note"] = this.note !== undefined ? this.note : <any>null;
+        data["materialGroupId"] = this.materialGroupId !== undefined ? this.materialGroupId : <any>null;
+        data["groupCode"] = this.groupCode !== undefined ? this.groupCode : <any>null;
+        data["groupName"] = this.groupName !== undefined ? this.groupName : <any>null;
+        return data;
+    }
+}
+
+export interface IIngredientDataView {
+    ingredientId?: number;
+    recipeId?: number;
+    baseMaterialId?: number;
+    quantity?: number;
+    materialCode?: string | null;
+    materialName?: string | null;
+    note?: string | null;
+    materialGroupId?: number | null;
+    groupCode?: number;
+    groupName?: string | null;
+}
+
 export class Ingredient implements IIngredient {
     ingredientId?: number;
     baseMaterialId?: number;
@@ -6668,12 +6894,26 @@ export interface IRecipeCategory {
 
 export class Recipe implements IRecipe {
     recipeId?: number;
-    name?: string | null;
-    description?: string | null;
-    createdDate?: Date;
-    createdBy?: string | null;
-    userId?: number;
-    categoryId?: number;
+    recipeName?: string | null;
+    recipeDescription?: string | null;
+    recipeCategoryId?: number;
+    recipeCostPrice?: number | null;
+    recipeRetailPrice?: number | null;
+    recipeKilojule?: number | null;
+    recipeCalories?: number | null;
+    recipeProtein?: number | null;
+    recipeFat?: number | null;
+    recipeCarbohydrate?: number | null;
+    recipeCholesterol?: number | null;
+    recipeSugar?: number | null;
+    recipeSalt?: number | null;
+    recipeSaturatedFat?: number | null;
+    recipeTransFat?: number | null;
+    recipeFiber?: number | null;
+    recipeKalcium?: number | null;
+    recipeKalium?: number | null;
+    recipeQuantity?: number | null;
+    recipeMeasure?: string | null;
 
     constructor(data?: IRecipe) {
         if (data) {
@@ -6687,12 +6927,26 @@ export class Recipe implements IRecipe {
     init(_data?: any, _mappings?: any) {
         if (_data) {
             this.recipeId = _data["recipeId"] !== undefined ? _data["recipeId"] : <any>null;
-            this.name = _data["name"] !== undefined ? _data["name"] : <any>null;
-            this.description = _data["description"] !== undefined ? _data["description"] : <any>null;
-            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>null;
-            this.createdBy = _data["createdBy"] !== undefined ? _data["createdBy"] : <any>null;
-            this.userId = _data["userId"] !== undefined ? _data["userId"] : <any>null;
-            this.categoryId = _data["categoryId"] !== undefined ? _data["categoryId"] : <any>null;
+            this.recipeName = _data["recipeName"] !== undefined ? _data["recipeName"] : <any>null;
+            this.recipeDescription = _data["recipeDescription"] !== undefined ? _data["recipeDescription"] : <any>null;
+            this.recipeCategoryId = _data["recipeCategoryId"] !== undefined ? _data["recipeCategoryId"] : <any>null;
+            this.recipeCostPrice = _data["recipeCostPrice"] !== undefined ? _data["recipeCostPrice"] : <any>null;
+            this.recipeRetailPrice = _data["recipeRetailPrice"] !== undefined ? _data["recipeRetailPrice"] : <any>null;
+            this.recipeKilojule = _data["recipeKilojule"] !== undefined ? _data["recipeKilojule"] : <any>null;
+            this.recipeCalories = _data["recipeCalories"] !== undefined ? _data["recipeCalories"] : <any>null;
+            this.recipeProtein = _data["recipeProtein"] !== undefined ? _data["recipeProtein"] : <any>null;
+            this.recipeFat = _data["recipeFat"] !== undefined ? _data["recipeFat"] : <any>null;
+            this.recipeCarbohydrate = _data["recipeCarbohydrate"] !== undefined ? _data["recipeCarbohydrate"] : <any>null;
+            this.recipeCholesterol = _data["recipeCholesterol"] !== undefined ? _data["recipeCholesterol"] : <any>null;
+            this.recipeSugar = _data["recipeSugar"] !== undefined ? _data["recipeSugar"] : <any>null;
+            this.recipeSalt = _data["recipeSalt"] !== undefined ? _data["recipeSalt"] : <any>null;
+            this.recipeSaturatedFat = _data["recipeSaturatedFat"] !== undefined ? _data["recipeSaturatedFat"] : <any>null;
+            this.recipeTransFat = _data["recipeTransFat"] !== undefined ? _data["recipeTransFat"] : <any>null;
+            this.recipeFiber = _data["recipeFiber"] !== undefined ? _data["recipeFiber"] : <any>null;
+            this.recipeKalcium = _data["recipeKalcium"] !== undefined ? _data["recipeKalcium"] : <any>null;
+            this.recipeKalium = _data["recipeKalium"] !== undefined ? _data["recipeKalium"] : <any>null;
+            this.recipeQuantity = _data["recipeQuantity"] !== undefined ? _data["recipeQuantity"] : <any>null;
+            this.recipeMeasure = _data["recipeMeasure"] !== undefined ? _data["recipeMeasure"] : <any>null;
         }
     }
 
@@ -6704,24 +6958,52 @@ export class Recipe implements IRecipe {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["recipeId"] = this.recipeId !== undefined ? this.recipeId : <any>null;
-        data["name"] = this.name !== undefined ? this.name : <any>null;
-        data["description"] = this.description !== undefined ? this.description : <any>null;
-        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>null;
-        data["createdBy"] = this.createdBy !== undefined ? this.createdBy : <any>null;
-        data["userId"] = this.userId !== undefined ? this.userId : <any>null;
-        data["categoryId"] = this.categoryId !== undefined ? this.categoryId : <any>null;
+        data["recipeName"] = this.recipeName !== undefined ? this.recipeName : <any>null;
+        data["recipeDescription"] = this.recipeDescription !== undefined ? this.recipeDescription : <any>null;
+        data["recipeCategoryId"] = this.recipeCategoryId !== undefined ? this.recipeCategoryId : <any>null;
+        data["recipeCostPrice"] = this.recipeCostPrice !== undefined ? this.recipeCostPrice : <any>null;
+        data["recipeRetailPrice"] = this.recipeRetailPrice !== undefined ? this.recipeRetailPrice : <any>null;
+        data["recipeKilojule"] = this.recipeKilojule !== undefined ? this.recipeKilojule : <any>null;
+        data["recipeCalories"] = this.recipeCalories !== undefined ? this.recipeCalories : <any>null;
+        data["recipeProtein"] = this.recipeProtein !== undefined ? this.recipeProtein : <any>null;
+        data["recipeFat"] = this.recipeFat !== undefined ? this.recipeFat : <any>null;
+        data["recipeCarbohydrate"] = this.recipeCarbohydrate !== undefined ? this.recipeCarbohydrate : <any>null;
+        data["recipeCholesterol"] = this.recipeCholesterol !== undefined ? this.recipeCholesterol : <any>null;
+        data["recipeSugar"] = this.recipeSugar !== undefined ? this.recipeSugar : <any>null;
+        data["recipeSalt"] = this.recipeSalt !== undefined ? this.recipeSalt : <any>null;
+        data["recipeSaturatedFat"] = this.recipeSaturatedFat !== undefined ? this.recipeSaturatedFat : <any>null;
+        data["recipeTransFat"] = this.recipeTransFat !== undefined ? this.recipeTransFat : <any>null;
+        data["recipeFiber"] = this.recipeFiber !== undefined ? this.recipeFiber : <any>null;
+        data["recipeKalcium"] = this.recipeKalcium !== undefined ? this.recipeKalcium : <any>null;
+        data["recipeKalium"] = this.recipeKalium !== undefined ? this.recipeKalium : <any>null;
+        data["recipeQuantity"] = this.recipeQuantity !== undefined ? this.recipeQuantity : <any>null;
+        data["recipeMeasure"] = this.recipeMeasure !== undefined ? this.recipeMeasure : <any>null;
         return data;
     }
 }
 
 export interface IRecipe {
     recipeId?: number;
-    name?: string | null;
-    description?: string | null;
-    createdDate?: Date;
-    createdBy?: string | null;
-    userId?: number;
-    categoryId?: number;
+    recipeName?: string | null;
+    recipeDescription?: string | null;
+    recipeCategoryId?: number;
+    recipeCostPrice?: number | null;
+    recipeRetailPrice?: number | null;
+    recipeKilojule?: number | null;
+    recipeCalories?: number | null;
+    recipeProtein?: number | null;
+    recipeFat?: number | null;
+    recipeCarbohydrate?: number | null;
+    recipeCholesterol?: number | null;
+    recipeSugar?: number | null;
+    recipeSalt?: number | null;
+    recipeSaturatedFat?: number | null;
+    recipeTransFat?: number | null;
+    recipeFiber?: number | null;
+    recipeKalcium?: number | null;
+    recipeKalium?: number | null;
+    recipeQuantity?: number | null;
+    recipeMeasure?: string | null;
 }
 
 export class UserRole implements IUserRole {

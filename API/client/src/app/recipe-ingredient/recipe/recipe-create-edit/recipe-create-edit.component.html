@@ -1,0 +1,295 @@
+<p-card class="">
+  <p-toast></p-toast>
+  <p>{{ recipe.recipeName }}</p>
+  <form class="p-3">
+    <div class="grid gap-4 grid-cols-4 gap-4 m-2">
+      <div class="field">
+        <label for="name" class="block text-900 font-medium m-2">Name</label>
+        <input
+          id="name"
+          name="recipeName"
+          type="text"
+          class="w-full n mb-3"
+          pInputText
+          required
+          [(ngModel)]="recipe.recipeName"
+        />
+        <p-message
+          severity="error"
+          text="Name is required"
+          *ngIf="!recipe.recipeName"
+        ></p-message>
+      </div>
+      <div class="">
+        <label for="description" class="block text-900 font-medium m-2"
+          >Description</label
+        >
+        <textarea
+          id="description"
+          type="textarea"
+          name="recipeDescription"
+          pInputTextarea
+          [(ngModel)]="recipe.recipeDescription"
+          required
+        ></textarea>
+        <p-message
+          severity="error"
+          text="Description is required"
+          *ngIf="!recipe.recipeDescription"
+        ></p-message>
+      </div>
+
+      <div class="w-full col-span-2">
+        <p-card>
+          <p-header class="grid gap-2 grid-cols-3 m-2 items-center">
+            <h3 class="self-center">Ingredients</h3>
+            <p-button
+              label="Add Ingredient"
+              class="p-button-rounded p-button-success m-3"
+              (click)="showAddIngredientDialog()"
+            ></p-button
+          ></p-header>
+
+          <p-table
+            [value]="ingredientViews"
+            [scrollable]="true"
+            scrollHeight="400px"
+            [tableStyle]="{ 'min-width': '50rem' }"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>PackageQuantity</th>
+                <th>Actions</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-ingredient>
+              <tr>
+                <td>{{ ingredient.materialName }}</td>
+                <td>{{ ingredient.quantity }}</td>
+                <td>{{ 1 }}</td>
+                <td>
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-pencil"
+                    class="p-button-rounded p-button-success mr-2"
+                    (click)="showEditIngredientDialog(ingredient)"
+                  ></button>
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-trash"
+                    class="p-button-rounded p-button-warning"
+                    (click)="deleteIngredient(ingredient)"
+                  ></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-card>
+      </div>
+      <div>
+        <p-dropdown
+          [options]="recipeCategories"
+          [(ngModel)]="selectedRecipeCategory"
+          optionLabel="categoryName"
+          placeholder="Select a category"
+          name="selectedRecipeCategory"
+          [showClear]="true"
+        ></p-dropdown>
+      </div>
+      <div>
+        <button
+          pButton
+          pRipple
+          label="Save"
+          icon="pi pi-check"
+          class="p-button-text"
+          (click)="saveRecipe()"
+        ></button>
+      </div>
+    </div>
+  </form>
+</p-card>
+<p-dialog
+  [(visible)]="ingredientToAddDialog"
+  [style]=""
+  header="Ingredient Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <p-table
+    [value]="baseMaterials"
+    selectionMode="single"
+    [(selection)]="selectedMaterialToCreateIngredient"
+    dataKey="code"
+    [scrollable]="true"
+    scrollHeight="400px"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [globalFilterFields]="[
+      'materialName',
+      'materialCode',
+      'costPrice',
+      'kilojule',
+      'isAllergen'
+    ]"
+    dataKey="materialId"
+  >
+    <ng-template pTemplate="caption">
+      <div class="tw-flex tw-align-items-center tw-justify-content-between">
+        <h5 class="tw-m-0">Manage Base-materials</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            #textInput
+            (input)="dt.filterGlobal(textInput.value, 'contains')"
+            placeholder="Search..."
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="materialName">
+          BaseMaterialName <p-sortIcon field="code"></p-sortIcon>
+        </th>
+        <th pSortableColumn="materialCode" style="min-width: 15rem">
+          Code <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="costPrice" style="min-width: 10rem">
+          CostPrice <p-sortIcon field="description"></p-sortIcon>
+        </th>
+        <th pSortableColumn="kilojule" style="min-width: 10rem">
+          Kilojoule<p-sortIcon field="description"></p-sortIcon>
+        </th>
+        <th pSortableColumn="isAllergen" style="min-width: 10rem">
+          Allergen<p-sortIcon field="description"></p-sortIcon>
+        </th>
+
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr [pSelectableRow]="item">
+        <td>{{ item.materialName }}</td>
+        <td>{{ item.materialCode }}</td>
+        <td>{{ item.costPrice }}</td>
+        <td>{{ item.kilojule }}</td>
+        <td>
+          <i
+            *ngIf="item.isAllergen"
+            class="pi pi-exclamation-triangle"
+            style="color: #cc8925; font-size: 1.5rem; margin-left: 1.5rem"
+          ></i>
+        </td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-info"
+            class="p-button-rounded p-button-help mr-2"
+            (click)="showMaterialInfo(item)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+            (click)="editMaterial(item)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <ng-template pTemplate="content">
+    <div class="grid grid-cols-3">
+      <div></div>
+      <div>
+        <div class="text-900">
+          <p>Quantity</p>
+        </div>
+        <div class="grid grid-cols-3">
+          <p-inputNumber
+            [(ngModel)]="ingredientToAdd.quantity"
+            mode="decimal"
+            [minFractionDigits]="2"
+            class="col-span-2 mr-2"
+          ></p-inputNumber>
+          <p class="self-center ml-2">
+            {{ selectedMaterialToCreateIngredient.measure }}
+          </p>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer" *ngIf="true">
+    <p>
+      Selected Material:
+      {{ selectedMaterialToCreateIngredient?.materialName }}
+    </p>
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideIngredientAddDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="addIngredient()"
+    ></button>
+  </ng-template>
+</p-dialog>
+<p-dialog
+  [(visible)]="displayEditIngredientDialog"
+  [style]=""
+  header="Edit Ingredient"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <div class="grid grid-cols-3">
+    <div></div>
+    <div>
+      <div class="text-900">
+        <p>Quantity</p>
+      </div>
+      <div class="grid grid-cols-3">
+        <p-inputNumber
+          [(ngModel)]="ingredientToAdd.quantity"
+          mode="decimal"
+          [minFractionDigits]="2"
+          class="col-span-2 mr-2"
+        ></p-inputNumber>
+      </div>
+    </div>
+    <div></div>
+  </div>
+  <p-footer>
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideEditIngredientDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="updateIngredient()"
+    ></button>
+  </p-footer>
+</p-dialog>

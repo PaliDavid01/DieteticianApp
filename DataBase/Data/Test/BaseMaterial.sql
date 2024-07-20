@@ -28,8 +28,8 @@ INSERT INTO [dbo].[BaseMaterial] (
 	[RetailPrice], 
 	[SupplierCode])
 	VALUES
-	(1, N'BL55 liszt', N'BL55_LL', N'sth sth', 27, 1000, N'g', 1, 2, N'idkn', 11, N'nootee', 3370, 12, 1, 76, 0, 0, 0, 0, 0, 4,  13, 140, 200, 250, N'123NOK'),
-	(2, N'Kristálycukor', N'CUK_12NOK', 'Cuukor', 27, 1000, N'g', 2, 2, N'idkn', 10, N'notee', 4000, 0, 0, 1000, 0, 1000, 0, 0, 0, 0, 0, 150, 190, 220, N'124NOK'),
+	(1, N'BL55 liszt', N'BL55_LL', N'sth sth', 27, 1000, N'g', 1, 2, N'idkn', 11, N'nootee', 3370, 120, 10, 760, 200, 200, 200, 200, 200, 40,  130, 1400, 2000, 2500, N'123NOK'),
+	(2, N'Kristálycukor', N'CUK_12NOK', 'Cuukor', 27, 1000, N'g', 2, 2, N'idkn', 10, N'notee', 4000, 200, 200, 1000, 200, 1000, 200, 200, 200, 200, 200, 150, 190, 220, N'124NOK'),
 	(3, N'Kakaópor', N'KAK_12NOK', 'Kakaópor', 27, 1000, N'g', 3, 2, N'idkn', 10, N'notee', 3680, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'125NOK'),
 	(4, N'Kakaóvaj', N'KAKV_12NOK', 'Kakaóvaj', 27, 1000, N'Kg', 4, 2, N'idkn', 10, N'notee', 8840, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'126NOK'),
 	(5, N'Közepes Tojás (~53g)', N'TOJ_12NOK', 'Tojás', 27, 1, N'db', 5, 2, N'idkn', 10, N'notee', 317, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'127NOK'),

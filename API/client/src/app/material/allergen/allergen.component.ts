@@ -33,10 +33,15 @@ export class AllergenComponent {
   ) {}
 
   ngOnInit() {
+    this.loadAllergens();
+  }
+
+  loadAllergens() {
     this.allergenService.readAll().subscribe((data) => {
       this.allergens = data;
     });
   }
+
   exportExcel() {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.allergens);
@@ -96,9 +101,7 @@ export class AllergenComponent {
               detail: 'Allergen Deleted',
               life: 3000,
             });
-            this.allergens = this.allergens.filter(
-              (val) => val.allergenId !== allergen.allergenId
-            );
+            this.loadAllergens();
             this.allergenDialog = false;
           },
           (error) => {
@@ -133,8 +136,7 @@ export class AllergenComponent {
             detail: 'Allergen Updated',
             life: 3000,
           });
-          this.allergens[this.findIndexById(this.allergen.allergenCode)] =
-            this.allergen;
+          this.loadAllergens();
           this.allergenDialog = false;
         },
         (error) => {
@@ -156,9 +158,7 @@ export class AllergenComponent {
             detail: 'Allergen Created',
             life: 3000,
           });
-          this.allergenService.readAll().subscribe((data) => {
-            this.allergens = data;
-          });
+          this.loadAllergens();
           this.allergenDialog = false;
         },
         (error) => {

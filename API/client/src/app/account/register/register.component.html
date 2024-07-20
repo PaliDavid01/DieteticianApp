@@ -1,12 +1,16 @@
-<div class="flex align-items-center justify-content-center">
-  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-3">
-    <div class="text-center mb-5">
-      <div class="text-900 text-3xl font-medium mb-3">Register</div>
+<div class="tw-flex tw-justify-center tw-w-100">
+  <div
+    class="tw-shadow tw-block tw-p-6 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow"
+  >
+    <div class="tw-text-center tw-mb-5">
+      <div class="tw-text-900 tw-text-3xl tw-font-medium tw-mb-3">Register</div>
     </div>
 
     <div>
       <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="on">
-        <label for="firstName1" class="block text-900 font-medium mb-2"
+        <label
+          for="firstName1"
+          class="tw-block tw-text-900 tw-font-medium tw-mb-2"
           >Firstname</label
         >
         <input
@@ -15,7 +19,7 @@
           type="text"
           placeholder="John"
           pInputText
-          class="w-full mb-3"
+          class="tw-w-full tw-mb-3"
           [(ngModel)]="model.firstName"
           [required]="true"
         />
@@ -25,7 +29,9 @@
           text="Firstname is required"
         ></p-message>
 
-        <label for="lastName1" class="block text-900 font-medium mb-2"
+        <label
+          for="lastName1"
+          class="tw-block tw-text-900 tw-font-medium tw-mb-2"
           >lastname</label
         >
         <input
@@ -34,7 +40,7 @@
           type="text"
           placeholder="Wick"
           pInputText
-          class="w-full mb-3"
+          class="tw-w-full tw-mb-3"
           [(ngModel)]="model.lastName"
           [required]="true"
         />
@@ -44,7 +50,7 @@
           text="Lastname is required"
         ></p-message>
 
-        <label for="email1" class="block text-900 font-medium mb-2"
+        <label for="email1" class="tw-block tw-text-900 tw-font-medium tw-mb-2"
           >Email</label
         >
         <input
@@ -53,7 +59,7 @@
           type="email"
           placeholder="yxz@sth.com"
           pInputText
-          class="w-full mb-3"
+          class="tw-w-full tw-mb-3"
           [(ngModel)]="model.email"
           [required]="true"
         />
@@ -63,7 +69,9 @@
           text="Email is required"
         ></p-message>
 
-        <label for="password1" class="block text-900 font-medium mb-2"
+        <label
+          for="password1"
+          class="tw-block tw-text-900 tw-font-medium tw-mb-2"
           >Password</label
         >
         <input
@@ -72,7 +80,7 @@
           type="password"
           placeholder="Password"
           pInputText
-          class="w-full mb-3"
+          class="tw-w-full tw-mb-3"
           [(ngModel)]="model.password"
           [required]="true"
           [minlength]="10"
@@ -88,7 +96,9 @@
           text="Password must be at least 10 characters"
         ></p-message>
 
-        <label for="roles1" class="block text-900 font-medium mb-2">Role</label>
+        <label for="roles1" class="tw-block tw-text-900 tw-font-medium tw-mb-2"
+          >Role</label
+        >
         <p-multiSelect
           id="roles1"
           name="roles"
@@ -97,7 +107,7 @@
           optionLabel="roleName"
           defaultLabel="Select a Role"
           [showClear]="true"
-          styleClass="w-full mb-3"
+          styleClass="tw-w-full tw-mb-3"
           display="chip"
           [required]="true"
         ></p-multiSelect>
@@ -106,14 +116,16 @@
           severity="error"
           text="At least one role is required"
         ></p-message>
-        <div class="flex align-items-center justify-content-between mb-6">
+        <div
+          class="tw-flex tw-align-items-center tw-justify-content-between tw-mb-6"
+        >
           <a
             class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
             >Forgot password?</a
           >
           <a
             href="/"
-            class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
+            class="tw-font-medium tw-no-underline tw-ml-2 tw-text-blue-500 tw-text-right tw-cursor-pointer"
             >Already have an account?</a
           >
         </div>

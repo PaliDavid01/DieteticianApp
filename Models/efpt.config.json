@@ -72,6 +72,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[IngredientDataView]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[UserRoleView]",
          "ObjectType": 3
       }

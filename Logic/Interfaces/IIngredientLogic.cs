@@ -5,5 +5,6 @@ namespace Logic.Interfaces
 {
     public interface IIngredientLogic : ICRUDLogic<Ingredient>
     {
+        Task<IEnumerable<IngredientDataView>> GetAllByRecipeId(int recipeId);
     }
 }

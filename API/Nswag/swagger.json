@@ -26,7 +26,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Allergen"
+                }
+              }
+            }
           }
         }
       }
@@ -366,7 +373,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllergenMaterial"
+                }
+              }
+            }
           }
         }
       }
@@ -751,7 +765,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseMaterial"
+                }
+              }
+            }
           }
         }
       }
@@ -1003,7 +1024,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ecode"
+                }
+              }
+            }
           }
         }
       }
@@ -1235,6 +1263,41 @@
         }
       }
     },
+    "/Ingredient/GetAllByRecipeId/{recipeId}": {
+      "get": {
+        "tags": [
+          "Ingredient"
+        ],
+        "operationId": "Ingredient_GetAllByRecipeId",
+        "parameters": [
+          {
+            "name": "recipeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IngredientDataView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Ingredient/Create": {
       "post": {
         "tags": [
@@ -1255,7 +1318,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ingredient"
+                }
+              }
+            }
           }
         }
       }
@@ -1507,7 +1577,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialGroup"
+                }
+              }
+            }
           }
         }
       }
@@ -1759,7 +1836,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeCategory"
+                }
+              }
+            }
           }
         }
       }
@@ -1991,6 +2075,31 @@
         }
       }
     },
+    "/Recipe/RecalculateMacros/{recipeId}": {
+      "put": {
+        "tags": [
+          "Recipe"
+        ],
+        "operationId": "Recipe_RecalculateMacros",
+        "parameters": [
+          {
+            "name": "recipeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/Recipe/Create": {
       "post": {
         "tags": [
@@ -2011,7 +2120,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Recipe"
+                }
+              }
+            }
           }
         }
       }
@@ -2462,7 +2578,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stock"
+                }
+              }
+            }
           }
         }
       }
@@ -2714,7 +2837,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vitamin"
+                }
+              }
+            }
           }
         }
       }
@@ -3265,6 +3395,53 @@
           }
         }
       },
+      "IngredientDataView": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ingredientId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recipeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "materialCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialName": {
+            "type": "string",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialGroupId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "groupCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "Ingredient": {
         "type": "object",
         "additionalProperties": false,
@@ -3327,29 +3504,101 @@
             "type": "integer",
             "format": "int32"
           },
-          "name": {
+          "recipeName": {
             "type": "string",
             "nullable": true
           },
-          "description": {
+          "recipeDescription": {
             "type": "string",
             "nullable": true
           },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "userId": {
+          "recipeCategoryId": {
             "type": "integer",
             "format": "int32"
           },
-          "categoryId": {
-            "type": "integer",
-            "format": "int32"
+          "recipeCostPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeRetailPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeKilojule": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeCalories": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeProtein": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeCarbohydrate": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeCholesterol": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeSugar": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeSalt": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeSaturatedFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeTransFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeFiber": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeKalcium": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeKalium": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeQuantity": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeMeasure": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

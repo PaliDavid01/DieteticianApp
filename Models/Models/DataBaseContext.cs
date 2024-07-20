@@ -25,6 +25,8 @@ public partial class DataBaseContext : DbContext
 
     public virtual DbSet<Ingredient> Ingredients { get; set; }
 
+    public virtual DbSet<IngredientDataView> IngredientDataViews { get; set; }
+
     public virtual DbSet<MaterialGroup> MaterialGroups { get; set; }
 
     public virtual DbSet<Recipe> Recipes { get; set; }
@@ -151,8 +153,28 @@ public partial class DataBaseContext : DbContext
         {
             entity.ToTable("Ingredient");
 
-            entity.Property(e => e.IngredientId).ValueGeneratedNever();
-            entity.Property(e => e.Quantity).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.Quantity).HasColumnType("decimal(18, 6)");
+        });
+
+        modelBuilder.Entity<IngredientDataView>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("IngredientDataView");
+
+            entity.Property(e => e.GroupName)
+                .IsRequired()
+                .HasMaxLength(255);
+            entity.Property(e => e.MaterialCode)
+                .IsRequired()
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.MaterialName)
+                .IsRequired()
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Note).HasColumnType("text");
+            entity.Property(e => e.Quantity).HasColumnType("decimal(18, 6)");
         });
 
         modelBuilder.Entity<MaterialGroup>(entity =>
@@ -170,24 +192,33 @@ public partial class DataBaseContext : DbContext
         {
             entity.ToTable("Recipe");
 
-            entity.Property(e => e.RecipeId).ValueGeneratedNever();
-            entity.Property(e => e.CreatedBy)
+            entity.Property(e => e.RecipeCalories).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeCarbohydrate).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeCholesterol).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeCostPrice).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeDescription).HasColumnType("text");
+            entity.Property(e => e.RecipeFat).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeFiber).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeKalcium).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeKalium).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeKilojule).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeMeasure).HasMaxLength(50);
+            entity.Property(e => e.RecipeName)
                 .IsRequired()
                 .HasMaxLength(50);
-            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-            entity.Property(e => e.Description)
-                .IsRequired()
-                .HasColumnType("text");
-            entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(50);
+            entity.Property(e => e.RecipeProtein).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeQuantity).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeRetailPrice).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeSalt).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeSaturatedFat).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeSugar).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.RecipeTransFat).HasColumnType("decimal(18, 2)");
         });
 
         modelBuilder.Entity<RecipeCategory>(entity =>
         {
             entity.ToTable("RecipeCategory");
 
-            entity.Property(e => e.RecipeCategoryId).ValueGeneratedNever();
             entity.Property(e => e.CategoryName)
                 .IsRequired()
                 .HasMaxLength(50);
