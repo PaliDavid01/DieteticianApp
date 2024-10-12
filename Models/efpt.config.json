@@ -16,6 +16,10 @@
    "T4TemplatePath": null,
    "Tables": [
       {
+         "Name": "[dbo].[AgeCategory]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Allergen]",
          "ObjectType": 0
       },
@@ -28,6 +32,18 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Customer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DayMenu]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DayOrder]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Ecodes]",
          "ObjectType": 0
       },
@@ -37,6 +53,14 @@
       },
       {
          "Name": "[dbo].[MaterialGroup]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Meal]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MealRecipe]",
          "ObjectType": 0
       },
       {
@@ -65,6 +89,14 @@
       },
       {
          "Name": "[dbo].[Vitamins]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WeekMenu]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WeekOrder]",
          "ObjectType": 0
       },
       {

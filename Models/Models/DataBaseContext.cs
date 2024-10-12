@@ -13,6 +13,8 @@ public partial class DataBaseContext : DbContext
     {
     }
 
+    public virtual DbSet<AgeCategory> AgeCategories { get; set; }
+
     public virtual DbSet<Allergen> Allergens { get; set; }
 
     public virtual DbSet<AllergenMaterial> AllergenMaterials { get; set; }
@@ -21,6 +23,12 @@ public partial class DataBaseContext : DbContext
 
     public virtual DbSet<BaseMaterial> BaseMaterials { get; set; }
 
+    public virtual DbSet<Customer> Customers { get; set; }
+
+    public virtual DbSet<DayMenu> DayMenus { get; set; }
+
+    public virtual DbSet<DayOrder> DayOrders { get; set; }
+
     public virtual DbSet<Ecode> Ecodes { get; set; }
 
     public virtual DbSet<Ingredient> Ingredients { get; set; }
@@ -28,6 +36,10 @@ public partial class DataBaseContext : DbContext
     public virtual DbSet<IngredientDataView> IngredientDataViews { get; set; }
 
     public virtual DbSet<MaterialGroup> MaterialGroups { get; set; }
+
+    public virtual DbSet<Meal> Meals { get; set; }
+
+    public virtual DbSet<MealRecipe> MealRecipes { get; set; }
 
     public virtual DbSet<Recipe> Recipes { get; set; }
 
@@ -45,8 +57,21 @@ public partial class DataBaseContext : DbContext
 
     public virtual DbSet<Vitamin> Vitamins { get; set; }
 
+    public virtual DbSet<WeekMenu> WeekMenus { get; set; }
+
+    public virtual DbSet<WeekOrder> WeekOrders { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AgeCategory>(entity =>
+        {
+            entity.ToTable("AgeCategory");
+
+            entity.Property(e => e.AgeCategoryName)
+                .IsRequired()
+                .HasMaxLength(50);
+        });
+
         modelBuilder.Entity<Allergen>(entity =>
         {
             entity.ToTable("Allergen");
@@ -137,6 +162,30 @@ public partial class DataBaseContext : DbContext
             entity.Property(e => e.Vatrate).HasColumnName("VATRate");
         });
 
+        modelBuilder.Entity<Customer>(entity =>
+        {
+            entity.ToTable("Customer");
+
+            entity.Property(e => e.CustomerName)
+                .IsRequired()
+                .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<DayMenu>(entity =>
+        {
+            entity.ToTable("DayMenu");
+
+            entity.Property(e => e.DayMenuDate).HasColumnType("date");
+            entity.Property(e => e.DayMenuName)
+                .IsRequired()
+                .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<DayOrder>(entity =>
+        {
+            entity.ToTable("DayOrder");
+        });
+
         modelBuilder.Entity<Ecode>(entity =>
         {
             entity.Property(e => e.EcodeId).HasColumnName("EcodeID");
@@ -186,6 +235,23 @@ public partial class DataBaseContext : DbContext
             entity.Property(e => e.GroupName)
                 .IsRequired()
                 .HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<Meal>(entity =>
+        {
+            entity.ToTable("Meal");
+
+            entity.Property(e => e.MealDescription)
+                .IsRequired()
+                .HasMaxLength(250);
+            entity.Property(e => e.MealName)
+                .IsRequired()
+                .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<MealRecipe>(entity =>
+        {
+            entity.ToTable("MealRecipe");
         });
 
         modelBuilder.Entity<Recipe>(entity =>
@@ -295,6 +361,25 @@ public partial class DataBaseContext : DbContext
             entity.Property(e => e.VitaminId).HasColumnName("VitaminID");
             entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
             entity.Property(e => e.Pha).HasColumnName("PHA");
+        });
+
+        modelBuilder.Entity<WeekMenu>(entity =>
+        {
+            entity.ToTable("WeekMenu");
+
+            entity.Property(e => e.WeekMenuEndDate).HasColumnType("date");
+            entity.Property(e => e.WeekMenuName)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.WeekMenuStartDate).HasColumnType("date");
+        });
+
+        modelBuilder.Entity<WeekOrder>(entity =>
+        {
+            entity.ToTable("WeekOrder");
+
+            entity.Property(e => e.EndDate).HasColumnType("date");
+            entity.Property(e => e.StartDate).HasColumnType("date");
         });
 
         OnModelCreatingPartial(modelBuilder);
