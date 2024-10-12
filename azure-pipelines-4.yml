@@ -1,8 +1,13 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
 trigger:
 - master
 
-pool: 
-  name: MyPool
+pool:
+  name: Azure Pipelines
 
 variables:
   solution: '**/*.sln'
@@ -10,17 +15,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '20.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install -g @angular/cli@17.3.2
-    npm install
-    ng build --configuration production
-  displayName: 'npm install and build'
-
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
@@ -34,3 +28,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
