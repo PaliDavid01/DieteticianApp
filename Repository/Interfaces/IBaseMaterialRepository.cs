@@ -3,7 +3,7 @@ using Repository.Interfaces.GenericInterfaces;
 
 namespace Repository.Interfaces
 {
-    public interface IBaseMaterialRepository : IRecipeRepository<BaseMaterial>
+    public interface IBaseMaterialRepository : ICRUDRepository<BaseMaterial>
     {
         Task<BaseMaterial> GetAllExtended();
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Interfaces
 {
-    public interface IUserRoleRepository : IRecipeRepository<UserRole>
+    public interface IUserRoleRepository : ICRUDRepository<UserRole>
     {
         ICollection<string> GetUserRolesWithNames(int userId);
     }

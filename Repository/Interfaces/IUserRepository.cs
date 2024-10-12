@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Interfaces
 {
-    public interface IUserRepository: IRecipeRepository<User> 
+    public interface IUserRepository: ICRUDRepository<User> 
     {
     }
 }

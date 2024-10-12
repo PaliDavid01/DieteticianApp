@@ -2,7 +2,7 @@
 using Repository.Interfaces.GenericInterfaces;
 namespace Repository.Interfaces
 {
-    public interface IStockRepository : IRecipeRepository<Stock>
+    public interface IStockRepository : ICRUDRepository<Stock>
     {
     }
 }

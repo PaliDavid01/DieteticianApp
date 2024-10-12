@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Interfaces
 {
-    public interface IVitaminRepository: IRecipeRepository<Vitamin>   
+    public interface IVitaminRepository: ICRUDRepository<Vitamin>   
     {
     }
 }

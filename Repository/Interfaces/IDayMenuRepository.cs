@@ -3,7 +3,7 @@ using Repository.Interfaces.GenericInterfaces;
 
 namespace Repository.Interfaces
 {
-    public interface IAllergenRepository : ICRUDRepository<Allergen>
+    public interface IDayMenuRepository : ICRUDRepository<DayMenu>
     {
     }
 }

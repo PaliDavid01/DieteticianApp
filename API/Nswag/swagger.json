@@ -6,6 +6,265 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/AgeCategory/Create": {
+      "post": {
+        "tags": [
+          "AgeCategory"
+        ],
+        "operationId": "AgeCategory_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeCategory"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgeCategory"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgeCategory/CreateAsyn": {
+      "post": {
+        "tags": [
+          "AgeCategory"
+        ],
+        "operationId": "AgeCategory_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeCategory"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AgeCategory/Delete": {
+      "delete": {
+        "tags": [
+          "AgeCategory"
+        ],
+        "operationId": "AgeCategory_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AgeCategory/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "AgeCategory"
+        ],
+        "operationId": "AgeCategory_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeCategory"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AgeCategory/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "AgeCategory"
+        ],
+        "operationId": "AgeCategory_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AgeCategory/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "AgeCategory"
+        ],
+        "operationId": "AgeCategory_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AgeCategory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgeCategory/ReadAll": {
+      "get": {
+        "tags": [
+          "AgeCategory"
+        ],
+        "operationId": "AgeCategory_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AgeCategory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgeCategory/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "AgeCategory"
+        ],
+        "operationId": "AgeCategory_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgeCategory"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgeCategory/Update": {
+      "put": {
+        "tags": [
+          "AgeCategory"
+        ],
+        "operationId": "AgeCategory_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeCategory"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AgeCategory/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "AgeCategory"
+        ],
+        "operationId": "AgeCategory_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeCategory"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/Allergen/Create": {
       "post": {
         "tags": [
@@ -1004,6 +1263,783 @@
         }
       }
     },
+    "/Customer/Create": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Customer/CreateAsyn": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Customer/Delete": {
+      "delete": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Customer/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Customer/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Customer/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Customer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Customer/ReadAll": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Customer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Customer/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Customer/Update": {
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Customer/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayMenu/Create": {
+      "post": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DayMenu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DayMenu/CreateAsyn": {
+      "post": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayMenu/Delete": {
+      "delete": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayMenu/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayMenu/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayMenu/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DayMenu"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DayMenu/ReadAll": {
+      "get": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DayMenu"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DayMenu/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DayMenu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DayMenu/Update": {
+      "put": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayMenu/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayOrder/Create": {
+      "post": {
+        "tags": [
+          "DayOrder"
+        ],
+        "operationId": "DayOrder_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayOrder"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DayOrder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DayOrder/CreateAsyn": {
+      "post": {
+        "tags": [
+          "DayOrder"
+        ],
+        "operationId": "DayOrder_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayOrder"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayOrder/Delete": {
+      "delete": {
+        "tags": [
+          "DayOrder"
+        ],
+        "operationId": "DayOrder_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayOrder/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "DayOrder"
+        ],
+        "operationId": "DayOrder_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayOrder"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayOrder/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "DayOrder"
+        ],
+        "operationId": "DayOrder_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayOrder/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "DayOrder"
+        ],
+        "operationId": "DayOrder_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DayOrder"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DayOrder/ReadAll": {
+      "get": {
+        "tags": [
+          "DayOrder"
+        ],
+        "operationId": "DayOrder_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DayOrder"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DayOrder/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "DayOrder"
+        ],
+        "operationId": "DayOrder_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DayOrder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DayOrder/Update": {
+      "put": {
+        "tags": [
+          "DayOrder"
+        ],
+        "operationId": "DayOrder_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayOrder"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/DayOrder/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "DayOrder"
+        ],
+        "operationId": "DayOrder_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayOrder"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/Ecode/Create": {
       "post": {
         "tags": [
@@ -1803,6 +2839,524 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/MaterialGroup"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Meal/Create": {
+      "post": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Meal"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Meal"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Meal/CreateAsyn": {
+      "post": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Meal"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Meal/Delete": {
+      "delete": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Meal/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Meal"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Meal/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Meal/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Meal"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Meal/ReadAll": {
+      "get": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Meal"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Meal/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Meal"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Meal/Update": {
+      "put": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Meal"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Meal/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Meal"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/MealRecipe/Create": {
+      "post": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MealRecipe"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MealRecipe"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MealRecipe/CreateAsyn": {
+      "post": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MealRecipe"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/MealRecipe/Delete": {
+      "delete": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/MealRecipe/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MealRecipe"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/MealRecipe/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/MealRecipe/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MealRecipe"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MealRecipe/ReadAll": {
+      "get": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MealRecipe"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MealRecipe/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MealRecipe"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MealRecipe/Update": {
+      "put": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MealRecipe"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/MealRecipe/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MealRecipe"
               }
             }
           },
@@ -3075,10 +4629,550 @@
           }
         }
       }
+    },
+    "/api/WeekMenu/Create": {
+      "post": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekMenu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/CreateAsyn": {
+      "post": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/Delete": {
+      "delete": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeekMenu"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/ReadAll": {
+      "get": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeekMenu"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekMenu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/Update": {
+      "put": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekOrder/Create": {
+      "post": {
+        "tags": [
+          "WeekOrder"
+        ],
+        "operationId": "WeekOrder_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekOrder"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekOrder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekOrder/CreateAsyn": {
+      "post": {
+        "tags": [
+          "WeekOrder"
+        ],
+        "operationId": "WeekOrder_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekOrder"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekOrder/Delete": {
+      "delete": {
+        "tags": [
+          "WeekOrder"
+        ],
+        "operationId": "WeekOrder_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekOrder/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "WeekOrder"
+        ],
+        "operationId": "WeekOrder_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekOrder"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekOrder/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "WeekOrder"
+        ],
+        "operationId": "WeekOrder_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekOrder/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "WeekOrder"
+        ],
+        "operationId": "WeekOrder_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeekOrder"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekOrder/ReadAll": {
+      "get": {
+        "tags": [
+          "WeekOrder"
+        ],
+        "operationId": "WeekOrder_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeekOrder"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekOrder/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "WeekOrder"
+        ],
+        "operationId": "WeekOrder_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekOrder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekOrder/Update": {
+      "put": {
+        "tags": [
+          "WeekOrder"
+        ],
+        "operationId": "WeekOrder_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekOrder"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/WeekOrder/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "WeekOrder"
+        ],
+        "operationId": "WeekOrder_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekOrder"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AgeCategory": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ageCategoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ageCategoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ageCategoryMinAge": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ageCategoryMaxAge": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "Allergen": {
         "type": "object",
         "additionalProperties": false,
@@ -3373,6 +5467,93 @@
           }
         }
       },
+      "Customer": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasAllergies": {
+            "type": "boolean"
+          },
+          "hasDiabetes": {
+            "type": "boolean"
+          },
+          "ageCategoryId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DayMenu": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "dayMenuId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dayMenuName": {
+            "type": "string",
+            "nullable": true
+          },
+          "dayMenuDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "breakfastId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "brunchId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lunchId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "afternoonSnackId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dinnerId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DayOrder": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "dayOrderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wantBreakfast": {
+            "type": "boolean"
+          },
+          "wantBrunch": {
+            "type": "boolean"
+          },
+          "wantLunch": {
+            "type": "boolean"
+          },
+          "wantAfternoonSnack": {
+            "type": "boolean"
+          },
+          "wantDinner": {
+            "type": "boolean"
+          }
+        }
+      },
       "Ecode": {
         "type": "object",
         "additionalProperties": false,
@@ -3475,6 +5656,51 @@
           "groupName": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "Meal": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "mealId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mealName": {
+            "type": "string",
+            "nullable": true
+          },
+          "servingCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mealDescription": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "MealRecipe": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "mealRecipeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recipeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mealId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
           }
         }
       },
@@ -3742,6 +5968,106 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        }
+      },
+      "WeekMenu": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "weekMenuId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weekMenuName": {
+            "type": "string",
+            "nullable": true
+          },
+          "weekMenuStartDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "weekMenuEndDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mondayId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tuesdayId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wednesdayId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "thursdayId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fridayId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "saturdayId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sundayId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "WeekOrder": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "weekOrderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "customerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mondayTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tuesdayTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wednesdayTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "thursdayTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fridayTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "saturdayTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sundayTypeId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       }

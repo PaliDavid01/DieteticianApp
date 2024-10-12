@@ -3,7 +3,7 @@ using Repository.Interfaces.GenericInterfaces;
 
 namespace Repository.Interfaces
 {
-    public interface IRoleRepository : IRecipeRepository<Role>
+    public interface IRoleRepository : ICRUDRepository<Role>
     {
         Task<IEnumerable<UserRoleView>> GetRoleViews();
         Task<IEnumerable<UserRoleView>> GetUserRoleViewsByUserId(int userId);

@@ -6,8 +6,8 @@ namespace Logic.Logic.GenericLogic
 {
     public class CRUDLogic<T> : ICRUDLogic<T> where T : class
     {
-        IRecipeRepository<T> _repository;
-        public CRUDLogic(IRecipeRepository<T> repository)
+        ICRUDRepository<T> _repository;
+        public CRUDLogic(ICRUDRepository<T> repository)
         {
             _repository = repository;
         }

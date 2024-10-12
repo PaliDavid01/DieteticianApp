@@ -3,7 +3,7 @@ using Repository.Interfaces.GenericInterfaces;
 
 namespace Repository.Interfaces
 {
-    public interface IEcodeRepository: IRecipeRepository<Ecode>
+    public interface IEcodeRepository : ICRUDRepository<Ecode>
     {
     }
 }

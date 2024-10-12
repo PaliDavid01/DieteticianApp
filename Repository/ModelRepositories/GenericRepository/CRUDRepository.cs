@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Repository.ModelRepositories.GenericRepository
 {
-    public abstract class CRUDRepository<T> : IRecipeRepository<T> where T : class
+    public abstract class CRUDRepository<T> : ICRUDRepository<T> where T : class
     {
         protected readonly DataBaseContext _dbContext;
         public CRUDRepository(DataBaseContext dbContext)
