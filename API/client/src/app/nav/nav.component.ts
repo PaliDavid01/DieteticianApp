@@ -102,22 +102,13 @@ export class NavComponent implements OnInit {
         ],
       },
       {
-        label: 'Events',
-        icon: 'pi pi-fw pi-calendar',
+        label: 'Menus',
+        icon: 'pi pi-fw pi-table',
         items: [
           {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-              {
-                label: 'Save',
-                icon: 'pi pi-fw pi-calendar-plus',
-              },
-              {
-                label: 'Delete',
-                icon: 'pi pi-fw pi-calendar-minus',
-              },
-            ],
+            label: 'List',
+            icon: 'pi pi-fw pi-list',
+            url: '/menu-list',
           },
           {
             label: 'Archieve',

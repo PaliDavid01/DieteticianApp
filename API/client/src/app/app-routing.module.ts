@@ -11,6 +11,8 @@ import { RecipeCategoryComponent } from './recipe-ingredient/recipe-category/rec
 import { RecipeComponent } from './recipe-ingredient/recipe/recipe.component';
 import { RecipeCreateEditComponent } from './recipe-ingredient/recipe/recipe-create-edit/recipe-create-edit.component';
 import { RecipeCreateEditResolverService } from './recipe-ingredient/recipe/recipe-create-edit-resolver.service';
+import { MenuListComponent } from './menu/menu-list/menu-list.component';
+import { MenuResolver } from './menu/menu-edit/menu-resolver.service';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -30,6 +32,12 @@ const routes: Routes = [
     resolve: { recipe: RecipeCreateEditResolverService },
   },
   { path: 'recipe-category', component: RecipeCategoryComponent },
+  { path: 'menu-list', component: MenuListComponent },
+  {
+    path: 'menu-edit/:id',
+    component: MenuListComponent,
+    resolve: { menu: MenuResolver },
+  },
 ];
 
 @NgModule({

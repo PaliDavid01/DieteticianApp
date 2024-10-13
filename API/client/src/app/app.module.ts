@@ -25,13 +25,23 @@ import {
   AuthService,
   BaseMaterial,
   BaseMaterialService,
+  Customer,
+  CustomerService,
+  DayMenuService,
+  DayOrder,
+  DayOrderService,
   Ingredient,
   IngredientService,
+  Meal,
+  MealRecipeService,
+  MealService,
   Recipe,
   RecipeCategory,
   RecipeCategoryService,
   RecipeService,
   RoleService,
+  WeekMenuService,
+  WeekOrderService,
 } from './services/generated-client';
 import { AuthInterceptor } from './services/auth/auth.interceptor';
 
@@ -141,6 +151,7 @@ import { MaterialCreateResolverService } from './material/material-create/materi
 import { RecipeComponent } from './recipe-ingredient/recipe/recipe.component';
 import { RecipeCategoryComponent } from './recipe-ingredient/recipe-category/recipe-category.component';
 import { RecipeCreateEditComponent } from './recipe-ingredient/recipe/recipe-create-edit/recipe-create-edit.component';
+import { MenuListComponent } from './menu/menu-list/menu-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -160,6 +171,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RecipeCategoryComponent,
     RecipeComponent,
     RecipeCreateEditComponent,
+    MenuListComponent,
   ],
   imports: [
     CommonModule,
@@ -296,6 +308,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     RecipeCategoryService,
     RecipeService,
     IngredientService,
+    // services ftom the generated service file that hasnt been imported
+    WeekMenuService,
+    WeekOrderService,
+    DayMenuService,
+    DayOrderService,
+    MealService,
+    MealRecipeService,
+    CustomerService,
+
     { provide: API_BASE_URL, useValue: 'http://localhost:7247' },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

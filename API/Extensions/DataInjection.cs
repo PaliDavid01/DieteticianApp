@@ -30,6 +30,13 @@ namespace API.Extensions
             services.AddScoped<IRecipeCategoryRepository, RecipeCategoryRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IIngredientRepository, IngredientRepository>();
+            services.AddScoped<IMealRecipeRepository, MealRecipeRepository>();
+            services.AddScoped<IMealRepository, MealRepository>();
+            services.AddScoped<IWeekMenuRepository, WeekMenuRepository>();
+            services.AddScoped<IWeekOrderRepository, WeekOrderRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IDayOrderRepository, DayOrderRepository>();
+
 
             //services.AddTransient<IMaterialLogic, MaterialLogic>();
             services.AddScoped<IUserLogic, UserLogic>();
@@ -45,6 +52,12 @@ namespace API.Extensions
             services.AddScoped<IRecipeCategoryLogic, RecipeCategoryLogic>();
             services.AddScoped<IRecipeLogic, RecipeLogic>();
             services.AddScoped<IIngredientLogic, IngredientLogic>();
+            services.AddScoped<IMealLogic, MealLogic>();
+            services.AddScoped<IMealRecipeLogic, MealRecipeLogic>();
+            services.AddScoped<IWeekMenuLogic, WeekMenuLogic>();
+            services.AddScoped<IWeekOrderLogic, WeekOrderLogic>();
+            services.AddScoped<ICustomerLogic, CustomerLogic>();
+            services.AddScoped<IDayOrderLogic, DayOrderLogic>();
 
             return services;
         }

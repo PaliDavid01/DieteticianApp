@@ -1,0 +1,336 @@
+<div class="card">
+  <p-toast></p-toast>
+  <p-toolbar styleClass="mb-2 gap-2">
+    <ng-template pTemplate="left">
+      <button
+        pButton
+        pRipple
+        label="New"
+        icon="pi pi-plus"
+        class="p-button-success mr-2 p-button-sm"
+        (click)="create()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        [label]="Delete"
+        icon="pi pi-trash"
+        class="p-button-danger p-button-sm"
+        (click)="deleteSelected()"
+        [disabled]="!selectedRecipes || !selectedRecipes.length"
+      ></button>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+      <p-fileUpload
+        mode="basic"
+        accept="image/*"
+        [maxFileSize]="1000000"
+        label="Import"
+        chooseLabel="Import"
+        class="mr-2 inline-block"
+        styleClass="p-button-sm"
+      ></p-fileUpload>
+      <button
+        pButton
+        pRipple
+        label="Export"
+        icon="pi pi-upload"
+        class="p-button-help p-button-sm"
+        (click)="exportExcel()"
+      ></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="items"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="[
+      'weekMenuId',
+      'weekMenuName',
+      'weekMenuStartDate',
+      'weekMenuEndDate'
+    ]"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedRecipes"
+    [rowHover]="true"
+    dataKey="recipeId"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="tw-flex tw-align-items-center tw-justify-content-between">
+        <h5 class="tw-m-0 tw-block">Manage week menus</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            #textInput
+            (input)="dt.filterGlobal(textInput.value, 'contains')"
+            placeholder="Search..."
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="weekMenuId">
+          Id <p-sortIcon field="weekMenuId"></p-sortIcon>
+        </th>
+        <th pSortableColumn="weekMenuName" style="min-width: 15rem">
+          Name<p-sortIcon field="weekMenuName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="weekMenuStartDate" style="min-width: 10rem">
+          Start date <p-sortIcon field="weekMenuStartDate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="weekMenuEndDate" style="min-width: 10rem">
+          End date <p-sortIcon field="weekMenuEndDate"></p-sortIcon>
+        </th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="item"></p-tableCheckbox>
+        </td>
+        <td>{{ item.weekMenuId }}</td>
+        <td>{{ item.weekMenuName }}</td>
+        <td>{{ item.weekMenuStartDate }}</td>
+        <td>{{ item.weekMenuEndDate }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-info"
+            class="p-button-rounded p-button-help mr-2"
+            (click)="showInfo(item)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+            (click)="edit(item)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            (click)="delete(item)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="tw-flex tw-align-items-center tw-justify-content-between">
+        In total there are {{ items ? items.length : 0 }} recipes.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- <p-dialog
+  [(visible)]="displayDialog"
+  [style]="{ width: '450px' }"
+  header="Recipe Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="recipeName">recipe Name</label>
+      <input
+        type="text"
+        pInputText
+        id="recipeName"
+        [(ngModel)]="recipe.recipeName"
+        disabled
+      />
+    </div>
+
+    <div class="field">
+      <label for="description">Description </label>
+      <textarea
+        pInputTextarea
+        id="note"
+        [(ngModel)]="recipe.recipeDescription"
+        rows="5"
+        disabled
+      ></textarea>
+    </div>
+
+    <div class="field">
+      <label for="kilojoule">Kilojoule</label>
+      <input
+        type="number"
+        pInputText
+        id="kilojoule"
+        [(ngModel)]="recipe.recipeKilojule"
+        step="0.01"
+        disabled
+      />
+    </div>
+
+    <div class="field">
+      <label for="protein">Protein</label>
+      <input
+        type="number"
+        pInputText
+        id="protein"
+        [(ngModel)]="recipe.recipeProtein"
+        step="0.01"
+        disabled
+      />
+    </div>
+
+    <div class="field">
+      <label for="calories">Calories</label>
+      <input
+        type="number"
+        pInputText
+        id="carbohydrate"
+        [(ngModel)]="recipe.recipeCalories"
+        step="0.01"
+        disabled
+      />
+    </div>
+
+    <div class="field">
+      <label for="fat">Fat</label>
+      <input
+        type="number"
+        pInputText
+        id="fat"
+        [(ngModel)]="recipe.recipeFat"
+        step="0.01"
+        disabled
+      />
+    </div>
+
+    <div class="field">
+      <label for="cholesterol">Cholesterol</label>
+      <input
+        type="number"
+        pInputText
+        id="cholesterol"
+        [(ngModel)]="recipe.recipeCholesterol"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <div class="field">
+      <label for="sugar">Sugar</label>
+      <input
+        type="number"
+        pInputText
+        id="sugar"
+        [(ngModel)]="recipe.recipeSugar"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <div class="field">
+      <label for="salt">Salt</label>
+      <input
+        type="number"
+        pInputText
+        id="salt"
+        [(ngModel)]="recipe.recipeSalt"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <div class="field">
+      <label for="saturatedFat">Saturated Fat</label>
+      <input
+        type="number"
+        pInputText
+        id="saturatedFat"
+        [(ngModel)]="recipe.recipeSaturatedFat"
+        disabled
+        step="0.01"
+      />
+    </div>
+    <div class="field">
+      <label for="transFat">Trans Fat</label>
+      <input
+        type="number"
+        pInputText
+        id="transFat"
+        [(ngModel)]="recipe.recipeTransFat"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <div class="field">
+      <label for="fiber">Fiber</label>
+      <input
+        type="number"
+        pInputText
+        id="fiber"
+        [(ngModel)]="recipe.recipeFiber"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <div class="field">
+      <label for="calcium">Calcium</label>
+      <input
+        type="number"
+        pInputText
+        id="calcium"
+        [(ngModel)]="recipe.recipeKalcium"
+        disabled
+        step="0.01"
+      />
+    </div>
+    <div class="field">
+      <label for="costPrice">Cost Price</label>
+      <input
+        type="number"
+        pInputText
+        id="costPrice"
+        [(ngModel)]="recipe.recipeCostPrice"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <div class="field">
+      <label for="retailPrice">Retail Price</label>
+      <input
+        type="number"
+        pInputText
+        id="retailPrice"
+        [(ngModel)]="recipe.recipeRetailPrice"
+        disabled
+        step="0.01"
+      />
+    </div>
+  </ng-template> 
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Back"
+      icon="pi pi-arrow-left"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+  </ng-template>
+</p-dialog>-->
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
