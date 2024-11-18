@@ -23,7 +23,7 @@ public partial class IngredientDataView
 
     public int? MaterialGroupId { get; set; }
 
-    public int GroupCode { get; set; }
+    public int? GroupCode { get; set; }
 
     public string GroupName { get; set; }
 }

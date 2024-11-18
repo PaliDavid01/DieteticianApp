@@ -59,12 +59,20 @@ public partial class DataBaseContext : DbContext
 
     public virtual DbSet<WeekMenu> WeekMenus { get; set; }
 
+    public virtual DbSet<WeekMenuGenerateDataAllergen> WeekMenuGenerateDataAllergens { get; set; }
+
+    public virtual DbSet<WeekMenuGenerateDatum> WeekMenuGenerateData { get; set; }
+
     public virtual DbSet<WeekOrder> WeekOrders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
+
         modelBuilder.Entity<AgeCategory>(entity =>
         {
+            entity.HasKey(e => e.AgeCategoryId).HasName("PK__AgeCateg__9E07484BFFDDCEA4");
+
             entity.ToTable("AgeCategory");
 
             entity.Property(e => e.AgeCategoryName)
@@ -74,6 +82,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<Allergen>(entity =>
         {
+            entity.HasKey(e => e.AllergenId).HasName("PK__Allergen__158B939F52B46B71");
+
             entity.ToTable("Allergen");
 
             entity.Property(e => e.AllergenCode)
@@ -90,6 +100,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<AllergenMaterial>(entity =>
         {
+            entity.HasKey(e => e.AllergenMaterialId).HasName("PK__Allergen__1C9C26BC53E4B126");
+
             entity.ToTable("AllergenMaterial");
 
             entity.Property(e => e.AllergenMaterialId).HasColumnName("AllergenMaterialID");
@@ -104,22 +116,17 @@ public partial class DataBaseContext : DbContext
                 .ToView("AllergenMaterialView");
 
             entity.Property(e => e.AllergenCode)
-                .IsRequired()
                 .HasMaxLength(255)
                 .IsUnicode(false);
-            entity.Property(e => e.AllergenDescription)
-                .IsRequired()
-                .HasMaxLength(250);
+            entity.Property(e => e.AllergenDescription).HasMaxLength(250);
             entity.Property(e => e.AllergenMaterialId).HasColumnName("AllergenMaterialID");
-            entity.Property(e => e.AllergenName)
-                .IsRequired()
-                .HasMaxLength(50);
+            entity.Property(e => e.AllergenName).HasMaxLength(50);
             entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
         });
 
         modelBuilder.Entity<BaseMaterial>(entity =>
         {
-            entity.HasKey(e => e.MaterialId);
+            entity.HasKey(e => e.MaterialId).HasName("PK__BaseMate__C50610F73B39FB36");
 
             entity.ToTable("BaseMaterial");
 
@@ -164,6 +171,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D88A0AA898");
+
             entity.ToTable("Customer");
 
             entity.Property(e => e.CustomerName)
@@ -173,6 +182,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<DayMenu>(entity =>
         {
+            entity.HasKey(e => e.DayMenuId).HasName("PK__DayMenu__359EBDA77F0F3AEE");
+
             entity.ToTable("DayMenu");
 
             entity.Property(e => e.DayMenuDate).HasColumnType("date");
@@ -183,11 +194,15 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<DayOrder>(entity =>
         {
+            entity.HasKey(e => e.DayOrderId).HasName("PK__DayOrder__AB151121F9A702C4");
+
             entity.ToTable("DayOrder");
         });
 
         modelBuilder.Entity<Ecode>(entity =>
         {
+            entity.HasKey(e => e.EcodeId).HasName("PK__Ecodes__E93FDF540AD05845");
+
             entity.Property(e => e.EcodeId).HasColumnName("EcodeID");
             entity.Property(e => e.Description).HasColumnType("text");
             entity.Property(e => e.Ecode1)
@@ -200,6 +215,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<Ingredient>(entity =>
         {
+            entity.HasKey(e => e.IngredientId).HasName("PK__Ingredie__BEAEB25AA0992651");
+
             entity.ToTable("Ingredient");
 
             entity.Property(e => e.Quantity).HasColumnType("decimal(18, 6)");
@@ -211,15 +228,11 @@ public partial class DataBaseContext : DbContext
                 .HasNoKey()
                 .ToView("IngredientDataView");
 
-            entity.Property(e => e.GroupName)
-                .IsRequired()
-                .HasMaxLength(255);
+            entity.Property(e => e.GroupName).HasMaxLength(255);
             entity.Property(e => e.MaterialCode)
-                .IsRequired()
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.MaterialName)
-                .IsRequired()
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.Note).HasColumnType("text");
@@ -228,7 +241,7 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<MaterialGroup>(entity =>
         {
-            entity.HasKey(e => e.GroupCode);
+            entity.HasKey(e => e.GroupCode).HasName("PK__Material__3B9743815ADF8768");
 
             entity.ToTable("MaterialGroup");
 
@@ -239,23 +252,25 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<Meal>(entity =>
         {
+            entity.HasKey(e => e.MealId).HasName("PK__Meal__ACF6A63D16AEEA27");
+
             entity.ToTable("Meal");
 
-            entity.Property(e => e.MealDescription)
-                .IsRequired()
-                .HasMaxLength(250);
-            entity.Property(e => e.MealName)
-                .IsRequired()
-                .HasMaxLength(50);
+            entity.Property(e => e.MealDescription).HasMaxLength(250);
+            entity.Property(e => e.MealName).HasMaxLength(50);
         });
 
         modelBuilder.Entity<MealRecipe>(entity =>
         {
+            entity.HasKey(e => e.MealRecipeId).HasName("PK__MealReci__3DA805E5AF578377");
+
             entity.ToTable("MealRecipe");
         });
 
         modelBuilder.Entity<Recipe>(entity =>
         {
+            entity.HasKey(e => e.RecipeId).HasName("PK__Recipe__FDD988B01DAAEC53");
+
             entity.ToTable("Recipe");
 
             entity.Property(e => e.RecipeCalories).HasColumnType("decimal(18, 2)");
@@ -283,6 +298,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<RecipeCategory>(entity =>
         {
+            entity.HasKey(e => e.RecipeCategoryId).HasName("PK__RecipeCa__747A031BF116455B");
+
             entity.ToTable("RecipeCategory");
 
             entity.Property(e => e.CategoryName)
@@ -295,6 +312,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE1A3C692941");
+
             entity.ToTable("Role");
 
             entity.Property(e => e.RoleDescription)
@@ -307,6 +326,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<Stock>(entity =>
         {
+            entity.HasKey(e => e.StockId).HasName("PK__Stock__2C83A9E2181E7BB9");
+
             entity.ToTable("Stock");
 
             entity.Property(e => e.StockId).HasColumnName("StockID");
@@ -321,6 +342,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CC4C73735C45");
+
             entity.ToTable("User");
 
             entity.Property(e => e.Email)
@@ -342,6 +365,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<UserRole>(entity =>
         {
+            entity.HasKey(e => e.UserRoleId).HasName("PK__UserRole__3D978A35EC09A062");
+
             entity.ToTable("UserRole");
         });
 
@@ -351,13 +376,13 @@ public partial class DataBaseContext : DbContext
                 .HasNoKey()
                 .ToView("UserRoleView");
 
-            entity.Property(e => e.RoleName)
-                .IsRequired()
-                .HasMaxLength(50);
+            entity.Property(e => e.RoleName).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Vitamin>(entity =>
         {
+            entity.HasKey(e => e.VitaminId).HasName("PK__Vitamins__0B06F80DB8C08B08");
+
             entity.Property(e => e.VitaminId).HasColumnName("VitaminID");
             entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
             entity.Property(e => e.Pha).HasColumnName("PHA");
@@ -365,6 +390,8 @@ public partial class DataBaseContext : DbContext
 
         modelBuilder.Entity<WeekMenu>(entity =>
         {
+            entity.HasKey(e => e.WeekMenuId).HasName("PK__WeekMenu__667FFFED0E04B2F2");
+
             entity.ToTable("WeekMenu");
 
             entity.Property(e => e.WeekMenuEndDate).HasColumnType("date");
@@ -374,14 +401,29 @@ public partial class DataBaseContext : DbContext
             entity.Property(e => e.WeekMenuStartDate).HasColumnType("date");
         });
 
+        modelBuilder.Entity<WeekMenuGenerateDataAllergen>(entity =>
+        {
+            entity.HasKey(e => e.WeekMenuGenerateDataAllergenId).HasName("PK__WeekMenu__20B9005E0600C5E3");
+
+            entity.ToTable("WeekMenuGenerateDataAllergen");
+        });
+
+        modelBuilder.Entity<WeekMenuGenerateDatum>(entity =>
+        {
+            entity.HasKey(e => e.WeekMenuGenerateDataId).HasName("PK__WeekMenu__39BD0D3D07D640AC");
+        });
+
         modelBuilder.Entity<WeekOrder>(entity =>
         {
+            entity.HasKey(e => e.WeekOrderId).HasName("PK__WeekOrde__F1FE3D70BDCDE75D");
+
             entity.ToTable("WeekOrder");
 
             entity.Property(e => e.EndDate).HasColumnType("date");
             entity.Property(e => e.StartDate).HasColumnType("date");
         });
 
+        OnModelCreatingGeneratedProcedures(modelBuilder);
         OnModelCreatingPartial(modelBuilder);
     }
 

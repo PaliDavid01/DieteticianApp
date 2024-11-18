@@ -1522,6 +1522,73 @@
         }
       }
     },
+    "/DayMenu/GetDayMenuByWeekMenuId/{weekMenuId}": {
+      "get": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_GetDayMenuByWeekMenuId",
+        "parameters": [
+          {
+            "name": "weekMenuId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DayMenu"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DayMenu/GetDayMenuMacroData/{dayMenuId}": {
+      "get": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_GetGetDayMenuMacroData",
+        "parameters": [
+          {
+            "name": "dayMenuId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDayMenuMacroDataResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/DayMenu/Create": {
       "post": {
         "tags": [
@@ -2852,6 +2919,71 @@
         }
       }
     },
+    "/Meal": {
+      "post": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_CreateWithReturnId",
+        "requestBody": {
+          "x-name": "meal",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Meal"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Meal/GetMealMacroData/{mealId}": {
+      "get": {
+        "tags": [
+          "Meal"
+        ],
+        "operationId": "Meal_GetMealMacroData",
+        "parameters": [
+          {
+            "name": "mealId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMealMacroDataResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Meal/Create": {
       "post": {
         "tags": [
@@ -3107,6 +3239,40 @@
         "responses": {
           "200": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/MealRecipe": {
+      "get": {
+        "tags": [
+          "MealRecipe"
+        ],
+        "operationId": "MealRecipe_GetAllDTO",
+        "parameters": [
+          {
+            "name": "mealId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetMealRecipe"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -4630,6 +4796,103 @@
         }
       }
     },
+    "/api/WeekMenu/InitWeekMenu": {
+      "post": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_InitWeekMenu",
+        "requestBody": {
+          "x-name": "weekMenu",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekMenu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/GetWeekMenuDTO/{id}": {
+      "get": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_GetWeekMenuDTO",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekMenuDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/CreateWeekMenuDTO": {
+      "post": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_CreateWeekMenuDTO",
+        "requestBody": {
+          "x-name": "weekMenuDTO",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuDTO"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/WeekMenu/Create": {
       "post": {
         "tags": [
@@ -4876,6 +5139,616 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/WeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/WeekMenuGenerateDataAllergenId/{weekMenuGenerateDataId}": {
+      "get": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_GetByWeekMenuGenerateDataId",
+        "parameters": [
+          {
+            "name": "weekMenuGenerateDataId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/UpdateAllergenWeekMenuGenerateDatas": {
+      "post": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_UpdateAllergenWeekMenuGenerateDatas",
+        "requestBody": {
+          "x-name": "updateAllergenMaterialsDTO",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAllergenWeekMenuDataDTO"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/Create": {
+      "post": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/CreateAsyn": {
+      "post": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/Delete": {
+      "delete": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/ReadAll": {
+      "get": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/Update": {
+      "put": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateDataAllergen/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "WeekMenuGenerateDataAllergen"
+        ],
+        "operationId": "WeekMenuGenerateDataAllergen_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/GetWeekMenuGenerateDataByWeekMenuId/{weekMenuId}": {
+      "get": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_GetByWeekMenuId",
+        "parameters": [
+          {
+            "name": "weekMenuId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekMenuGenerateDatum"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/Create": {
+      "post": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuGenerateDatum"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekMenuGenerateDatum"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/CreateAsyn": {
+      "post": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuGenerateDatum"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/Delete": {
+      "delete": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuGenerateDatum"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeekMenuGenerateDatum"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/ReadAll": {
+      "get": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeekMenuGenerateDatum"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeekMenuGenerateDatum"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/Update": {
+      "put": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuGenerateDatum"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/WeekMenuGenerateData/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "WeekMenuGenerateData"
+        ],
+        "operationId": "WeekMenuGenerateData_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeekMenuGenerateDatum"
               }
             }
           },
@@ -5168,6 +6041,10 @@
             "format": "int32"
           },
           "ageCategoryMaxAge": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxDailyCalories": {
             "type": "integer",
             "format": "int32"
           }
@@ -5529,6 +6406,96 @@
           }
         }
       },
+      "GetDayMenuMacroDataResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "totalCostPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalRetailPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalKilojule": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalCalories": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalProtein": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalCarbohydrate": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalCholesterol": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalSugar": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalSalt": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalSaturatedFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalTransFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalFiber": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalKalcium": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalKalium": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "hasAllergen": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "allergens": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "DayOrder": {
         "type": "object",
         "additionalProperties": false,
@@ -5615,7 +6582,8 @@
           },
           "groupCode": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "groupName": {
             "type": "string",
@@ -5679,6 +6647,125 @@
           "mealDescription": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "GetMealMacroDataResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "mealId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCostPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalRetailPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalKilojule": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalCalories": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalProtein": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalCarbohydrate": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalCholesterol": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalSugar": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalSalt": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalSaturatedFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalTransFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalFiber": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalKalcium": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "totalKalium": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "hasAllergen": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allergens": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GetMealRecipe": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "mealRecipeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mealId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recipeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recipeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
           }
         }
       },
@@ -6016,6 +7103,223 @@
             "format": "int32"
           },
           "sundayId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "WeekMenuDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "weekMenuId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "weekMenuName": {
+            "type": "string",
+            "nullable": true
+          },
+          "weekMenuStartDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "weekMenuEndDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "monday": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DayMenuDTO"
+              }
+            ]
+          },
+          "tuesday": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DayMenuDTO"
+              }
+            ]
+          },
+          "wednesday": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DayMenuDTO"
+              }
+            ]
+          },
+          "thursday": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DayMenuDTO"
+              }
+            ]
+          },
+          "friday": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DayMenuDTO"
+              }
+            ]
+          },
+          "saturday": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DayMenuDTO"
+              }
+            ]
+          },
+          "sunday": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DayMenuDTO"
+              }
+            ]
+          }
+        }
+      },
+      "DayMenuDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "dayMenuId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dayMenuName": {
+            "type": "string",
+            "nullable": true
+          },
+          "dayMenuDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "breakfast": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MealDTO"
+              }
+            ]
+          },
+          "brunch": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MealDTO"
+              }
+            ]
+          },
+          "lunch": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MealDTO"
+              }
+            ]
+          },
+          "afternoonSnack": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MealDTO"
+              }
+            ]
+          },
+          "dinner": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MealDTO"
+              }
+            ]
+          }
+        }
+      },
+      "MealDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "mealId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mealName": {
+            "type": "string",
+            "nullable": true
+          },
+          "servingCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mealDescription": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "WeekMenuGenerateDataAllergen": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "weekMenuGenerateDataAllergenId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weekMenuGenerateDataId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allergenId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateAllergenWeekMenuDataDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "weekMWeekMenuGenerateDataId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allergenWeekMenuDatas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WeekMenuGenerateDataAllergen"
+            }
+          }
+        }
+      },
+      "WeekMenuGenerateDatum": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "weekMenuGenerateDataId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weekMenuId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ageCategoryId": {
             "type": "integer",
             "format": "int32"
           }

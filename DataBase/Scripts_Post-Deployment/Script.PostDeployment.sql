@@ -19,4 +19,6 @@ Post-Deployment Script Template
 :r .\..\Data\Test\RecipeCategory.sql
 :r .\..\Data\Test\Recipe.sql
 :r .\..\Data\Test\Ingredient.sql
+:r .\..\Data\Test\Meal.sql
+:r .\..\Data\Test\AgeCategory.sql
 

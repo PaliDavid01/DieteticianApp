@@ -13,6 +13,8 @@ import { RecipeCreateEditComponent } from './recipe-ingredient/recipe/recipe-cre
 import { RecipeCreateEditResolverService } from './recipe-ingredient/recipe/recipe-create-edit-resolver.service';
 import { MenuListComponent } from './menu/menu-list/menu-list.component';
 import { MenuResolver } from './menu/menu-edit/menu-resolver.service';
+import { MenuEditComponent } from './menu/menu-edit/menu-edit.component';
+import { AgeCategoryComponent } from './material/age-category/age-category.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -35,9 +37,10 @@ const routes: Routes = [
   { path: 'menu-list', component: MenuListComponent },
   {
     path: 'menu-edit/:id',
-    component: MenuListComponent,
+    component: MenuEditComponent,
     resolve: { menu: MenuResolver },
   },
+  { path: 'diet-group', component: AgeCategoryComponent },
 ];
 
 @NgModule({

@@ -5,5 +5,7 @@ namespace Logic.Interfaces
 {
     public interface IDayMenuLogic : ICRUDLogic<DayMenu>
     {
+        Task<IEnumerable<DayMenu>> GetDayMenuByWeekMenuId(int weekMenuId);
+        Task<GetDayMenuMacroDataResult> GetGetDayMenuMacroData(int dayMenuId);
     }
 }

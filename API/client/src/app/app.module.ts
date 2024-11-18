@@ -21,6 +21,8 @@ import { MaterialContainerComponent } from './material/material-container/materi
 import { MaterialCreateComponent } from './material/material-create/material-create.component';
 import {
   API_BASE_URL,
+  AgeCategory,
+  AgeCategoryService,
   AllergenService,
   AuthService,
   BaseMaterial,
@@ -40,6 +42,8 @@ import {
   RecipeCategoryService,
   RecipeService,
   RoleService,
+  WeekMenuGenerateDataAllergenService,
+  WeekMenuGenerateDataService,
   WeekMenuService,
   WeekOrderService,
 } from './services/generated-client';
@@ -152,6 +156,13 @@ import { RecipeComponent } from './recipe-ingredient/recipe/recipe.component';
 import { RecipeCategoryComponent } from './recipe-ingredient/recipe-category/recipe-category.component';
 import { RecipeCreateEditComponent } from './recipe-ingredient/recipe/recipe-create-edit/recipe-create-edit.component';
 import { MenuListComponent } from './menu/menu-list/menu-list.component';
+import { MealComponentComponent } from './menu/menu-shared/meal-component/meal-component.component';
+import { MenuEditComponent } from './menu/menu-edit/menu-edit.component';
+import { MealEditComponent } from './menu/meal/meal-edit-component/meal-edit-component.component';
+import { RecipeListContainerComponent } from './recipe-ingredient/recipe/recipe-list-container/recipe-list-container.component';
+import { MealInfoCardComponent } from './menu/meal/meal-info-card/meal-info-card.component';
+import { MenuGenerateModalComponent } from './menu/menu-generate-modal/menu-generate-modal.component';
+import { AgeCategoryComponent } from './material/age-category/age-category.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -172,6 +183,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     RecipeComponent,
     RecipeCreateEditComponent,
     MenuListComponent,
+    MealComponentComponent,
+    MenuEditComponent,
+    MealEditComponent,
+    RecipeListContainerComponent,
+    MealInfoCardComponent,
+    MenuGenerateModalComponent,
+    AgeCategoryComponent,
   ],
   imports: [
     CommonModule,
@@ -316,6 +334,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MealService,
     MealRecipeService,
     CustomerService,
+    WeekMenuGenerateDataAllergenService,
+    WeekMenuGenerateDataService,
+    AgeCategoryService,
 
     { provide: API_BASE_URL, useValue: 'http://localhost:7247' },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -4,4 +4,5 @@
 	,[AgeCategoryName] NVARCHAR(50) NOT NULL
 	,[AgeCategoryMinAge] INT NOT NULL
 	,[AgeCategoryMaxAge] INT NOT NULL
+	,[MaxDailyCalories] INT NOT NULL
 )

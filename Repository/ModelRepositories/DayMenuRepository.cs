@@ -9,5 +9,15 @@ namespace Repository.ModelRepositories
         public DayMenuRepository(DataBaseContext dbContext) : base(dbContext)
         {
         }
+
+        public Task<IEnumerable<DayMenu>> GetDayMenuByWeekMenuId(int weekMenuId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<GetDayMenuMacroDataResult> GetGetDayMenuMacroData(int dayMenuId)
+        {
+            return (await _dbContext.GetProcedures().GetDayMenuMacroDataAsync(dayMenuId)).First();
+        }
     }
 }

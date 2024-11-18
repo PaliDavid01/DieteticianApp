@@ -1,1 +1,388 @@
-<p>menu-edit works!</p>
+<p-card header="Menu planner" class="menuEditBackground">
+  <div style="height: fit-content !important">
+    <div class="grid gap-4 grid-cols-5" style="height: 15vh; display: flex">
+      <div style="width: 30vw; height: inherit">
+        <label for="name" class="block text-900 font-medium m-2">Név</label>
+        <input
+          id="name"
+          name="recipeName"
+          type="text"
+          class="n mb-3"
+          pInputText
+          required
+          [(ngModel)]="weekMenu.weekMenuName"
+        />
+        <p-message
+          severity="error"
+          text="Name is required"
+          *ngIf="!weekMenu.weekMenuName"
+        ></p-message>
+      </div>
+      <div style="width: 30vw; height: inherit">
+        <label for="name" class="block text-900 font-medium m-2"
+          >Start Date (M)</label
+        >
+        <p-calendar
+          [(ngModel)]="weekMenu.weekMenuStartDate"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          dateFormat="yy.mm.dd"
+          inputId="icondisplay"
+        />
+      </div>
+      <div style="width: 30vw; height: inherit">
+        <label for="name" class="block text-900 font-medium m-2"
+          >End Date (S)</label
+        >
+        <p-calendar
+          [(ngModel)]="weekMenu.weekMenuEndDate"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          dateFormat="yy.mm.dd"
+          inputId="icondisplay"
+        />
+      </div>
+      <div style="width: 30vw; height: inherit">
+        <button
+          pButton
+          pRipple
+          label="Edit Gen. Data"
+          icon="pi pi-plus"
+          class="p-button-success p-button-md"
+          style="margin-top: 40px"
+          (click)="showGenerateDataDialog()"
+        ></button>
+      </div>
+      <div style="width: 30vw; height: inherit">
+        <button
+          pButton
+          pRipple
+          label="{{ initEditBtnLabel }}"
+          icon="pi pi-plus"
+          class="p-button-success p-button-md"
+          style="margin-top: 40px"
+          (click)="initOrEdit()"
+        ></button>
+      </div>
+    </div>
+    @if(weekMenu.weekMenuId){
+    <div style="height: 80vh">
+      <table style="height: 40rem !important; width: 100%">
+        <tr>
+          <th
+            style="height: 30px; border-bottom: 2px white solid"
+            *ngFor="let col of DaysOfWeek"
+          >
+            {{ col }}
+          </th>
+        </tr>
+        <tr>
+          <td *ngFor="let i of range">
+            <p-card>
+              <div class="grid grid-rows-4" style="height: 150px">
+                <div class="grid grid-rows-1">
+                  <div class="justify-self-center">
+                    <h5>Breakfast</h5>
+                  </div>
+                </div>
+                <div class="row-span-3">
+                  @if(dayMenus.get(i) && dayMenus.get(i).breakfastId > 1){
+                  <div class="grid grid-rows-3">
+                    <div class="row-span-2">
+                      <app-meal-info-card
+                        [mealId]="dayMenus.get(i).breakfastId"
+                      ></app-meal-info-card>
+                    </div>
+                    <div class="justify-self-center">
+                      <button
+                        pRipple
+                        label="Edit meal"
+                        pButton
+                        icon="pi pi-plus"
+                        class="p-button-info p-button-sm"
+                        (click)="
+                          addOrEditMeal(
+                            dayMenus.get(i).breakfastId,
+                            dayMenus.get(i).dayMenuId,
+                            'Breakfast',
+                            i
+                          )
+                        "
+                      ></button>
+                    </div>
+                  </div>
+                  } @else{
+                  <div class="grid grid-rows-1">
+                    <div class="justify-self-center">
+                      <button
+                        pRipple
+                        label="Add meal"
+                        pButton
+                        icon="pi pi-plus"
+                        class="p-button-success p-button-sm"
+                        (click)="
+                          addOrEditMeal(
+                            dayMenus.get(i).breakfastId,
+                            dayMenus.get(i).dayMenuId,
+                            'Breakfast',
+                            i
+                          )
+                        "
+                      ></button>
+                    </div>
+                  </div>
+                  }
+                </div>
+              </div>
+            </p-card>
+          </td>
+        </tr>
+        <tr>
+          <td *ngFor="let i of range">
+            <p-card>
+              <div class="grid grid-rows-4" style="height: 150px">
+                <div class="grid grid-rows-1">
+                  <div class="justify-self-center">
+                    <h5>Brunch</h5>
+                  </div>
+                </div>
+                <div class="row-span-3">
+                  @if(dayMenus.get(i) && dayMenus.get(i).brunchId > 1){
+                  <div class="grid grid-rows-3">
+                    <div class="row-span-2">
+                      <app-meal-info-card
+                        [mealId]="dayMenus.get(i).brunchId"
+                      ></app-meal-info-card>
+                    </div>
+                    <div class="justify-self-center">
+                      <button
+                        pRipple
+                        label="Edit meal"
+                        pButton
+                        icon="pi pi-plus"
+                        class="p-button-info p-button-sm"
+                        (click)="
+                          addOrEditMeal(
+                            dayMenus.get(i).brunchId,
+                            dayMenus.get(i).dayMenuId,
+                            'Breakfast',
+                            i
+                          )
+                        "
+                      ></button>
+                    </div>
+                  </div>
+                  } @else{
+                  <div class="grid grid-rows-1">
+                    <div class="justify-self-center">
+                      <button
+                        pRipple
+                        label="Add meal"
+                        pButton
+                        icon="pi pi-plus"
+                        class="p-button-success p-button-sm"
+                        (click)="
+                          addOrEditMeal(
+                            dayMenus.get(i).brunchId,
+                            dayMenus.get(i).dayMenuId,
+                            'Brunch',
+                            i
+                          )
+                        "
+                      ></button>
+                    </div>
+                  </div>
+                  }
+                </div>
+              </div>
+            </p-card>
+          </td>
+        </tr>
+        <tr>
+          <td *ngFor="let i of range">
+            <p-card>
+              <div class="grid grid-rows-4" style="height: 150px">
+                <div class="grid grid-rows-1">
+                  <div class="justify-self-center">
+                    <h5>Lunch</h5>
+                  </div>
+                </div>
+                <div class="row-span-3">
+                  @if(dayMenus.get(i) && dayMenus.get(i).lunchId > 1){
+                  <div class="grid grid-rows-3">
+                    <div class="row-span-2">
+                      <app-meal-info-card
+                        [mealId]="dayMenus.get(i).lunchId"
+                      ></app-meal-info-card>
+                    </div>
+                    <div class="justify-self-center">
+                      <button
+                        pRipple
+                        label="Edit meal"
+                        pButton
+                        icon="pi pi-plus"
+                        class="p-button-info p-button-sm"
+                        (click)="
+                          addOrEditMeal(
+                            dayMenus.get(i).lunchId,
+                            dayMenus.get(i).dayMenuId,
+                            'Lunch',
+                            i
+                          )
+                        "
+                      ></button>
+                    </div>
+                  </div>
+                  } @else{
+                  <div class="grid grid-rows-1">
+                    <div class="justify-self-center">
+                      <button
+                        pRipple
+                        label="Add meal"
+                        pButton
+                        icon="pi pi-plus"
+                        class="p-button-success p-button-sm"
+                        (click)="
+                          addOrEditMeal(
+                            dayMenus.get(i).lunchId,
+                            dayMenus.get(i).dayMenuId,
+                            'Brunch',
+                            i
+                          )
+                        "
+                      ></button>
+                    </div>
+                  </div>
+                  }
+                </div>
+              </div>
+            </p-card>
+          </td>
+        </tr>
+        <tr>
+          <td *ngFor="let i of range">
+            <p-card>
+              <div class="grid grid-rows-4" style="height: 150px">
+                <div class="grid grid-rows-1">
+                  <div class="justify-self-center">
+                    <h5>Afternoon Snack</h5>
+                  </div>
+                </div>
+                <div class="row-span-3">
+                  @if(dayMenus.get(i) && dayMenus.get(i).afternoonSnackId > 1){
+                  <div class="grid grid-rows-3">
+                    <div class="row-span-2">
+                      <app-meal-info-card
+                        [mealId]="dayMenus.get(i).afternoonSnackId"
+                      ></app-meal-info-card>
+                    </div>
+                    <div class="justify-self-center">
+                      <button
+                        pRipple
+                        label="Edit meal"
+                        pButton
+                        icon="pi pi-plus"
+                        class="p-button-info p-button-sm"
+                        (click)="
+                          addOrEditMeal(
+                            dayMenus.get(i).afternoonSnackId,
+                            dayMenus.get(i).dayMenuId,
+                            'Breakfast',
+                            i
+                          )
+                        "
+                      ></button>
+                    </div>
+                  </div>
+                  } @else{
+                  <div class="grid grid-rows-1">
+                    <div class="justify-self-center">
+                      <button
+                        pRipple
+                        label="Add meal"
+                        pButton
+                        icon="pi pi-plus"
+                        class="p-button-success p-button-sm"
+                        (click)="
+                          addOrEditMeal(
+                            dayMenus.get(i).afternoonSnackId,
+                            dayMenus.get(i).dayMenuId,
+                            'Afternoon Snack',
+                            i
+                          )
+                        "
+                      ></button>
+                    </div>
+                  </div>
+                  }
+                </div>
+              </div>
+            </p-card>
+          </td>
+        </tr>
+        <tr>
+          <td *ngFor="let i of range">
+            <p-card>
+              <div class="grid grid-rows-4" style="height: 150px">
+                <div class="grid grid-rows-1">
+                  <div class="justify-self-center">
+                    <h5>Dinner</h5>
+                  </div>
+                </div>
+                <div class="row-span-3">
+                  @if(dayMenus.get(i) && dayMenus.get(i).dinnerId > 1){
+                  <div class="grid grid-rows-3">
+                    <div class="row-span-2">
+                      <app-meal-info-card
+                        [mealId]="dayMenus.get(i).dinnerId"
+                      ></app-meal-info-card>
+                    </div>
+                    <div class="justify-self-center">
+                      <button
+                        pRipple
+                        label="Edit meal"
+                        pButton
+                        icon="pi pi-plus"
+                        class="p-button-info p-button-sm"
+                        (click)="
+                          addOrEditMeal(
+                            dayMenus.get(i).dinnerId,
+                            dayMenus.get(i).dayMenuId,
+                            'Lunch',
+                            i
+                          )
+                        "
+                      ></button>
+                    </div>
+                  </div>
+                  } @else{
+                  <div class="grid grid-rows-1">
+                    <div class="justify-self-center">
+                      <button
+                        pRipple
+                        label="Add meal"
+                        pButton
+                        icon="pi pi-plus"
+                        class="p-button-success p-button-sm"
+                        (click)="
+                          addOrEditMeal(
+                            dayMenus.get(i).dinnerId,
+                            dayMenus.get(i).dayMenuId,
+                            'Dinner',
+                            i
+                          )
+                        "
+                      ></button>
+                    </div>
+                  </div>
+                  }
+                </div>
+              </div>
+            </p-card>
+          </td>
+        </tr>
+      </table>
+    </div>
+    }
+  </div>
+</p-card>

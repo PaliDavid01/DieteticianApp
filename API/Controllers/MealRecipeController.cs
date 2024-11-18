@@ -2,6 +2,7 @@
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models.DTOs;
 using Models.Models;
 
 namespace API.Controllers
@@ -11,8 +12,15 @@ namespace API.Controllers
     [Authorize(Roles = "IT,Supervisor,Dietitian")]
     public class MealRecipeController : CRUDController<MealRecipe>
     {
-        public MealRecipeController(IMealRecipeLogic repository) : base(repository)
+        private readonly IMealRecipeLogic _logic;
+        public MealRecipeController(IMealRecipeLogic logic) : base(logic)
         {
+            _logic = logic;
+        }
+        [HttpGet]
+        public async Task<IEnumerable<GetMealRecipe>> GetAllDTO(int mealId)
+        {
+            return await _logic.GetAllDTO(mealId);
         }
     }
 }

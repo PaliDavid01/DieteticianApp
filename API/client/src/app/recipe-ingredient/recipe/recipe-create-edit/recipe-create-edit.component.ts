@@ -42,7 +42,6 @@ export class RecipeCreateEditComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private baseMaterialService: BaseMaterialService,
     private messageService: MessageService,
     private recipeService: RecipeService,

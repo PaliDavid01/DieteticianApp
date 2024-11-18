@@ -96,6 +96,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[WeekMenuGenerateData]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WeekMenuGenerateDataAllergen]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[WeekOrder]",
          "ObjectType": 0
       },
@@ -110,9 +118,17 @@
       {
          "Name": "[dbo].[UserRoleView]",
          "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[GetDayMenuMacroData]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[GetMealMacroData]",
+         "ObjectType": 1
       }
    ],
-   "UiHint": "..\\DataBase\\DataBase.sqlproj",
+   "UiHint": "ddd\\mssqlserver01.DataBase.dbo",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,

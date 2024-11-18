@@ -14,4 +14,6 @@ public partial class AgeCategory
     public int AgeCategoryMinAge { get; set; }
 
     public int AgeCategoryMaxAge { get; set; }
+
+    public int MaxDailyCalories { get; set; }
 }

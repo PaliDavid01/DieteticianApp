@@ -1,0 +1,54 @@
+<div class="grid gap-4 grid-rows-3 grid-cols-2">
+  <div class="col-span-2">
+    <div class="field">
+      <label for="allergens" class="n block n text-900 n font-medium n mb-2"
+        >Allergens</label
+      >
+      <p-multiSelect
+        [options]="allergens"
+        name="allergens"
+        [(ngModel)]="selectedAllergens"
+        optionLabel="allergenName"
+        placeholder="Allergens"
+      ></p-multiSelect>
+    </div>
+  </div>
+  <div class="col-span-2">
+    <div class="field">
+      <label for="allergens" class="n block n text-900 n font-medium n mb-2"
+        >Age Categorys</label
+      >
+      <p-dropdown
+        [options]="ageCategories"
+        [(ngModel)]="selectedAgeCategory"
+        class="n w-full n mb-3"
+        optionLabel="ageCategoryName"
+      />
+      <small class="p-error" *ngIf="!weekMenuGenerateData.ageCategoryId"
+        >Age category is required.</small
+      >
+    </div>
+  </div>
+  <div class="col-span-2">
+    <div class="grid gap-4 grid-cols-2">
+      <div>
+        <button
+          pButton
+          pRipple
+          label="Back"
+          icon="pi pi-arrow-left"
+          class="p-button-text"
+          (click)="hideDialog()"
+        ></button>
+      </div>
+      <div>
+        <p-button
+          pRipple
+          label="Save"
+          severity="success"
+          (onClick)="save()"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+</div>

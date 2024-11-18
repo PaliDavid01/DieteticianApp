@@ -1,0 +1,318 @@
+<p-table
+  #dt
+  [value]="recipes"
+  [rows]="10"
+  [paginator]="true"
+  [globalFilterFields]="[
+    'recipeId',
+    'recipeName',
+    'recipeCalories',
+    'recipeCostPrice'
+  ]"
+  [(selection)]="selectedRecipes"
+  [rowHover]="true"
+  dataKey="recipeId"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [showCurrentPageReport]="true"
+>
+  <ng-template pTemplate="caption">
+    <div class="tw-flex tw-align-items-center tw-justify-content-between">
+      <h5 class="tw-m-0 tw-block">Recipes</h5>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          #textInput
+          (input)="dt.filterGlobal(textInput.value, 'contains')"
+          placeholder="Search..."
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 4rem">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th pSortableColumn="recipeName">
+        Name<p-sortIcon field="recipeName"></p-sortIcon>
+      </th>
+      <th pSortableColumn="recipeCalories">
+        Calories <p-sortIcon field="recipeCalories"></p-sortIcon>
+      </th>
+      <th pSortableColumn="recipeCostPrice">
+        Cost price <p-sortIcon field="recipeCostPrice"></p-sortIcon>
+      </th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td>
+        <p-tableCheckbox [value]="item"></p-tableCheckbox>
+      </td>
+      <td>{{ item.recipeName }}</td>
+      <td>{{ item.recipeCalories }}</td>
+      <td>{{ item.recipeCostPrice }}</td>
+      <td>
+        <button
+          pButton
+          pRipple
+          icon="pi pi-info"
+          class="p-button-rounded p-button-help mr-2"
+          (click)="showInfo(item)"
+        ></button>
+        <button
+          pButton
+          pRipple
+          icon="pi pi-plus"
+          class="p-button-rounded p-button-success mr-2"
+          (click)="addClicked(item.recipeId)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [(visible)]="displayAddRecipeDialog"
+  header="Add Meal"
+  [modal]="true"
+  styleClass="p-fluid"
+  ><ng-template pTemplate="content">
+    <div class="field">
+      <label for="recipeName">Quantity</label>
+      <p-inputNumber id="recipeName" [(ngModel)]="quantity" />
+    </div> </ng-template
+  ><ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Back"
+      icon="pi pi-arrow-left"
+      class="p-button-text"
+      (click)="hideAddDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Add"
+      icon="pi pi-plus"
+      class="p-button-text"
+      (click)="save()"
+    ></button></ng-template
+></p-dialog>
+
+<p-dialog
+  [(visible)]="displayDialog"
+  header="Recipe Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="recipeName">recipe Name</label>
+      <input
+        type="text"
+        pInputText
+        id="recipeName"
+        [(ngModel)]="recipe.recipeName"
+        disabled
+      />
+    </div>
+    <!-- ActivityDescriptor input -->
+
+    <!-- The rest of the fields would follow the same pattern, adjusting the type attribute as needed (e.g., text, number, etc.) and whether they are required or not based on your application's logic. -->
+
+    <!-- Note input -->
+    <div class="field">
+      <label for="description">Description </label>
+      <textarea
+        pInputTextarea
+        id="note"
+        [(ngModel)]="recipe.recipeDescription"
+        rows="5"
+        disabled
+      ></textarea>
+    </div>
+
+    <!-- Kilojoule input -->
+    <div class="field">
+      <label for="kilojoule">Kilojoule</label>
+      <input
+        type="number"
+        pInputText
+        id="kilojoule"
+        [(ngModel)]="recipe.recipeKilojule"
+        step="0.01"
+        disabled
+      />
+    </div>
+
+    <!-- Protein input -->
+    <div class="field">
+      <label for="protein">Protein</label>
+      <input
+        type="number"
+        pInputText
+        id="protein"
+        [(ngModel)]="recipe.recipeProtein"
+        step="0.01"
+        disabled
+      />
+    </div>
+
+    <!-- Carbohydrate input -->
+    <div class="field">
+      <label for="calories">Calories</label>
+      <input
+        type="number"
+        pInputText
+        id="carbohydrate"
+        [(ngModel)]="recipe.recipeCalories"
+        step="0.01"
+        disabled
+      />
+    </div>
+
+    <!-- Fat input -->
+    <div class="field">
+      <label for="fat">Fat</label>
+      <input
+        type="number"
+        pInputText
+        id="fat"
+        [(ngModel)]="recipe.recipeFat"
+        step="0.01"
+        disabled
+      />
+    </div>
+
+    <!-- Cholesterol input -->
+    <div class="field">
+      <label for="cholesterol">Cholesterol</label>
+      <input
+        type="number"
+        pInputText
+        id="cholesterol"
+        [(ngModel)]="recipe.recipeCholesterol"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <!-- Sugar input -->
+    <div class="field">
+      <label for="sugar">Sugar</label>
+      <input
+        type="number"
+        pInputText
+        id="sugar"
+        [(ngModel)]="recipe.recipeSugar"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <!-- Salt input -->
+    <div class="field">
+      <label for="salt">Salt</label>
+      <input
+        type="number"
+        pInputText
+        id="salt"
+        [(ngModel)]="recipe.recipeSalt"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <!-- SaturatedFat input -->
+    <div class="field">
+      <label for="saturatedFat">Saturated Fat</label>
+      <input
+        type="number"
+        pInputText
+        id="saturatedFat"
+        [(ngModel)]="recipe.recipeSaturatedFat"
+        disabled
+        step="0.01"
+      />
+    </div>
+    <!-- TransFat input -->
+    <div class="field">
+      <label for="transFat">Trans Fat</label>
+      <input
+        type="number"
+        pInputText
+        id="transFat"
+        [(ngModel)]="recipe.recipeTransFat"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <!-- Fiber input -->
+    <div class="field">
+      <label for="fiber">Fiber</label>
+      <input
+        type="number"
+        pInputText
+        id="fiber"
+        [(ngModel)]="recipe.recipeFiber"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <!-- Calcium input -->
+    <div class="field">
+      <label for="calcium">Calcium</label>
+      <input
+        type="number"
+        pInputText
+        id="calcium"
+        [(ngModel)]="recipe.recipeKalcium"
+        disabled
+        step="0.01"
+      />
+    </div>
+    <!-- CostPrice input -->
+    <div class="field">
+      <label for="costPrice">Cost Price</label>
+      <input
+        type="number"
+        pInputText
+        id="costPrice"
+        [(ngModel)]="recipe.recipeCostPrice"
+        disabled
+        step="0.01"
+      />
+    </div>
+
+    <!-- RetailPrice input -->
+    <div class="field">
+      <label for="retailPrice">Retail Price</label>
+      <input
+        type="number"
+        pInputText
+        id="retailPrice"
+        [(ngModel)]="recipe.recipeRetailPrice"
+        disabled
+        step="0.01"
+      />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Back"
+      icon="pi pi-arrow-left"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+  </ng-template>
+</p-dialog>

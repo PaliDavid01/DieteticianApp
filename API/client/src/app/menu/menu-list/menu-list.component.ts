@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { WeekMenu, WeekMenuService } from 'src/app/services/generated-client';
 
 @Component({
   selector: 'app-menu-list',
@@ -10,6 +11,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   styleUrl: './menu-list.component.css',
 })
 export class MenuListComponent {
+  weekMenus: WeekMenu[];
   displayDialog: boolean = false;
   selectedRecipes: any;
   Delete: string = 'Delete';
@@ -18,22 +20,23 @@ export class MenuListComponent {
   constructor(
     private messageService: MessageService,
     private router: Router,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private weekMenuService: WeekMenuService
   ) {}
   ngOnInit(): void {
     this.load();
   }
 
   exportExcel() {
-    // import('xlsx').then((xlsx) => {
-    //   const worksheet = xlsx.utils.json_to_sheet(this.recipes);
-    //   const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-    //   const excelBuffer: any = xlsx.write(workbook, {
-    //     bookType: 'xlsx',
-    //     type: 'array',
-    //   });
-    //   this.saveAsExcelFile(excelBuffer, 'recipes');
-    // });
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(this.weekMenus);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsExcelFile(excelBuffer, 'wekMenus');
+    });
   }
 
   deleteSelected() {
@@ -58,9 +61,9 @@ export class MenuListComponent {
   }
 
   load() {
-    // this.recipeService.readAll().subscribe((data) => {
-    //   this.recipes = data;
-    // });
+    this.weekMenuService.readAll().subscribe((data) => {
+      this.weekMenus = data;
+    });
   }
   delete(recipe: any) {
     this.confirmationService.confirm({
@@ -92,7 +95,7 @@ export class MenuListComponent {
   }
 
   edit(item: any) {
-    this.router.navigate(['/recipe-edit', item.recipeId]);
+    this.router.navigate(['/menu-edit', item.weekMenuId]);
   }
   showInfo(item: any) {
     // this.recipe = item;

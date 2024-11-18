@@ -1,0 +1,11 @@
+<div>
+  @if(meal && mealData){
+  <span>{{ meal.mealName }}</span>
+  <br />
+  <span>{{ mealData.totalCalories }} Kcal</span>
+  <hr />
+  <span
+    >hasAllergen: {{ mealData.hasAllergen && mealData.hasAllergen == 1 }}</span
+  >
+  }
+</div>

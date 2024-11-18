@@ -40,6 +40,7 @@ export class NavComponent implements OnInit {
           {
             label: 'Diet groups',
             icon: PrimeIcons.USERS,
+            url: '/diet-group',
           },
         ],
       },

@@ -3035,6 +3035,117 @@ export class DayMenuService {
         this.baseUrl = baseUrl ?? "";
     }
 
+    getDayMenuByWeekMenuId(weekMenuId: number): Observable<DayMenu[]> {
+        let url_ = this.baseUrl + "/DayMenu/GetDayMenuByWeekMenuId/{weekMenuId}";
+        if (weekMenuId === undefined || weekMenuId === null)
+            throw new Error("The parameter 'weekMenuId' must be defined.");
+        url_ = url_.replace("{weekMenuId}", encodeURIComponent("" + weekMenuId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDayMenuByWeekMenuId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDayMenuByWeekMenuId(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<DayMenu[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<DayMenu[]>;
+        }));
+    }
+
+    protected processGetDayMenuByWeekMenuId(response: HttpResponseBase): Observable<DayMenu[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(DayMenu.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getGetDayMenuMacroData(dayMenuId: number): Observable<GetDayMenuMacroDataResult> {
+        let url_ = this.baseUrl + "/DayMenu/GetDayMenuMacroData/{dayMenuId}";
+        if (dayMenuId === undefined || dayMenuId === null)
+            throw new Error("The parameter 'dayMenuId' must be defined.");
+        url_ = url_.replace("{dayMenuId}", encodeURIComponent("" + dayMenuId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetGetDayMenuMacroData(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetGetDayMenuMacroData(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetDayMenuMacroDataResult>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetDayMenuMacroDataResult>;
+        }));
+    }
+
+    protected processGetGetDayMenuMacroData(response: HttpResponseBase): Observable<GetDayMenuMacroDataResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = GetDayMenuMacroDataResult.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
     create(entity: DayMenu): Observable<DayMenu> {
         let url_ = this.baseUrl + "/DayMenu/Create";
         url_ = url_.replace(/[?&]$/, "");
@@ -5674,6 +5785,111 @@ export class MealService {
         this.baseUrl = baseUrl ?? "";
     }
 
+    createWithReturnId(meal: Meal): Observable<number> {
+        let url_ = this.baseUrl + "/Meal";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(meal);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateWithReturnId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateWithReturnId(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<number>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<number>;
+        }));
+    }
+
+    protected processCreateWithReturnId(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getMealMacroData(mealId: number): Observable<GetMealMacroDataResult> {
+        let url_ = this.baseUrl + "/Meal/GetMealMacroData/{mealId}";
+        if (mealId === undefined || mealId === null)
+            throw new Error("The parameter 'mealId' must be defined.");
+        url_ = url_.replace("{mealId}", encodeURIComponent("" + mealId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetMealMacroData(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetMealMacroData(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetMealMacroDataResult>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetMealMacroDataResult>;
+        }));
+    }
+
+    protected processGetMealMacroData(response: HttpResponseBase): Observable<GetMealMacroDataResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = GetMealMacroDataResult.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
     create(entity: Meal): Observable<Meal> {
         let url_ = this.baseUrl + "/Meal/Create";
         url_ = url_.replace(/[?&]$/, "");
@@ -6188,6 +6404,66 @@ export class MealRecipeService {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ?? "";
+    }
+
+    getAllDTO(mealId?: number | undefined): Observable<GetMealRecipe[]> {
+        let url_ = this.baseUrl + "/MealRecipe?";
+        if (mealId === null)
+            throw new Error("The parameter 'mealId' cannot be null.");
+        else if (mealId !== undefined)
+            url_ += "mealId=" + encodeURIComponent("" + mealId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllDTO(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllDTO(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetMealRecipe[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetMealRecipe[]>;
+        }));
+    }
+
+    protected processGetAllDTO(response: HttpResponseBase): Observable<GetMealRecipe[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(GetMealRecipe.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
     }
 
     create(entity: MealRecipe): Observable<MealRecipe> {
@@ -9223,6 +9499,164 @@ export class WeekMenuService {
         this.baseUrl = baseUrl ?? "";
     }
 
+    initWeekMenu(weekMenu: WeekMenu): Observable<WeekMenu> {
+        let url_ = this.baseUrl + "/api/WeekMenu/InitWeekMenu";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(weekMenu);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processInitWeekMenu(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processInitWeekMenu(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenu>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenu>;
+        }));
+    }
+
+    protected processInitWeekMenu(response: HttpResponseBase): Observable<WeekMenu> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = WeekMenu.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getWeekMenuDTO(id: number): Observable<WeekMenuDTO> {
+        let url_ = this.baseUrl + "/api/WeekMenu/GetWeekMenuDTO/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetWeekMenuDTO(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetWeekMenuDTO(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuDTO>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuDTO>;
+        }));
+    }
+
+    protected processGetWeekMenuDTO(response: HttpResponseBase): Observable<WeekMenuDTO> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = WeekMenuDTO.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    createWeekMenuDTO(weekMenuDTO: WeekMenuDTO): Observable<number> {
+        let url_ = this.baseUrl + "/api/WeekMenu/CreateWeekMenuDTO";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(weekMenuDTO);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateWeekMenuDTO(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateWeekMenuDTO(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<number>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<number>;
+        }));
+    }
+
+    protected processCreateWeekMenuDTO(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
     create(entity: WeekMenu): Observable<WeekMenu> {
         let url_ = this.baseUrl + "/api/WeekMenu/Create";
         url_ = url_.replace(/[?&]$/, "");
@@ -9681,6 +10115,1197 @@ export class WeekMenuService {
 
     update2(entity: WeekMenu): Observable<void> {
         let url_ = this.baseUrl + "/api/WeekMenu/UpdateAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdate2(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
+export class WeekMenuGenerateDataAllergenService {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    getByWeekMenuGenerateDataId(weekMenuGenerateDataId: number): Observable<WeekMenuGenerateDataAllergen[]> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/WeekMenuGenerateDataAllergenId/{weekMenuGenerateDataId}";
+        if (weekMenuGenerateDataId === undefined || weekMenuGenerateDataId === null)
+            throw new Error("The parameter 'weekMenuGenerateDataId' must be defined.");
+        url_ = url_.replace("{weekMenuGenerateDataId}", encodeURIComponent("" + weekMenuGenerateDataId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetByWeekMenuGenerateDataId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetByWeekMenuGenerateDataId(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuGenerateDataAllergen[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuGenerateDataAllergen[]>;
+        }));
+    }
+
+    protected processGetByWeekMenuGenerateDataId(response: HttpResponseBase): Observable<WeekMenuGenerateDataAllergen[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(WeekMenuGenerateDataAllergen.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    updateAllergenWeekMenuGenerateDatas(updateAllergenMaterialsDTO: UpdateAllergenWeekMenuDataDTO): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/UpdateAllergenWeekMenuGenerateDatas";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(updateAllergenMaterialsDTO);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateAllergenWeekMenuGenerateDatas(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdateAllergenWeekMenuGenerateDatas(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdateAllergenWeekMenuGenerateDatas(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    create(entity: WeekMenuGenerateDataAllergen): Observable<WeekMenuGenerateDataAllergen> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuGenerateDataAllergen>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuGenerateDataAllergen>;
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<WeekMenuGenerateDataAllergen> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = WeekMenuGenerateDataAllergen.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    create2(entity: WeekMenuGenerateDataAllergen): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/CreateAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processCreate2(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    delete(id?: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    delete2(entity: WeekMenuGenerateDataAllergen): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/DeleteAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete2(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    deleteById(id: number): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/DeleteByIdAsyn/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteById(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDeleteById(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    readAll(): Observable<WeekMenuGenerateDataAllergen[]> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/ReadAllAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processReadAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processReadAll(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuGenerateDataAllergen[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuGenerateDataAllergen[]>;
+        }));
+    }
+
+    protected processReadAll(response: HttpResponseBase): Observable<WeekMenuGenerateDataAllergen[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(WeekMenuGenerateDataAllergen.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    readAll2(): Observable<WeekMenuGenerateDataAllergen[]> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/ReadAll";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processReadAll2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processReadAll2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuGenerateDataAllergen[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuGenerateDataAllergen[]>;
+        }));
+    }
+
+    protected processReadAll2(response: HttpResponseBase): Observable<WeekMenuGenerateDataAllergen[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(WeekMenuGenerateDataAllergen.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getById(id: number): Observable<WeekMenuGenerateDataAllergen> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/ReadByIdAsyn/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetById(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuGenerateDataAllergen>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuGenerateDataAllergen>;
+        }));
+    }
+
+    protected processGetById(response: HttpResponseBase): Observable<WeekMenuGenerateDataAllergen> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = WeekMenuGenerateDataAllergen.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    update(entity: WeekMenuGenerateDataAllergen): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    update2(entity: WeekMenuGenerateDataAllergen): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateDataAllergen/UpdateAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdate2(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
+export class WeekMenuGenerateDataService {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    getByWeekMenuId(weekMenuId: number): Observable<WeekMenuGenerateDatum> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/GetWeekMenuGenerateDataByWeekMenuId/{weekMenuId}";
+        if (weekMenuId === undefined || weekMenuId === null)
+            throw new Error("The parameter 'weekMenuId' must be defined.");
+        url_ = url_.replace("{weekMenuId}", encodeURIComponent("" + weekMenuId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetByWeekMenuId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetByWeekMenuId(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuGenerateDatum>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuGenerateDatum>;
+        }));
+    }
+
+    protected processGetByWeekMenuId(response: HttpResponseBase): Observable<WeekMenuGenerateDatum> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = WeekMenuGenerateDatum.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    create(entity: WeekMenuGenerateDatum): Observable<WeekMenuGenerateDatum> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuGenerateDatum>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuGenerateDatum>;
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<WeekMenuGenerateDatum> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = WeekMenuGenerateDatum.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    create2(entity: WeekMenuGenerateDatum): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/CreateAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processCreate2(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    delete(id?: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    delete2(entity: WeekMenuGenerateDatum): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/DeleteAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete2(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    deleteById(id: number): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/DeleteByIdAsyn/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteById(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDeleteById(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    readAll(): Observable<WeekMenuGenerateDatum[]> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/ReadAllAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processReadAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processReadAll(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuGenerateDatum[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuGenerateDatum[]>;
+        }));
+    }
+
+    protected processReadAll(response: HttpResponseBase): Observable<WeekMenuGenerateDatum[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(WeekMenuGenerateDatum.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    readAll2(): Observable<WeekMenuGenerateDatum[]> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/ReadAll";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processReadAll2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processReadAll2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuGenerateDatum[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuGenerateDatum[]>;
+        }));
+    }
+
+    protected processReadAll2(response: HttpResponseBase): Observable<WeekMenuGenerateDatum[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(WeekMenuGenerateDatum.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getById(id: number): Observable<WeekMenuGenerateDatum> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/ReadByIdAsyn/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetById(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeekMenuGenerateDatum>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeekMenuGenerateDatum>;
+        }));
+    }
+
+    protected processGetById(response: HttpResponseBase): Observable<WeekMenuGenerateDatum> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = WeekMenuGenerateDatum.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    update(entity: WeekMenuGenerateDatum): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    update2(entity: WeekMenuGenerateDatum): Observable<void> {
+        let url_ = this.baseUrl + "/WeekMenuGenerateData/UpdateAsyn";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(entity);
@@ -10249,6 +11874,7 @@ export class AgeCategory implements IAgeCategory {
     ageCategoryName?: string | null;
     ageCategoryMinAge?: number;
     ageCategoryMaxAge?: number;
+    maxDailyCalories?: number;
 
     constructor(data?: IAgeCategory) {
         if (data) {
@@ -10265,6 +11891,7 @@ export class AgeCategory implements IAgeCategory {
             this.ageCategoryName = _data["ageCategoryName"] !== undefined ? _data["ageCategoryName"] : <any>null;
             this.ageCategoryMinAge = _data["ageCategoryMinAge"] !== undefined ? _data["ageCategoryMinAge"] : <any>null;
             this.ageCategoryMaxAge = _data["ageCategoryMaxAge"] !== undefined ? _data["ageCategoryMaxAge"] : <any>null;
+            this.maxDailyCalories = _data["maxDailyCalories"] !== undefined ? _data["maxDailyCalories"] : <any>null;
         }
     }
 
@@ -10279,6 +11906,7 @@ export class AgeCategory implements IAgeCategory {
         data["ageCategoryName"] = this.ageCategoryName !== undefined ? this.ageCategoryName : <any>null;
         data["ageCategoryMinAge"] = this.ageCategoryMinAge !== undefined ? this.ageCategoryMinAge : <any>null;
         data["ageCategoryMaxAge"] = this.ageCategoryMaxAge !== undefined ? this.ageCategoryMaxAge : <any>null;
+        data["maxDailyCalories"] = this.maxDailyCalories !== undefined ? this.maxDailyCalories : <any>null;
         return data;
     }
 }
@@ -10288,6 +11916,7 @@ export interface IAgeCategory {
     ageCategoryName?: string | null;
     ageCategoryMinAge?: number;
     ageCategoryMaxAge?: number;
+    maxDailyCalories?: number;
 }
 
 export class Allergen implements IAllergen {
@@ -10936,6 +12565,104 @@ export interface IDayMenu {
     dinnerId?: number;
 }
 
+export class GetDayMenuMacroDataResult implements IGetDayMenuMacroDataResult {
+    totalCostPrice?: number | null;
+    totalRetailPrice?: number | null;
+    totalKilojule?: number | null;
+    totalCalories?: number | null;
+    totalProtein?: number | null;
+    totalFat?: number | null;
+    totalCarbohydrate?: number | null;
+    totalCholesterol?: number | null;
+    totalSugar?: number | null;
+    totalSalt?: number | null;
+    totalSaturatedFat?: number | null;
+    totalTransFat?: number | null;
+    totalFiber?: number | null;
+    totalKalcium?: number | null;
+    totalKalium?: number | null;
+    hasAllergen?: number | null;
+    allergens?: string | null;
+
+    constructor(data?: IGetDayMenuMacroDataResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.totalCostPrice = _data["totalCostPrice"] !== undefined ? _data["totalCostPrice"] : <any>null;
+            this.totalRetailPrice = _data["totalRetailPrice"] !== undefined ? _data["totalRetailPrice"] : <any>null;
+            this.totalKilojule = _data["totalKilojule"] !== undefined ? _data["totalKilojule"] : <any>null;
+            this.totalCalories = _data["totalCalories"] !== undefined ? _data["totalCalories"] : <any>null;
+            this.totalProtein = _data["totalProtein"] !== undefined ? _data["totalProtein"] : <any>null;
+            this.totalFat = _data["totalFat"] !== undefined ? _data["totalFat"] : <any>null;
+            this.totalCarbohydrate = _data["totalCarbohydrate"] !== undefined ? _data["totalCarbohydrate"] : <any>null;
+            this.totalCholesterol = _data["totalCholesterol"] !== undefined ? _data["totalCholesterol"] : <any>null;
+            this.totalSugar = _data["totalSugar"] !== undefined ? _data["totalSugar"] : <any>null;
+            this.totalSalt = _data["totalSalt"] !== undefined ? _data["totalSalt"] : <any>null;
+            this.totalSaturatedFat = _data["totalSaturatedFat"] !== undefined ? _data["totalSaturatedFat"] : <any>null;
+            this.totalTransFat = _data["totalTransFat"] !== undefined ? _data["totalTransFat"] : <any>null;
+            this.totalFiber = _data["totalFiber"] !== undefined ? _data["totalFiber"] : <any>null;
+            this.totalKalcium = _data["totalKalcium"] !== undefined ? _data["totalKalcium"] : <any>null;
+            this.totalKalium = _data["totalKalium"] !== undefined ? _data["totalKalium"] : <any>null;
+            this.hasAllergen = _data["hasAllergen"] !== undefined ? _data["hasAllergen"] : <any>null;
+            this.allergens = _data["allergens"] !== undefined ? _data["allergens"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): GetDayMenuMacroDataResult | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<GetDayMenuMacroDataResult>(data, _mappings, GetDayMenuMacroDataResult);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCostPrice"] = this.totalCostPrice !== undefined ? this.totalCostPrice : <any>null;
+        data["totalRetailPrice"] = this.totalRetailPrice !== undefined ? this.totalRetailPrice : <any>null;
+        data["totalKilojule"] = this.totalKilojule !== undefined ? this.totalKilojule : <any>null;
+        data["totalCalories"] = this.totalCalories !== undefined ? this.totalCalories : <any>null;
+        data["totalProtein"] = this.totalProtein !== undefined ? this.totalProtein : <any>null;
+        data["totalFat"] = this.totalFat !== undefined ? this.totalFat : <any>null;
+        data["totalCarbohydrate"] = this.totalCarbohydrate !== undefined ? this.totalCarbohydrate : <any>null;
+        data["totalCholesterol"] = this.totalCholesterol !== undefined ? this.totalCholesterol : <any>null;
+        data["totalSugar"] = this.totalSugar !== undefined ? this.totalSugar : <any>null;
+        data["totalSalt"] = this.totalSalt !== undefined ? this.totalSalt : <any>null;
+        data["totalSaturatedFat"] = this.totalSaturatedFat !== undefined ? this.totalSaturatedFat : <any>null;
+        data["totalTransFat"] = this.totalTransFat !== undefined ? this.totalTransFat : <any>null;
+        data["totalFiber"] = this.totalFiber !== undefined ? this.totalFiber : <any>null;
+        data["totalKalcium"] = this.totalKalcium !== undefined ? this.totalKalcium : <any>null;
+        data["totalKalium"] = this.totalKalium !== undefined ? this.totalKalium : <any>null;
+        data["hasAllergen"] = this.hasAllergen !== undefined ? this.hasAllergen : <any>null;
+        data["allergens"] = this.allergens !== undefined ? this.allergens : <any>null;
+        return data;
+    }
+}
+
+export interface IGetDayMenuMacroDataResult {
+    totalCostPrice?: number | null;
+    totalRetailPrice?: number | null;
+    totalKilojule?: number | null;
+    totalCalories?: number | null;
+    totalProtein?: number | null;
+    totalFat?: number | null;
+    totalCarbohydrate?: number | null;
+    totalCholesterol?: number | null;
+    totalSugar?: number | null;
+    totalSalt?: number | null;
+    totalSaturatedFat?: number | null;
+    totalTransFat?: number | null;
+    totalFiber?: number | null;
+    totalKalcium?: number | null;
+    totalKalium?: number | null;
+    hasAllergen?: number | null;
+    allergens?: string | null;
+}
+
 export class DayOrder implements IDayOrder {
     dayOrderId?: number;
     wantBreakfast?: boolean;
@@ -11045,7 +12772,7 @@ export class IngredientDataView implements IIngredientDataView {
     materialName?: string | null;
     note?: string | null;
     materialGroupId?: number | null;
-    groupCode?: number;
+    groupCode?: number | null;
     groupName?: string | null;
 
     constructor(data?: IIngredientDataView) {
@@ -11102,7 +12829,7 @@ export interface IIngredientDataView {
     materialName?: string | null;
     note?: string | null;
     materialGroupId?: number | null;
-    groupCode?: number;
+    groupCode?: number | null;
     groupName?: string | null;
 }
 
@@ -11234,6 +12961,158 @@ export interface IMeal {
     mealName?: string | null;
     servingCount?: number | null;
     mealDescription?: string | null;
+}
+
+export class GetMealMacroDataResult implements IGetMealMacroDataResult {
+    mealId?: number;
+    totalCostPrice?: number | null;
+    totalRetailPrice?: number | null;
+    totalKilojule?: number | null;
+    totalCalories?: number | null;
+    totalProtein?: number | null;
+    totalFat?: number | null;
+    totalCarbohydrate?: number | null;
+    totalCholesterol?: number | null;
+    totalSugar?: number | null;
+    totalSalt?: number | null;
+    totalSaturatedFat?: number | null;
+    totalTransFat?: number | null;
+    totalFiber?: number | null;
+    totalKalcium?: number | null;
+    totalKalium?: number | null;
+    hasAllergen?: number;
+    allergens?: string | null;
+
+    constructor(data?: IGetMealMacroDataResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.mealId = _data["mealId"] !== undefined ? _data["mealId"] : <any>null;
+            this.totalCostPrice = _data["totalCostPrice"] !== undefined ? _data["totalCostPrice"] : <any>null;
+            this.totalRetailPrice = _data["totalRetailPrice"] !== undefined ? _data["totalRetailPrice"] : <any>null;
+            this.totalKilojule = _data["totalKilojule"] !== undefined ? _data["totalKilojule"] : <any>null;
+            this.totalCalories = _data["totalCalories"] !== undefined ? _data["totalCalories"] : <any>null;
+            this.totalProtein = _data["totalProtein"] !== undefined ? _data["totalProtein"] : <any>null;
+            this.totalFat = _data["totalFat"] !== undefined ? _data["totalFat"] : <any>null;
+            this.totalCarbohydrate = _data["totalCarbohydrate"] !== undefined ? _data["totalCarbohydrate"] : <any>null;
+            this.totalCholesterol = _data["totalCholesterol"] !== undefined ? _data["totalCholesterol"] : <any>null;
+            this.totalSugar = _data["totalSugar"] !== undefined ? _data["totalSugar"] : <any>null;
+            this.totalSalt = _data["totalSalt"] !== undefined ? _data["totalSalt"] : <any>null;
+            this.totalSaturatedFat = _data["totalSaturatedFat"] !== undefined ? _data["totalSaturatedFat"] : <any>null;
+            this.totalTransFat = _data["totalTransFat"] !== undefined ? _data["totalTransFat"] : <any>null;
+            this.totalFiber = _data["totalFiber"] !== undefined ? _data["totalFiber"] : <any>null;
+            this.totalKalcium = _data["totalKalcium"] !== undefined ? _data["totalKalcium"] : <any>null;
+            this.totalKalium = _data["totalKalium"] !== undefined ? _data["totalKalium"] : <any>null;
+            this.hasAllergen = _data["hasAllergen"] !== undefined ? _data["hasAllergen"] : <any>null;
+            this.allergens = _data["allergens"] !== undefined ? _data["allergens"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): GetMealMacroDataResult | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<GetMealMacroDataResult>(data, _mappings, GetMealMacroDataResult);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["mealId"] = this.mealId !== undefined ? this.mealId : <any>null;
+        data["totalCostPrice"] = this.totalCostPrice !== undefined ? this.totalCostPrice : <any>null;
+        data["totalRetailPrice"] = this.totalRetailPrice !== undefined ? this.totalRetailPrice : <any>null;
+        data["totalKilojule"] = this.totalKilojule !== undefined ? this.totalKilojule : <any>null;
+        data["totalCalories"] = this.totalCalories !== undefined ? this.totalCalories : <any>null;
+        data["totalProtein"] = this.totalProtein !== undefined ? this.totalProtein : <any>null;
+        data["totalFat"] = this.totalFat !== undefined ? this.totalFat : <any>null;
+        data["totalCarbohydrate"] = this.totalCarbohydrate !== undefined ? this.totalCarbohydrate : <any>null;
+        data["totalCholesterol"] = this.totalCholesterol !== undefined ? this.totalCholesterol : <any>null;
+        data["totalSugar"] = this.totalSugar !== undefined ? this.totalSugar : <any>null;
+        data["totalSalt"] = this.totalSalt !== undefined ? this.totalSalt : <any>null;
+        data["totalSaturatedFat"] = this.totalSaturatedFat !== undefined ? this.totalSaturatedFat : <any>null;
+        data["totalTransFat"] = this.totalTransFat !== undefined ? this.totalTransFat : <any>null;
+        data["totalFiber"] = this.totalFiber !== undefined ? this.totalFiber : <any>null;
+        data["totalKalcium"] = this.totalKalcium !== undefined ? this.totalKalcium : <any>null;
+        data["totalKalium"] = this.totalKalium !== undefined ? this.totalKalium : <any>null;
+        data["hasAllergen"] = this.hasAllergen !== undefined ? this.hasAllergen : <any>null;
+        data["allergens"] = this.allergens !== undefined ? this.allergens : <any>null;
+        return data;
+    }
+}
+
+export interface IGetMealMacroDataResult {
+    mealId?: number;
+    totalCostPrice?: number | null;
+    totalRetailPrice?: number | null;
+    totalKilojule?: number | null;
+    totalCalories?: number | null;
+    totalProtein?: number | null;
+    totalFat?: number | null;
+    totalCarbohydrate?: number | null;
+    totalCholesterol?: number | null;
+    totalSugar?: number | null;
+    totalSalt?: number | null;
+    totalSaturatedFat?: number | null;
+    totalTransFat?: number | null;
+    totalFiber?: number | null;
+    totalKalcium?: number | null;
+    totalKalium?: number | null;
+    hasAllergen?: number;
+    allergens?: string | null;
+}
+
+export class GetMealRecipe implements IGetMealRecipe {
+    mealRecipeId?: number;
+    mealId?: number;
+    recipeId?: number;
+    recipeName?: string | null;
+    quantity?: number;
+
+    constructor(data?: IGetMealRecipe) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.mealRecipeId = _data["mealRecipeId"] !== undefined ? _data["mealRecipeId"] : <any>null;
+            this.mealId = _data["mealId"] !== undefined ? _data["mealId"] : <any>null;
+            this.recipeId = _data["recipeId"] !== undefined ? _data["recipeId"] : <any>null;
+            this.recipeName = _data["recipeName"] !== undefined ? _data["recipeName"] : <any>null;
+            this.quantity = _data["quantity"] !== undefined ? _data["quantity"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): GetMealRecipe | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<GetMealRecipe>(data, _mappings, GetMealRecipe);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["mealRecipeId"] = this.mealRecipeId !== undefined ? this.mealRecipeId : <any>null;
+        data["mealId"] = this.mealId !== undefined ? this.mealId : <any>null;
+        data["recipeId"] = this.recipeId !== undefined ? this.recipeId : <any>null;
+        data["recipeName"] = this.recipeName !== undefined ? this.recipeName : <any>null;
+        data["quantity"] = this.quantity !== undefined ? this.quantity : <any>null;
+        return data;
+    }
+}
+
+export interface IGetMealRecipe {
+    mealRecipeId?: number;
+    mealId?: number;
+    recipeId?: number;
+    recipeName?: string | null;
+    quantity?: number;
 }
 
 export class MealRecipe implements IMealRecipe {
@@ -11734,6 +13613,340 @@ export interface IWeekMenu {
     fridayId?: number;
     saturdayId?: number;
     sundayId?: number;
+}
+
+export class WeekMenuDTO implements IWeekMenuDTO {
+    weekMenuId?: number | null;
+    weekMenuName?: string | null;
+    weekMenuStartDate?: Date | null;
+    weekMenuEndDate?: Date | null;
+    monday?: DayMenuDTO | null;
+    tuesday?: DayMenuDTO | null;
+    wednesday?: DayMenuDTO | null;
+    thursday?: DayMenuDTO | null;
+    friday?: DayMenuDTO | null;
+    saturday?: DayMenuDTO | null;
+    sunday?: DayMenuDTO | null;
+
+    constructor(data?: IWeekMenuDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+            this.monday = data.monday && !(<any>data.monday).toJSON ? new DayMenuDTO(data.monday) : <DayMenuDTO>this.monday;
+            this.tuesday = data.tuesday && !(<any>data.tuesday).toJSON ? new DayMenuDTO(data.tuesday) : <DayMenuDTO>this.tuesday;
+            this.wednesday = data.wednesday && !(<any>data.wednesday).toJSON ? new DayMenuDTO(data.wednesday) : <DayMenuDTO>this.wednesday;
+            this.thursday = data.thursday && !(<any>data.thursday).toJSON ? new DayMenuDTO(data.thursday) : <DayMenuDTO>this.thursday;
+            this.friday = data.friday && !(<any>data.friday).toJSON ? new DayMenuDTO(data.friday) : <DayMenuDTO>this.friday;
+            this.saturday = data.saturday && !(<any>data.saturday).toJSON ? new DayMenuDTO(data.saturday) : <DayMenuDTO>this.saturday;
+            this.sunday = data.sunday && !(<any>data.sunday).toJSON ? new DayMenuDTO(data.sunday) : <DayMenuDTO>this.sunday;
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.weekMenuId = _data["weekMenuId"] !== undefined ? _data["weekMenuId"] : <any>null;
+            this.weekMenuName = _data["weekMenuName"] !== undefined ? _data["weekMenuName"] : <any>null;
+            this.weekMenuStartDate = _data["weekMenuStartDate"] ? new Date(_data["weekMenuStartDate"].toString()) : <any>null;
+            this.weekMenuEndDate = _data["weekMenuEndDate"] ? new Date(_data["weekMenuEndDate"].toString()) : <any>null;
+            this.monday = _data["monday"] ? DayMenuDTO.fromJS(_data["monday"], _mappings) : <any>null;
+            this.tuesday = _data["tuesday"] ? DayMenuDTO.fromJS(_data["tuesday"], _mappings) : <any>null;
+            this.wednesday = _data["wednesday"] ? DayMenuDTO.fromJS(_data["wednesday"], _mappings) : <any>null;
+            this.thursday = _data["thursday"] ? DayMenuDTO.fromJS(_data["thursday"], _mappings) : <any>null;
+            this.friday = _data["friday"] ? DayMenuDTO.fromJS(_data["friday"], _mappings) : <any>null;
+            this.saturday = _data["saturday"] ? DayMenuDTO.fromJS(_data["saturday"], _mappings) : <any>null;
+            this.sunday = _data["sunday"] ? DayMenuDTO.fromJS(_data["sunday"], _mappings) : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): WeekMenuDTO | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<WeekMenuDTO>(data, _mappings, WeekMenuDTO);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["weekMenuId"] = this.weekMenuId !== undefined ? this.weekMenuId : <any>null;
+        data["weekMenuName"] = this.weekMenuName !== undefined ? this.weekMenuName : <any>null;
+        data["weekMenuStartDate"] = this.weekMenuStartDate ? this.weekMenuStartDate.toISOString() : <any>null;
+        data["weekMenuEndDate"] = this.weekMenuEndDate ? this.weekMenuEndDate.toISOString() : <any>null;
+        data["monday"] = this.monday ? this.monday.toJSON() : <any>null;
+        data["tuesday"] = this.tuesday ? this.tuesday.toJSON() : <any>null;
+        data["wednesday"] = this.wednesday ? this.wednesday.toJSON() : <any>null;
+        data["thursday"] = this.thursday ? this.thursday.toJSON() : <any>null;
+        data["friday"] = this.friday ? this.friday.toJSON() : <any>null;
+        data["saturday"] = this.saturday ? this.saturday.toJSON() : <any>null;
+        data["sunday"] = this.sunday ? this.sunday.toJSON() : <any>null;
+        return data;
+    }
+}
+
+export interface IWeekMenuDTO {
+    weekMenuId?: number | null;
+    weekMenuName?: string | null;
+    weekMenuStartDate?: Date | null;
+    weekMenuEndDate?: Date | null;
+    monday?: IDayMenuDTO | null;
+    tuesday?: IDayMenuDTO | null;
+    wednesday?: IDayMenuDTO | null;
+    thursday?: IDayMenuDTO | null;
+    friday?: IDayMenuDTO | null;
+    saturday?: IDayMenuDTO | null;
+    sunday?: IDayMenuDTO | null;
+}
+
+export class DayMenuDTO implements IDayMenuDTO {
+    dayMenuId?: number | null;
+    dayMenuName?: string | null;
+    dayMenuDate?: Date | null;
+    breakfast?: MealDTO | null;
+    brunch?: MealDTO | null;
+    lunch?: MealDTO | null;
+    afternoonSnack?: MealDTO | null;
+    dinner?: MealDTO | null;
+
+    constructor(data?: IDayMenuDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+            this.breakfast = data.breakfast && !(<any>data.breakfast).toJSON ? new MealDTO(data.breakfast) : <MealDTO>this.breakfast;
+            this.brunch = data.brunch && !(<any>data.brunch).toJSON ? new MealDTO(data.brunch) : <MealDTO>this.brunch;
+            this.lunch = data.lunch && !(<any>data.lunch).toJSON ? new MealDTO(data.lunch) : <MealDTO>this.lunch;
+            this.afternoonSnack = data.afternoonSnack && !(<any>data.afternoonSnack).toJSON ? new MealDTO(data.afternoonSnack) : <MealDTO>this.afternoonSnack;
+            this.dinner = data.dinner && !(<any>data.dinner).toJSON ? new MealDTO(data.dinner) : <MealDTO>this.dinner;
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.dayMenuId = _data["dayMenuId"] !== undefined ? _data["dayMenuId"] : <any>null;
+            this.dayMenuName = _data["dayMenuName"] !== undefined ? _data["dayMenuName"] : <any>null;
+            this.dayMenuDate = _data["dayMenuDate"] ? new Date(_data["dayMenuDate"].toString()) : <any>null;
+            this.breakfast = _data["breakfast"] ? MealDTO.fromJS(_data["breakfast"], _mappings) : <any>null;
+            this.brunch = _data["brunch"] ? MealDTO.fromJS(_data["brunch"], _mappings) : <any>null;
+            this.lunch = _data["lunch"] ? MealDTO.fromJS(_data["lunch"], _mappings) : <any>null;
+            this.afternoonSnack = _data["afternoonSnack"] ? MealDTO.fromJS(_data["afternoonSnack"], _mappings) : <any>null;
+            this.dinner = _data["dinner"] ? MealDTO.fromJS(_data["dinner"], _mappings) : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): DayMenuDTO | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<DayMenuDTO>(data, _mappings, DayMenuDTO);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["dayMenuId"] = this.dayMenuId !== undefined ? this.dayMenuId : <any>null;
+        data["dayMenuName"] = this.dayMenuName !== undefined ? this.dayMenuName : <any>null;
+        data["dayMenuDate"] = this.dayMenuDate ? this.dayMenuDate.toISOString() : <any>null;
+        data["breakfast"] = this.breakfast ? this.breakfast.toJSON() : <any>null;
+        data["brunch"] = this.brunch ? this.brunch.toJSON() : <any>null;
+        data["lunch"] = this.lunch ? this.lunch.toJSON() : <any>null;
+        data["afternoonSnack"] = this.afternoonSnack ? this.afternoonSnack.toJSON() : <any>null;
+        data["dinner"] = this.dinner ? this.dinner.toJSON() : <any>null;
+        return data;
+    }
+}
+
+export interface IDayMenuDTO {
+    dayMenuId?: number | null;
+    dayMenuName?: string | null;
+    dayMenuDate?: Date | null;
+    breakfast?: IMealDTO | null;
+    brunch?: IMealDTO | null;
+    lunch?: IMealDTO | null;
+    afternoonSnack?: IMealDTO | null;
+    dinner?: IMealDTO | null;
+}
+
+export class MealDTO implements IMealDTO {
+    mealId?: number | null;
+    mealName?: string | null;
+    servingCount?: number | null;
+    mealDescription?: string | null;
+
+    constructor(data?: IMealDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.mealId = _data["mealId"] !== undefined ? _data["mealId"] : <any>null;
+            this.mealName = _data["mealName"] !== undefined ? _data["mealName"] : <any>null;
+            this.servingCount = _data["servingCount"] !== undefined ? _data["servingCount"] : <any>null;
+            this.mealDescription = _data["mealDescription"] !== undefined ? _data["mealDescription"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): MealDTO | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<MealDTO>(data, _mappings, MealDTO);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["mealId"] = this.mealId !== undefined ? this.mealId : <any>null;
+        data["mealName"] = this.mealName !== undefined ? this.mealName : <any>null;
+        data["servingCount"] = this.servingCount !== undefined ? this.servingCount : <any>null;
+        data["mealDescription"] = this.mealDescription !== undefined ? this.mealDescription : <any>null;
+        return data;
+    }
+}
+
+export interface IMealDTO {
+    mealId?: number | null;
+    mealName?: string | null;
+    servingCount?: number | null;
+    mealDescription?: string | null;
+}
+
+export class WeekMenuGenerateDataAllergen implements IWeekMenuGenerateDataAllergen {
+    weekMenuGenerateDataAllergenId?: number;
+    weekMenuGenerateDataId?: number;
+    allergenId?: number;
+
+    constructor(data?: IWeekMenuGenerateDataAllergen) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.weekMenuGenerateDataAllergenId = _data["weekMenuGenerateDataAllergenId"] !== undefined ? _data["weekMenuGenerateDataAllergenId"] : <any>null;
+            this.weekMenuGenerateDataId = _data["weekMenuGenerateDataId"] !== undefined ? _data["weekMenuGenerateDataId"] : <any>null;
+            this.allergenId = _data["allergenId"] !== undefined ? _data["allergenId"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): WeekMenuGenerateDataAllergen | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<WeekMenuGenerateDataAllergen>(data, _mappings, WeekMenuGenerateDataAllergen);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["weekMenuGenerateDataAllergenId"] = this.weekMenuGenerateDataAllergenId !== undefined ? this.weekMenuGenerateDataAllergenId : <any>null;
+        data["weekMenuGenerateDataId"] = this.weekMenuGenerateDataId !== undefined ? this.weekMenuGenerateDataId : <any>null;
+        data["allergenId"] = this.allergenId !== undefined ? this.allergenId : <any>null;
+        return data;
+    }
+}
+
+export interface IWeekMenuGenerateDataAllergen {
+    weekMenuGenerateDataAllergenId?: number;
+    weekMenuGenerateDataId?: number;
+    allergenId?: number;
+}
+
+export class UpdateAllergenWeekMenuDataDTO implements IUpdateAllergenWeekMenuDataDTO {
+    weekMWeekMenuGenerateDataId?: number;
+    allergenWeekMenuDatas?: WeekMenuGenerateDataAllergen[];
+
+    constructor(data?: IUpdateAllergenWeekMenuDataDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+            if (data.allergenWeekMenuDatas) {
+                this.allergenWeekMenuDatas = [];
+                for (let i = 0; i < data.allergenWeekMenuDatas.length; i++) {
+                    let item = data.allergenWeekMenuDatas[i];
+                    this.allergenWeekMenuDatas[i] = item && !(<any>item).toJSON ? new WeekMenuGenerateDataAllergen(item) : <WeekMenuGenerateDataAllergen>item;
+                }
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.weekMWeekMenuGenerateDataId = _data["weekMWeekMenuGenerateDataId"] !== undefined ? _data["weekMWeekMenuGenerateDataId"] : <any>null;
+            if (Array.isArray(_data["allergenWeekMenuDatas"])) {
+                this.allergenWeekMenuDatas = [] as any;
+                for (let item of _data["allergenWeekMenuDatas"])
+                    this.allergenWeekMenuDatas!.push(WeekMenuGenerateDataAllergen.fromJS(item, _mappings));
+            }
+            else {
+                this.allergenWeekMenuDatas = <any>null;
+            }
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): UpdateAllergenWeekMenuDataDTO | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<UpdateAllergenWeekMenuDataDTO>(data, _mappings, UpdateAllergenWeekMenuDataDTO);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["weekMWeekMenuGenerateDataId"] = this.weekMWeekMenuGenerateDataId !== undefined ? this.weekMWeekMenuGenerateDataId : <any>null;
+        if (Array.isArray(this.allergenWeekMenuDatas)) {
+            data["allergenWeekMenuDatas"] = [];
+            for (let item of this.allergenWeekMenuDatas)
+                data["allergenWeekMenuDatas"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IUpdateAllergenWeekMenuDataDTO {
+    weekMWeekMenuGenerateDataId?: number;
+    allergenWeekMenuDatas?: IWeekMenuGenerateDataAllergen[];
+}
+
+export class WeekMenuGenerateDatum implements IWeekMenuGenerateDatum {
+    weekMenuGenerateDataId?: number;
+    weekMenuId?: number;
+    ageCategoryId?: number;
+
+    constructor(data?: IWeekMenuGenerateDatum) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.weekMenuGenerateDataId = _data["weekMenuGenerateDataId"] !== undefined ? _data["weekMenuGenerateDataId"] : <any>null;
+            this.weekMenuId = _data["weekMenuId"] !== undefined ? _data["weekMenuId"] : <any>null;
+            this.ageCategoryId = _data["ageCategoryId"] !== undefined ? _data["ageCategoryId"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): WeekMenuGenerateDatum | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<WeekMenuGenerateDatum>(data, _mappings, WeekMenuGenerateDatum);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["weekMenuGenerateDataId"] = this.weekMenuGenerateDataId !== undefined ? this.weekMenuGenerateDataId : <any>null;
+        data["weekMenuId"] = this.weekMenuId !== undefined ? this.weekMenuId : <any>null;
+        data["ageCategoryId"] = this.ageCategoryId !== undefined ? this.ageCategoryId : <any>null;
+        return data;
+    }
+}
+
+export interface IWeekMenuGenerateDatum {
+    weekMenuGenerateDataId?: number;
+    weekMenuId?: number;
+    ageCategoryId?: number;
 }
 
 export class WeekOrder implements IWeekOrder {

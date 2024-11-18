@@ -65,6 +65,8 @@
     <Folder Include="Schemas\dbo\Programmability_Stored-Procedures" />
     <Folder Include="PublishingProfiles" />
     <Folder Include="Data\Test" />
+    <Folder Include="Schemas\dbo\Procedures" />
+    <Folder Include="ChangeScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\dbo\Tables\User.sql" />
@@ -94,6 +96,8 @@
     <Build Include="Schemas\dbo\Tables\AgeCategory.sql" />
     <Build Include="Schemas\dbo\Tables\DayOrder.sql" />
     <Build Include="Schemas\dbo\Tables\WeekOrder.sql" />
+    <Build Include="Schemas\dbo\Tables\WeekMenuGenerateData.sql" />
+    <Build Include="Schemas\dbo\Tables\WeekMenuGenerateDataAllergen.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DataBase.refactorlog" />
@@ -109,6 +113,11 @@
     <None Include="Data\Test\Recipe.sql" />
     <None Include="Data\Test\RecipeCategory.sql" />
     <None Include="Data\Test\DayOrder.sql" />
+    <None Include="Data\Test\Meal.sql" />
+    <Build Include="Schemas\dbo\Procedures\GetMealMacroData.sql" />
+    <Build Include="Schemas\dbo\Procedures\GetDayMenuMacroData.sql" />
+    <None Include="ChangeScripts\20241115_AddMacroCalcProcedures.sql" />
+    <None Include="Data\Test\AgeCategory.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts_Post-Deployment\Script.PostDeployment.sql" />

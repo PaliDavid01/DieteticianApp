@@ -36,6 +36,11 @@ namespace API.Extensions
             services.AddScoped<IWeekOrderRepository, WeekOrderRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IDayOrderRepository, DayOrderRepository>();
+            services.AddScoped<IDayMenuRepository, DayMenuRepository>();
+            services.AddScoped<IWeekMenuGenerateDataAllergenRepository, WeekMenuGenerateDataAllergenRepository>();
+            services.AddScoped<IWeekMenuGenerateDataRepository, WeekMenuGenerateDataRepository>();
+            services.AddScoped<IAgeCategoryRepository, AgeCategoryRepository>();
+
 
 
             //services.AddTransient<IMaterialLogic, MaterialLogic>();
@@ -58,6 +63,10 @@ namespace API.Extensions
             services.AddScoped<IWeekOrderLogic, WeekOrderLogic>();
             services.AddScoped<ICustomerLogic, CustomerLogic>();
             services.AddScoped<IDayOrderLogic, DayOrderLogic>();
+            services.AddScoped<IDayMenuLogic, DayMenuLogic>();
+            services.AddScoped<IWeekMenuGenerateDataLogic, WeekMenuGenerateDataLogic>();
+            services.AddScoped<IWeekMenuGenerateDataAllergenLogic, WeekMenuGenerateDataAllergenLogic>();
+            services.AddScoped<IAgeCategoryLogic, AgeCategoryLogic>();
 
             return services;
         }
