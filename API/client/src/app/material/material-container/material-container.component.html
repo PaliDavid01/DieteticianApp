@@ -1,4 +1,8 @@
 <div class="card">
+  @if(loading){
+  <p-progressSpinner ariaLabel="loading" />
+  } @else{
+
   <p-toast></p-toast>
   <p-toolbar styleClass="mb-2 gap-2">
     <ng-template pTemplate="left">
@@ -147,6 +151,7 @@
       </div>
     </ng-template>
   </p-table>
+  }
 </div>
 
 <!-- show info -->

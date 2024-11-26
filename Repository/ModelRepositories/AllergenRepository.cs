@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Models.Models;
+﻿using Models.Models;
 using Repository.Interfaces;
 using Repository.ModelRepositories.GenericRepository;
 
@@ -10,5 +9,6 @@ namespace Repository.ModelRepositories
         public AllergenRepository(DataBaseContext dbContext) : base(dbContext)
         {
         }
+
     }
 }

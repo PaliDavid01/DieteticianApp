@@ -121,6 +121,7 @@
   styleClass="p-fluid"
 >
   <p-table
+    #dt
     [value]="baseMaterials"
     selectionMode="single"
     [(selection)]="selectedMaterialToCreateIngredient"
@@ -220,6 +221,8 @@
             class="col-span-2 mr-2"
           ></p-inputNumber>
           <p class="self-center ml-2">
+            {{ selectedMaterialToCreateIngredient?.quantity }}
+            /
             {{ selectedMaterialToCreateIngredient.measure }}
           </p>
         </div>

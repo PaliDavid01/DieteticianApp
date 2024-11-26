@@ -65,5 +65,11 @@ namespace Logic.Logic
             }
 
         }
+        public void LoadData()
+        {
+            _repository.LoadData();
+        }
+
+
     }
 }

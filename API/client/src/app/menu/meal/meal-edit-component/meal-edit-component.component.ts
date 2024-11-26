@@ -24,6 +24,7 @@ export class MealEditComponent implements OnInit {
   meal: Meal = new Meal();
   mealRecipes: MealRecipe[] = [];
   LoadedMealRecipes: GetMealRecipe[] = [];
+  loading = false;
   constructor(
     public ref: DynamicDialogRef,
     public dialogConfig: DynamicDialogConfig,

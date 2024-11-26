@@ -292,4 +292,7 @@ export class RecipeCreateEditComponent {
   showMaterialInfo(arg0: any) {
     throw new Error('Method not implemented.');
   }
+  applyFilterGlobal($event: any, stringVal: any) {
+    this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
 }

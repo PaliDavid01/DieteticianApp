@@ -30,5 +30,11 @@ namespace API.Controllers
         {
             await _logic.DeleteWithAlllergenMaterials(entity);
         }
+
+        [HttpGet("Load")]
+        public void Load()
+        {
+            _logic.LoadData();
+        }
     }
 }

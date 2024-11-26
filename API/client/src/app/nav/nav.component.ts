@@ -25,10 +25,12 @@ export class NavComponent implements OnInit {
     this.items = [
       {
         label: 'Base data',
+        id: 'basedata',
         icon: PrimeIcons.FILE,
         items: [
           {
             label: 'Allergen',
+            id: 'allergen',
             icon: PrimeIcons.CIRCLE_FILL,
             url: '/allergen',
           },

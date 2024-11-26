@@ -6,5 +6,6 @@ namespace Repository.Interfaces
     public interface IBaseMaterialRepository : ICRUDRepository<BaseMaterial>
     {
         Task<BaseMaterial> GetAllExtended();
+        void LoadData();
     }
 }

@@ -27,7 +27,7 @@ export class MaterialContainerComponent {
   statuses!: any[];
   Delete: string = 'Delete';
   displayDialog: boolean = false;
-
+  loading = false;
   constructor(
     private materialService: BaseMaterialService,
     private messageService: MessageService,
@@ -37,8 +37,10 @@ export class MaterialContainerComponent {
   ) {}
 
   ngOnInit() {
+    this.loading = true;
     this.materialService.getBaseMaterialsExtended().subscribe((data) => {
       this.materials = data;
+      this.loading = false;
     });
   }
   exportExcel() {

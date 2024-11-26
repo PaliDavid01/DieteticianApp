@@ -30,7 +30,7 @@ namespace Repository.ModelRepositories.GenericRepository
 
         public T Read(int id)
         {
-            return _dbContext.Set<T>().Find(id);
+            return _dbContext.Set<T>().Find(id)!;
         }
 
         public virtual IEnumerable<T> ReadAll()

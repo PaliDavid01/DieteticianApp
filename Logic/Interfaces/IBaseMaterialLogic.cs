@@ -8,5 +8,6 @@ namespace Logic.Interfaces
         void LoadFromExcel();
         Task<IEnumerable<BaseMaterial>> GetBaseMaterialsExtended();
         Task DeleteWithAlllergenMaterials(BaseMaterial baseMaterial);
+        void LoadData();
     }
 }
