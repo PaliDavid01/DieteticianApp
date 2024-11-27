@@ -116,6 +116,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[RecipeGenerateDataView]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[UserRoleView]",
          "ObjectType": 3
       },
