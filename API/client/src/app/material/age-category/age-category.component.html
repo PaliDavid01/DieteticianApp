@@ -48,10 +48,10 @@
     [rows]="10"
     [paginator]="true"
     [globalFilterFields]="[
-      'AgeCategoryName',
-      'AgeCategoryMinAge',
-      'AgeCategoryMaxAge',
-      'MaxDailyCalories'
+      'ageCategoryName',
+      'ageCategoryMinAge',
+      'ageCategoryMaxAge',
+      'maxDailyCalories'
     ]"
     [tableStyle]="{ 'min-width': '75rem' }"
     [(selection)]="selectedAgeCategories"
@@ -116,6 +116,7 @@
             pButton
             pRipple
             icon="pi pi-trash"
+            id="delete"
             class="p-button-rounded p-button-warning"
             (click)="deleteAgeCategory(item)"
           ></button>
@@ -153,11 +154,11 @@
       >
     </div>
     <div class="field">
-      <label for="quantity">AgeCategoryMinAge</label>
+      <label for="quantity">MinAge</label>
       <input
         type="number"
         pInputText
-        id="quantity"
+        id="minAge"
         [(ngModel)]="ageCategory.ageCategoryMinAge"
       />
       <small class="p-error" *ngIf="!ageCategory.ageCategoryMinAge"
@@ -165,11 +166,11 @@
       >
     </div>
     <div class="field">
-      <label for="quantity">AgeCategoryMaxAge</label>
+      <label for="quantity">MaxAge</label>
       <input
         type="number"
         pInputText
-        id="quantity"
+        id="maxAge"
         [(ngModel)]="ageCategory.ageCategoryMaxAge"
       />
       <small class="p-error" *ngIf="!ageCategory.ageCategoryMaxAge"
@@ -181,7 +182,7 @@
       <input
         type="number"
         pInputText
-        id="quantity"
+        id="maxDailyCalories"
         [(ngModel)]="ageCategory.maxDailyCalories"
       />
       <small class="p-error" *ngIf="!ageCategory.maxDailyCalories"

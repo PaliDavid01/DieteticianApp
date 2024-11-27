@@ -6,7 +6,7 @@ using OpenQA.Selenium.Interactions;
 namespace Test
 {
     [TestClass]
-    public class UnitTest1
+    public class AllergenTest
     {
         [TestMethod]
         public void CreateAllergen()
@@ -52,6 +52,7 @@ namespace Test
             // search for the allergen in the grid and verify
             var isAllergenExists = driver.FindElement(By.XPath("//td[text()='test allergen']")) is not null;
             Assert.IsTrue(isAllergenExists);
+            driver.Quit();
             #endregion
         }
 
@@ -114,6 +115,7 @@ namespace Test
             }
 
             Assert.IsTrue(!isAllergenExists);
+            driver.Quit();
             #endregion
         }
     }
