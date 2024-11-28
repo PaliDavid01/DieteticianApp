@@ -1,0 +1,106 @@
+<div class="grid gap-4 grid-rows-11 grid-cols-2">
+  <div class="col-span-2 row-span-2">
+    <p>Breakfast</p>
+    <span>{{ generatedMenu.Breakfast.at(0).recipe.recipeName }}</span
+    ><br />
+    <span>{{ generatedMenu.Breakfast.at(0).recipe.recipeCalories }} Kcal</span
+    ><br />
+    <span>{{ generatedMenu.Breakfast.at(0).quantity }}</span>
+    <hr />
+    <span>{{
+      generatedMenu.Breakfast.at(0).recipe.recipeCalories *
+        generatedMenu.Breakfast.at(0).quantity
+    }}</span>
+  </div>
+  <div class="col-span-2 row-span-2">
+    <p>Brunch</p>
+    <span>{{ generatedMenu.Brunch.at(0).recipe.recipeName }}</span
+    ><br />
+    <span>{{ generatedMenu.Brunch.at(0).recipe.recipeCalories }} Kcal</span
+    ><br />
+    <span>quantity: {{ generatedMenu.Brunch.at(0).quantity }}</span>
+    <hr />
+    <span>Total calories: </span>
+    <span
+      >{{
+        generatedMenu.Brunch.at(0).recipe.recipeCalories *
+          generatedMenu.Brunch.at(0).quantity
+      }}
+      Kcal</span
+    >
+  </div>
+  <div class="col-span-2 row-span-2">
+    <p>Lunch</p>
+    <span>{{ generatedMenu.Lunch.at(0).recipe.recipeName }}</span
+    ><br />
+    <span>{{ generatedMenu.Lunch.at(0).recipe.recipeCalories }} Kcal</span
+    ><br />
+    <span>quantity: {{ generatedMenu.Lunch.at(0).quantity }}</span>
+    <hr />
+    <span>Total calories: </span>
+    <span
+      >{{
+        generatedMenu.Lunch.at(0).recipe.recipeCalories *
+          generatedMenu.Lunch.at(0).quantity
+      }}
+      Kcal</span
+    >
+  </div>
+  <div class="col-span-2 row-span-2">
+    <p>AfternoonSnack</p>
+    <span>{{ generatedMenu.AfternoonSnack.at(0).recipe.recipeName }}</span
+    ><br />
+    <span
+      >{{ generatedMenu.AfternoonSnack.at(0).recipe.recipeCalories }} Kcal</span
+    ><br />
+    <span>quantity: {{ generatedMenu.AfternoonSnack.at(0).quantity }}</span>
+    <hr />
+    <span>Total calories: </span>
+    <span
+      >{{
+        generatedMenu.AfternoonSnack.at(0).recipe.recipeCalories *
+          generatedMenu.AfternoonSnack.at(0).quantity
+      }}
+      Kcal</span
+    >
+  </div>
+  <div class="col-span-2 row-span-2">
+    <p>Dinner</p>
+    <span>{{ generatedMenu.Dinner.at(0).recipe.recipeName }}</span
+    ><br />
+    <span>{{ generatedMenu.Dinner.at(0).recipe.recipeCalories }} Kcal</span
+    ><br />
+    <span>quantity: {{ generatedMenu.Dinner.at(0).quantity }}</span>
+    <hr />
+    <span>Total calories: </span>
+    <span
+      >{{
+        generatedMenu.Dinner.at(0).recipe.recipeCalories *
+          generatedMenu.Dinner.at(0).quantity
+      }}
+      Kcal</span
+    >
+  </div>
+  <div class="col-span-2">
+    <div class="grid gap-4 grid-cols-2">
+      <div>
+        <button
+          pButton
+          pRipple
+          label="Back"
+          icon="pi pi-arrow-left"
+          class="p-button-text"
+          (click)="hideDialog()"
+        ></button>
+      </div>
+      <div>
+        <p-button
+          pRipple
+          label="Save"
+          severity="success"
+          (onClick)="save()"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+</div>

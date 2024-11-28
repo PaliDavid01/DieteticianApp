@@ -1,6 +1,7 @@
 ﻿using API.Controllers.GenericController;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using Models.Models;
 using static Logic.Logic.DayMenuLogic;
 
@@ -29,10 +30,16 @@ namespace API.Controllers
             return _logic.GetGetDayMenuMacroData(dayMenuId);
         }
 
-        [HttpPost("GenerateDayMenu/{weekMenuId}/{dayMenuId}")]
-        public async Task<Dictionary<MealType, ICollection<MealRecipeDTO>>> GenerateDayMenu(int weekMenuId, int dayMenuId)
+        [HttpPost("GenerateDayMenu/{weekMenuId}")]
+        public async Task<Dictionary<MealType, ICollection<MealRecipeDTO>>> GenerateDayMenu(int weekMenuId)
         {
-            return await _logic.GenerateDayMenu(weekMenuId, dayMenuId);
+            return await _logic.GenerateDayMenu(weekMenuId);
+        }
+
+        [HttpPost("SaveGeneratedDaymenu/{dayMenuId}")]
+        public async Task SaveGeneratedDaymenu(int dayMenuId, Dictionary<MealType, MealRecipe> dayMenu)
+        {
+            await _logic.SaveGeneratedDaymenu(dayMenuId, dayMenu);
         }
     }
 }

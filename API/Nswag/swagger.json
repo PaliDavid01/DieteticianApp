@@ -1004,6 +1004,19 @@
         }
       }
     },
+    "/BaseMaterial/Load": {
+      "get": {
+        "tags": [
+          "BaseMaterial"
+        ],
+        "operationId": "BaseMaterial_Load",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/BaseMaterial/Create": {
       "post": {
         "tags": [
@@ -1585,6 +1598,90 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/DayMenu/GenerateDayMenu/{weekMenuId}": {
+      "post": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_GenerateDayMenu",
+        "parameters": [
+          {
+            "name": "weekMenuId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-dictionaryKey": {
+                    "$ref": "#/components/schemas/MealType"
+                  },
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MealRecipeDTO"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DayMenu/SaveGeneratedDaymenu/{dayMenuId}": {
+      "post": {
+        "tags": [
+          "DayMenu"
+        ],
+        "operationId": "DayMenu_SaveGeneratedDaymenu",
+        "parameters": [
+          {
+            "name": "dayMenuId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "dayMenu",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-dictionaryKey": {
+                  "$ref": "#/components/schemas/MealType"
+                },
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/MealRecipe"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": ""
           }
         }
       }
@@ -6496,6 +6593,169 @@
           }
         }
       },
+      "MealType": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Breakfast",
+          "Brunch",
+          "Lunch",
+          "AfternoonSnack",
+          "Dinner"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "MealRecipeDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "recipeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "recipe": {
+            "$ref": "#/components/schemas/Recipe"
+          }
+        }
+      },
+      "Recipe": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "recipeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recipeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "recipeDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "recipeCategoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recipeCostPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeRetailPrice": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeKilojule": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeCalories": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeProtein": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeCarbohydrate": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeCholesterol": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeSugar": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeSalt": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeSaturatedFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeTransFat": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeFiber": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeKalcium": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeKalium": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeQuantity": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "recipeMeasure": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "MealRecipe": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "mealRecipeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recipeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mealId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
       "DayOrder": {
         "type": "object",
         "additionalProperties": false,
@@ -6769,28 +7029,6 @@
           }
         }
       },
-      "MealRecipe": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "mealRecipeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "recipeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "mealId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "quantity": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "RecipeCategory": {
         "type": "object",
         "additionalProperties": false,
@@ -6804,112 +7042,6 @@
             "nullable": true
           },
           "description": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "Recipe": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "recipeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "recipeName": {
-            "type": "string",
-            "nullable": true
-          },
-          "recipeDescription": {
-            "type": "string",
-            "nullable": true
-          },
-          "recipeCategoryId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "recipeCostPrice": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeRetailPrice": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeKilojule": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeCalories": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeProtein": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeFat": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeCarbohydrate": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeCholesterol": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeSugar": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeSalt": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeSaturatedFat": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeTransFat": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeFiber": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeKalcium": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeKalium": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeQuantity": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "recipeMeasure": {
             "type": "string",
             "nullable": true
           }

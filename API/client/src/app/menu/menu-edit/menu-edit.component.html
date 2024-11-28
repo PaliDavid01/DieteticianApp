@@ -68,6 +68,21 @@
     @if(weekMenu.weekMenuId){
     <div style="height: 80vh">
       <table style="height: 40rem !important; width: 100%">
+        @if(generateData){
+        <tr>
+          <td *ngFor="let i of range">
+            <button
+              *ngIf="isGeneratable(i)"
+              pRipple
+              label="Generate menu"
+              pButton
+              icon="pi pi-plus"
+              class="p-button-info p-button-sm"
+              (click)="generateMenu(dayMenus.get(i).dayMenuId)"
+            ></button>
+          </td>
+        </tr>
+        }
         <tr>
           <th
             style="height: 30px; border-bottom: 2px white solid"

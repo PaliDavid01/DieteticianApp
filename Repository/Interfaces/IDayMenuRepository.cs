@@ -1,4 +1,5 @@
-﻿using Models.Models;
+﻿using Models;
+using Models.Models;
 using Repository.Interfaces.GenericInterfaces;
 
 namespace Repository.Interfaces
@@ -7,5 +8,6 @@ namespace Repository.Interfaces
     {
         Task<IEnumerable<DayMenu>> GetDayMenuByWeekMenuId(int weekMenuId);
         Task<GetDayMenuMacroDataResult> GetGetDayMenuMacroData(int dayMenuId);
+        Task SaveGeneratedDaymenu(int dayMenuId, Dictionary<MealType, MealRecipe> dayMenu);
     }
 }

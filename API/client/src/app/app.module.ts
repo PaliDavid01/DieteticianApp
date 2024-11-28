@@ -163,6 +163,7 @@ import { RecipeListContainerComponent } from './recipe-ingredient/recipe/recipe-
 import { MealInfoCardComponent } from './menu/meal/meal-info-card/meal-info-card.component';
 import { MenuGenerateModalComponent } from './menu/menu-generate-modal/menu-generate-modal.component';
 import { AgeCategoryComponent } from './material/age-category/age-category.component';
+import { MenuGenerateInfoComponent } from './menu/menu-generate-info/menu-generate-info.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -190,6 +191,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MealInfoCardComponent,
     MenuGenerateModalComponent,
     AgeCategoryComponent,
+    MenuGenerateInfoComponent,
   ],
   imports: [
     CommonModule,

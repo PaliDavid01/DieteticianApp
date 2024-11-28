@@ -2003,6 +2003,50 @@ export class BaseMaterialService {
         return _observableOf(null as any);
     }
 
+    load(): Observable<void> {
+        let url_ = this.baseUrl + "/BaseMaterial/Load";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processLoad(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processLoad(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processLoad(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
     create(entity: BaseMaterial): Observable<BaseMaterial> {
         let url_ = this.baseUrl + "/BaseMaterial/Create";
         url_ = url_.replace(/[?&]$/, "");
@@ -3137,6 +3181,118 @@ export class DayMenuService {
             let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
             result200 = GetDayMenuMacroDataResult.fromJS(resultData200, _mappings);
             return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    generateDayMenu(weekMenuId: number): Observable<{ [key in keyof typeof MealType]?: MealRecipeDTO[]; }> {
+        let url_ = this.baseUrl + "/DayMenu/GenerateDayMenu/{weekMenuId}";
+        if (weekMenuId === undefined || weekMenuId === null)
+            throw new Error("The parameter 'weekMenuId' must be defined.");
+        url_ = url_.replace("{weekMenuId}", encodeURIComponent("" + weekMenuId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGenerateDayMenu(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGenerateDayMenu(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<{ [key in keyof typeof MealType]?: MealRecipeDTO[]; }>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<{ [key in keyof typeof MealType]?: MealRecipeDTO[]; }>;
+        }));
+    }
+
+    protected processGenerateDayMenu(response: HttpResponseBase): Observable<{ [key in keyof typeof MealType]?: MealRecipeDTO[]; }> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (resultData200) {
+                result200 = {} as any;
+                for (let key in resultData200) {
+                    if (resultData200.hasOwnProperty(key))
+                        (<any>result200)![key] = resultData200[key] ? resultData200[key].map((i: any) => MealRecipeDTO.fromJS(i, _mappings)) : [];
+                }
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    saveGeneratedDaymenu(dayMenuId: number, dayMenu: { [key in keyof typeof MealType]?: MealRecipe; }): Observable<void> {
+        let url_ = this.baseUrl + "/DayMenu/SaveGeneratedDaymenu/{dayMenuId}";
+        if (dayMenuId === undefined || dayMenuId === null)
+            throw new Error("The parameter 'dayMenuId' must be defined.");
+        url_ = url_.replace("{dayMenuId}", encodeURIComponent("" + dayMenuId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(dayMenu);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSaveGeneratedDaymenu(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSaveGeneratedDaymenu(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processSaveGeneratedDaymenu(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12663,6 +12819,217 @@ export interface IGetDayMenuMacroDataResult {
     allergens?: string | null;
 }
 
+export enum MealType {
+    Breakfast = 0,
+    Brunch = 1,
+    Lunch = 2,
+    AfternoonSnack = 3,
+    Dinner = 4,
+}
+
+export class MealRecipeDTO implements IMealRecipeDTO {
+    recipeId?: number;
+    quantity?: number;
+    recipe?: Recipe;
+
+    constructor(data?: IMealRecipeDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+            this.recipe = data.recipe && !(<any>data.recipe).toJSON ? new Recipe(data.recipe) : <Recipe>this.recipe;
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.recipeId = _data["recipeId"] !== undefined ? _data["recipeId"] : <any>null;
+            this.quantity = _data["quantity"] !== undefined ? _data["quantity"] : <any>null;
+            this.recipe = _data["recipe"] ? Recipe.fromJS(_data["recipe"], _mappings) : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): MealRecipeDTO | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<MealRecipeDTO>(data, _mappings, MealRecipeDTO);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["recipeId"] = this.recipeId !== undefined ? this.recipeId : <any>null;
+        data["quantity"] = this.quantity !== undefined ? this.quantity : <any>null;
+        data["recipe"] = this.recipe ? this.recipe.toJSON() : <any>null;
+        return data;
+    }
+}
+
+export interface IMealRecipeDTO {
+    recipeId?: number;
+    quantity?: number;
+    recipe?: IRecipe;
+}
+
+export class Recipe implements IRecipe {
+    recipeId?: number;
+    recipeName?: string | null;
+    recipeDescription?: string | null;
+    recipeCategoryId?: number;
+    recipeCostPrice?: number | null;
+    recipeRetailPrice?: number | null;
+    recipeKilojule?: number | null;
+    recipeCalories?: number | null;
+    recipeProtein?: number | null;
+    recipeFat?: number | null;
+    recipeCarbohydrate?: number | null;
+    recipeCholesterol?: number | null;
+    recipeSugar?: number | null;
+    recipeSalt?: number | null;
+    recipeSaturatedFat?: number | null;
+    recipeTransFat?: number | null;
+    recipeFiber?: number | null;
+    recipeKalcium?: number | null;
+    recipeKalium?: number | null;
+    recipeQuantity?: number | null;
+    recipeMeasure?: string | null;
+
+    constructor(data?: IRecipe) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.recipeId = _data["recipeId"] !== undefined ? _data["recipeId"] : <any>null;
+            this.recipeName = _data["recipeName"] !== undefined ? _data["recipeName"] : <any>null;
+            this.recipeDescription = _data["recipeDescription"] !== undefined ? _data["recipeDescription"] : <any>null;
+            this.recipeCategoryId = _data["recipeCategoryId"] !== undefined ? _data["recipeCategoryId"] : <any>null;
+            this.recipeCostPrice = _data["recipeCostPrice"] !== undefined ? _data["recipeCostPrice"] : <any>null;
+            this.recipeRetailPrice = _data["recipeRetailPrice"] !== undefined ? _data["recipeRetailPrice"] : <any>null;
+            this.recipeKilojule = _data["recipeKilojule"] !== undefined ? _data["recipeKilojule"] : <any>null;
+            this.recipeCalories = _data["recipeCalories"] !== undefined ? _data["recipeCalories"] : <any>null;
+            this.recipeProtein = _data["recipeProtein"] !== undefined ? _data["recipeProtein"] : <any>null;
+            this.recipeFat = _data["recipeFat"] !== undefined ? _data["recipeFat"] : <any>null;
+            this.recipeCarbohydrate = _data["recipeCarbohydrate"] !== undefined ? _data["recipeCarbohydrate"] : <any>null;
+            this.recipeCholesterol = _data["recipeCholesterol"] !== undefined ? _data["recipeCholesterol"] : <any>null;
+            this.recipeSugar = _data["recipeSugar"] !== undefined ? _data["recipeSugar"] : <any>null;
+            this.recipeSalt = _data["recipeSalt"] !== undefined ? _data["recipeSalt"] : <any>null;
+            this.recipeSaturatedFat = _data["recipeSaturatedFat"] !== undefined ? _data["recipeSaturatedFat"] : <any>null;
+            this.recipeTransFat = _data["recipeTransFat"] !== undefined ? _data["recipeTransFat"] : <any>null;
+            this.recipeFiber = _data["recipeFiber"] !== undefined ? _data["recipeFiber"] : <any>null;
+            this.recipeKalcium = _data["recipeKalcium"] !== undefined ? _data["recipeKalcium"] : <any>null;
+            this.recipeKalium = _data["recipeKalium"] !== undefined ? _data["recipeKalium"] : <any>null;
+            this.recipeQuantity = _data["recipeQuantity"] !== undefined ? _data["recipeQuantity"] : <any>null;
+            this.recipeMeasure = _data["recipeMeasure"] !== undefined ? _data["recipeMeasure"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): Recipe | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<Recipe>(data, _mappings, Recipe);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["recipeId"] = this.recipeId !== undefined ? this.recipeId : <any>null;
+        data["recipeName"] = this.recipeName !== undefined ? this.recipeName : <any>null;
+        data["recipeDescription"] = this.recipeDescription !== undefined ? this.recipeDescription : <any>null;
+        data["recipeCategoryId"] = this.recipeCategoryId !== undefined ? this.recipeCategoryId : <any>null;
+        data["recipeCostPrice"] = this.recipeCostPrice !== undefined ? this.recipeCostPrice : <any>null;
+        data["recipeRetailPrice"] = this.recipeRetailPrice !== undefined ? this.recipeRetailPrice : <any>null;
+        data["recipeKilojule"] = this.recipeKilojule !== undefined ? this.recipeKilojule : <any>null;
+        data["recipeCalories"] = this.recipeCalories !== undefined ? this.recipeCalories : <any>null;
+        data["recipeProtein"] = this.recipeProtein !== undefined ? this.recipeProtein : <any>null;
+        data["recipeFat"] = this.recipeFat !== undefined ? this.recipeFat : <any>null;
+        data["recipeCarbohydrate"] = this.recipeCarbohydrate !== undefined ? this.recipeCarbohydrate : <any>null;
+        data["recipeCholesterol"] = this.recipeCholesterol !== undefined ? this.recipeCholesterol : <any>null;
+        data["recipeSugar"] = this.recipeSugar !== undefined ? this.recipeSugar : <any>null;
+        data["recipeSalt"] = this.recipeSalt !== undefined ? this.recipeSalt : <any>null;
+        data["recipeSaturatedFat"] = this.recipeSaturatedFat !== undefined ? this.recipeSaturatedFat : <any>null;
+        data["recipeTransFat"] = this.recipeTransFat !== undefined ? this.recipeTransFat : <any>null;
+        data["recipeFiber"] = this.recipeFiber !== undefined ? this.recipeFiber : <any>null;
+        data["recipeKalcium"] = this.recipeKalcium !== undefined ? this.recipeKalcium : <any>null;
+        data["recipeKalium"] = this.recipeKalium !== undefined ? this.recipeKalium : <any>null;
+        data["recipeQuantity"] = this.recipeQuantity !== undefined ? this.recipeQuantity : <any>null;
+        data["recipeMeasure"] = this.recipeMeasure !== undefined ? this.recipeMeasure : <any>null;
+        return data;
+    }
+}
+
+export interface IRecipe {
+    recipeId?: number;
+    recipeName?: string | null;
+    recipeDescription?: string | null;
+    recipeCategoryId?: number;
+    recipeCostPrice?: number | null;
+    recipeRetailPrice?: number | null;
+    recipeKilojule?: number | null;
+    recipeCalories?: number | null;
+    recipeProtein?: number | null;
+    recipeFat?: number | null;
+    recipeCarbohydrate?: number | null;
+    recipeCholesterol?: number | null;
+    recipeSugar?: number | null;
+    recipeSalt?: number | null;
+    recipeSaturatedFat?: number | null;
+    recipeTransFat?: number | null;
+    recipeFiber?: number | null;
+    recipeKalcium?: number | null;
+    recipeKalium?: number | null;
+    recipeQuantity?: number | null;
+    recipeMeasure?: string | null;
+}
+
+export class MealRecipe implements IMealRecipe {
+    mealRecipeId?: number;
+    recipeId?: number;
+    mealId?: number;
+    quantity?: number;
+
+    constructor(data?: IMealRecipe) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.mealRecipeId = _data["mealRecipeId"] !== undefined ? _data["mealRecipeId"] : <any>null;
+            this.recipeId = _data["recipeId"] !== undefined ? _data["recipeId"] : <any>null;
+            this.mealId = _data["mealId"] !== undefined ? _data["mealId"] : <any>null;
+            this.quantity = _data["quantity"] !== undefined ? _data["quantity"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): MealRecipe | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<MealRecipe>(data, _mappings, MealRecipe);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["mealRecipeId"] = this.mealRecipeId !== undefined ? this.mealRecipeId : <any>null;
+        data["recipeId"] = this.recipeId !== undefined ? this.recipeId : <any>null;
+        data["mealId"] = this.mealId !== undefined ? this.mealId : <any>null;
+        data["quantity"] = this.quantity !== undefined ? this.quantity : <any>null;
+        return data;
+    }
+}
+
+export interface IMealRecipe {
+    mealRecipeId?: number;
+    recipeId?: number;
+    mealId?: number;
+    quantity?: number;
+}
+
 export class DayOrder implements IDayOrder {
     dayOrderId?: number;
     wantBreakfast?: boolean;
@@ -13115,52 +13482,6 @@ export interface IGetMealRecipe {
     quantity?: number;
 }
 
-export class MealRecipe implements IMealRecipe {
-    mealRecipeId?: number;
-    recipeId?: number;
-    mealId?: number;
-    quantity?: number;
-
-    constructor(data?: IMealRecipe) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any, _mappings?: any) {
-        if (_data) {
-            this.mealRecipeId = _data["mealRecipeId"] !== undefined ? _data["mealRecipeId"] : <any>null;
-            this.recipeId = _data["recipeId"] !== undefined ? _data["recipeId"] : <any>null;
-            this.mealId = _data["mealId"] !== undefined ? _data["mealId"] : <any>null;
-            this.quantity = _data["quantity"] !== undefined ? _data["quantity"] : <any>null;
-        }
-    }
-
-    static fromJS(data: any, _mappings?: any): MealRecipe | null {
-        data = typeof data === 'object' ? data : {};
-        return createInstance<MealRecipe>(data, _mappings, MealRecipe);
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["mealRecipeId"] = this.mealRecipeId !== undefined ? this.mealRecipeId : <any>null;
-        data["recipeId"] = this.recipeId !== undefined ? this.recipeId : <any>null;
-        data["mealId"] = this.mealId !== undefined ? this.mealId : <any>null;
-        data["quantity"] = this.quantity !== undefined ? this.quantity : <any>null;
-        return data;
-    }
-}
-
-export interface IMealRecipe {
-    mealRecipeId?: number;
-    recipeId?: number;
-    mealId?: number;
-    quantity?: number;
-}
-
 export class RecipeCategory implements IRecipeCategory {
     recipeCategoryId?: number;
     categoryName?: string | null;
@@ -13201,120 +13522,6 @@ export interface IRecipeCategory {
     recipeCategoryId?: number;
     categoryName?: string | null;
     description?: string | null;
-}
-
-export class Recipe implements IRecipe {
-    recipeId?: number;
-    recipeName?: string | null;
-    recipeDescription?: string | null;
-    recipeCategoryId?: number;
-    recipeCostPrice?: number | null;
-    recipeRetailPrice?: number | null;
-    recipeKilojule?: number | null;
-    recipeCalories?: number | null;
-    recipeProtein?: number | null;
-    recipeFat?: number | null;
-    recipeCarbohydrate?: number | null;
-    recipeCholesterol?: number | null;
-    recipeSugar?: number | null;
-    recipeSalt?: number | null;
-    recipeSaturatedFat?: number | null;
-    recipeTransFat?: number | null;
-    recipeFiber?: number | null;
-    recipeKalcium?: number | null;
-    recipeKalium?: number | null;
-    recipeQuantity?: number | null;
-    recipeMeasure?: string | null;
-
-    constructor(data?: IRecipe) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any, _mappings?: any) {
-        if (_data) {
-            this.recipeId = _data["recipeId"] !== undefined ? _data["recipeId"] : <any>null;
-            this.recipeName = _data["recipeName"] !== undefined ? _data["recipeName"] : <any>null;
-            this.recipeDescription = _data["recipeDescription"] !== undefined ? _data["recipeDescription"] : <any>null;
-            this.recipeCategoryId = _data["recipeCategoryId"] !== undefined ? _data["recipeCategoryId"] : <any>null;
-            this.recipeCostPrice = _data["recipeCostPrice"] !== undefined ? _data["recipeCostPrice"] : <any>null;
-            this.recipeRetailPrice = _data["recipeRetailPrice"] !== undefined ? _data["recipeRetailPrice"] : <any>null;
-            this.recipeKilojule = _data["recipeKilojule"] !== undefined ? _data["recipeKilojule"] : <any>null;
-            this.recipeCalories = _data["recipeCalories"] !== undefined ? _data["recipeCalories"] : <any>null;
-            this.recipeProtein = _data["recipeProtein"] !== undefined ? _data["recipeProtein"] : <any>null;
-            this.recipeFat = _data["recipeFat"] !== undefined ? _data["recipeFat"] : <any>null;
-            this.recipeCarbohydrate = _data["recipeCarbohydrate"] !== undefined ? _data["recipeCarbohydrate"] : <any>null;
-            this.recipeCholesterol = _data["recipeCholesterol"] !== undefined ? _data["recipeCholesterol"] : <any>null;
-            this.recipeSugar = _data["recipeSugar"] !== undefined ? _data["recipeSugar"] : <any>null;
-            this.recipeSalt = _data["recipeSalt"] !== undefined ? _data["recipeSalt"] : <any>null;
-            this.recipeSaturatedFat = _data["recipeSaturatedFat"] !== undefined ? _data["recipeSaturatedFat"] : <any>null;
-            this.recipeTransFat = _data["recipeTransFat"] !== undefined ? _data["recipeTransFat"] : <any>null;
-            this.recipeFiber = _data["recipeFiber"] !== undefined ? _data["recipeFiber"] : <any>null;
-            this.recipeKalcium = _data["recipeKalcium"] !== undefined ? _data["recipeKalcium"] : <any>null;
-            this.recipeKalium = _data["recipeKalium"] !== undefined ? _data["recipeKalium"] : <any>null;
-            this.recipeQuantity = _data["recipeQuantity"] !== undefined ? _data["recipeQuantity"] : <any>null;
-            this.recipeMeasure = _data["recipeMeasure"] !== undefined ? _data["recipeMeasure"] : <any>null;
-        }
-    }
-
-    static fromJS(data: any, _mappings?: any): Recipe | null {
-        data = typeof data === 'object' ? data : {};
-        return createInstance<Recipe>(data, _mappings, Recipe);
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["recipeId"] = this.recipeId !== undefined ? this.recipeId : <any>null;
-        data["recipeName"] = this.recipeName !== undefined ? this.recipeName : <any>null;
-        data["recipeDescription"] = this.recipeDescription !== undefined ? this.recipeDescription : <any>null;
-        data["recipeCategoryId"] = this.recipeCategoryId !== undefined ? this.recipeCategoryId : <any>null;
-        data["recipeCostPrice"] = this.recipeCostPrice !== undefined ? this.recipeCostPrice : <any>null;
-        data["recipeRetailPrice"] = this.recipeRetailPrice !== undefined ? this.recipeRetailPrice : <any>null;
-        data["recipeKilojule"] = this.recipeKilojule !== undefined ? this.recipeKilojule : <any>null;
-        data["recipeCalories"] = this.recipeCalories !== undefined ? this.recipeCalories : <any>null;
-        data["recipeProtein"] = this.recipeProtein !== undefined ? this.recipeProtein : <any>null;
-        data["recipeFat"] = this.recipeFat !== undefined ? this.recipeFat : <any>null;
-        data["recipeCarbohydrate"] = this.recipeCarbohydrate !== undefined ? this.recipeCarbohydrate : <any>null;
-        data["recipeCholesterol"] = this.recipeCholesterol !== undefined ? this.recipeCholesterol : <any>null;
-        data["recipeSugar"] = this.recipeSugar !== undefined ? this.recipeSugar : <any>null;
-        data["recipeSalt"] = this.recipeSalt !== undefined ? this.recipeSalt : <any>null;
-        data["recipeSaturatedFat"] = this.recipeSaturatedFat !== undefined ? this.recipeSaturatedFat : <any>null;
-        data["recipeTransFat"] = this.recipeTransFat !== undefined ? this.recipeTransFat : <any>null;
-        data["recipeFiber"] = this.recipeFiber !== undefined ? this.recipeFiber : <any>null;
-        data["recipeKalcium"] = this.recipeKalcium !== undefined ? this.recipeKalcium : <any>null;
-        data["recipeKalium"] = this.recipeKalium !== undefined ? this.recipeKalium : <any>null;
-        data["recipeQuantity"] = this.recipeQuantity !== undefined ? this.recipeQuantity : <any>null;
-        data["recipeMeasure"] = this.recipeMeasure !== undefined ? this.recipeMeasure : <any>null;
-        return data;
-    }
-}
-
-export interface IRecipe {
-    recipeId?: number;
-    recipeName?: string | null;
-    recipeDescription?: string | null;
-    recipeCategoryId?: number;
-    recipeCostPrice?: number | null;
-    recipeRetailPrice?: number | null;
-    recipeKilojule?: number | null;
-    recipeCalories?: number | null;
-    recipeProtein?: number | null;
-    recipeFat?: number | null;
-    recipeCarbohydrate?: number | null;
-    recipeCholesterol?: number | null;
-    recipeSugar?: number | null;
-    recipeSalt?: number | null;
-    recipeSaturatedFat?: number | null;
-    recipeTransFat?: number | null;
-    recipeFiber?: number | null;
-    recipeKalcium?: number | null;
-    recipeKalium?: number | null;
-    recipeQuantity?: number | null;
-    recipeMeasure?: string | null;
 }
 
 export class UserRole implements IUserRole {

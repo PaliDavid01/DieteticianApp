@@ -4,12 +4,18 @@ import { DialogService } from 'primeng/dynamicdialog';
 import {
   DayMenu,
   DayMenuService,
+  MealRecipe,
+  MealType,
   WeekMenu,
   WeekMenuGenerateDataAllergenService,
   WeekMenuGenerateDataService,
   WeekMenuService,
 } from 'src/app/services/generated-client';
 import { MealEditComponent } from '../meal/meal-edit-component/meal-edit-component.component';
+import {
+  GeneratedDaymenuDTO,
+  MenuGenerateInfoComponent,
+} from '../menu-generate-info/menu-generate-info.component';
 import { first } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { MenuGenerateModalComponent } from '../menu-generate-modal/menu-generate-modal.component';
@@ -245,7 +251,7 @@ export class MenuEditComponent implements OnInit {
 
   showGenerateDataDialog() {
     let ref = this.dialogService.open(MenuGenerateModalComponent, {
-      header: 'Generate Menu',
+      header: 'Generate parameters',
       width: '20%',
       height: '55%',
       data: {
@@ -255,5 +261,45 @@ export class MenuEditComponent implements OnInit {
     ref.onClose.subscribe((data) => {
       this.generateData = data;
     });
+  }
+  selectedDayMenuId: number;
+  generateMenu(dayMenuId: number) {
+    let dialogref = this.dialogService.open(MenuGenerateInfoComponent, {
+      header: 'Generate Menu',
+      width: '30%',
+      height: '100%',
+      data: {
+        weekMenuId: this.weekMenu.weekMenuId,
+      },
+    });
+    dialogref.onClose.subscribe((data: any) => {
+      let dayMenu: { [key in keyof typeof MealType]?: MealRecipe } = {
+        Breakfast: data.data.Breakfast,
+        Brunch: data.data.Brunch,
+        Lunch: data.data.Lunch,
+        AfternoonSnack: data.data.AfternoonSnack,
+        Dinner: data.data.Dinner,
+      };
+      this.dayMenuService
+        .saveGeneratedDaymenu(dayMenuId, dayMenu)
+        .subscribe(() => {
+          this.router.navigate(['menu-edit', this.weekMenu.weekMenuId]);
+        });
+      this.router.navigate(['menu-edit', this.weekMenu.weekMenuId]);
+    });
+  }
+  isGeneratable(daymenuElement: number): boolean {
+    let daymenu = this.dayMenus.get(daymenuElement);
+
+    if (!daymenu) {
+      return false;
+    }
+    return (
+      daymenu.breakfastId == 1 &&
+      daymenu.brunchId == 1 &&
+      daymenu.lunchId == 1 &&
+      daymenu.afternoonSnackId == 1 &&
+      daymenu.dinnerId == 1
+    );
   }
 }

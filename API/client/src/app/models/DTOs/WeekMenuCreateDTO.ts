@@ -29,10 +29,3 @@ interface MealDTO {
   servingCount?: number | null;
   mealDescription?: string | null;
 }
-
-interface MealRecipeDTO {
-  mealRecipeId?: number;
-  recipeId?: number;
-  meal?: MealDTO;
-  quantity?: number;
-}

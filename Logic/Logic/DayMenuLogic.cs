@@ -1,5 +1,6 @@
 ﻿using Logic.Interfaces;
 using Logic.Logic.GenericLogic;
+using Models;
 using Models.Models;
 using Repository.Interfaces;
 
@@ -38,11 +39,16 @@ namespace Logic.Logic
         {
             return _repository.GetGetDayMenuMacroData(dayMenuId);
         }
-        public async Task<Dictionary<MealType, ICollection<MealRecipeDTO>>> GenerateDayMenu(int weekMenuId, int dayMenuId)
+
+        public async Task SaveGeneratedDaymenu(int dayMenuId, Dictionary<MealType, MealRecipe> dayMenu)
+        {
+            await _repository.SaveGeneratedDaymenu(dayMenuId, dayMenu);
+        }
+
+        public async Task<Dictionary<MealType, ICollection<MealRecipeDTO>>> GenerateDayMenu(int weekMenuId)
         {
             var weekMenu = _weekMenuRepository.Read(weekMenuId);
             var generateData = _weekMenuGenerateDataRepository.GetByWeekMenuId(weekMenuId);
-            var dayMenu = _repository.Read(dayMenuId);
             var ageCategory = _ageCategoryRepository.Read(generateData.AgeCategoryId);
             var allergens = _weekMenuGenerateDataAllergenRepository.GetByWeekMenuGenerateDataId(generateData.WeekMenuGenerateDataId).Select(t => t.AllergenId.ToString());
 
@@ -135,14 +141,6 @@ namespace Logic.Logic
             };
         }
 
-        public enum MealType
-        {
-            Breakfast,
-            Brunch,
-            Lunch,
-            AfternoonSnack,
-            Dinner,
-        }
         public class MealRecipeDTO
         {
             public int RecipeId { get; set; }
