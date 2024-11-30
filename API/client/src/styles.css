@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import "tailwindcss/base" layer(tailwindcss);
+
 @import "tailwindcss/components" layer(tailwindcss);
 @import "tailwindcss/utilities" layer(tailwindcss);
 

@@ -1048,6 +1048,628 @@ export class AllergenService {
 }
 
 @Injectable()
+export class AllergenCustomerService {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    getAllergensByCustomerId(id: number): Observable<number[]> {
+        let url_ = this.baseUrl + "/AllergenCustomer/GetAllergensByCustomerId/{Id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{Id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllergensByCustomerId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllergensByCustomerId(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<number[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<number[]>;
+        }));
+    }
+
+    protected processGetAllergensByCustomerId(response: HttpResponseBase): Observable<number[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(item);
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    updateAllergenMaterials(updateAllergenCustomersDTO: UpdateAllergenCustomersDTO): Observable<void> {
+        let url_ = this.baseUrl + "/AllergenCustomer/UpdateAllergenMaterials";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(updateAllergenCustomersDTO);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateAllergenMaterials(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdateAllergenMaterials(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdateAllergenMaterials(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    create(entity: AllergenCustomer): Observable<AllergenCustomer> {
+        let url_ = this.baseUrl + "/AllergenCustomer/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AllergenCustomer>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AllergenCustomer>;
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<AllergenCustomer> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = AllergenCustomer.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    create2(entity: AllergenCustomer): Observable<void> {
+        let url_ = this.baseUrl + "/AllergenCustomer/CreateAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processCreate2(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    delete(id?: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/AllergenCustomer/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    delete2(entity: AllergenCustomer): Observable<void> {
+        let url_ = this.baseUrl + "/AllergenCustomer/DeleteAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete2(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    deleteById(id: number): Observable<void> {
+        let url_ = this.baseUrl + "/AllergenCustomer/DeleteByIdAsyn/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteById(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDeleteById(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    readAll(): Observable<AllergenCustomer[]> {
+        let url_ = this.baseUrl + "/AllergenCustomer/ReadAllAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processReadAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processReadAll(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AllergenCustomer[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AllergenCustomer[]>;
+        }));
+    }
+
+    protected processReadAll(response: HttpResponseBase): Observable<AllergenCustomer[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(AllergenCustomer.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    readAll2(): Observable<AllergenCustomer[]> {
+        let url_ = this.baseUrl + "/AllergenCustomer/ReadAll";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processReadAll2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processReadAll2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AllergenCustomer[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AllergenCustomer[]>;
+        }));
+    }
+
+    protected processReadAll2(response: HttpResponseBase): Observable<AllergenCustomer[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(AllergenCustomer.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getById(id: number): Observable<AllergenCustomer> {
+        let url_ = this.baseUrl + "/AllergenCustomer/ReadByIdAsyn/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetById(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AllergenCustomer>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AllergenCustomer>;
+        }));
+    }
+
+    protected processGetById(response: HttpResponseBase): Observable<AllergenCustomer> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = AllergenCustomer.fromJS(resultData200, _mappings);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    update(entity: AllergenCustomer): Observable<void> {
+        let url_ = this.baseUrl + "/AllergenCustomer/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    update2(entity: AllergenCustomer): Observable<void> {
+        let url_ = this.baseUrl + "/AllergenCustomer/UpdateAsyn";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdate2(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
 export class AllergenMaterialService {
     private http: HttpClient;
     private baseUrl: string;
@@ -2561,6 +3183,62 @@ export class CustomerService {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ?? "";
+    }
+
+    getAllCustomerListView(): Observable<CustomerListView[]> {
+        let url_ = this.baseUrl + "/Customer/GetAllCustomerListView";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllCustomerListView(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllCustomerListView(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<CustomerListView[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<CustomerListView[]>;
+        }));
+    }
+
+    protected processGetAllCustomerListView(response: HttpResponseBase): Observable<CustomerListView[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        let _mappings: { source: any, target: any }[] = [];
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(CustomerListView.fromJS(item, _mappings));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
     }
 
     create(entity: Customer): Observable<Customer> {
@@ -12121,6 +12799,104 @@ export interface IAllergen {
     allergenCode?: string | null;
 }
 
+export class UpdateAllergenCustomersDTO implements IUpdateAllergenCustomersDTO {
+    customerId?: number;
+    allergenCustomers?: AllergenCustomer[];
+
+    constructor(data?: IUpdateAllergenCustomersDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+            if (data.allergenCustomers) {
+                this.allergenCustomers = [];
+                for (let i = 0; i < data.allergenCustomers.length; i++) {
+                    let item = data.allergenCustomers[i];
+                    this.allergenCustomers[i] = item && !(<any>item).toJSON ? new AllergenCustomer(item) : <AllergenCustomer>item;
+                }
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.customerId = _data["customerId"] !== undefined ? _data["customerId"] : <any>null;
+            if (Array.isArray(_data["allergenCustomers"])) {
+                this.allergenCustomers = [] as any;
+                for (let item of _data["allergenCustomers"])
+                    this.allergenCustomers!.push(AllergenCustomer.fromJS(item, _mappings));
+            }
+            else {
+                this.allergenCustomers = <any>null;
+            }
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): UpdateAllergenCustomersDTO | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<UpdateAllergenCustomersDTO>(data, _mappings, UpdateAllergenCustomersDTO);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["customerId"] = this.customerId !== undefined ? this.customerId : <any>null;
+        if (Array.isArray(this.allergenCustomers)) {
+            data["allergenCustomers"] = [];
+            for (let item of this.allergenCustomers)
+                data["allergenCustomers"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IUpdateAllergenCustomersDTO {
+    customerId?: number;
+    allergenCustomers?: IAllergenCustomer[];
+}
+
+export class AllergenCustomer implements IAllergenCustomer {
+    allergenCustomerId?: number;
+    allergenId?: number;
+    customerId?: number;
+
+    constructor(data?: IAllergenCustomer) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.allergenCustomerId = _data["allergenCustomerId"] !== undefined ? _data["allergenCustomerId"] : <any>null;
+            this.allergenId = _data["allergenId"] !== undefined ? _data["allergenId"] : <any>null;
+            this.customerId = _data["customerId"] !== undefined ? _data["customerId"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): AllergenCustomer | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<AllergenCustomer>(data, _mappings, AllergenCustomer);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["allergenCustomerId"] = this.allergenCustomerId !== undefined ? this.allergenCustomerId : <any>null;
+        data["allergenId"] = this.allergenId !== undefined ? this.allergenId : <any>null;
+        data["customerId"] = this.customerId !== undefined ? this.customerId : <any>null;
+        return data;
+    }
+}
+
+export interface IAllergenCustomer {
+    allergenCustomerId?: number;
+    allergenId?: number;
+    customerId?: number;
+}
+
 export class AllergenMaterialView implements IAllergenMaterialView {
     allergenMaterialId?: number;
     materialId?: number;
@@ -12607,6 +13383,64 @@ export interface IBaseMaterial {
     retailPrice?: number | null;
     supplierCode?: string | null;
     isAllergen?: boolean | null;
+}
+
+export class CustomerListView implements ICustomerListView {
+    customerId?: number;
+    customerName?: string | null;
+    hasAllergies?: boolean;
+    hasDiabetes?: boolean;
+    ageCategoryName?: string | null;
+    ageCategoryId?: number;
+    allergies?: string | null;
+
+    constructor(data?: ICustomerListView) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any, _mappings?: any) {
+        if (_data) {
+            this.customerId = _data["customerId"] !== undefined ? _data["customerId"] : <any>null;
+            this.customerName = _data["customerName"] !== undefined ? _data["customerName"] : <any>null;
+            this.hasAllergies = _data["hasAllergies"] !== undefined ? _data["hasAllergies"] : <any>null;
+            this.hasDiabetes = _data["hasDiabetes"] !== undefined ? _data["hasDiabetes"] : <any>null;
+            this.ageCategoryName = _data["ageCategoryName"] !== undefined ? _data["ageCategoryName"] : <any>null;
+            this.ageCategoryId = _data["ageCategoryId"] !== undefined ? _data["ageCategoryId"] : <any>null;
+            this.allergies = _data["allergies"] !== undefined ? _data["allergies"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any, _mappings?: any): CustomerListView | null {
+        data = typeof data === 'object' ? data : {};
+        return createInstance<CustomerListView>(data, _mappings, CustomerListView);
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["customerId"] = this.customerId !== undefined ? this.customerId : <any>null;
+        data["customerName"] = this.customerName !== undefined ? this.customerName : <any>null;
+        data["hasAllergies"] = this.hasAllergies !== undefined ? this.hasAllergies : <any>null;
+        data["hasDiabetes"] = this.hasDiabetes !== undefined ? this.hasDiabetes : <any>null;
+        data["ageCategoryName"] = this.ageCategoryName !== undefined ? this.ageCategoryName : <any>null;
+        data["ageCategoryId"] = this.ageCategoryId !== undefined ? this.ageCategoryId : <any>null;
+        data["allergies"] = this.allergies !== undefined ? this.allergies : <any>null;
+        return data;
+    }
+}
+
+export interface ICustomerListView {
+    customerId?: number;
+    customerName?: string | null;
+    hasAllergies?: boolean;
+    hasDiabetes?: boolean;
+    ageCategoryName?: string | null;
+    ageCategoryId?: number;
+    allergies?: string | null;
 }
 
 export class Customer implements ICustomer {

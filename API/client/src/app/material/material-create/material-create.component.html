@@ -1,10 +1,10 @@
 <p-card>
   <form>
-    <div class="n grid n grid-cols-4 n gap-4 n m-2">
+    <div class="n tw-grid n tw-grid-cols-4 n tw-gap-4 n tw-m-2">
       <div class="field">
         <label
           for="materialName"
-          class="n block n text-900 n font-medium n mb-2"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Material Name</label
         >
         <input
@@ -14,7 +14,7 @@
           name="materialName"
           [(ngModel)]="material.materialName"
           required
-          class="w-full n mb-3"
+          class="tw-w-full n tw-mb-3"
         />
         <small class="p-error" *ngIf="submitted && !material.materialName"
           >Material Name is required.</small
@@ -24,7 +24,7 @@
       <div class="field">
         <label
           for="materialCode"
-          class="n block n text-900 n font-medium n mb-2"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Material Code</label
         >
         <input
@@ -34,7 +34,7 @@
           name="materialCode"
           [(ngModel)]="material.materialCode"
           required
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
         <small class="p-error" *ngIf="submitted && !material.materialCode"
           >Material Code is required.</small
@@ -45,7 +45,7 @@
       <div class="field">
         <label
           for="activityDescriptor"
-          class="n block n text-900 n font-medium n mb-2"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Activity Descriptor</label
         >
         <input
@@ -54,13 +54,15 @@
           id="activityDescriptor"
           name="activityDescriptor"
           [(ngModel)]="material.activityDescription"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
       <!-- Quantity input -->
       <div class="field">
-        <label for="quantity" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="quantity"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Quantity</label
         >
         <input
@@ -70,7 +72,7 @@
           name="quantity"
           [(ngModel)]="material.quantity"
           required
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
         <small class="p-error" *ngIf="submitted && !material.quantity"
           >Quantity is required.</small
@@ -79,7 +81,9 @@
 
       <!-- Measure input -->
       <div class="field">
-        <label for="measure" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="measure"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Measure</label
         >
         <input
@@ -88,7 +92,7 @@
           id="measure"
           name="measure"
           [(ngModel)]="material.measure"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
@@ -96,7 +100,7 @@
       <div class="field">
         <label
           for="ledgerAccountNumber"
-          class="n block n text-900 n font-medium n mb-2"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Ledger Account Number</label
         >
         <input
@@ -104,14 +108,16 @@
           pInputText
           id="ledgerAccountNumber"
           name="ledgerAccountNumber"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
           [(ngModel)]="material.ledgerAccountNumber"
         />
       </div>
 
       <!-- Rounding input -->
       <div class="field">
-        <label for="rounding" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="rounding"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Rounding</label
         >
         <input
@@ -119,7 +125,7 @@
           pInputText
           id="rounding"
           name="rounding"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
           [(ngModel)]="material.rounding"
         />
       </div>
@@ -128,7 +134,9 @@
 
       <!-- Kilojoule input -->
       <div class="field">
-        <label for="kilojoule" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="kilojoule"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Kilojoule</label
         >
         <input
@@ -137,14 +145,16 @@
           id="kilojoule"
           name="kilojoule"
           [(ngModel)]="material.kilojule"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
           step="0.01"
         />
       </div>
 
       <!-- Protein input -->
       <div class="field">
-        <label for="protein" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="protein"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Protein</label
         >
         <input
@@ -153,7 +163,7 @@
           id="protein"
           name="protein"
           [(ngModel)]="material.protein"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
           step="0.01"
         />
       </div>
@@ -162,7 +172,7 @@
       <div class="field">
         <label
           for="carbohydrate"
-          class="n block n text-900 n font-medium n mb-2"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Carbohydrate</label
         >
         <input
@@ -172,13 +182,15 @@
           name="carbohydrate"
           [(ngModel)]="material.carbohydrate"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
       <!-- Fat input -->
       <div class="field">
-        <label for="fat" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="fat"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Fat</label
         >
         <input
@@ -188,13 +200,15 @@
           name="fat"
           [(ngModel)]="material.fat"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
       <!-- Cholesterol input -->
       <div class="field">
-        <label for="cholesterol" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="cholesterol"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Cholesterol</label
         >
         <input
@@ -204,13 +218,15 @@
           name="cholesterol"
           [(ngModel)]="material.cholesterol"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
       <!-- Sugar input -->
       <div class="field">
-        <label for="sugar" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="sugar"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Sugar</label
         >
         <input
@@ -220,13 +236,15 @@
           name="sugar"
           [(ngModel)]="material.sugar"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
       <!-- Salt input -->
       <div class="field">
-        <label for="salt" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="salt"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Salt</label
         >
         <input
@@ -236,7 +254,7 @@
           name="salt"
           [(ngModel)]="material.salt"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
@@ -244,7 +262,7 @@
       <div class="field">
         <label
           for="saturatedFat"
-          class="n block n text-900 n font-medium n mb-2"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Saturated Fat</label
         >
         <input
@@ -254,12 +272,14 @@
           name="saturatedFat"
           [(ngModel)]="material.saturatedFat"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
       <!-- TransFat input -->
       <div class="field">
-        <label for="transFat" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="transFat"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Trans Fat</label
         >
         <input
@@ -269,13 +289,15 @@
           name="transFat"
           [(ngModel)]="material.transFat"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
       <!-- Fiber input -->
       <div class="field">
-        <label for="fiber" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="fiber"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Fiber</label
         >
         <input
@@ -285,13 +307,15 @@
           name="fiber"
           [(ngModel)]="material.fiber"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
       <!-- Calcium input -->
       <div class="field">
-        <label for="calcium" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="calcium"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Calcium</label
         >
         <input
@@ -301,7 +325,7 @@
           name="calcium"
           [(ngModel)]="material.kalcium"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
@@ -319,7 +343,9 @@
 
       <!-- CostPrice input -->
       <div class="field">
-        <label for="costPrice" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="costPrice"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Cost Price</label
         >
         <input
@@ -329,13 +355,15 @@
           name="costPrice"
           [(ngModel)]="material.costPrice"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
       <!-- RetailPrice input -->
       <div class="field">
-        <label for="retailPrice" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="retailPrice"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Retail Price</label
         >
         <input
@@ -345,7 +373,7 @@
           name="retailPrice"
           [(ngModel)]="material.retailPrice"
           step="0.01"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
@@ -353,7 +381,7 @@
       <div class="field">
         <label
           for="supplierCode"
-          class="n block n text-900 n font-medium n mb-2"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Supplier Code</label
         >
         <input
@@ -362,13 +390,15 @@
           id="supplierCode"
           name="supplierCode"
           [(ngModel)]="material.supplierCode"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
       <!-- IT3_SIZE input -->
       <div class="field">
-        <label for="it3Size" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="it3Size"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >IT3 Size</label
         >
         <input
@@ -377,7 +407,7 @@
           id="it3Size"
           name="itjSztj"
           [(ngModel)]="material.itjSztj"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         />
       </div>
 
@@ -387,7 +417,7 @@
       <div class="field">
         <label
           for="materialGroupId"
-          class="n block n text-900 n font-medium n mb-2"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Material Group ID</label
         >
         <select
@@ -396,7 +426,7 @@
           name="materialGroupId"
           [(ngModel)]="material.materialGroupId"
           required
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
         >
           <option *ngFor="let item of materialGroups" [value]="item.groupCode">
             {{ item.groupName }}
@@ -408,7 +438,9 @@
       </div>
 
       <div class="field">
-        <label for="allergens" class="n block n text-900 n font-medium n mb-2"
+        <label
+          for="allergens"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Allergens</label
         >
         <p-multiSelect
@@ -420,8 +452,10 @@
         ></p-multiSelect>
       </div>
       <!-- Note input -->
-      <div class="n col-span-2">
-        <label for="note" class="n block n text-900 n font-medium n mb-2"
+      <div class="n tw-col-span-2">
+        <label
+          for="note"
+          class="n tw-block n text-900 n tw-font-medium n tw-mb-2"
           >Note</label
         >
         <textarea
@@ -429,12 +463,12 @@
           id="note"
           name="note"
           [(ngModel)]="material.note"
-          class="n w-full n mb-3"
+          class="n tw-w-full n tw-mb-3"
           rows="7"
         ></textarea>
       </div>
-      <div class="n col-span-2 n flex n items-center">
-        <div class="n grid n justify-items-center">
+      <div class="n tw-col-span-2 n tw-flex n tw-items-center">
+        <div class="n tw-grid n tw-justify-items-center">
           <div>
             <p-button
               pRipple

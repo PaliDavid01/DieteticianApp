@@ -1,15 +1,17 @@
 <p-card class="">
   <p-toast></p-toast>
   <p>{{ recipe.recipeName }}</p>
-  <form class="p-3">
-    <div class="grid gap-4 grid-cols-4 gap-4 m-2">
+  <form class="tw-p-3">
+    <div class="tw-grid tw-gap-4 tw-grid-cols-4 tw-gap-4 tw-m-2">
       <div class="field">
-        <label for="name" class="block text-900 font-medium m-2">Name</label>
+        <label for="name" class="tw-block text-900 tw-font-medium tw-m-2"
+          >Name</label
+        >
         <input
           id="name"
           name="recipeName"
           type="text"
-          class="w-full n mb-3"
+          class="tw-w-full n tw-mb-3"
           pInputText
           required
           [(ngModel)]="recipe.recipeName"
@@ -21,7 +23,7 @@
         ></p-message>
       </div>
       <div class="">
-        <label for="description" class="block text-900 font-medium m-2"
+        <label for="description" class="tw-block text-900 tw-font-medium tw-m-2"
           >Description</label
         >
         <textarea
@@ -39,13 +41,15 @@
         ></p-message>
       </div>
 
-      <div class="w-full col-span-2">
+      <div class="tw-w-full tw-col-span-2">
         <p-card>
-          <p-header class="grid gap-2 grid-cols-3 m-2 items-center">
-            <h3 class="self-center">Ingredients</h3>
+          <p-header
+            class="tw-grid tw-gap-2 tw-grid-cols-3 tw-m-2 tw-items-center"
+          >
+            <h3 class="tw-self-center">Ingredients</h3>
             <p-button
               label="Add Ingredient"
-              class="p-button-rounded p-button-success m-3"
+              class="p-button-rounded p-button-success tw-m-3"
               (click)="showAddIngredientDialog()"
             ></p-button
           ></p-header>
@@ -74,7 +78,7 @@
                     pButton
                     pRipple
                     icon="pi pi-pencil"
-                    class="p-button-rounded p-button-success mr-2"
+                    class="p-button-rounded p-button-success tw-mr-2"
                     (click)="showEditIngredientDialog(ingredient)"
                   ></button>
                   <button
@@ -192,14 +196,14 @@
             pButton
             pRipple
             icon="pi pi-info"
-            class="p-button-rounded p-button-help mr-2"
+            class="p-button-rounded p-button-help tw-mr-2"
             (click)="showMaterialInfo(item)"
           ></button>
           <button
             pButton
             pRipple
             icon="pi pi-pencil"
-            class="p-button-rounded p-button-success mr-2"
+            class="p-button-rounded p-button-success tw-mr-2"
             (click)="editMaterial(item)"
           ></button>
         </td>
@@ -207,20 +211,20 @@
     </ng-template>
   </p-table>
   <ng-template pTemplate="content">
-    <div class="grid grid-cols-3">
+    <div class="tw-grid tw-grid-cols-3">
       <div></div>
       <div>
         <div class="text-900">
           <p>Quantity</p>
         </div>
-        <div class="grid grid-cols-3">
+        <div class="tw-grid tw-grid-cols-3">
           <p-inputNumber
             [(ngModel)]="ingredientToAdd.quantity"
             mode="decimal"
             [minFractionDigits]="2"
-            class="col-span-2 mr-2"
+            class="tw-col-span-2 tw-mr-2"
           ></p-inputNumber>
-          <p class="self-center ml-2">
+          <p class="tw-self-center tw-ml-2">
             {{ selectedMaterialToCreateIngredient?.quantity }}
             /
             {{ selectedMaterialToCreateIngredient.measure }}
@@ -260,18 +264,18 @@
   [modal]="true"
   styleClass="p-fluid"
 >
-  <div class="grid grid-cols-3">
+  <div class="tw-grid tw-grid-cols-3">
     <div></div>
     <div>
       <div class="text-900">
         <p>Quantity</p>
       </div>
-      <div class="grid grid-cols-3">
+      <div class="tw-grid tw-grid-cols-3">
         <p-inputNumber
           [(ngModel)]="ingredientToAdd.quantity"
           mode="decimal"
           [minFractionDigits]="2"
-          class="col-span-2 mr-2"
+          class="tw-col-span-2 tw-mr-2"
         ></p-inputNumber>
       </div>
     </div>

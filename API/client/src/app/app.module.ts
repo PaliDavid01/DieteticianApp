@@ -23,6 +23,8 @@ import {
   API_BASE_URL,
   AgeCategory,
   AgeCategoryService,
+  AllergenCustomer,
+  AllergenCustomerService,
   AllergenService,
   AuthService,
   BaseMaterial,
@@ -164,6 +166,7 @@ import { MealInfoCardComponent } from './menu/meal/meal-info-card/meal-info-card
 import { MenuGenerateModalComponent } from './menu/menu-generate-modal/menu-generate-modal.component';
 import { AgeCategoryComponent } from './material/age-category/age-category.component';
 import { MenuGenerateInfoComponent } from './menu/menu-generate-info/menu-generate-info.component';
+import { CustomerListComponent } from './customer/customer-list/customer-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -192,6 +195,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MenuGenerateModalComponent,
     AgeCategoryComponent,
     MenuGenerateInfoComponent,
+    CustomerListComponent,
   ],
   imports: [
     CommonModule,
@@ -339,6 +343,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     WeekMenuGenerateDataAllergenService,
     WeekMenuGenerateDataService,
     AgeCategoryService,
+    AllergenCustomerService,
 
     { provide: API_BASE_URL, useValue: 'http://localhost:7247' },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

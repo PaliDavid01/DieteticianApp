@@ -17,6 +17,8 @@ public partial class DataBaseContext : DbContext
 
     public virtual DbSet<Allergen> Allergens { get; set; }
 
+    public virtual DbSet<AllergenCustomer> AllergenCustomers { get; set; }
+
     public virtual DbSet<AllergenMaterial> AllergenMaterials { get; set; }
 
     public virtual DbSet<AllergenMaterialView> AllergenMaterialViews { get; set; }
@@ -24,6 +26,8 @@ public partial class DataBaseContext : DbContext
     public virtual DbSet<BaseMaterial> BaseMaterials { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
+
+    public virtual DbSet<CustomerListView> CustomerListViews { get; set; }
 
     public virtual DbSet<DayMenu> DayMenus { get; set; }
 
@@ -98,6 +102,13 @@ public partial class DataBaseContext : DbContext
             entity.Property(e => e.AllergenName)
                 .IsRequired()
                 .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<AllergenCustomer>(entity =>
+        {
+            entity.HasKey(e => e.AllergenCustomerId).HasName("PK__Allergen__315AAE97F0B58D21");
+
+            entity.ToTable("AllergenCustomer");
         });
 
         modelBuilder.Entity<AllergenMaterial>(entity =>
@@ -177,6 +188,21 @@ public partial class DataBaseContext : DbContext
 
             entity.ToTable("Customer");
 
+            entity.Property(e => e.CustomerName)
+                .IsRequired()
+                .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<CustomerListView>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("CustomerListView");
+
+            entity.Property(e => e.AgeCategoryName)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.Allergies).HasMaxLength(4000);
             entity.Property(e => e.CustomerName)
                 .IsRequired()
                 .HasMaxLength(50);

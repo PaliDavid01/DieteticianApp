@@ -99,6 +99,8 @@
     <Build Include="Schemas\dbo\Tables\WeekMenuGenerateData.sql" />
     <Build Include="Schemas\dbo\Tables\WeekMenuGenerateDataAllergen.sql" />
     <Build Include="Schemas\dbo\Views\RecipeGenerateDataView.sql" />
+    <Build Include="Schemas\dbo\Views\CustomerListView.sql" />
+    <Build Include="Schemas\dbo\Tables\AllergenCustomer.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DataBase.refactorlog" />

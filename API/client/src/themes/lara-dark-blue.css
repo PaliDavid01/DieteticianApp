@@ -1,7 +1,8 @@
 @charset "UTF-8";
-@import "tailwindcss/base" layer(tailwindcss);
-@import "tailwindcss/components" layer(tailwindcss);
-@import "tailwindcss/utilities" layer(tailwindcss);
+/* Ensure Tailwind CSS is properly installed and configured */
+@import "node_modules/tailwindcss/base" layer(tailwindcss);
+@import "node_modules/tailwindcss/components" layer(tailwindcss);
+@import "node_modules/tailwindcss/utilities" layer(tailwindcss);
 
 @import "node_modules/primeng/resources/themes/lara-dark-blue/theme.css";
 @import "node_modules/primeicons/primeicons.css";

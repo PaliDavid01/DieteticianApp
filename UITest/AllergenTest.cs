@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 
-namespace Test
+namespace UI_Test
 {
     [TestClass]
     public class AllergenTest
@@ -20,10 +20,8 @@ namespace Test
             System.Threading.Thread.Sleep(1 * 1000);
             driver.FindElement(By.Name("password")).SendKeys("string");
             System.Threading.Thread.Sleep(1 * 1000);
-            //scroll down 
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
-            //wait 
             System.Threading.Thread.Sleep(1 * 1000);
             driver.FindElement(By.Id("login")).Click();
             System.Threading.Thread.Sleep(3 * 1000);

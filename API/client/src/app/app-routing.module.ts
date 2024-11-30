@@ -15,6 +15,7 @@ import { MenuListComponent } from './menu/menu-list/menu-list.component';
 import { MenuResolver } from './menu/menu-edit/menu-resolver.service';
 import { MenuEditComponent } from './menu/menu-edit/menu-edit.component';
 import { AgeCategoryComponent } from './material/age-category/age-category.component';
+import { CustomerListComponent } from './customer/customer-list/customer-list.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
     resolve: { menu: MenuResolver },
   },
   { path: 'diet-group', component: AgeCategoryComponent },
+  { path: 'customer', component: CustomerListComponent },
 ];
 
 @NgModule({

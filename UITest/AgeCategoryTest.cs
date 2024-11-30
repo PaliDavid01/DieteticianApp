@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 
-namespace Test
+namespace UI_Test
 {
     [TestClass]
     public class AgeCategoryTest

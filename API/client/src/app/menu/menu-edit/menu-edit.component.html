@@ -1,13 +1,18 @@
 <p-card header="Menu planner" class="menuEditBackground">
   <div style="height: fit-content !important">
-    <div class="grid gap-4 grid-cols-5" style="height: 15vh; display: flex">
-      <div style="width: 30vw; height: inherit">
-        <label for="name" class="block text-900 font-medium m-2">Név</label>
+    <div
+      class="tw-grid tw-gap-4 tw-grid-cols-5"
+      style="height: 15vh; display: tw-flex"
+    >
+      <div>
+        <label for="name" class="tw-block text-900 tw-font-medium tw-m-2"
+          >Név</label
+        >
         <input
           id="name"
           name="recipeName"
           type="text"
-          class="n mb-3"
+          class="n tw-mb-3"
           pInputText
           required
           [(ngModel)]="weekMenu.weekMenuName"
@@ -18,8 +23,8 @@
           *ngIf="!weekMenu.weekMenuName"
         ></p-message>
       </div>
-      <div style="width: 30vw; height: inherit">
-        <label for="name" class="block text-900 font-medium m-2"
+      <div>
+        <label for="name" class="tw-block text-900 tw-font-medium tw-m-2"
           >Start Date (M)</label
         >
         <p-calendar
@@ -30,8 +35,8 @@
           inputId="icondisplay"
         />
       </div>
-      <div style="width: 30vw; height: inherit">
-        <label for="name" class="block text-900 font-medium m-2"
+      <div>
+        <label for="name" class="tw-block text-900 tw-font-medium tw-m-2"
           >End Date (S)</label
         >
         <p-calendar
@@ -42,7 +47,7 @@
           inputId="icondisplay"
         />
       </div>
-      <div style="width: 30vw; height: inherit">
+      <div>
         <button
           pButton
           pRipple
@@ -53,7 +58,7 @@
           (click)="showGenerateDataDialog()"
         ></button>
       </div>
-      <div style="width: 30vw; height: inherit">
+      <div>
         <button
           pButton
           pRipple
@@ -94,21 +99,21 @@
         <tr>
           <td *ngFor="let i of range">
             <p-card>
-              <div class="grid grid-rows-4" style="height: 150px">
-                <div class="grid grid-rows-1">
-                  <div class="justify-self-center">
+              <div class="tw-grid tw-grid-rows-4" style="height: 150px">
+                <div class="tw-grid tw-grid-rows-1">
+                  <div class="tw-justify-self-center">
                     <h5>Breakfast</h5>
                   </div>
                 </div>
-                <div class="row-span-3">
+                <div class="tw-row-span-3">
                   @if(dayMenus.get(i) && dayMenus.get(i).breakfastId > 1){
-                  <div class="grid grid-rows-3">
-                    <div class="row-span-2">
+                  <div class="tw-grid tw-grid-rows-3">
+                    <div class="tw-row-span-2">
                       <app-meal-info-card
                         [mealId]="dayMenus.get(i).breakfastId"
                       ></app-meal-info-card>
                     </div>
-                    <div class="justify-self-center">
+                    <div class="tw-justify-self-center">
                       <button
                         pRipple
                         label="Edit meal"
@@ -127,8 +132,8 @@
                     </div>
                   </div>
                   } @else{
-                  <div class="grid grid-rows-1">
-                    <div class="justify-self-center">
+                  <div class="tw-grid tw-grid-rows-1">
+                    <div class="tw-justify-self-center">
                       <button
                         pRipple
                         label="Add meal"
@@ -155,21 +160,21 @@
         <tr>
           <td *ngFor="let i of range">
             <p-card>
-              <div class="grid grid-rows-4" style="height: 150px">
-                <div class="grid grid-rows-1">
-                  <div class="justify-self-center">
+              <div class="tw-grid tw-grid-rows-4" style="height: 150px">
+                <div class="tw-grid tw-grid-rows-1">
+                  <div class="tw-justify-self-center">
                     <h5>Brunch</h5>
                   </div>
                 </div>
-                <div class="row-span-3">
+                <div class="tw-row-span-3">
                   @if(dayMenus.get(i) && dayMenus.get(i).brunchId > 1){
-                  <div class="grid grid-rows-3">
-                    <div class="row-span-2">
+                  <div class="tw-grid tw-grid-rows-3">
+                    <div class="tw-row-span-2">
                       <app-meal-info-card
                         [mealId]="dayMenus.get(i).brunchId"
                       ></app-meal-info-card>
                     </div>
-                    <div class="justify-self-center">
+                    <div class="tw-justify-self-center">
                       <button
                         pRipple
                         label="Edit meal"
@@ -188,8 +193,8 @@
                     </div>
                   </div>
                   } @else{
-                  <div class="grid grid-rows-1">
-                    <div class="justify-self-center">
+                  <div class="tw-grid tw-grid-rows-1">
+                    <div class="tw-justify-self-center">
                       <button
                         pRipple
                         label="Add meal"
@@ -216,21 +221,21 @@
         <tr>
           <td *ngFor="let i of range">
             <p-card>
-              <div class="grid grid-rows-4" style="height: 150px">
-                <div class="grid grid-rows-1">
-                  <div class="justify-self-center">
+              <div class="tw-grid tw-grid-rows-4" style="height: 150px">
+                <div class="tw-grid tw-grid-rows-1">
+                  <div class="tw-justify-self-center">
                     <h5>Lunch</h5>
                   </div>
                 </div>
-                <div class="row-span-3">
+                <div class="tw-row-span-3">
                   @if(dayMenus.get(i) && dayMenus.get(i).lunchId > 1){
-                  <div class="grid grid-rows-3">
-                    <div class="row-span-2">
+                  <div class="tw-grid tw-grid-rows-3">
+                    <div class="tw-row-span-2">
                       <app-meal-info-card
                         [mealId]="dayMenus.get(i).lunchId"
                       ></app-meal-info-card>
                     </div>
-                    <div class="justify-self-center">
+                    <div class="tw-justify-self-center">
                       <button
                         pRipple
                         label="Edit meal"
@@ -249,8 +254,8 @@
                     </div>
                   </div>
                   } @else{
-                  <div class="grid grid-rows-1">
-                    <div class="justify-self-center">
+                  <div class="tw-grid tw-grid-rows-1">
+                    <div class="tw-justify-self-center">
                       <button
                         pRipple
                         label="Add meal"
@@ -277,21 +282,21 @@
         <tr>
           <td *ngFor="let i of range">
             <p-card>
-              <div class="grid grid-rows-4" style="height: 150px">
-                <div class="grid grid-rows-1">
-                  <div class="justify-self-center">
+              <div class="tw-grid tw-grid-rows-4" style="height: 150px">
+                <div class="tw-grid tw-grid-rows-1">
+                  <div class="tw-justify-self-center">
                     <h5>Afternoon Snack</h5>
                   </div>
                 </div>
-                <div class="row-span-3">
+                <div class="tw-row-span-3">
                   @if(dayMenus.get(i) && dayMenus.get(i).afternoonSnackId > 1){
-                  <div class="grid grid-rows-3">
-                    <div class="row-span-2">
+                  <div class="tw-grid tw-grid-rows-3">
+                    <div class="tw-row-span-2">
                       <app-meal-info-card
                         [mealId]="dayMenus.get(i).afternoonSnackId"
                       ></app-meal-info-card>
                     </div>
-                    <div class="justify-self-center">
+                    <div class="tw-justify-self-center">
                       <button
                         pRipple
                         label="Edit meal"
@@ -310,8 +315,8 @@
                     </div>
                   </div>
                   } @else{
-                  <div class="grid grid-rows-1">
-                    <div class="justify-self-center">
+                  <div class="tw-grid tw-grid-rows-1">
+                    <div class="tw-justify-self-center">
                       <button
                         pRipple
                         label="Add meal"
@@ -338,21 +343,21 @@
         <tr>
           <td *ngFor="let i of range">
             <p-card>
-              <div class="grid grid-rows-4" style="height: 150px">
-                <div class="grid grid-rows-1">
-                  <div class="justify-self-center">
+              <div class="tw-grid tw-grid-rows-4" style="height: 150px">
+                <div class="tw-grid tw-grid-rows-1">
+                  <div class="tw-justify-self-center">
                     <h5>Dinner</h5>
                   </div>
                 </div>
-                <div class="row-span-3">
+                <div class="tw-row-span-3">
                   @if(dayMenus.get(i) && dayMenus.get(i).dinnerId > 1){
-                  <div class="grid grid-rows-3">
-                    <div class="row-span-2">
+                  <div class="tw-grid tw-grid-rows-3">
+                    <div class="tw-row-span-2">
                       <app-meal-info-card
                         [mealId]="dayMenus.get(i).dinnerId"
                       ></app-meal-info-card>
                     </div>
-                    <div class="justify-self-center">
+                    <div class="tw-justify-self-center">
                       <button
                         pRipple
                         label="Edit meal"
@@ -371,8 +376,8 @@
                     </div>
                   </div>
                   } @else{
-                  <div class="grid grid-rows-1">
-                    <div class="justify-self-center">
+                  <div class="tw-grid tw-grid-rows-1">
+                    <div class="tw-justify-self-center">
                       <button
                         pRipple
                         label="Add meal"

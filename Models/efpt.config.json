@@ -24,6 +24,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[AllergenCustomer]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[AllergenMaterial]",
          "ObjectType": 0
       },
@@ -109,6 +113,10 @@
       },
       {
          "Name": "[dbo].[AllergenMaterialView]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[CustomerListView]",
          "ObjectType": 3
       },
       {

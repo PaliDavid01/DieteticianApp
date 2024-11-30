@@ -50,29 +50,31 @@ namespace Logic.Logic
             var weekMenu = _weekMenuRepository.Read(weekMenuId);
             var generateData = _weekMenuGenerateDataRepository.GetByWeekMenuId(weekMenuId);
             var ageCategory = _ageCategoryRepository.Read(generateData.AgeCategoryId);
-            var allergens = _weekMenuGenerateDataAllergenRepository.GetByWeekMenuGenerateDataId(generateData.WeekMenuGenerateDataId).Select(t => t.AllergenId.ToString());
-
+            var allergens = _weekMenuGenerateDataAllergenRepository.GetByWeekMenuGenerateDataId(generateData.WeekMenuGenerateDataId)
+                .Select(t => t.AllergenId.ToString());
             var recipes = await _recipeRepository.ReadAllAsync();
             var recipeGenData = await _recipeRepository.ReadAllRecipeGenerateDataViewAsync();
             foreach (var allergen in allergens)
             {
-                recipes = recipes.Where(r => recipeGenData.First(t => t.RecipeId == r.RecipeId).AllergenIds is not null ? recipeGenData.First(t => t.RecipeId == r.RecipeId).AllergenIds.Split(',').Any(t => t == allergen) : true);
+                recipes = recipes.Where(r =>
+                recipeGenData.First(t => t.RecipeId == r.RecipeId).AllergenIds is not null ?
+                    recipeGenData.First(t => t.RecipeId == r.RecipeId).AllergenIds.Split(',')
+                    .Any(t => t == allergen) : true);
             }
-
             var seed = new Random(DateTime.Now.Microsecond);
             return await Task.Run(() =>
             {
                 return Generate(recipes, ageCategory, seed);
             });
         }
-        // a method that generates a day menu
         public Dictionary<MealType, ICollection<MealRecipeDTO>> Generate(IEnumerable<Recipe> recipes, AgeCategory ageCategory, Random random)
         {
             Dictionary<MealType, ICollection<MealRecipeDTO>> prevGeneratedDayMenu = new Dictionary<MealType, ICollection<MealRecipeDTO>>
             {
                 { MealType.Breakfast, new List<MealRecipeDTO>() { new MealRecipeDTO(){
                     quantity = random.Next(1, 10),
-                    Recipe = recipes.Where(t => t.RecipeCategoryId == 1).ToList()[random.Next(0, recipes.Where(t => t.RecipeCategoryId == 1).Count())] } }
+                    Recipe = recipes.Where(t => t.RecipeCategoryId == 1)
+                        .ToList()[random.Next(0, recipes.Where(t => t.RecipeCategoryId == 1).Count())] } }
                 },
                 { MealType.Brunch, new List<MealRecipeDTO>(){ new MealRecipeDTO(){
                     quantity = random.Next(1, 10),

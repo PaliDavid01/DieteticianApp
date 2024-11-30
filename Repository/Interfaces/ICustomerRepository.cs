@@ -5,5 +5,6 @@ namespace Repository.Interfaces
 {
     public interface ICustomerRepository : ICRUDRepository<Customer>
     {
+        Task<ICollection<CustomerListView>> GetAllCustomerListViewAsync();
     }
 }

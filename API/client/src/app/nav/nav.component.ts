@@ -71,30 +71,21 @@ export class NavComponent implements OnInit {
         ],
       },
       {
-        label: 'Users',
+        label: 'Customers',
         icon: 'pi pi-fw pi-user',
         items: [
           {
-            label: 'New',
+            label: 'List',
             icon: 'pi pi-fw pi-user-plus',
+            url: '/customer',
           },
           {
-            label: 'Delete',
-            icon: 'pi pi-fw pi-user-minus',
-          },
-          {
-            label: 'Search',
+            label: 'Audit',
             icon: 'pi pi-fw pi-users',
             items: [
               {
                 label: 'Filter',
                 icon: 'pi pi-fw pi-filter',
-                items: [
-                  {
-                    label: 'Print',
-                    icon: 'pi pi-fw pi-print',
-                  },
-                ],
               },
               {
                 icon: 'pi pi-fw pi-bars',

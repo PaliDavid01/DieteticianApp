@@ -524,6 +524,326 @@
         }
       }
     },
+    "/AllergenCustomer/GetAllergensByCustomerId/{Id}": {
+      "get": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_GetAllergensByCustomerId",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/UpdateAllergenMaterials": {
+      "post": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_UpdateAllergenMaterials",
+        "requestBody": {
+          "x-name": "updateAllergenCustomersDTO",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAllergenCustomersDTO"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/Create": {
+      "post": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllergenCustomer"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllergenCustomer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/CreateAsyn": {
+      "post": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllergenCustomer"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/Delete": {
+      "delete": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllergenCustomer"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AllergenCustomer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/ReadAll": {
+      "get": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AllergenCustomer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllergenCustomer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/Update": {
+      "put": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllergenCustomer"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/AllergenCustomer/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "AllergenCustomer"
+        ],
+        "operationId": "AllergenCustomer_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllergenCustomer"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/AllergenMaterial/GetAllergensByMaterialId/{Id}": {
       "get": {
         "tags": [
@@ -1272,6 +1592,29 @@
         "responses": {
           "200": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/Customer/GetAllCustomerListView": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_GetAllCustomerListView",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerListView"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -6169,6 +6512,40 @@
           }
         }
       },
+      "UpdateAllergenCustomersDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allergenCustomers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AllergenCustomer"
+            }
+          }
+        }
+      },
+      "AllergenCustomer": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "allergenCustomerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allergenId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "customerId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "AllergenMaterialView": {
         "type": "object",
         "additionalProperties": false,
@@ -6437,6 +6814,38 @@
           },
           "isAllergen": {
             "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "CustomerListView": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasAllergies": {
+            "type": "boolean"
+          },
+          "hasDiabetes": {
+            "type": "boolean"
+          },
+          "ageCategoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ageCategoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allergies": {
+            "type": "string",
             "nullable": true
           }
         }
