@@ -3976,6 +3976,609 @@
         }
       }
     },
+    "/Order/customer/{customerId}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_ReadAllByCustomerId",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderListView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Order/initialize/{customerId}": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_InitializeOrders",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Order/Create": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Order/CreateAsyn": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Order/Delete": {
+      "delete": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Order/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Order/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Order/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Order/ReadAll": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Order/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Order/Update": {
+      "put": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Order/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/delete/{orderId}": {
+      "delete": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_DeleteByOrderId",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/Create": {
+      "post": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_Create",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderWeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderWeekMenu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/CreateAsyn": {
+      "post": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_Create2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderWeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/Delete": {
+      "delete": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/DeleteAsyn": {
+      "delete": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_Delete2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderWeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/DeleteByIdAsyn/{id}": {
+      "delete": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_DeleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/ReadAllAsyn": {
+      "get": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_ReadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderWeekMenu"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/ReadAll": {
+      "get": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_ReadAll2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderWeekMenu"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/ReadByIdAsyn/{id}": {
+      "get": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderWeekMenu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/Update": {
+      "put": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_Update",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderWeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/OrderWeekMenu/UpdateAsyn": {
+      "put": {
+        "tags": [
+          "OrderWeekMenu"
+        ],
+        "operationId": "OrderWeekMenu_Update2",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderWeekMenu"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/RecipeCategory/Create": {
       "post": {
         "tags": [
@@ -5326,6 +5929,41 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WeekMenu/ReadAllByCustomerPreferences/{customerId}": {
+      "get": {
+        "tags": [
+          "WeekMenu"
+        ],
+        "operationId": "WeekMenu_ReadAllByCustomerPreferences",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeekMenu"
+                  }
                 }
               }
             }
@@ -7435,6 +8073,76 @@
           "quantity": {
             "type": "number",
             "format": "double"
+          }
+        }
+      },
+      "OrderListView": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "customerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderStartDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "orderEndDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "hasOrderWeekMenu": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "customerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderStartDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "orderEndDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "OrderWeekMenu": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "orderWeekMenuId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weekMenuId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

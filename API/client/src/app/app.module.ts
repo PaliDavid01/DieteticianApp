@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,6 +39,9 @@ import {
   Meal,
   MealRecipeService,
   MealService,
+  Order,
+  OrderService,
+  OrderWeekMenuService,
   Recipe,
   RecipeCategory,
   RecipeCategoryService,
@@ -167,6 +170,9 @@ import { MenuGenerateModalComponent } from './menu/menu-generate-modal/menu-gene
 import { AgeCategoryComponent } from './material/age-category/age-category.component';
 import { MenuGenerateInfoComponent } from './menu/menu-generate-info/menu-generate-info.component';
 import { CustomerListComponent } from './customer/customer-list/customer-list.component';
+import { OrderEditModalComponent } from './customer/order-edit-modal/order-edit-modal.component';
+import { CustomDateFormatPipe } from './pipes/custom-date-format.pipe';
+import { OrderWeekEditModalComponent } from './customer/order-week-edit-modal/order-week-edit-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -196,7 +202,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AgeCategoryComponent,
     MenuGenerateInfoComponent,
     CustomerListComponent,
+    OrderEditModalComponent,
+    CustomDateFormatPipe,
+    OrderWeekEditModalComponent,
   ],
+  exports: [CustomDateFormatPipe],
   imports: [
     CommonModule,
     BrowserModule,
@@ -344,6 +354,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     WeekMenuGenerateDataService,
     AgeCategoryService,
     AllergenCustomerService,
+    OrderWeekMenuService,
+    OrderService,
+    DatePipe,
 
     { provide: API_BASE_URL, useValue: 'http://localhost:7247' },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

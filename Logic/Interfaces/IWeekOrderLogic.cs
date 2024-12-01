@@ -5,5 +5,6 @@ namespace Logic.Interfaces
 {
     public interface IWeekOrderLogic : ICRUDLogic<WeekOrder>
     {
+
     }
 }

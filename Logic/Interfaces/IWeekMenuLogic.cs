@@ -9,5 +9,6 @@ namespace Logic.Interfaces
         WeekMenu InitWeekMenu(WeekMenu weekMenu);
         public Task<WeekMenuDTO> GetWeekMenuDTO(int id);
         public Task<int> CreateWeekMenuDTO(WeekMenuDTO weekMenuDTO);
+        Task<IEnumerable<WeekMenu>> ReadAllByCustomerPreferences(int customerId);
     }
 }

@@ -7,7 +7,9 @@ namespace Repository.Interfaces
     public interface IWeekMenuRepository : ICRUDRepository<WeekMenu>
     {
         WeekMenu InitWeekMenu(WeekMenu weekMenu);
-        public Task<WeekMenuDTO> GetWeekMenuDTO(int id);
-        public Task<int> CreateWeekMenuDTO(WeekMenuDTO weekMenuDTO);
+        Task<WeekMenuDTO> GetWeekMenuDTO(int id);
+        Task<int> CreateWeekMenuDTO(WeekMenuDTO weekMenuDTO);
+
+        Task<IEnumerable<WeekMenu>> ReadAllByCustomerPreferences(int customerId);
     }
 }

@@ -419,5 +419,29 @@ namespace Repository.ModelRepositories
             return await weekMenu.FirstOrDefaultAsync();
 
         }
+
+        public async Task<IEnumerable<WeekMenu>> ReadAllByCustomerPreferences(int customerId)
+        {
+            var customer = await _dbContext.Customers.Where(u => u.CustomerId == customerId).FirstOrDefaultAsync();
+            var customerAllergens = await _dbContext.AllergenCustomers.Where(ca => ca.CustomerId == customerId).ToListAsync();
+            if (customer == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            var weekMenus = await _dbContext.WeekMenus.Join(_dbContext.WeekMenuGenerateData,
+                wm => wm.WeekMenuId,
+                wmgd => wmgd.WeekMenuId,
+                (wm, wmgd) => new { wm, wmgd })
+                .Join(_dbContext.WeekMenuGenerateDataAllergens,
+                wm_wmgd => wm_wmgd.wmgd.WeekMenuGenerateDataId,
+                wmgda => wmgda.WeekMenuGenerateDataId,
+                (wm_wmgd, wmgda) => new { wm_wmgd, wmgda }).ToListAsync();
+
+            weekMenus.Where(wm => wm.wm_wmgd.wmgd.AgeCategoryId == customer.AgeCategoryId);
+            weekMenus.Where(wm => customerAllergens.Select(ca => ca.AllergenId).Any(t => t == wm.wmgda.AllergenId));
+
+            return weekMenus.Select(wm => wm.wm_wmgd.wm).ToList();
+        }
     }
 }

@@ -33,5 +33,11 @@ namespace API.Controllers
         {
             return _logic.CreateWeekMenuDTO(weekMenuDTO);
         }
+
+        [HttpGet("ReadAllByCustomerPreferences/{customerId}")]
+        public Task<IEnumerable<WeekMenu>> ReadAllByCustomerPreferences(int customerId)
+        {
+            return _logic.ReadAllByCustomerPreferences(customerId);
+        }
     }
 }

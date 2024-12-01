@@ -1,5 +1,6 @@
 <div class="card">
   <p-toast></p-toast>
+
   <p-toolbar styleClass="tw-mb-3 tw-gap-2">
     <ng-template pTemplate="left">
       <button
@@ -105,10 +106,10 @@
           <button
             pButton
             pRipple
-            icon="pi pi-trash"
+            icon="pi pi-bars"
             id="delete"
             class="p-button-rounded p-button-warning"
-            (click)="deleteCustomer(item)"
+            (click)="editOrder(item)"
           ></button>
         </td>
       </tr>

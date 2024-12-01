@@ -26,5 +26,10 @@ namespace Logic.Logic
         {
             return _repository.GetWeekMenuDTO(id);
         }
+
+        public Task<IEnumerable<WeekMenu>> ReadAllByCustomerPreferences(int customerId)
+        {
+            return _repository.ReadAllByCustomerPreferences(customerId);
+        }
     }
 }

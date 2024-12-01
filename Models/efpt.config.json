@@ -68,6 +68,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Order]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderWeekMenu]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Recipe]",
          "ObjectType": 0
       },
@@ -121,6 +129,10 @@
       },
       {
          "Name": "[dbo].[IngredientDataView]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[OrderListView]",
          "ObjectType": 3
       },
       {

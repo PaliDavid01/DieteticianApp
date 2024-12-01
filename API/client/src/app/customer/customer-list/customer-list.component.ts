@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import {
   AgeCategory,
@@ -15,6 +16,7 @@ import {
   CustomerService,
   UpdateAllergenCustomersDTO,
 } from 'src/app/services/generated-client';
+import { OrderEditModalComponent } from '../order-edit-modal/order-edit-modal.component';
 
 @Component({
   selector: 'app-customer-list',
@@ -49,7 +51,8 @@ export class CustomerListComponent {
     private agecategoryService: AgeCategoryService,
     private allergenService: AllergenService,
     private allergenCustomerService: AllergenCustomerService,
-    private router: Router
+    private router: Router,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
@@ -89,8 +92,13 @@ export class CustomerListComponent {
 
   editCustomer(customerListView: CustomerListView) {
     if (customerListView.customerId) {
+      this.customerService
+        .getById(customerListView.customerId)
+        .subscribe((data) => {
+          this.customer = data;
+        });
       this.allergenCustomerService
-        .getAllergensByCustomerId(this.customer.customerId)
+        .getAllergensByCustomerId(customerListView.customerId)
         .subscribe((data) => {
           this.selectedAllergenCustomers = data;
           this.selectedAllegens = this.allergens.filter((allergen) =>
@@ -100,45 +108,22 @@ export class CustomerListComponent {
           );
         });
     }
-    this.customerService
-      .getById(customerListView.customerId)
-      .subscribe((data) => {
-        this.customer = data;
-      });
+
     this.selectedAgeCategory = this.ageCategories.find(
-      (ageCategory) => ageCategory.ageCategoryId === this.customer.ageCategoryId
+      (ageCategory) =>
+        ageCategory.ageCategoryId === customerListView.ageCategoryId
     );
     this.showCustomerDialog = true;
   }
 
-  deleteCustomer(customerListView: CustomerListView) {
-    this.confirmationService.confirm({
-      message:
-        'Are you sure you want to delete ' +
-        customerListView.customerName +
-        '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.customerService.delete(customerListView.customerId).subscribe(
-          (data) => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Successful',
-              detail: 'Allergen Deleted',
-              life: 3000,
-            });
-          },
-          (error) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Allergen not Deleted',
-              life: 3000,
-            });
-          }
-        );
+  editOrder(customerListView: CustomerListView) {
+    this.dialogService.open(OrderEditModalComponent, {
+      data: {
+        customerId: customerListView.customerId,
       },
+      header: 'Edit Orders',
+      width: '70%',
+      height: '80%',
     });
   }
 
@@ -168,6 +153,7 @@ export class CustomerListComponent {
               .subscribe();
           }
           this.showCustomerDialog = false;
+          this.loadCustomers();
         },
         (error) => {
           this.messageService.add({
@@ -197,6 +183,7 @@ export class CustomerListComponent {
               .subscribe();
           }
           this.showCustomerDialog = false;
+          this.loadCustomers();
         },
         (error) => {
           this.messageService.add({
@@ -208,7 +195,6 @@ export class CustomerListComponent {
         }
       );
     }
-    this.loadCustomers();
   }
 
   findIndexById(customerId: number): number {

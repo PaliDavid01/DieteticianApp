@@ -45,6 +45,12 @@ public partial class DataBaseContext : DbContext
 
     public virtual DbSet<MealRecipe> MealRecipes { get; set; }
 
+    public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<OrderListView> OrderListViews { get; set; }
+
+    public virtual DbSet<OrderWeekMenu> OrderWeekMenus { get; set; }
+
     public virtual DbSet<Recipe> Recipes { get; set; }
 
     public virtual DbSet<RecipeCategory> RecipeCategories { get; set; }
@@ -293,6 +299,34 @@ public partial class DataBaseContext : DbContext
             entity.HasKey(e => e.MealRecipeId).HasName("PK__MealReci__3DA805E535B86B12");
 
             entity.ToTable("MealRecipe");
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.HasKey(e => e.OrderId).HasName("PK__Order__C3905BCF386A35E1");
+
+            entity.ToTable("Order");
+
+            entity.Property(e => e.OrderEndDate).HasColumnType("date");
+            entity.Property(e => e.OrderStartDate).HasColumnType("date");
+        });
+
+        modelBuilder.Entity<OrderListView>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("OrderListView");
+
+            entity.Property(e => e.OrderEndDate).HasColumnType("date");
+            entity.Property(e => e.OrderId).ValueGeneratedOnAdd();
+            entity.Property(e => e.OrderStartDate).HasColumnType("date");
+        });
+
+        modelBuilder.Entity<OrderWeekMenu>(entity =>
+        {
+            entity.HasKey(e => e.OrderWeekMenuId).HasName("PK__OrderWee__05E4122187302EC2");
+
+            entity.ToTable("OrderWeekMenu");
         });
 
         modelBuilder.Entity<Recipe>(entity =>

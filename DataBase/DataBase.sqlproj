@@ -101,6 +101,10 @@
     <Build Include="Schemas\dbo\Views\RecipeGenerateDataView.sql" />
     <Build Include="Schemas\dbo\Views\CustomerListView.sql" />
     <Build Include="Schemas\dbo\Tables\AllergenCustomer.sql" />
+    <Build Include="Schemas\dbo\Tables\Order.sql" />
+    <Build Include="Schemas\dbo\Tables\OrderWeekMenu.sql" />
+    <Build Include="Schemas\dbo\Views\OrderListView.sql" />
+    <Build Include="Schemas\dbo\Views\OrderWeekMenuListView.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DataBase.refactorlog" />
